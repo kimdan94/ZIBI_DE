@@ -10,15 +10,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class MainController {
+	
 	@RequestMapping("/")
 	public String init(HttpSession session) {
-		log.debug("<<루트 호출>");
 		return "redirect:/main/home";
 	}
 	
 	@RequestMapping("/main/home")
 	public String main() {
-		log.debug("<<헤더 호출>");
 		return "home";
 	}
 	

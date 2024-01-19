@@ -49,9 +49,8 @@ public class MemberVO {
 	private String mem_auid;
 	
 	/*---비밀번호 체크---*/
-	public boolean checkPassword(String db_password) {
-		if(db_password.equals(mem_password)) 
-			return true;
+	public boolean checkPassword(String input_password) {
+		if(input_password.equals(mem_password)) return true;
 		return false;
 	}
 	

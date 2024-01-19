@@ -7,4 +7,20 @@
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
 	</definition>
+	
+	<definition name="registerForm" extends="home">
+    	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
+	</definition>
+	<definition name="login" extends="home">
+    	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+	</definition>
+	
+	<definition name="mypageMain" extends="home">
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageMain.jsp"/>
+	</definition>
+	<definition name="mypageUpdate" extends="home">
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageUpdateForm.jsp"/>
+	</definition>
+	
+	
 </tiles-definitions>

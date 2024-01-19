@@ -31,6 +31,12 @@ public class MainController {
 		
 		return "main";//타일스 설정명
 	}
+	
+	@RequestMapping("/sample")
+	public String sample() {
+		
+		return "sample";//샘플페이지
+	}
 }
 
 

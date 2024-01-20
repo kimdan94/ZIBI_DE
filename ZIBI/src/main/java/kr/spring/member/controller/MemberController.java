@@ -5,11 +5,13 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -32,31 +34,30 @@ public class MemberController {
 	
 	//회원가입 폼 호출
 	@GetMapping("/member/register")
-	public String memberRegister() {
-		return "registerForm"; //타일즈
+	public ModelAndView memberRegister(Model model) {
+		return new ModelAndView("registerForm","pageName","회원가입"); //타일즈
 	}
 	
 	@PostMapping("/member/register")
-	public String registerSubmit(@Valid MemberVO memberVO, BindingResult result) {
-		//유효성 체크
-		if(result.hasFieldErrors("mem_email") || result.hasFieldErrors("mem_password")) {
-			return memberRegister();
-		}
-		//회원가입
-		memberService.registerMember(memberVO);
+	public String registerSubmit(@Valid MemberVO memberVO, BindingResult result, Model model) {
 		
+		if(result.hasFieldErrors("mem_email") || result.hasFieldErrors("mem_password")) {//유효성 체크
+			model.addAttribute("pageName","회원 가입");
+			return "registerForm";
+		}
+		memberService.registerMember(memberVO);//회원가입
 		return "home"; //타일즈
 	}
 	
 	//로그인 폼 호출
 	@GetMapping("/member/login")
-	public String loginForm() {
-		return "login"; //타일즈
+	public ModelAndView loginForm() {
+		return new ModelAndView("login","pageName","로그인"); //타일즈
 	}
 	
 	//로그인 폼 submit
 	@PostMapping("/member/login")
-	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
 		
 		log.debug("<<로그인>>" + memberVO);
 		
@@ -66,7 +67,6 @@ public class MemberController {
 		try {
 			db_member = memberService.selectMember(memberVO.getMem_email());
 			boolean check = false;
-			
 			log.debug("<<로그인 check>>" + db_member);
 			
 			if( db_member != null ) //아이디 존재할 경우
@@ -84,17 +84,16 @@ public class MemberController {
 			
 		} catch (PasswordCheckException e) {
 			result.reject("invalidIdOrPassword");
-			return loginForm();
+			model.addAttribute("pageName","로그인");
+			return "login";
 		}
 	}
 	
 	//로그아웃 처리
 	@RequestMapping("/member/logout")
 	public String logout(HttpSession session) {
-		
 		session.invalidate();
-		
-	return "redirect:/main/home";
+		return "redirect:/main/home";
 	}
 	
 	

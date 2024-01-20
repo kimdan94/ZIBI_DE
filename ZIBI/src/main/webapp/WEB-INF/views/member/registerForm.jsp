@@ -1,34 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container">
-	<form:form action="register" id="register_member" modelAttribute="memberVO">
-		<div>
-			<form:label path="mem_email">이메일</form:label>
-			<form:input path="mem_email" placeholder="test@test.com 형식으로 입력해주세요"/>
-			<input type="button" value="중복체크" id="email_check">
-			<form:errors path="mem_email"/>
-			<span id="email_area"></span>
+	<div class="d-flex justify-content-center">
+		<div class="rounded login-form col-md-4 col-lg-6">
+			<form:form action="register" id="register_member" modelAttribute="memberVO">
+				<div>
+					<form:label path="mem_email">이메일</form:label>
+					<form:input path="mem_email" class="w-100 form-control p-3" placeholder="이메일 형식에 맞게 입력"/>
+				</div>
+				<div class="register-check">
+					<input type="button" class="btn btn-secondary" value="중복체크" id="email_check">
+					<span id="email_area"></span>
+					<form:errors path="mem_email"/>
+				</div>				
+				<div>
+					<form:label path="mem_nickname">닉네임</form:label>
+					<form:input path="mem_nickname" class="w-100 form-control p-3" placeholder="한글만 가능"/>
+				</div>
+				<div class="register-check">
+					<input type="button" class="btn btn-secondary" value="중복체크" id="nickname_check">
+					<span id="nickname_area"></span>
+					<form:errors path="mem_nickname"/>
+				</div>
+				<div>
+					<form:label path="mem_password">비밀번호</form:label>
+					<form:password path="mem_password" class="w-100 form-control p-3" placeholder="영문 대소문자, 숫자만 가능"/>
+				</div>
+				<div>
+					<label for="c_password">비밀번호 확인</label>
+					<input type="password" id="c_password" class="w-100 form-control p-3"  placeholder="비밀번호와 동일하게 입력" >
+				</div>
+				<div class="password-check">
+					<span id="password_area"></span>
+				</div>
+				<form:button class="w-100 btn btn-light form-control p-3 rounded-pill">회원가입하기</form:button>
+			</form:form>
 		</div>
-		<div>
-			<form:label path="mem_nickname">닉네임</form:label>
-			<form:input path="mem_nickname" placeholder="한글만 가능합니다" style="width:300px;"/>
-			<input type="button" value="중복체크" id="nickname_check">
-			<form:errors path="mem_nickname"/>
-			<span id="nickname_area"></span>
-		</div>
-			<div>
-			<form:label path="mem_password">비밀번호</form:label>
-			<form:password path="mem_password" placeholder="영어 대소문자, 숫자 4~12 사이로 입력해주세요"/>
-			<form:errors path="mem_password"/>
-		</div>
-		<div>
-			<label>비밀번호 확인</label>
-			<input type="password" id="c_password" name="c_password" placeholder="비밀번호 입력란과 동일하게 작성해주세요">
-			<span id="password_area"></span>
-		</div>
-		<form:button>회원가입하기</form:button>
-		<p>이미 계정이 있으신가요? <a href="/member/login">로그인하세요</a></p>
-	</form:form>
+	</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -147,7 +155,7 @@
 				return false;
 			}
 			if(password_checked==0){
-				$('#password_area').text('비밀번호가 일치하지 않습니다');
+				$('#password_area').text('비밀번호를 올바르게 입력해주세요');
 				return false;
 			}
 		});

@@ -34,6 +34,11 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.updateMemberDetail(memberVO);
 	}
 
+	@Override
+	public MemberVO checkPhone(String mem_phone) {
+		return memberMapper.checkPhone(mem_phone);
+	}
+
 	
 
 }

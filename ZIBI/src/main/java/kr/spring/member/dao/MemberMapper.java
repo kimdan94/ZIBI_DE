@@ -22,8 +22,11 @@ public interface MemberMapper {
 	@Select("SELECT * FROM member JOIN member_detail USING (mem_num) WHERE mem_email=#{mem_email}")
 	public MemberVO selectMember(String mem_email);
 
-	@Select("SELECT * FROM member JOIN member_detail USING (mem_num) WHERE mem_nickname=#{mem_nickname}")
+	@Select("SELECT * FROM member_detail WHERE mem_nickname=#{mem_nickname}")
 	public MemberVO checkNickname(String mem_nickname);
+	
+	@Select("SELECT * FROM member_detail WHERE mem_phone=#{mem_phone}")
+	public MemberVO checkPhone(String mem_phone);
 	
 	@Update("UPDATE member_detail SET mem_nickname=#{mem_nickname},mem_name=#{mem_name},mem_phone=#{mem_phone},mem_zipcode=#{mem_zipcode},mem_address1=#{mem_address1},mem_address2=#{mem_address2},mem_modidate=SYSDATE WHERE mem_num=#{mem_num}")
 	public void updateMemberDetail(MemberVO memberVO);

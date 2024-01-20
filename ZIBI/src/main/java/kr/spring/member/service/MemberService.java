@@ -14,4 +14,6 @@ public interface MemberService {
 	public MemberVO checkNickname(String mem_nickname);
 	
 	public void updateMemberDetail(MemberVO memberVO);
+	
+	public MemberVO checkPhone(String mem_phone);
 }

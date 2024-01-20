@@ -6,21 +6,30 @@
     <definition name="home" template="/WEB-INF/views/home/layout_main.jsp">
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
-	<definition name="registerForm" extends="home">
+	 <definition name="menuPage" template="/WEB-INF/views/home/layout_menuPage.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
+	</definition>
+	
+	<definition name="registerForm" extends="menuPage">
     	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
 	</definition>
-	<definition name="login" extends="home">
+	<definition name="login" extends="menuPage">
     	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
 	</definition>
 	
-	<definition name="mypageMain" extends="home">
+	<definition name="mypageMain" extends="menuPage">
     	<put-attribute name="body" value="/WEB-INF/views/member/mypageMain.jsp"/>
 	</definition>
-	<definition name="mypageUpdate" extends="home">
+	<definition name="mypageUpdate" extends="menuPage">
     	<put-attribute name="body" value="/WEB-INF/views/member/mypageUpdateForm.jsp"/>
 	</definition>
+	
 	
 	
 </tiles-definitions>

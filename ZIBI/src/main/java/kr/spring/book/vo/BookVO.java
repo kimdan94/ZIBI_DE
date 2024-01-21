@@ -46,6 +46,7 @@ public class BookVO {
 	@Size(min=0,max=999999)
 	private int book_expense;//0(default)
 	
+	/*-- JOIN으로 읽어올 정보 --*/
 	private String mem_nickname;
 	
 	private int matching_cnt;//예약 신청수

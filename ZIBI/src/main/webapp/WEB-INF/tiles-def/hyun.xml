@@ -21,5 +21,10 @@
     	<put-attribute name="body" value="/WEB-INF/views/performance/write.jsp"/>
 	</definition>
 	
+	<!-- 상영관, 날짜 선택 -->
+	<definition name="ticketing" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
+    	<put-attribute name="body" value="/WEB-INF/views/performance/ticketing.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>

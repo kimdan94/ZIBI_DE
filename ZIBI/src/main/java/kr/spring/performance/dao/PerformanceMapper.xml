@@ -21,6 +21,29 @@
 		   #{performance_category})
 	</insert>
 	
+	<!-- [재사용] sql 검색어 -->
+	<sql id="performanceSearch">
+		<where>
+			<if test="keyword != null and keyword != ''">
+				performance_title LIKE '%' || #{keyword} || '%' AND performance_category=#{category}
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 공연 전체/검색 목록 -->
+	<select id="selectList" parameterType="map" resultType="performanceVO">
+		SELECT
+			*
+		FROM performance
+		<include refid="performanceSearch"></include>
+	</select>
+	
+	<!-- 공연 개수/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM performance
+		<include refid="performanceSearch"></include>
+	</select>
+	
 	
 	
 </mapper>

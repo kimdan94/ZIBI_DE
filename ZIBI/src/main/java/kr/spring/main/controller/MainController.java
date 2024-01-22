@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 public class MainController {
 	
@@ -26,9 +25,3 @@ public class MainController {
 		return "sample";//샘플페이지
 	}
 }
-
-
-
-
-
-

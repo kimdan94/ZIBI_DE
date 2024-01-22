@@ -1,5 +1,6 @@
 package kr.spring.member.controller;
 
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -38,6 +39,7 @@ public class MemberController {
 		return new ModelAndView("registerForm","pageName","회원가입"); //타일즈
 	}
 	
+	//회원가입 처리
 	@PostMapping("/member/register")
 	public String registerSubmit(@Valid MemberVO memberVO, BindingResult result, Model model) {
 		
@@ -55,7 +57,7 @@ public class MemberController {
 		return new ModelAndView("login","pageName","로그인"); //타일즈
 	}
 	
-	//로그인 폼 submit
+	//로그인 처리
 	@PostMapping("/member/login")
 	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
 		
@@ -65,7 +67,7 @@ public class MemberController {
 		MemberVO db_member = null;
 		
 		try {
-			db_member = memberService.selectMember(memberVO.getMem_email());
+			db_member = memberService.checkEmail(memberVO.getMem_email());
 			boolean check = false;
 			log.debug("<<로그인 check>>" + db_member);
 			
@@ -95,9 +97,7 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/main/home";
 	}
-	
-	
-	
+
 	
 	
 }

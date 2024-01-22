@@ -47,13 +47,13 @@ body{
 }
 
 /*--------------------헤더--------------------*/
-header{
+/*header{
 	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
 	z-index: 9999;
-}
+}*/
 .main-header .nav-bar {
     background: #fafafa;
     border-bottom: 1px solid #ededed;
@@ -102,13 +102,13 @@ header{
 }
 
 /*--------------------헤더 메뉴명--------------------*/
-.header-menu{
+/*.header-menu{
 	position: sticky;
 	top: 107px;
 	left: 0;
 	right: 0;
 	z-index: 9998;
-}
+}*/
 .menu-title{
     background: #ffffff;
     box-shadow: 0 8px 8px 0 #ededed;
@@ -307,12 +307,12 @@ footer .info{
 #update_member label{
 	margin-top: 20px;
 }
-#update_member .row{
-	width:70%;
+.mypageMain .row{
+	width:80%;
 	float:none;
 	margin:0 auto;
 }
-#update_member .col-6{
+.mypageMain .col-6{
 	float:none;
 	margin:0 auto;
 }
@@ -343,6 +343,9 @@ footer .info{
 button[type='submit']{
 	margin-top: 30px;
 }
+
+/*--------------------마이페이지 메인--------------------*/
+
 
 /*--------------------크롬 input 태그 파란 배경색상 제거--------------------*/
 input:-webkit-autofill { 

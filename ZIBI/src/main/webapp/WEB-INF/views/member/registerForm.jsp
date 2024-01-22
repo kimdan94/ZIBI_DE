@@ -12,7 +12,7 @@
 					<input type="button" class="btn btn-secondary" value="중복체크" id="email_check">
 					<span id="email_area"></span>
 					<form:errors path="mem_email"/>
-				</div>				
+				</div>
 				<div>
 					<form:label path="mem_nickname">닉네임</form:label>
 					<form:input path="mem_nickname" class="w-100 form-control p-3" placeholder="한글만 가능"/>
@@ -100,7 +100,7 @@
 				return;
 			}
 			$.ajax({
-				url: 'checkNickname',
+				url: 'registerNickname',
 				type: 'post',
 				data: {mem_nickname:$('#mem_nickname').val()},
 				dataType: 'json',
@@ -146,18 +146,23 @@
 		
 		//submit 이벤트 발생 시 이메일, 닉네임, 비밀번호 체크
 		$('#register_member').submit(function(){
-			if(email_checked==0){
+			let count = 0;
+			
+			if(email_checked==0)	{
 				$('#email_area').text('이메일 중복 체크를 진행해주세요');
-				return false;
+				count++;
 			}
 			if(nickname_checked==0){
 				$('#nickname_area').text('닉네임 중복 체크를 진행해주세요');
-				return false;
-			}
+				count++;
+			}	
 			if(password_checked==0){
 				$('#password_area').text('비밀번호를 올바르게 입력해주세요');
-				return false;
-			}
-		});
+				count++;
+			}	
+			
+			if(count>1)	return false;
+		});//end of submit
+		
 	});//end of function
 </script>

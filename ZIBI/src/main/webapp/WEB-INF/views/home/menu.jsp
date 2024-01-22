@@ -8,9 +8,9 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					${pageName}
 				</div>
-				<div class="collapse navbar-collapse justify-content-end">
+				<!--<div class="collapse navbar-collapse justify-content-end">
 					홈 > ${pageName}
-				</div>
+				</div>  -->
 			</nav>
 		</div>
 	</div>

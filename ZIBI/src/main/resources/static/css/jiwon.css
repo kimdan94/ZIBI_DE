@@ -1,1 +1,131 @@
 @charset "UTF-8";
+
+/* 중고거래 메인 list
+-------------------------*/
+.scmain-btn {
+    text-align: right; /* Move the button to the right */
+    margin-top: 20px; /* Add some spacing at the top */
+    background-color:pink;
+}
+/* 채팅버튼 */
+.chat-btn{
+	border: none;
+    display: right;
+    align-items: center;
+    padding: 5px; /* Adjust padding as needed */
+    cursor: pointer;
+}
+/* 판매하기 버튼 */
+.sell-btn{
+	border: none;
+    display: right;
+    align-items: center;
+    padding: 5px; /* Adjust padding as needed */
+    cursor: pointer;
+}
+/* 내 상점 버튼 */
+.sc-mypage-btn{
+	border: none;
+    display: right;
+    align-items: center;
+    padding: 5px; /* Adjust padding as needed */
+    cursor: pointer;
+}
+.sell-btn img {
+	margin-right: 5px; /* Adjust the margin as needed */
+  }
+
+.sell-txt {
+	margin: 0; /* Remove default margin for span element */
+}
+
+/* 중고거래 글쓰기 폼
+-------------------------*/
+.sc-writeform input[type='text']:focus,
+.sc-writeform input[type='text']:hover,
+.sc-writeform select:focus,
+.sc-writeform select:hover {
+	outline:2px solid #32a77b;
+	box-shadow: none;
+}
+
+/* 상품 등록 버튼 */
+.sc-writeform .btn.btn-light{
+    font-weight: 600;
+    transition: .5s;
+    background: #fafafa;
+}
+.sc-writeform .btn.btn-light:hover{
+    background: #32a77b !important;
+    color: white !important;
+}
+
+/* 유효성 검사 색상 */
+.error-color{
+	color:#ff0000;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*나중에 list에 사용할거임*/
+/*** service start ***/
+.service .service-item {
+    position: relative;
+    height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+}
+
+.service-content::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 0;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    background: var(--bs-primary);
+    border-radius: 8px;
+    transition: 1s;
+}
+
+.service-item:hover .service-content::after {
+    height: 100%;
+    opacity: 1;
+}
+
+.service-item .service-content-icon {
+    position: relative;
+    z-index: 2;
+}
+
+.service-item .service-content-icon i,
+.service-item .service-content-icon p {
+    transition: 1s;
+}
+
+.service-item:hover .service-content-icon i {
+    color: var(--bs-dark) !important;
+}
+
+.service-item:hover .service-content-icon p {
+    color: var(--bs-white);
+}
+
+.service-item:hover .service-content-icon a.btn-primary {
+    background: var(--bs-white);
+    color: var(--bs-dark);
+}
+
+.service-item .service-content-icon a.btn-primary {
+    transition: 1s !important;
+}
+/*** Services End ***/

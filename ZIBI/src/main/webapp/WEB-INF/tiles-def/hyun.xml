@@ -3,7 +3,23 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="hyun" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+	
+	 <definition name="menuPage" template="/WEB-INF/views/home/layout_menuPage.jsp">
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
+	
+	<!-- 공연 list (main 페이지) -->
+	<definition name="list" extends="menuPage">
+    	<put-attribute name="body" value="/WEB-INF/views/performance/list.jsp"/>
+	</definition>
+	
+	<!-- 공연 정보 넣는 폼 작성 -->
+	<definition name="write" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
+    	<put-attribute name="body" value="/WEB-INF/views/performance/write.jsp"/>
+	</definition>
+	
+	
 </tiles-definitions>

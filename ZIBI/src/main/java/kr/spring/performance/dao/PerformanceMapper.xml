@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.performance.dao.PerformanceMapper">
+	<!-- 공연 등록 -->
+	<insert id="insertPerformance" parameterType="performanceVO">
+		INSERT INTO performance(
+		   performance_num,
+		   performance_title,
+		   performance_poster,
+		   performance_content,
+		   performance_start_date,
+		   performance_age,
+		   performance_category)
+		VALUES (
+		   performance_seq.nextval,
+		   #{performance_title},
+		   #{performance_poster,jdbcType=VARCHAR},
+		   #{performance_content},
+		   #{performance_start_date},
+		   #{performance_age},
+		   #{performance_category})
+	</insert>
+	
+	
+	
+</mapper>
+

@@ -1,15 +1,18 @@
+-- 예매 --
+
 --영화 정보 ent 테이블
-create table ent(
- ent_num number not null,
- ent_title varchar2(60) not null,
- ent_poster_filename varchar2(100) not null,
- ent_content clob not null,
- end_start_date date not null,
- ent_age varchar2(30) not null,
- constraint ent_pk primary key(ent_num)
+create table performance(
+ performance_num number not null,
+ performance_title varchar2(60) not null,
+ performance_poster varchar2(300) not null, -- file name
+ performance_content clob not null,
+ performance_start_date date not null,
+ performance_age number not null,
+ performance_category number not null,
+ constraint ent_pk primary key(performance_num)
 );
 
-create sequence ent_seq;
+create sequence performance_seq;
 
 --상영관 정보 cinema
 create table cinema(
@@ -39,7 +42,7 @@ create table seat(
 --
 create table ticketing(
  ticketing_num number not null,
- ent_num number not null,
+ performance_num number not null,
  cinema_num number not null,
  ticketing_date date not null,
  ticketing_start_time varchar2(30) not null
@@ -74,3 +77,46 @@ create table payment(
 );
 
 create sequence payment_seq;
+
+
+-- 고객센터 --
+
+-- 일대일 문의
+create table question(
+ question_num number not null,
+ question_title varchar2(100) not null,
+ question_content clob not null,
+ question_reg_date date default sysdate not null,
+ question_photo_name varchar2(200),
+ question_ip varchar2(40) not null,
+ mem_num number not null,
+ constraint notice_fk1 foreign key (mem_num) references member (mem_num)
+);
+
+create sequence question_seq;
+-- 일대일 댓글
+create table question_reply(
+ quest_re_num number not null,
+ quest_re_content varchar2(900) not null,
+ quest_re_date date default sysdate not null,
+ quest_re_ip varchar2(40) not null,
+ mem_num number not null,
+ question_num number not null,
+ constraint question_reply_fk1 foreign key (mem_num) references member (mem_num)
+ constraint question_reply_fk2 foreign key (question_num) references question (question_num)
+ 
+);
+
+create sequence question_reply_seq;
+-- 공지
+create table notice(
+ notice_num number not null,
+ notice_title varchar2(100) not null,
+ notice_content clob not null,
+ notice_photo_name varchar2(300) not null,
+ notice_ip varchar2(40) not null,
+ mem_num number not null,
+ constraint notice_fk1 foreign key (mem_num) references member (mem_num)
+);
+
+create sequence notice_seq;

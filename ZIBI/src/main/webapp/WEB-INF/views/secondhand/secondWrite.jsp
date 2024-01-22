@@ -11,10 +11,10 @@
     });
 </script>
 
-<div class="container">
+<div>
 	<div class="d-flex justify-content-center">
-		<div class="rounded sc-writeform col-md-4 col-lg-6" style="background:pink;">
-			<form:form action="write" id="sc_write" modelAttribute="secondVO">
+		<div class="rounded sc-writeform col-md-4 col-lg-6">
+			<form:form action="write" id="sc_write" modelAttribute="secondVO" enctype="multipart/form-data">
 				<div>
 					<form:label path="sc_title">제목</form:label>
 					<form:input path="sc_title" class="w-100 form-control p-3 mb-4" placeholder="제목"/>
@@ -24,7 +24,7 @@
 				<div>
                     <form:label path="sc_category">카테고리</form:label>
                     <form:select path="sc_category" class="w-100 form-select p-3 mb-4" id="categorm_form">
-                    	<form:option value="" disabled="disabled" label="카테고리 선택"/>
+                    	<form:option value="0" disabled="disabled" label="카테고리 선택"/>
        					<form:option value="1" label="의류/액세서리" />
         				<form:option value="2" label="도서/티켓/문구" />
         				<form:option value="3" label="뷰티" />
@@ -33,6 +33,12 @@
         				<form:option value="6" label="기타" />
                     </form:select>
                 </div>
+				
+				<div>
+					<form:label path="sc_price">가격</form:label>
+					<form:input path="sc_price" class="w-100 form-control p-3 mb-4" placeholder="판매가격"/>
+					<form:errors path="sc_price" cssClass="error-color"/>
+				</div>
 				
 				<div>
 					<form:label path="upload">썸네일 이미지</form:label>

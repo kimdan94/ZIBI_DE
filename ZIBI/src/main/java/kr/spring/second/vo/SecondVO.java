@@ -19,7 +19,7 @@ public class SecondVO {
 	private String sc_title;	//글 제목
 	@NotBlank
 	private String sc_content; 	//글 내용
-	private Integer sc_category; 	//상품 카테고리
+	private int sc_category; 	//상품 카테고리
 	private int sc_price; 		//판매 가격
 	private int sc_status;		//상품 상태 (1:중고, 2: 새상품)
 	private int sc_way; 		//거래 방법(1: 직거래, 2: 택배)

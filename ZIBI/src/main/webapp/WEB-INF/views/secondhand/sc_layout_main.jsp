@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>ZIBI</title>
-<link href="${pageContext.request.contextPath}/sample/lib/animate/animate.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/sample/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/jiwon.css" rel="stylesheet">
 <tiles:insertAttribute name="css" ignore="true"/>

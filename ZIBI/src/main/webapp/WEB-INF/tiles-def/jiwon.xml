@@ -10,7 +10,7 @@
 	
 	<!-- 판매 등록 폼 -->
 	<definition name="secondWrite" extends="secondMain">
-		<put-attribute name="css" value="/WEB-INF/views/secondhand/secondCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondWrite.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/views/secondhand/secondCSS.jsp"/>
 	</definition>	
 </tiles-definitions>

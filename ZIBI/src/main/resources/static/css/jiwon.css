@@ -1,5 +1,34 @@
 @charset "UTF-8";
 
+
+/* 중고거래 글쓰기 폼
+-------------------------*/
+
+.sc-writeform input[type='text']:focus,
+.sc-writeform input[type='text']:hover,
+.sc-writeform select:focus,
+.sc-writeform select:hover {
+	outline:2px solid #32a77b;
+	box-shadow: none;
+}
+
+/* 상품 등록 버튼 */
+.sc-writeform .btn.btn-light{
+    font-weight: 600;
+    transition: .5s;
+    background: #fafafa;
+}
+.sc-writeform .btn.btn-light:hover{
+    background: #32a77b !important;
+    color: white !important;
+}
+
+/* 유효성 검사 색상 */
+.error-color{
+	color:#ff0000;
+}
+
+
 /* 중고거래 메인 list
 -------------------------*/
 .scmain-btn {
@@ -39,32 +68,6 @@
 	margin: 0; /* Remove default margin for span element */
 }
 
-/* 중고거래 글쓰기 폼
--------------------------*/
-
-.sc-writeform input[type='text']:focus,
-.sc-writeform input[type='text']:hover,
-.sc-writeform select:focus,
-.sc-writeform select:hover {
-	outline:2px solid #32a77b;
-	box-shadow: none;
-}
-
-/* 상품 등록 버튼 */
-.sc-writeform .btn.btn-light{
-    font-weight: 600;
-    transition: .5s;
-    background: #fafafa;
-}
-.sc-writeform .btn.btn-light:hover{
-    background: #32a77b !important;
-    color: white !important;
-}
-
-/* 유효성 검사 색상 */
-.error-color{
-	color:#ff0000;
-}
 
 
 
@@ -72,11 +75,7 @@
 
 
 
-
-
-
-
-/*나중에 list에 사용할거임*/
+/* 나중에 list에 사용할거임 */
 /*** service start ***/
 .service .service-item {
     position: relative;
@@ -113,14 +112,6 @@
     transition: 1s;
 }
 
-.service-item:hover .service-content-icon i {
-    color: var(--bs-dark) !important;
-}
-
-.service-item:hover .service-content-icon p {
-    color: var(--bs-white);
-}
-
 .service-item:hover .service-content-icon a.btn-primary {
     background: var(--bs-white);
     color: var(--bs-dark);
@@ -130,3 +121,41 @@
     transition: 1s !important;
 }
 /*** Services End ***/
+
+/* 공통 등록, 수정 폼
+------------------------------*/
+
+form ul li{
+	clear:both;
+}
+form ul li label{
+	width:130px;
+	float:left;
+}
+ul{
+	list-style:none;
+}
+
+form#search_form{
+	border:none;
+}
+ul.search{
+	width:340px;
+	list-style:none;
+	padding:0;
+	margin:0 auto;
+}
+ul.search li{
+	margin:0 0 9px 0;
+	padding:0;
+	display:inline;
+}
+.result-display{
+	width:400px;
+	height:200px;
+	margin:50px auto;
+	border:1px solid #000;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}

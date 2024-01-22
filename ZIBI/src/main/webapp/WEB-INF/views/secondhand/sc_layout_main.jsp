@@ -10,6 +10,7 @@
 <link href="${pageContext.request.contextPath}/sample/css/bootstrap.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/jiwon.css" rel="stylesheet">
+<tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>

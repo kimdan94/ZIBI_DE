@@ -2,6 +2,10 @@ package kr.spring.second.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,7 +15,9 @@ import lombok.ToString;
 @ToString
 public class SecondVO {
 	private int sc_num; 		//판매글 등록 번호
+	@NotBlank
 	private String sc_title;	//글 제목
+	@NotBlank
 	private String sc_content; 	//글 내용
 	private Integer sc_category; 	//상품 카테고리
 	private int sc_price; 		//판매 가격
@@ -23,6 +29,7 @@ public class SecondVO {
 	private int sc_hit;			//판매글 조회수(default 0)
 	private Date sc_reg_date;	//등록일(default sysdate)
 	private Date sc_modify_date;//수정일
+	private MultipartFile upload;//폼에서 파일을 upload로 넘김
 	private String sc_filename;	//업로드한 파일 이름
 	private String sc_ip;		//글작성 ip
 	private int sc_show;		//게시글 표시 여부(default 2: 표시, 1:미표시(숨김 처리))

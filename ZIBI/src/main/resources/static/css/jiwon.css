@@ -41,6 +41,7 @@
 
 /* 중고거래 글쓰기 폼
 -------------------------*/
+
 .sc-writeform input[type='text']:focus,
 .sc-writeform input[type='text']:hover,
 .sc-writeform select:focus,

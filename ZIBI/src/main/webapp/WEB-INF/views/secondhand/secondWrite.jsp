@@ -13,12 +13,12 @@
 
 <div class="container">
 	<div class="d-flex justify-content-center">
-		<div class="rounded sc-writeform col-md-4 col-lg-6">
+		<div class="rounded sc-writeform col-md-4 col-lg-6" style="background:pink;">
 			<form:form action="write" id="sc_write" modelAttribute="secondVO">
-				
 				<div>
 					<form:label path="sc_title">제목</form:label>
 					<form:input path="sc_title" class="w-100 form-control p-3 mb-4" placeholder="제목"/>
+					<form:errors path="sc_title" cssClass="error-color"/>
 				</div>
 				
 				<div>
@@ -34,6 +34,51 @@
                     </form:select>
                 </div>
 				
+				<div>
+					<form:label path="upload">썸네일 이미지</form:label>
+					<input type="file" name="upload" id="upload">
+				</div>
+				
+				
+				
+				<div>
+					<form:label path="sc_content">내용을 입력하세요</form:label>
+					<form:textarea path="sc_content"/>
+					<form:errors path="sc_content" cssClass="error-color"/>
+					<script>
+						function MyCustomUploadAdapterPlugin(editor){
+							editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+								return new UploadAdapter(loader);
+							}
+						}
+					
+						ClassicEditor
+							.create(document.querySelector('#sc_content'),{
+								extraPlugins:[MyCustomUploadAdapterPlugin]
+							})
+							.then(editor => {
+								window.editor = editor;
+							})
+							.catch(error => {
+								console.error(error);
+							});
+					</script>
+				</div>
+			
+				<div>
+					<form:label path="sc_status">상품 상태</form:label>
+					<form:radiobutton path="sc_status"  value="1" label="중고" checked="checked"/>
+					<form:radiobutton path="sc_status" value="2" label="새상품" />
+				</div>
+				
+				<div>
+					<form:label path="sc_way">거래 방법</form:label>
+					<form:radiobutton path="sc_way"  value="1" label="직거래" checked="checked"/>
+					<form:radiobutton path="sc_way" value="2" label="택배" />
+				</div>
+				
+				
+				<!-- 거래 희망 장소 -->
 				
 				<form:button class="w-100 btn btn-light form-control p-3 rounded-pill">상품 등록</form:button>
 			</form:form>

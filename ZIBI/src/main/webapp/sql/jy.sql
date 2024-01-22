@@ -8,7 +8,7 @@ create table book(
  book_onoff number(1) default 0 not null, -- 0:모집중, 1:모임 완료, 2:모임 취소
  book_title varchar2(120) not null,
  book_content clob not null,
- book_gatheringDate date not null,
+ book_gatheringDate varchar2(100) not null,
  book_match number(1) default 0 not null, -- 0:예약 바로 확정, 1:주최자 승인 필요
  book_regDate date default sysdate not null,
  book_modifyDate date,

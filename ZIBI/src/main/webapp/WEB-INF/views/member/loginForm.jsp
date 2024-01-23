@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <!-- Contact Start -->
-<div class="container">
-	<div class="login-form row justify-content-center">
+<div class="container page-width">
+	<div class="member-form row justify-content-center">
 		<div class="col-7">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">

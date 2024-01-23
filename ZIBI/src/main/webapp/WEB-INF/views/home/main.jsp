@@ -1,131 +1,160 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 메인 바디 시작 -->
-<div class="container-fluid event py-2">
-    <div class="container">
-    	<%-- 캐러셀 이미지 삽입 --%>
-    	<div class="d-flex justify-content-center"><%-- 재정렬 필요 --%>
-	    	<div class="site-content">
-				<p><img src="${pageContext.request.contextPath}/images/logo_mini.png" width="90px"></p>
-				<p>1인 가구를 위한 정보가 가득한 곳</p>
-			</div>
+<div class="container">
+	<div class="d-flex site-page">
+		<div class="align-self-center">
+			1인 가구를 위한 정보가 가득한 곳, <img src="${pageContext.request.contextPath}/images/logo_squ.png" width="90px">
 		</div>
-		<!-- 사이트 설명 시작 -->
-		<div class="container-fluid service py-6">
-			<div class="row g-4">
-				<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
-								</h4>
-								<p class="mb-1">모임을 만들거나 참여하여<br>지비러들끼리 소통을 활성화하세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/ent/list">영화 감상</a>
-								</h4>
-								<p class="mb-1">1인 가구를 위해 엄선된 영화를<br>특별한 가격으로 누려보세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/rental/list">물품 대여</a>
-								</h4>
-								<p class="mb-1">한 번만 사용할 물건들을<br>지비러에게서 빌려보세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/checklist/list">집 체크리스트</a>
-								</h4>
-								<p class="mb-1">집을 이사할 때<br>ZIBI의 체크리스트를 활용해보세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/secondhand/list">중고거래</a>
-								</h4>
-								<p class="mb-1">더이상 사용하지 않는<br>물품을 거래하세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/contents/list">컬럼 구독</a>
-								</h4>
-								<p class="mb-1">지비러들과<br>유용한 정보를 주고받으세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex  justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/helper/list">재능 기부</a>
-								</h4>
-								<p class="mb-1">나의 사소한 재능을<br>기부하세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/">1인 가구 정보</a>
-								</h4>
-								<p class="mb-1">1인 가구 정보를<br>열람하세요</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/community/list">커뮤니티</a>
-								</h4>
-								<p class="mb-1">지비러들끼리<br>간편하게 소통하세요</p>
-							</div>
+		<div class="flex-fill align-self-center">
+			캐러셀
+			
+			<div id="carouselExampleIndicators" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="${pageContext.request.contextPath}/sample/img/event-3.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="${pageContext.request.contextPath}/sample/img/event-2.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="${pageContext.request.contextPath}/sample/img/event-4.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+			
+		</div>
+	</div>
+	<!-- 사이트 설명 시작 -->
+	<div class="container-fluid service py-6">
+		<div class="row g-4">
+			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
+							</h4>
+							<p class="mb-1">모임을 만들거나 참여하여<br>지비러들끼리 소통을 활성화하세요</p>
 						</div>
 					</div>
 				</div>
 			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/ent/list">영화 감상</a>
+							</h4>
+							<p class="mb-1">1인 가구를 위해 엄선된 영화를<br>특별한 가격으로 누려보세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/rental/list">물품 대여</a>
+							</h4>
+							<p class="mb-1">한 번만 사용할 물건들을<br>지비러에게서 빌려보세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/checklist/list">집 체크리스트</a>
+							</h4>
+							<p class="mb-1">집을 이사할 때<br>ZIBI의 체크리스트를 활용해보세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/secondhand/list">중고거래</a>
+							</h4>
+							<p class="mb-1">더이상 사용하지 않는<br>물품을 거래하세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/contents/list">컬럼 구독</a>
+							</h4>
+							<p class="mb-1">지비러들과<br>유용한 정보를 주고받으세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex  justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/helper/list">재능 기부</a>
+							</h4>
+							<p class="mb-1">나의 사소한 재능을<br>기부하세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/">1인 가구 정보</a>
+							</h4>
+							<p class="mb-1">1인 가구 정보를<br>열람하세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/community/list">커뮤니티</a>
+							</h4>
+							<p class="mb-1">지비러들끼리<br>간편하게 소통하세요</p>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- 사이트 설명 끝 -->
-		<!-- 개별 카테고리 최신 글 시작 --><%-- 최신글 링크 걸기 --%>
+	</div>
+	<!-- 사이트 설명 끝 -->
+	<!-- 개별 카테고리 최신 글 시작 --><%-- 최신글 링크 걸기 --%>
+	<div class="container-fluid event py-2">
 		<div class="tab-class text-center">
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">

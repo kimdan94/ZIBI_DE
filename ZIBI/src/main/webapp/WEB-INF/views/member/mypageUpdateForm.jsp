@@ -1,51 +1,52 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div class="container mypageMain">
-	<form:form action="mypageUpdate" id="update_member" modelAttribute="memberVO">
-		<div class="row">
-			<div class="col-12">
-				<form:label path="mem_email">이메일</form:label>
-				<p>${memberVO.mem_email}</p>
+<div class="container form-width">
+	<div class="member-form">
+		<form:form action="mypageUpdate" id="update_member" modelAttribute="memberVO">
+			<div class="row">
+				<div class="col-12 text-center">
+					<h6>* 이메일을 제외한 정보만 수정 가능합니다</h6>
+				</div>
+				<div class="col-6">
+					<form:label path="mem_name">이름</form:label>
+					<form:input path="mem_name" class=" form-control p-3"/>
+					<form:errors path="mem_name"/>
+				</div>
+				<div class="col-6">
+					<form:label path="mem_nickname">닉네임</form:label>
+					<form:input path="mem_nickname" class="form-control p-3" placeholder="한글만 가능" autocomplete="off"/>
+					<input type="button" class="btn" value="중복체크" id="nickname_check" style="display: none;">
+					<span id="nickname_area"></span>
+					<form:errors path="mem_nickname"/>
+				</div>
+				<div class="col-6">
+					<form:label path="mem_phone">연락처</form:label>
+					<form:input path="mem_phone" class="form-control p-3"/>
+					<input type="button" class="btn" value="중복체크" id="phone_check" style="display: none;">
+					<span id="phone_area"></span>
+					<form:errors path="mem_phone"/>
+				</div>
+				<div class="col-6">
+					<form:label path="mem_zipcode">우편번호</form:label>
+					<form:input path="mem_zipcode" class="input-check w-100 form-control p-3" maxlength="5" autocomplete="off"/>
+					<input type="button" class="btn" value="찾기" id="zipcode_check" onclick="execDaumPostcode()">
+					<span id="zipcode_area"></span>
+					<form:errors path="mem_zipcode"/>
+				</div>
+				<div class="col-6">
+					<form:label path="mem_address1">주소</form:label>
+					<form:input path="mem_address1" class="form-control p-3"/>
+					<form:errors path="mem_address1"/>
+				</div>
+				<div class="col-6">
+					<form:label path="mem_address2">상세 주소</form:label>
+					<form:input path="mem_address2" class="form-control p-3"/>
+					<form:errors path="mem_address2"/>
+				</div>
+				<form:button class="btn btn-light active rounded-pill w-100 p-3">회원 정보 수정</form:button>
 			</div>
-			<div class="col-6">
-				<form:label path="mem_name">이름</form:label>
-				<form:input path="mem_name" class=" form-control p-3"/>
-				<form:errors path="mem_name"/>
-			</div>
-			<div class="col-6">
-				<form:label path="mem_nickname">닉네임</form:label>
-				<form:input path="mem_nickname" class="form-control p-3" placeholder="한글만 가능" autocomplete="off"/>
-				<input type="button" class="btn" value="중복체크" id="nickname_check" style="display: none;">
-				<span id="nickname_area"></span>
-				<form:errors path="mem_nickname"/>
-			</div>
-			<div class="col-6">
-				<form:label path="mem_phone">연락처</form:label>
-				<form:input path="mem_phone" class="form-control p-3"/>
-				<input type="button" class="btn" value="중복체크" id="phone_check" style="display: none;">
-				<span id="phone_area"></span>
-				<form:errors path="mem_phone"/>
-			</div>
-			<div class="col-6">
-				<form:label path="mem_zipcode">우편번호</form:label>
-				<form:input path="mem_zipcode" class="input-check w-100 form-control p-3" maxlength="5" autocomplete="off"/>
-				<input type="button" class="btn" value="찾기" id="zipcode_check" onclick="execDaumPostcode()">
-				<span id="zipcode_area"></span>
-				<form:errors path="mem_zipcode"/>
-			</div>
-			<div class="col-6">
-				<form:label path="mem_address1">주소</form:label>
-				<form:input path="mem_address1" class="form-control p-3"/>
-				<form:errors path="mem_address1"/>
-			</div>
-			<div class="col-6">
-				<form:label path="mem_address2">상세 주소</form:label>
-				<form:input path="mem_address2" class="form-control p-3"/>
-				<form:errors path="mem_address2"/>
-			</div>
-			<form:button class="btn btn-light active rounded-pill w-100 p-3">회원 정보 수정</form:button>
-		</div>
-	</form:form>
+		</form:form>
+	</div>
 </div>
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 	<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
@@ -90,8 +91,10 @@
 							phoneCheck('로그인 후 변경 가능합니다');
 						} else if(param.result=='phoneDuplicated'){
 							phoneCheck('연락처가 중복됩니다');
+							$('#mem_phone').val('').focus();
 						} else if(param.result=='notMatchPattern'){
 							phoneCheck('연락처 형식이 불일치합니다');
+							$('#mem_phone').val('').focus();
 						} else if(param.result=='phoneNotFound'){
 							$('#phone_area').text('연락처 사용 가능합니다');
 							phone_checked = 1;
@@ -100,6 +103,7 @@
 							phone_checked = 1;
 						} else {
 							phoneCheck('연락처 중복 체크 오류가 발생했습니다');
+							phone_checked = 0;
 						}
 					},
 					error:function(){
@@ -119,7 +123,7 @@
 			$('#nickname_area').text('');
 			$('#mem_nickname.errors').text('');
 						
-			//닉네임 중복 체크
+			//닉네임 중복 체크 버튼 클릭 시
 			$('#nickname_check').click(function(){
 				$('#mem_nickname.errors').text('');
 				
@@ -131,15 +135,17 @@
 				$.ajax({
 					url: 'checkNickname',
 					type: 'post',
-					data: {mem_nickname:$('#mem_nickname').val(),login:"login"},//회원가입폼과 동일한 메서드 사용을 위해 login 값 추가
+					data: {mem_nickname:$('#mem_nickname').val()},
 					dataType: 'json',
 					success:function(param){
 						if(param.result=='logout'){
 							nicknameCheck('로그인 후 변경 가능합니다');
 						} else if(param.result=='nicknameDuplicated'){
 							nicknameCheck('닉네임이 중복됩니다');
+							$('#mem_nickname').val('').focus();
 						} else if(param.result=='notMatchPattern'){
 							nicknameCheck('닉네임은 한글만 입력 가능합니다');
+							$('#mem_nickname').val('').focus();
 						} else if(param.result=='nicknameNotFound'){
 							$('#nickname_area').text('닉네임 사용 가능');
 							nickname_checked = 1;
@@ -148,6 +154,7 @@
 							nickname_checked = 1;
 						} else {
 							nicknameCheck('닉네임 중복 체크 오류가 발생했습니다');
+							nickname_checked = 0;
 						}
 					},
 					error:function(){
@@ -159,33 +166,31 @@
 		});
 		
 		//submit 이벤트 발생 시 닉네임, 연락처 체크
-		$('#register_member').submit(function(){
+		$('#update_member').submit(function(){
 			let count = 0;
 			
 			if(nickname_checked==0){
-				nicknameCheck('닉네임 중복 체크를 진행해주세요');
 				count++;
+				nicknameCheck('닉네임 중복 체크를 진행해주세요');
 			}
 			if(phone_checked==0){
-				phoneCheck('닉네임 중복 체크를 진행해주세요');
 				count++;
+				phoneCheck('연락처 중복 체크를 진행해주세요');
 			}
 			
-			if(count>1) return false;
+			if(count>0) return false;
 		});
 		
 		function phoneCheck(message){
 			$('#phone_check').show();
 			$('#mem_phone.errors').text('');
 			$('#phone_area').text(message);
-			$('#mem_phone').val('').focus();
 			phone_checked = 0;
 		}
 		function nicknameCheck(message){
 			$('#nickname_check').show();
 			$('#mem_nickname.errors').text('');
 			$('#nickname_area').text(message);
-			$('#mem_nickname').val('').focus();
 			nickname_checked = 0;
 		}
 		

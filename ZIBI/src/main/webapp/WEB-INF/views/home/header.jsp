@@ -40,7 +40,7 @@
 	<!-- 헤더 시작 -->
 	<div class="container-fluid nav-bar">
 		<div class="container">
-			<nav class="navbar navbar-expand-lg py-2">
+			<nav class="navbar navbar-expand-lg">
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<div class="navbar-nav">
 						<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/main/home">메인</a>

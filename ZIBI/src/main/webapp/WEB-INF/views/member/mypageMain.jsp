@@ -1,44 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<div class="container mypageMain">
-	<div class="text-center">
-		<input type="button" class="btn btn-light active p-3" value="메인" onclick="location.href='${pageContext.request.contextPath}/member/mypageMain'">
-		<input type="button" class="btn btn-light p-3" value="거래 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
-		<input type="button" class="btn btn-light p-3" value="활동 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
-		<input type="button" class="btn btn-light p-3" value="팔로우 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
-	</div>
-	<%-- @@님과 함께한지 몇일 --%>
-	<div class="row">
-		<div class="col-6 event text-center align-self-center">
-			<div class="event-img position-relative">
-				<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView" width="350" height="350"> <%--이미지 영역 고정 필요--%>
-				<div class="event-overlay d-flex flex-column p-4">
-					<a data-lightbox="event-1" class="my-auto" id="photo_btn">프로필 사진 변경</a>
+<div class="container page-width">
+	<div class="member-page mypageMain">
+		<div class="row">
+			<div class="col">
+				<input type="button" class="btn btn-light active w-100" value="메인" onclick="location.href='${pageContext.request.contextPath}/member/mypageMain'">
+			</div>
+			<div class="col">
+				<input type="button" class="btn btn-light w-100" value="거래 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
+			</div>
+			<div class="col">
+				<input type="button" class="btn btn-light w-100" value="활동 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
+			</div>
+			<div class="col">
+				<input type="button" class="btn btn-light w-100" value="팔로우 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
+			</div>
+		</div>
+		<div class="row profile-detail">
+			<div class="col-6 event text-center align-self-center">
+				<div class="photo-area">
+					<div class="event-img position-relative">
+						<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView" width="350" height="350">
+						<div class="event-overlay d-flex flex-column">
+							<a data-lightbox="event-1" class="my-auto" id="photo_btn">
+								<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="60px">
+							</a>
+						</div>
+						
+					</div>
+					<div id="photo_choice" style="display: none;">
+						<input type="file" id="upload" class="btn" accept="image/gif,image/png,image/jpeg"><br>
+						<input type="button" value="변경" class="btn" id="photo_submit"> 
+						<input type="button" value="취소" class="btn" id="photo_reset">
+						<div id="photo_check"></div>
+					</div>
 				</div>
 			</div>
-			<div id="photo_choice" style="display: none;">
-				<input type="file" id="upload" class="btn" accept="image/gif,image/png,image/jpeg"><br>
-				<input type="button" value="변경" class="btn" id="photo_submit"> 
-				<input type="button" value="취소" class="btn" id="photo_reset">
-				<div id="photo_check"></div>
+			<div class="col-6 align-self-center">
+				<h6>이메일</h6>
+				<p>${memberVO.mem_email}</p>
+				<h6>닉네임</h6>
+				<p>${memberVO.mem_nickname}</p>
+				<c:if test="${!empty memberVO.mem_name}">
+					<h6>이름</h6>
+					<p>${memberVO.mem_name}</p>
+					<h6>연락처</h6>
+					<p>${memberVO.mem_phone}</p>
+					<h6>주소</h6>
+					<p>${memberVO.mem_address1} ${memberVO.mem_address2} (${memberVO.mem_zipcode})</p>
+				</c:if>
+				
 			</div>
-			<input type="button" value="나의 오픈 프로필" class="btn btn-light active p-10 w-50" onclick="location.herf='${pageContext.request.contextPath}/member/'">
 		</div>
-		<div class="col-6 align-self-center">
-			<h6>이메일</h6>
-			<p>${memberVO.mem_email}</p>
-			<h6>닉네임</h6>
-			<p>${memberVO.mem_nickname}</p>
-			<c:if test="${!empty memberVO.mem_name}">
-				<h6>이름</h6>
-				<p>${memberVO.mem_name}</p>
-				<h6>연락처</h6>
-				<p>${memberVO.mem_phone}</p>
-				<h6>주소</h6>
-				<p>${memberVO.mem_address1} ${memberVO.mem_address2} (${memberVO.mem_zipcode})</p>
-			</c:if>
-			<div class="text-center">
+		<div class="row">
+			<div class="col-6">
+				<input type="button" value="나의 오픈 프로필" class="btn btn-light active w-100" onclick="location.herf='${pageContext.request.contextPath}/member/'">
+			</div>
+			<div class="col-6 text-center">
 				<input type="button" class="btn" value="정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">
 				<input type="button" class="btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/'">
 				<input type="button" class="btn" value="회원 탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/'">

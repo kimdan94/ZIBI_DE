@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Controller
 public class MemberAjaxController {
 	
@@ -28,11 +26,9 @@ public class MemberAjaxController {
 	@ResponseBody
 	public Map<String,String> updateMyPhoto(HttpSession session, MemberVO memberVO){
 		
-		log.debug("<<프로필 사진 업로드>>"+memberVO);
-		
 		Map<String, String> mapJson = new HashMap<String, String>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		log.debug("<<프로필 사진 업로드2>>"+user);
+		
 		if(user==null) {
 			mapJson.put("result","logout");
 		} else {

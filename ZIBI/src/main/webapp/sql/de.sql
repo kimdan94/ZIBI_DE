@@ -27,13 +27,14 @@ create table rental_review(
  review_reg_date date default sysdate not null,
  review_ip varchar2(40) not null,
  mem_num number not null,
+ rental_num number not null,
  constraint rental_review_pk primary key (review_num),
  constraint rental_review_fk1 foreign key (rental_num) references rental (rental_num),
  constraint rental_review_fk2 foreign key (mem_num) references member (mem_num)
 );
 
 -- 대여 게시판 스크랩 테이블
-create rental_scrap(
+create table rental_scrap(
  rental_num number not null,
  mem_num number not null,
  constraint rental_scrap_fk1 foreign key (rental_num) references rental (rental_num),
@@ -50,39 +51,21 @@ create table helper(
  helper_content clob not null,
  helper_filename varchar2(200) not null,
  helper_zipcode varchar2(100) not null,
+ helper_address1 varchar2(100) not null,
+ helper_address2 varchar2(100),
  helper_ip varchar2(40) not null,
  helper_reg_date date default sysdate not null,
  helper_modify_date date,
  helper_solution number not null,
  mem_num number not null,
+ constraint helper_pk primary key (helper_num),
  constraint helper foreign key (mem_num) references member (mem_num)
 );
 
 -- 재능기부 게시판 스크랩 테이블
-create helper_scrap(
+create table helper_scrap(
  helper_num number not null,
  mem_num number not null,
- constraint helper_scrap_fk1 foreign key (helper_num) references rental (helper_num),
+ constraint helper_scrap_fk1 foreign key (helper_num) references helper (helper_num),
  constraint helper_scrap_fk2 foreign key (mem_num) references member (mem_num)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

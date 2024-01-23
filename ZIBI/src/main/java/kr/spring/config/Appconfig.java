@@ -27,7 +27,8 @@ public class Appconfig implements WebMvcConfigurer {
 		
 		registry.addInterceptor(loginCheck)
 			.addPathPatterns("/member/mypageMain")
-			.addPathPatterns("/member/mypageUpdate");
+			.addPathPatterns("/member/mypageUpdate")
+			.addPathPatterns("/book/write");
 	}
 	
 	

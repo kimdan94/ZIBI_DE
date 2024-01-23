@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -42,6 +43,7 @@ public class BookVO {
 	@Size(min=5,max=5)
 	private String book_zipcode;
 	private String book_kit;//준비물 없음(default)
+	@Range(min=2,max=99)
 	@NotNull
 	private int book_maxcount;
 	private int book_headcount;//0(default)

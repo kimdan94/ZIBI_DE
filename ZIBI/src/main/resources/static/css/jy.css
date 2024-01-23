@@ -1,1 +1,90 @@
-@charset "UTF-8";
+/*----------- 공통 문구 스타일 -----------*/
+.guide-phrase{
+	font-size:12px;
+	color:#32a77b;
+	font-weight:bold;
+}
+h4{
+	font-family:sans-serif;
+	font-weight:bold;
+	color:#414142;
+}
+.title-phrase{
+	font-size:25px;
+	margin-bottom:-37px;
+}
+.error-phrase{
+	font-size:12px;
+	color:#dd5c5e;
+}
+/*----------- 공통 버튼 -----------*/
+.default-btn,input[type=file]::file-selector-button{
+	background:#32a77b;
+	font-weight:bold;
+	color:white;
+	border:none;
+	font-size:13px;
+	border-radius:5px;
+	width:100px;
+	height:24px;
+	padding:3px;
+}
+/*----------- 공통 정렬 -----------*/
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
+/*----------- 모임글 등록 폼 -----------*/
+#book_write label{
+	margin-top:20px;
+}
+#book_content{
+	resize:none;
+	width:100%;
+	height:350px;
+}
+#book_maxcount:focus, #book_maxcount:hover, 
+#book_expense:focus, #book_expense:hover{
+	outline:2px solid #32a77b;
+	box-shadow:none;
+}
+#book_zipcode:hover{
+	border:none;
+}
+#book_category:hover, #book_category:focus-within{
+	border:none;
+	outline:2px solid #32a77b;
+	box-shadow:none;
+}
+#book_category{
+	font-size:13px;
+}
+.book_match input[type="radio"]{
+	display:none;
+}
+.book_match input[type="radio"]+label{
+	display:inline-block;
+    cursor:pointer;
+    height:30px;
+    width:90px;
+    border: 1px solid #32a77b;
+    line-height:30px;
+    text-align:center;
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:13px;
+    background-color:#fff;
+    color:#333;
+}
+.book_match input[type="radio"]:checked+label{
+	background-color:#32a77b;
+	color:white;
+}
+input[value="우편번호 찾기"]{
+	margin-left:5px;
+}
+#book_gatheringDate{
+	cursor:pointer;
+}

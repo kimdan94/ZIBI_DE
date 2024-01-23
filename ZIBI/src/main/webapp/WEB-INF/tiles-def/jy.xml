@@ -3,7 +3,15 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-    <definition name="jy" extends="main">
-		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+    <definition name="bookWrite" template="/WEB-INF/views/book/layout_bookBasic.jsp">
+    	<put-attribute name="title" value="모임 만들기 | ZIBI"/>
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/book/bookWrite.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
+	</definition>
+	<definition name="bookList" extends="bookWrite">
+	<put-attribute name="title" value="소모임 예약 | ZIBI"/>
+		<put-attribute name="body" value="/WEB-INF/views/book/bookList.jsp"/>
 	</definition>
 </tiles-definitions>

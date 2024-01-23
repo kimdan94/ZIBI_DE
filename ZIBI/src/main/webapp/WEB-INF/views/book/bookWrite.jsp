@@ -23,8 +23,9 @@
 				<div class="book_match">
 					<form:label path="book_match">승인 여부</form:label>
 					<br>
-					<input type="radio" id="book_match0" name="book_match" value="0"><label for="book_match0">바로 승인</label>
-					<input type="radio" id="book_match1" name="book_match" value="1"><label for="book_match1">승인 필요</label>
+					<form:radiobutton path="book_match" id="book_match1"  value="1"/><label for="book_match1">바로 승인</label>
+					<form:radiobutton path="book_match" id="book_match2" value="2"/><label for="book_match2">승인 필요</label>
+					<br>
 					<form:errors path="book_match" cssClass="error-phrase"/>
 					<br>
 					<span class="guide-phrase">*승인 필요 체크 시 나의 예약 내역에서 신청자의 참여를 직접 승인해야 예약이 확정됩니다.</span>
@@ -51,8 +52,6 @@
 					<script>
 					$("#book_gatheringDate").daterangepicker({
 					    locale: {
-						"minYear":2024,
-						"maxYear":2034,
 					    "format": 'YYYY-MM-DD a HH:mm',
 					    "applyLabel": "확인",
 					    "cancelLabel": "취소",
@@ -72,7 +71,7 @@
 					    $(".yearselect").css("float", "left");
 					    $(".monthselect").css("float", "right");
 					    $(".cancelBtn").css("float", "right");
-					});						
+					});
 					</script>
 				</div>
 				<div>
@@ -94,19 +93,9 @@
 				</div>
 				<div>
 					<form:label path="book_maxcount">참여 인원</form:label>
-					<input type="number" id="book_maxcount" name="book_maxcount"
-						min="2" max="99" 
-						class="w-100 form-control p-3" placeholder="최대 참여 인원을 알려주세요!">
+					<form:input path="book_maxcount" class="w-100 form-control p-3"
+						placeholder="최대 참여 인원을 알려주세요!"/>
 					<form:errors path="book_maxcount" cssClass="error-phrase"/>	
-				</div>
-				<div class="filebox">
-					<form:label path="book_thumbnailName">썸네일</form:label>
-					<br>
-					<input type="file" id="book_thumbnailName" name="book_thumbnailName"
-						accept="image/gif,image/png,image/jpeg">
-					<form:errors path="book_thumbnailName" cssClass="error-phrase"/>	
-					<br>
-					<span class="guide-phrase">*썸네일 이미지는 500 x 500px 또는 1:1 비율 고화질 이미지를 권장합니다.</span>
 				</div>
 				<div>
 					<form:label path="book_content">소개 글</form:label>
@@ -117,6 +106,17 @@
 					<h4>선택 입력사항</h4>
 				</div>
 				<hr size="3" noshade="noshade" width="100%">
+				<div class="filebox">
+					<form:label path="book_thumbnailName">썸네일</form:label>
+					<br>
+					<input type="file" id="book_thumbnailName" name="upload"
+						accept="image/gif,image/png,image/jpeg">
+					<form:errors path="book_thumbnailName" cssClass="error-phrase"/>	
+					<br>
+					<span class="guide-phrase">
+						*500 x 500px 또는 1:1 비율의 고화질 이미지를 권장하며 미선택 시 기본 이미지가 제공됩니다.
+					</span>
+				</div>
 				<div>
 					<form:label path="book_expense">참여 비용</form:label>
 					<input type="number" id="book_expense" name="book_expense"
@@ -126,13 +126,6 @@
 					<form:label path="book_kit">준비물</form:label>
 					<form:input path="book_kit" class="w-100 form-control p-3" 
 						placeholder="지참해야 하는 준비물이 있다면 알려주세요!  ex. 붓, 수채화 물감"/>
-				</div>
-				<div>
-					<form:label path="book_fileName">소개 이미지</form:label>
-					<br>
-					<input type="file" id="book_fileName" name="book_fileName"
-						placeholder="활동 사진을 추가해 보세요!"
-						accept="image/gif,image/png,image/jpeg">
 				</div>
 				<div class="align-center" style="margin-top:20px;">
 				<input type="submit" value="모임 만들기" class="w-25 btn btn-light form-control p-3 rounded-pill">

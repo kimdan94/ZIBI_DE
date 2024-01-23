@@ -2,6 +2,7 @@ package kr.spring.book.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,28 +57,24 @@ public class BookController {
 	//전송된 데이터 처리
 	@PostMapping("/book/write")
 	public String submit(@Valid BookVO bookVO,BindingResult result,
-							HttpServletRequest request,HttpSession session) throws IllegalStateException, IOException {
+							HttpServletRequest request,HttpSession session,
+							Model model) throws IllegalStateException, IOException {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
 		//유효성 체크 결과 오류 발생 시 폼 호출
 		if(result.hasErrors()) {
+			model.addAttribute("mem_nickname", user.getMem_nickname());
 			return "bookWrite";
 		}
 		
 		//회원 번호 세팅
-		MemberVO vo = (MemberVO)session.getAttribute("user");
-		bookVO.setMem_num(vo.getMem_num());
+		bookVO.setMem_num(user.getMem_num());
 		//ip 세팅
 		bookVO.setBook_ip(request.getRemoteAddr());
 		//썸네일 업로드
-		if(bookVO.getBook_thumbnailName()!=null) {
-			bookVO.setBook_thumbnailName(FileUtil.createFile(request, bookVO.getUpload()));
-		}else {
-			bookVO.setBook_thumbnailName(null);
-		}
-		//소개 이미지 업로드
-		if(bookVO.getBook_fileName()!=null) {
-			bookVO.setBook_fileName(FileUtil.createFile(request, bookVO.getUpload()));
-		}
+		bookVO.setBook_thumbnailName(FileUtil.createFile(request, bookVO.getUpload()));
+		
 		//글쓰기
 		bookService.insertBook(bookVO);
 		

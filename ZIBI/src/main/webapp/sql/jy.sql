@@ -2,24 +2,23 @@
 create table book(
  book_num number not null,
  mem_num number not null,
- book_thumbnailName varchar2(150) not null,
- book_fileName varchar2(150),
+ book_thumbnailName varchar2(150),
  book_category number(1) not null, -- 0:취미 소모임, 1:원데이 클래스, 2:스터디 모임
  book_onoff number(1) default 0 not null, -- 0:모집중, 1:모임 완료, 2:모임 취소
  book_title varchar2(120) not null,
  book_content clob not null,
  book_gatheringDate varchar2(100) not null,
- book_match number(1) default 0 not null, -- 0:예약 바로 확정, 1:주최자 승인 필요
+ book_match number(1)not null, -- 1:예약 바로 확정, 2:주최자 승인 필요
  book_regDate date default sysdate not null,
  book_modifyDate date,
  book_address1 varchar2(100) not null,
  book_address2 varchar2(80) not null,
  book_zipcode varchar2(5) not null,
- book_kit varchar2(100) default '준비물 없음' not null,
- book_maxcount number(2) not null, -- min:2, max:99
- book_headcount number(2) default 0 not null,
+ book_kit varchar2(100) not null,
+ book_maxcount number not null,
+ book_headcount number default 0 not null,
  book_ip varchar2(40) not null,
- book_expense number(6) default 0 not null, -- min:0, max:999,999원
+ book_expense number(6),
  constraint book_pk primary key (book_num),
  constraint book_fk foreign key (mem_num) references member (mem_num)
 );
@@ -39,7 +38,7 @@ create table book_matching(
 -- 소모임 예약 리뷰
 create table book_review(
  book_num number not null,
- mem_num num ber not null,
+ mem_num number not null,
  book_rev varchar2(300) not null,
  book_grade number(1) not null, -- min:1, max:5
  constraint book_review_fk1 foreign key (book_num) references book (book_num),

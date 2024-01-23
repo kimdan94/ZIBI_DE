@@ -24,7 +24,8 @@ create table cinema(
  cinema_row number not null,
  cinema_col number not null,
  cinema_adult number not null,
- cinema_not_adult number not null,
+ cinema_teenage number not null,
+ cinema_treatment number not null,
  constraint cinema_pk primary key(cinema_num)
 );
 

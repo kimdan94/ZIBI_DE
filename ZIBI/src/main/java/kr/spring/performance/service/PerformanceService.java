@@ -12,7 +12,7 @@ public interface PerformanceService {
 	public int selectRowCount(Map<String, Object> map);
 	
 	public List<CinemaVO> selectCinemaLoc1();
-	public void selectCinemaLoc2();
+	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map);
 	
 	// 관리자
 	public void insertPerformance(PerformanceVO performance);

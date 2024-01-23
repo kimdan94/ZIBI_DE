@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.performance.service.PerformanceService;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
+import kr.spring.performance.vo.TicketingVO;
 import kr.spring.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,10 +77,10 @@ public class PerformanceController {
 	}
 	
 	// 등록 폼 호출
-	@RequestMapping("/ent/write")
+	@RequestMapping("/ent/write") // -> /performance/writePerformance로 변경하기
 	public String form() {
 		log.debug("<<영화 등록 폼>>");
-		return "write"; // write.jsp명과 동일 tiles
+		return "writePerformance"; // write.jsp명과 동일 tiles
 	}
 	
 	//전송된 데이터 처리
@@ -137,7 +138,7 @@ public class PerformanceController {
 		performanceService.insertCinema(CinemaVO);
 		
 		//View에 표시할 메시지
-		model.addAttribute("message", "영화가 등록되었습니다");
+		model.addAttribute("message", "상영관이 등록되었습니다");
 		model.addAttribute("url", request.getContextPath()+"/ent/list");
 		
 		return "common/resultAlert";
@@ -187,7 +188,36 @@ public class PerformanceController {
 	}
 	
 	
-	
+	/*=================================
+	 * 영화관,상영관,상영 날짜,상영 시간 선택 폼
+	 *=================================*/
+	// 자바빈(VO) 초기화
+	@ModelAttribute
+	public TicketingVO initPerformanceDate() {
+		return new TicketingVO();
+	}
+	@RequestMapping("/ent/writePerformanceDate")
+	public ModelAndView formPerformanceDate() {
+		log.debug("<<영화관,상영관,상영 날짜,상영 시간 선택 폼>>");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 영화 select
+		List<PerformanceVO> listPerformance = null;
+		listPerformance = performanceService.selectList(map);
+		
+		// 상영관 지역1 select
+		List<CinemaVO> listCinemaLoc1 = null;
+		listCinemaLoc1 = performanceService.selectCinemaLoc1();
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("writePerformanceDate"); // tiles 설정
+		mav.addObject("listPerformance", listPerformance);
+		mav.addObject("listCinemaLoc1", listCinemaLoc1);
+
+		return mav; 
+	}
 	
 	
 	

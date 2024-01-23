@@ -16,5 +16,6 @@ public class CinemaVO {
 	private int cinema_row;
 	private int cinema_col;
 	private int cinema_adult;
-	private int cinema_not_adult;
+	private int cinema_teenage;
+	private int cinema_treatment;
 }

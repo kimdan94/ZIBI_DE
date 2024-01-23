@@ -43,8 +43,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public void selectCinemaLoc2() {
-		// TODO Auto-generated method stub
+	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map) {
+		return null;
 		
 	}
 

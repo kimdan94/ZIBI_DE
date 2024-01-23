@@ -31,7 +31,8 @@
 		   cinema_row,
 		   cinema_col,
 		   cinema_adult,
-		   cinema_not_adult)
+		   cinema_teenage,
+		   cinema_treatment)
 		VALUES (
 		   performance_seq.nextval,
 		   #{cinema_location1},
@@ -41,7 +42,8 @@
 		   #{cinema_row},
 		   #{cinema_col},
 		   #{cinema_adult},
-		   #{cinema_not_adult})
+		   #{cinema_teenage},
+		   #{cinema_treatment})
 	</insert>
 	
 	<!-- [재사용] sql 검색어 -->
@@ -67,6 +69,10 @@
 		<include refid="performanceSearch"></include>
 	</select>
 	
+	<!-- 지역1로 -> 지역2 선택 -->
+	<select id="selectCinemaLoc2" parameterType="map" resultType="cinemaVO">
+		SELECT DISTINCT cinema_location2 FROM cinema WHERE cinema_location1=#{cinema_location1}
+	</select>
 	
 	
 </mapper>

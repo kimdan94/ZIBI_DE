@@ -9,18 +9,24 @@
 					<form:input path="mem_email" class="w-100 form-control p-3" placeholder="이메일 형식에 맞게 입력"/>
 				</div>
 				<div class="register-check">
-					<input type="button" class="btn btn-secondary" value="중복체크" id="email_check">
+					
 					<span id="email_area"></span>
 					<form:errors path="mem_email"/>
+					
+					<input type="button" class="btn" value="중복체크" id="email_check">
+					
 				</div>
 				<div>
 					<form:label path="mem_nickname">닉네임</form:label>
 					<form:input path="mem_nickname" class="w-100 form-control p-3" placeholder="한글만 가능"/>
 				</div>
 				<div class="register-check">
-					<input type="button" class="btn btn-secondary" value="중복체크" id="nickname_check">
+					
 					<span id="nickname_area"></span>
 					<form:errors path="mem_nickname"/>
+					
+					<input type="button" class="btn" value="중복체크" id="nickname_check">
+					
 				</div>
 				<div>
 					<form:label path="mem_password">비밀번호</form:label>
@@ -33,7 +39,7 @@
 				<div class="password-check">
 					<span id="password_area"></span>
 				</div>
-				<form:button class="w-100 btn btn-light form-control p-3 rounded-pill">회원가입하기</form:button>
+				<form:button class="btn btn-light active rounded-pill w-100 p-3">회원가입하기</form:button>
 			</form:form>
 		</div>
 	</div>

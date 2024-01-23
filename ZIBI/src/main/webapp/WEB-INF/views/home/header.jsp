@@ -45,9 +45,7 @@
 					<div class="navbar-nav">
 						<a class="nav-link dropdown-toggle" href="${pageContext.request.contextPath}/main/home">메인</a>
 						<div class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-								득템찬스 <img src="${pageContext.request.contextPath}/images/na/header_menu.png" width="15px">
-							</a>
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">득템찬스</a>
 							<div class="dropdown-menu">
 								<a href="${pageContext.request.contextPath}/rental/list" class="dropdown-item">물품 대여</a> 
 								<a href="${pageContext.request.contextPath}/secondhand/list" class="dropdown-item">중고거래</a> 
@@ -55,9 +53,7 @@
 							</div>
 						</div>
 						<div class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-								문화꿀팁 <img src="${pageContext.request.contextPath}/images/na/header_menu.png" width="15px">
-							</a>
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">문화꿀팁</a>
 							<div class="dropdown-menu">
 								<a href="${pageContext.request.contextPath}/ent/list" class="dropdown-item">영화 예매</a> 
 								<a href="${pageContext.request.contextPath}/book/list" class="dropdown-item">소모임 예약</a> 
@@ -65,9 +61,7 @@
 							</div>
 						</div>
 						<div class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-								척척박사 <img src="${pageContext.request.contextPath}/images/na/header_menu.png" width="15px">
-							</a>
+							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">척척박사</a>
 							<div class="dropdown-menu">
 								<a href="${pageContext.request.contextPath}/contents/list" class="dropdown-item">컬럼 구독</a> 
 								<a href="${pageContext.request.contextPath}/" class="dropdown-item">1인 가구 정보</a> 
@@ -79,7 +73,7 @@
 				<div class="collapse navbar-collapse justify-content-end">
 					<div class="navbar-nav">
 						<a href="${pageContext.request.contextPath}/main/home" class="navbar-brand">
-							<img id="main_logo" src="${pageContext.request.contextPath}/images/logo_mini.png" width="40px">
+							<img id="main_logo" src="${pageContext.request.contextPath}/images/logo_squ.png" width="60px">
 						</a>
 					</div>
 				</div>

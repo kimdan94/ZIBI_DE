@@ -2,8 +2,33 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
  <!-- Contact Start -->
 <div class="container">
-	<div class="d-flex justify-content-center">
-		<div class="rounded login-form col-md-4 col-lg-6">
+	<div class="login-form row justify-content-center">
+		<div class="col-7">
+			<div id="carouselExample" class="carousel slide">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="${pageContext.request.contextPath}/sample/img/event-1.jpg" class="d-block w-100">
+					</div>
+					<div class="carousel-item">
+						<img src="${pageContext.request.contextPath}/sample/img/event-2.jpg" class="d-block w-100">
+					</div>
+					<div class="carousel-item">
+						<img src="${pageContext.request.contextPath}/sample/img/event-3.jpg" class="d-block w-100">
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button"
+					data-bs-target="#carouselExample" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button"
+					data-bs-target="#carouselExample" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+		<div class="col-5">
 			<form:form action="login" id="login" modelAttribute="memberVO">
 				<div id="login-check">
 					<form:errors element="span"/>
@@ -16,13 +41,14 @@
 					<form:label path="mem_password">비밀번호</form:label>
 					<form:password path="mem_password" class="w-100 form-control p-3 mb-4" />
 				</div>
-				<%-- [소셜 네트워크 로그인] --%>
-				<form:button class="w-100 btn btn-light form-control p-3 rounded-pill">로그인</form:button>
+				<form:button class="btn btn-light active rounded-pill w-100 p-3">로그인</form:button>
 			</form:form>
-			<div id="register-check">
-				<%-- 아이디 찾기 [버튼] --%>
-				<%-- 비밀번호 찾기 [버튼] --%>
+			<div class="text-center">
+				<input type="button" class="btn" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/member/register'">
 			</div>
+			<%-- [소셜 네트워크 로그인] --%>
 		</div>
 	</div>
 </div>

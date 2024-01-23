@@ -18,7 +18,7 @@ body{
      opacity: 1;
  }
  
- /*--------------------상단으로 스크롤--------------------*/
+ /*-------------상단으로 스크롤--------------*/
  .back-to-top {
     position: fixed;
     right: 30px;
@@ -27,7 +27,7 @@ body{
     background-color: white;
 }
  
-/*--------------------회원 메뉴--------------------*/
+/*--------------회원 메뉴-------------*/
 #member_menu{
 	background-color: white;
 }
@@ -166,7 +166,6 @@ footer .info{
 
 /*-------------------- 사이트 설명 --------------------*/
 .site-content {
-
 	margin-top: 20px;
 	padding: 5px;
 	font-size: .9em;
@@ -273,41 +272,41 @@ footer .info{
     cursor: pointer;
 }
 
-/*--------------------로그인 폼--------------------*/
-#login-check{
-	margin: 10px 0 20px 0;
-	height: 20px;
-	color: black;
-	text-align: center;
-}
-.login-form input[type='text']:focus,
-.login-form input[type='password']:focus,
-.login-form input[type='text']:hover,
-.login-form input[type='password']:hover{
-	outline:2px solid #32a77b;
-	box-shadow: none;
-}
-.login-form label{
+/*--------------------입력 폼--------------------*/
+.login-form label,
+#register_member label,
+#update_member label{
 	font-weight: bold;
 	color: black;
 	margin-bottom: 5px;
 }
-
-/*--------------------회원 가입, 회원 정보 수정 폼--------------------*/
-.password-check{
-	margin: 5px 0 20px 0;
-	height: 20px;
-	color: black;
-}
 #register_member input,
 #update_member input{
-	margin-bottom: 10px;
+	margin: 10px 0 10px 0;
 }
-#register_member label,
-#update_member label{
-	margin-top: 20px;
+.login-form input[type='text']:focus,
+.login-form input[type='password']:focus,
+.login-form input[type='text']:hover,
+.login-form input[type='password']:hover,
+#update_member input[type='text']:focus,
+#update_member input[type='text']:hover{
+	outline:2px solid #32a77b;
+	box-shadow: none;
 }
-.mypageMain .row{
+
+/*--------------------에러 메세지--------------------*/
+.mypageMain #photo_check,
+.login-form span,
+#update_member span,
+register_member span{
+	margin-top: 5px;
+	font-weight: bold;
+	color: #DB3954;
+}
+
+/*--------------회원 가입, 회원 정보 수정 폼 가운데 정렬----------*/
+.mypageMain .row,
+.login-form.row{
 	width:80%;
 	float:none;
 	margin:0 auto;
@@ -315,36 +314,63 @@ footer .info{
 .mypageMain .col-6{
 	float:none;
 	margin:0 auto;
+	border: 1px solid black;
 }
 
-/*--------------------로그인, 회원 가입 버튼--------------------*/
-.login-form .btn.btn-primary{
-    border: 0;
-}
-.login-form .btn.btn-light{
-    font-weight: 600;
+/*--------------------버튼--------------------*/
+.login-form .btn,
+.mypageMain .btn{
+	font-size: .9em;
+    transition: .5s;
+    border: 1px solid #ededed;
     transition: .5s;
 }
-.login-form .btn.btn-light:hover,
-.mypageMain .btn.btn-light:hover{
-    background: #32a77b !important;
-    color: white !important;
+.login-form .btn:hover,
+.mypageMain .btn:hover{
+	font-weight:bold;
+	background: #32a77b !important;
+	color: white;
 }
-.login-form .btn.btn-secondary,
-.mypageMain .btn.btn-secondary{
-	font-size: .8em;
+.login-form .btn-light,
+.mypageMain .btn-light{
+	font-weight:bold;
     transition: .5s;
+    background: white;
+    color: black;
+    margin: 20px 0 40px 0;
 }
-.login-form .btn.btn-secondary:hover,
-.mypageMain .btn.btn-secondary:hover{
-    background: #32a77b !important;
-    color: white !important;
+.login-form .btn-light.active,
+.mypageMain .btn-light.active{
+    background: #32a77b;
+    color: white;
 }
-button[type='submit']{
-	margin-top: 30px;
+.login-form .btn-light:hover,
+.mypageMain .btn-light:hover{
+    background: white !important;
+    color: #32a77b !important;
 }
 
 /*--------------------마이페이지 메인--------------------*/
+.mypageMain row{
+	margin-top: 10px;
+}
+.mypageMain .event{
+	height: 500px;
+}
+.mypageMain h6{
+	font-weight: 700;
+	padding: 10px 0 5px 0;
+	border-bottom: 1px solid lightgray;
+}
+.mypageMain p{
+	padding-left: 10px;
+}
+.mypageMain a{
+	font-weight: 700;
+	font-size: 1.2em;
+	text-decoration-line: none;
+	color: white;
+}
 
 
 /*--------------------크롬 input 태그 파란 배경색상 제거--------------------*/

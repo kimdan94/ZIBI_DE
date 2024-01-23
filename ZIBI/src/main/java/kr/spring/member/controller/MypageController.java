@@ -30,16 +30,15 @@ public class MypageController {
 	//VO 초기화
 	@ModelAttribute
 	public MemberVO initCommand(HttpSession session) {
-		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO memberVO = memberService.selectMember(user.getMem_num());
 		return memberVO;
 	}
 	
 	//마이페이지 메인
 	@RequestMapping("/member/mypageMain")
 	public String mypageMain(HttpSession session, Model model) {
-	
 		model.addAttribute("pageName","마이페이지");
-		
 		return "mypageMain"; //타일즈
 	}
 	
@@ -70,8 +69,6 @@ public class MypageController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인 정보
 		
-		log.debug("<<로그인 전용>>");
-		
 		if(user==null) { //미로그인 시
 			getBasicProfileImage(request, model);
 		} else { //로그인 시
@@ -87,7 +84,6 @@ public class MypageController {
 	
 	//프로필 사진 처리
 	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
-		log.debug("<<프사 처리>>");
 		if(memberVO==null||memberVO.getMem_photoname()==null) {
 			getBasicProfileImage(request, model);
 		} else {
@@ -98,7 +94,6 @@ public class MypageController {
 	
 	//기본 프로필 사진 처리
 	public void getBasicProfileImage(HttpServletRequest request, Model model) {
-		log.debug("<<기본 프사>>");
 		byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
 		model.addAttribute("imageFile",readbyte);
 		model.addAttribute("filename","face.png");

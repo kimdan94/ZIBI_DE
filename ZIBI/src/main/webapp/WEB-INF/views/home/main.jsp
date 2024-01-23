@@ -5,7 +5,7 @@
     	<%-- 캐러셀 이미지 삽입 --%>
     	<div class="d-flex justify-content-center"><%-- 재정렬 필요 --%>
 	    	<div class="site-content">
-				<p><img src="${pageContext.request.contextPath}/images/logo_rec.png" width="90px"></p>
+				<p><img src="${pageContext.request.contextPath}/images/logo_mini.png" width="90px"></p>
 				<p>1인 가구를 위한 정보가 가득한 곳</p>
 			</div>
 		</div>

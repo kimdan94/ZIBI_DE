@@ -2,13 +2,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container mypageMain">
 	<form:form action="mypageUpdate" id="update_member" modelAttribute="memberVO">
-		<form:errors element="span"/>
 		<div class="row">
-			<div class="col-6">
-				프로필 사진 : ${memberVO.mem_email}
-			</div>
-			<div class="col-6">
-				이메일 : ${memberVO.mem_email}
+			<div class="col-12">
+				<form:label path="mem_email">이메일</form:label>
+				<p>${memberVO.mem_email}</p>
 			</div>
 			<div class="col-6">
 				<form:label path="mem_name">이름</form:label>
@@ -18,23 +15,23 @@
 			<div class="col-6">
 				<form:label path="mem_nickname">닉네임</form:label>
 				<form:input path="mem_nickname" class="form-control p-3" placeholder="한글만 가능" autocomplete="off"/>
-				<input type="button" class="btn btn-secondary" value="중복체크" id="nickname_check" style="display: none;">
+				<input type="button" class="btn" value="중복체크" id="nickname_check" style="display: none;">
 				<span id="nickname_area"></span>
 				<form:errors path="mem_nickname"/>
 			</div>
 			<div class="col-6">
 				<form:label path="mem_phone">연락처</form:label>
 				<form:input path="mem_phone" class="form-control p-3"/>
-				<input type="button" class="btn btn-secondary" value="중복체크" id="phone_check" style="display: none;">
+				<input type="button" class="btn" value="중복체크" id="phone_check" style="display: none;">
 				<span id="phone_area"></span>
 				<form:errors path="mem_phone"/>
 			</div>
 			<div class="col-6">
 				<form:label path="mem_zipcode">우편번호</form:label>
 				<form:input path="mem_zipcode" class="input-check w-100 form-control p-3" maxlength="5" autocomplete="off"/>
-				<input type="button" class="btn btn-secondary" value="찾기" id="zipcode_check" onclick="execDaumPostcode()">
+				<input type="button" class="btn" value="찾기" id="zipcode_check" onclick="execDaumPostcode()">
 				<span id="zipcode_area"></span>
-				<form:errors path="mem_name"/>
+				<form:errors path="mem_zipcode"/>
 			</div>
 			<div class="col-6">
 				<form:label path="mem_address1">주소</form:label>
@@ -46,7 +43,7 @@
 				<form:input path="mem_address2" class="form-control p-3"/>
 				<form:errors path="mem_address2"/>
 			</div>
-			<form:button class="btn btn-light form-control p-3">회원 정보 수정</form:button>
+			<form:button class="btn btn-light active rounded-pill w-100 p-3">회원 정보 수정</form:button>
 		</div>
 	</form:form>
 </div>

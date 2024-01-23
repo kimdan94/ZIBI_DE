@@ -7,9 +7,17 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script type="text/javascript">
+window.onload = function(){
+	let book_maxcount = document.getElementById('book_maxcount');
+	if(book_maxcount.value == 0){
+		book_maxcount.value = '';
+	}
+};
+</script>
 <div class="container">
 	<div class="d-flex justify-content-center">
-		<div class="rounded login-form col-md-4 col-lg-6">
+		<div class="rounded col-md-4 col-lg-6">
 			<form:form action="write" id="book_write" 
 					modelAttribute="bookVO" enctype="multipart/form-data">
 				<div class="title-phrase">
@@ -26,9 +34,9 @@
 					<form:radiobutton path="book_match" id="book_match1"  value="1"/><label for="book_match1">바로 승인</label>
 					<form:radiobutton path="book_match" id="book_match2" value="2"/><label for="book_match2">승인 필요</label>
 					<br>
-					<form:errors path="book_match" cssClass="error-phrase"/>
-					<br>
 					<span class="guide-phrase">*승인 필요 체크 시 나의 예약 내역에서 신청자의 참여를 직접 승인해야 예약이 확정됩니다.</span>
+					<br>
+					<form:errors path="book_match" cssClass="error-phrase"/>
 				</div>				
 				<div>
 					<form:label path="book_category">카테고리</form:label>
@@ -128,8 +136,8 @@
 						placeholder="지참해야 하는 준비물이 있다면 알려주세요!  ex. 붓, 수채화 물감"/>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
-				<input type="submit" value="모임 만들기" class="w-25 btn btn-light form-control p-3 rounded-pill">
-				<input type="button" class="w-25 btn btn-light form-control p-3 rounded-pill" 
+				<input type="submit" value="모임 만들기" class="w-25 btn btn-light form-control p-3 rounded-pill active">
+				<input type="button" class="w-25 btn btn-light form-control p-3 rounded-pill active" 
 					onclick="location.href='list'" value="목록으로">
 				</div>	
 			</form:form>

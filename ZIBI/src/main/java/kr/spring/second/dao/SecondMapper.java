@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondVO;
@@ -15,6 +16,7 @@ public interface SecondMapper {
 	public int selectRowCount(Map<String,Object> map);
 	public void insertSecond(SecondVO second);
 	public SecondVO selectSecond(int sc_num);
+	@Update("UPDATE second SET sc_hit=sc_hit+1 WHERE sc_num=#{sc_num}")
 	public void updateHit(int sc_num);
 	public void updateSecond(SecondVO second);
 	public void deleteSecond(int sc_num);

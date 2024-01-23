@@ -23,6 +23,7 @@ public class SecondVO {
 	private int sc_price; 		//판매 가격
 	private int sc_status;		//상품 상태 (1:중고, 2: 새상품)
 	private int sc_way; 		//거래 방법(1: 직거래, 2: 택배)
+	private String sc_address;  //법정동 주소(ex)서울시 송파구 ..동)
 	private String sc_place; 	//거래 희망 장소
 	private double sc_latitude;	//위도
 	private double sc_longitude;//경도

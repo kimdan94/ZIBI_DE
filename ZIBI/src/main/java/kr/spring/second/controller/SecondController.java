@@ -25,6 +25,7 @@ import kr.spring.second.service.SecondService;
 import kr.spring.second.vo.SecondVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -113,6 +114,25 @@ public class SecondController {
 		
 		return mav;
 	}
+	/*================================
+	 * 중고거래 글 상세
+	 *================================*/
+	@RequestMapping("/secondhand/detail")
+	public ModelAndView process(@RequestParam int sc_num) {
+		log.debug("<<중거고래 글 상세 sc_num>> : " + sc_num);
+		
+		//해당 글의 조회수 증가
+		secondService.updateHit(sc_num);
+		
+		SecondVO second = secondService.selectSecond(sc_num);
+		
+		//제목에 태그를 허용하지 않음
+		second.setSc_title(StringUtil.useNoHtml(second.getSc_title()));
+		
+		return new ModelAndView("secondDetail","second",second);
+	}//second에 mem_num, sc_num, sc_title, sc_content, sc_category,sc_price,sc_status,sc_way,sc_place,위도,경도,조회수,등록일 등 정보 있음
+	
+	
 	
 }
 

@@ -6,6 +6,7 @@
 <!-- 관리자 button -->
 <%-- <c:if test="${count == 0}"> --%>
 <input type="button" value="영화 form" onclick="location.href='write'"><!-- /ent/formPage -->
+<input type="button" value="상영관 form" onclick="location.href='writeCinema'">
 <%-- </c:if> --%>
 
 <form action="list" method="get">
@@ -101,10 +102,8 @@
         
         
         
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <hr>
-        <hr>
-        <c:if test="${count==0}">
+    <!--     
+    <c:if test="${count==0}">
 	<div>표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count>0}">
@@ -117,4 +116,5 @@
 		${performance.performance_category}
 	</c:forEach>
 	</c:if>
+	 -->
         

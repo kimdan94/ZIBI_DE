@@ -20,12 +20,14 @@ create table cinema(
  cinema_location1 varchar2(30) not null,
  cinema_location2 varchar2(40) not null,
  cinema_theater varchar2(40) not null,
+ cinema_theater_num number not null,
  cinema_row number not null,
  cinema_col number not null,
  cinema_adult number not null,
  cinema_not_adult number not null,
  constraint cinema_pk primary key(cinema_num)
 );
+
 
 create sequence cinema_seq;
 

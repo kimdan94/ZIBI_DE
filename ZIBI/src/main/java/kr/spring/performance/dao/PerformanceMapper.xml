@@ -20,6 +20,29 @@
 		   #{performance_age},
 		   #{performance_category})
 	</insert>
+	<!-- 상영관 등록 -->
+	<insert id="insertCinema" parameterType="cinemaVO">
+		INSERT INTO cinema(
+		   cinema_num,
+		   cinema_location1,
+		   cinema_location2,
+		   cinema_theater,
+		   cinema_theater_num,
+		   cinema_row,
+		   cinema_col,
+		   cinema_adult,
+		   cinema_not_adult)
+		VALUES (
+		   performance_seq.nextval,
+		   #{cinema_location1},
+		   #{cinema_location2},
+		   #{cinema_theater},
+		   #{cinema_theater_num},
+		   #{cinema_row},
+		   #{cinema_col},
+		   #{cinema_adult},
+		   #{cinema_not_adult})
+	</insert>
 	
 	<!-- [재사용] sql 검색어 -->
 	<sql id="performanceSearch">

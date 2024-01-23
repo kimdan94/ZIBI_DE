@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.performance.dao.PerformanceMapper;
+import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
 
 @Service
@@ -29,6 +30,22 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public int selectRowCount(Map<String, Object> map) {
 		return performanceMapper.selectRowCount(map);
+	}
+
+	@Override
+	public void insertCinema(CinemaVO cinema) {
+		performanceMapper.insertCinema(cinema);
+	}
+
+	@Override
+	public List<CinemaVO> selectCinemaLoc1() {
+		return performanceMapper.selectCinemaLoc1();
+	}
+
+	@Override
+	public void selectCinemaLoc2() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

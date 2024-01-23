@@ -26,5 +26,10 @@
     	<put-attribute name="body" value="/WEB-INF/views/performance/ticketing.jsp"/>
 	</definition>
 	
+	<!-- 상영관 정보 넣는 폼 작성 -->
+	<definition name="writeCinema" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
+    	<put-attribute name="body" value="/WEB-INF/views/performance/writeCinema.jsp"/>
+	</definition>
+	
 	
 </tiles-definitions>

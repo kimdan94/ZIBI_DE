@@ -19,7 +19,7 @@ public class Appconfig implements WebMvcConfigurer {
 	@Bean
 	public LoginCheckInterceptor interceptor() { //인터셉터 객체 생성
 		loginCheck = new LoginCheckInterceptor();
-		return loginCheck;
+		return loginCheck; 
 	}
 	
 	@Override

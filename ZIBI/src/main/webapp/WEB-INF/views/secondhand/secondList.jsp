@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div>
+<div> 
 	<div class="scmain-btn">
 	<button type="button" class="chat-btn" onclick="location.href='write'">
 		<img src="${pageContext.request.contextPath}/images/jiwon/chat_icon.png" width="22px">

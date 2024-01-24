@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,8 +47,12 @@ public class SecondController {
 	 *================================*/
 	//등록 폼 호출
 	@GetMapping("/secondhand/write") 
-	public String scwriteform() {
-		return "secondWrite"; //타일스
+	public ModelAndView scwriteform() {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pageName", "상품 등록"); 
+		mav.setViewName("secondWrite"); //타일스
+		return mav; //타일스
 	}
 	
 	//등록폼 전송된 데이터 처리 
@@ -57,7 +63,7 @@ public class SecondController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return scwriteform();
+			return "secondWrite"; //타일스
 		}
 		
 		//회원 번호 셋팅
@@ -73,10 +79,10 @@ public class SecondController {
 		secondService.insertSecond(secondVO);
 		
 		//View에 표시할 메시지 
-		model.addAttribute("message", "상품 등록이 완료되었습니다.");
-		model.addAttribute("url", request.getContextPath()+"/secondhand/list");
+		//model.addAttribute("message", "상품 등록이 완료되었습니다.");
+		//model.addAttribute("url", request.getContextPath()+"/secondhand/secondList");
 		
-		return "/common/resultAlert";
+		return "redirect:/secondhand/list";
 	}
 	/*================================
 	 * 중고거래 글 목록
@@ -129,10 +135,35 @@ public class SecondController {
 		//제목에 태그를 허용하지 않음
 		second.setSc_title(StringUtil.useNoHtml(second.getSc_title()));
 		
+		String extractedAddress = extractAddress(second.getSc_address());
+        second.setSc_address(extractedAddress);
+		
 		return new ModelAndView("secondDetail","second",second);
 	}//second에 mem_num, sc_num, sc_title, sc_content, sc_category,sc_price,sc_status,sc_way,sc_place,위도,경도,조회수,등록일 등 정보 있음
 	
+	private String extractAddress(String originalAddress) {
+        // 정규표현식 패턴
+        Pattern pattern = Pattern.compile("([가-힣\\s]+[읍면동가-힣]+).*");
+
+        // 정규표현식에 맞는 부분 추출
+        Matcher matcher = pattern.matcher(originalAddress);
+
+        // 주소 반환
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return originalAddress; // 매칭되는 부분이 없을 경우 원래 주소를 반환
+        }
+    }
 	
+	
+	/*================================
+	 * 중고거래 채팅방 목록
+	 *================================*/
+	@RequestMapping("/secondhand/secondChatList")
+	public String scChatList() {
+		return "secondChatList";
+	}
 	
 }
 

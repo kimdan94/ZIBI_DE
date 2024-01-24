@@ -6,7 +6,7 @@
     <definition name="secondMain" template="/WEB-INF/views/secondhand/sc_layout_main.jsp">
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/secondhand/list.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondList.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
@@ -20,4 +20,9 @@
 	<definition name="secondDetail" extends="secondMain">
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondDetail.jsp"/>
 	</definition>	
+	
+	<!-- 채팅 페이지 -->
+	<definition name="secondChatList" extends="secondMain">
+		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondChatList.jsp"/>
+	</definition>
 </tiles-definitions>

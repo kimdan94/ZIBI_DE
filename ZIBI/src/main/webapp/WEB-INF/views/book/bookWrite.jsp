@@ -7,6 +7,8 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<%-- CKEditor --%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript">
 window.onload = function(){
 	let book_maxcount = document.getElementById('book_maxcount');
@@ -110,6 +112,24 @@ window.onload = function(){
 					<form:label path="book_content">소개 글</form:label>
 					<form:textarea path="book_content"/>
 					<form:errors path="book_content" cssClass="error-phrase"/>
+					<script>
+						function MyCustomUploadAdapterPlugin(editor){
+							editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+								return new UploadAdapter(loader);
+							}
+						}
+					
+						ClassicEditor
+							.create(document.querySelector('#book_content'),{
+								extraPlugins:[MyCustomUploadAdapterPlugin]
+							})
+							.then(editor => {
+								window.editor = editor;
+							})
+							.catch(error => {
+								console.error(error);
+							});
+					</script>
 				</div>
 				<div class="align-right" style="margin-top:50px;">
 					<h4>선택 입력사항</h4>

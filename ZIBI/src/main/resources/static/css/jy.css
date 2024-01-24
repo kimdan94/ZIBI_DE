@@ -17,6 +17,42 @@ h4{
 	font-size:12px;
 	color:#dd5c5e;
 }
+.result-display{
+	width:400px;
+	height:200px;
+	margin:100px auto;
+	border:1px solid #000;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+/*----------- 공통 검색폼 스타일 -----------*/
+form#search_form{
+	padding-bottom:0;
+	border:none;
+}
+ul.search{
+	width:700px;
+	list-style:none;
+	padding:0;
+	margin:20px 560px 65px 600px;
+}
+ul.search li{
+	margin:0 0 15px 0;
+	padding:0;
+	display:inline;
+}
+#keyword{
+	border-radius:20px;
+	border:1px solid #c7d9c9;
+}
+#keyword:hover,#keyword:focus{
+	outline:2px solid #32a77b;
+	box-shadow:none;
+}
+#keyfield{
+	font-size:13px;
+}
 /*----------- 공통 버튼 -----------*/
 .default-btn,input[type=file]::file-selector-button{
 	background:#32a77b;
@@ -29,6 +65,15 @@ h4{
 	height:24px;
 	padding:3px;
 }
+.btn-search{
+	background-position:0px 0px;
+	background-repeat:no-repeat;
+	width:30px;
+	height:30px;
+	border:0px;
+	cursor:pointer;
+	outline:0;
+}
 /*----------- 공통 정렬 -----------*/
 .align-center{
 	text-align:center;
@@ -36,7 +81,7 @@ h4{
 .align-right{
 	text-align:right;
 }
-/*----------- 모임글 등록 폼 -----------*/
+/*----------- 모임글 등록폼 -----------*/
 #book_write label{
 	margin-bottom:15px;
 	margin-top:15px;
@@ -113,120 +158,54 @@ input[value="우편번호 찾기"]{
     font-size:15px;
     font-weight:bold;
 }
-
-
-/*--------------------헤더--------------------*/
-/* 회원 메뉴 */
-#member_menu{
-	background-color: white;
+.ck-editor__editable {
+	height: 400px;
 }
-#member_menu a{
-	font-size: 0.8em;
-	color: #65756f;
-	border-left: 1px solid #6e6e6e;
-	text-decoration-line: none;
-	padding: 0 5px 0 10px;
+.ck-content {
+	font-size: 14px;
 }
-#member_menu .nickname-area{
-	border: none;
+/*----------- 모임글 목록 -----------*/
+ul.book-ul{
+	list-style:none;
 }
-#member_menu a:hover{
-	color: #0a2118;	
-	transition: .4s;
+li.book-li{
+	float:left;
+	margin-left:186px;
+	margin-right:-200px;
 }
-/* 전체 메뉴, 로고 */
-.main-header .nav-bar {
-    background: #fafafa;
-    border-bottom: 1px solid #ededed;
-    border-top: 1px solid #ededed;
-    font-size: 0.9em;
-
-}
-.main-header .navbar .navbar-nav .nav-link {
-    transition: .4s;
-    cursor: pointer;
-    color: black;
-}
-.main-header .navbar .navbar-nav .nav-link:hover,
-.main-header .navbar .navbar-nav .nav-link.active {
-    color: #0a2118;
-}
-.main-header .navbar .dropdown-toggle::after {
-    border: none;
-    vertical-align: middle;
-    margin-left: 8px;
-}
-@media (min-width: 1200px) {
-    .main-header .navbar .nav-item .dropdown-menu {
-        display: block;
-        visibility: hidden;
-        top: 100%;
-        transform: rotateX(-75deg);
-        transform-origin: 0% 0%;
-        transition: .3s;
-        opacity: 0;
-    }
-    .main-header .navbar .nav-item:hover .dropdown-menu {
-        transform: rotateX(0deg);
-        visibility: visible;
-        opacity: 1;
-    }
-}
-.main-header .dropdown .dropdown-menu a:hover {
-    background: #fafafa;
-    color: #0a2118;
-    transition: .4s;
-}
-.main-header .dropdown-menu{
-	 font-size: 0.9em;
-}
-/* 페이지 메뉴명 */
-.menu-title{
-    background: #ffffff;
-    box-shadow: 0 8px 8px 0 #ededed;
-    font-size: 0.9em;
-    margin-bottom: 70px;
-    color: black;
-}
-.menu-title #navbarCollapse{
-	font-size:1.5em;
-	font-weight: 600;
-	margin-left: 10px;
-}
-/*--------------------푸터--------------------*/
-footer{
-	background: #fafafa;
-	padding: 40px;
-	margin-top: 50px;
-	color: #65756f;
-}
-footer a{
-	text-decoration-line: none;
-	color: #424242;
-}
-footer a:hover{
-	color: #0a2118;
-}
-footer ul li{
-	list-style-type: none;
-	padding: 2px;
-	
-}
-footer ul>li:first-child{
-	font-size: .9em;
-	font-weight: 580;
-	padding-bottom: 6px;
-}
-footer ul li:not(:first-of-type) {
-	font-size: .8em;
-}
-footer .footer-logo{
-	margin-left:100px;
-}
-footer .info{
-	border-top: 1px solid lightgray;
-	font-size: .7em;
+.book-page{
+	clear:both;
 	text-align:center;
-	padding-top: 20px;
-	margin-top:20px;
+	font-family:fantasy;
+	padding-top:20px;
+}
+.book-img{
+	width:150px;
+	height:150px;
+	object-fit:cover;
+	border-radius:7px;
+	margin:30px 0;
+}
+.book-section{
+	width:300px;
+	height:430px;
+	box-shadow:5px 5px 10px lightgray;
+}
+.book-first{
+	font-size:12px;
+	font-weight:bold;
+	color:white;
+	border-radius:3px;
+	width:100px;
+	margin-top:10px;
+}
+.book-second{
+	font-size:12px;
+	font-weight:bold;
+	color:#32a77b;
+}
+.book-third{
+	margin-left:-170px;
+	font-size:15px;
+	color:#383838;
 }

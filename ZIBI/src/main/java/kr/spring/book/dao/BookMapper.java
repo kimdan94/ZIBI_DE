@@ -11,7 +11,7 @@ import kr.spring.book.vo.BookVO;
 public interface BookMapper {
 	//부모글
 	public List<BookVO> selectList(Map<String,Object> map);
-	public int selectRowCound(Map<String,Object> map);
+	public int selectRowCount(Map<String,Object> map);
 	public void insertBook(BookVO book);
 	public BookVO selectBook(int book_num);
 	public void updateBook(BookVO book);

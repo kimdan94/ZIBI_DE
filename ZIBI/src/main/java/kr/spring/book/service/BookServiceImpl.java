@@ -18,14 +18,12 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public List<BookVO> selectList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookMapper.selectList(map);
 	}
 
 	@Override
-	public int selectRowCound(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectRowCount(Map<String, Object> map) {
+		return bookMapper.selectRowCount(map);
 	}
 
 	@Override

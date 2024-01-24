@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +24,7 @@ import kr.spring.book.service.BookService;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil_cust;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -79,19 +79,38 @@ public class BookController {
 		bookService.insertBook(bookVO);
 		
 		/*---상세글로 이동 예정(수정 필요)---*/
-		return "bookList";
+		return "redirect:/book/list";
 	}
 	
 	/*-- 예약 게시글 목록 --*/
 	@RequestMapping("/book/list")
 	public ModelAndView process(
 			@RequestParam(value="pageNum",defaultValue = "1") int currentPage,
+			@RequestParam(value="order",defaultValue = "1") int order,
 			String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
 		
+		//전체 검색 레코드 수
+		int count = bookService.selectRowCount(map);
+		
+		PageUtil_cust page = new PageUtil_cust(keyfield, keyword, currentPage,
+									count, 4, 10, "list","&order="+order);
+		List<BookVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = bookService.selectList(map);
+		}
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bookList");
 		mav.addObject("pageName","소모임 예약");
+		mav.addObject("count",count);
+		mav.addObject("list",list);
+		mav.addObject("page",page.getPage());
 		
 		return mav;
 	}

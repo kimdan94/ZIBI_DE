@@ -44,7 +44,7 @@ public class SecondController {
 	 * 중고거래 글 등록
 	 *================================*/
 	//등록 폼 호출
-	@GetMapping("/secondhand/write")
+	@GetMapping("/secondhand/write") 
 	public String scwriteform() {
 		return "secondWrite"; //타일스
 	}

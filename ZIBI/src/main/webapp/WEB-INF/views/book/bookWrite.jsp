@@ -50,12 +50,13 @@ window.onload = function(){
 				</div>
 				<div>
 					<form:label path="book_title">제목</form:label>
-					<form:input path="book_title" class="w-100 form-control p-3"/>
+					<form:input path="book_title" class="w-100 form-control p-3" autocomplete="off"/>
 					<form:errors path="book_title" cssClass="error-phrase"/>
 				</div>
 				<div>
 					<form:label path="book_gatheringDate">모임 일정</form:label>
-					<form:input path="book_gatheringDate" class="w-100 form-control p-3" placeholder="모임 날짜와 시간을 선택해 주세요!"/>
+					<form:input path="book_gatheringDate" class="w-100 form-control p-3" 
+						placeholder="모임 날짜와 시간을 선택해 주세요!" autocomplete="off"/>
 					<form:errors path="book_gatheringDate" cssClass="error-phrase"/>
 					<script>
 					$("#book_gatheringDate").daterangepicker({
@@ -91,18 +92,18 @@ window.onload = function(){
 				</div>
 				<div>
 					<form:label path="book_address1">모임 장소</form:label>
-					<form:input path="book_address1" class="w-100 form-control p-3"/>
+					<form:input path="book_address1" class="w-100 form-control p-3" autocomplete="off"/>
 					<form:errors path="book_address1" cssClass="error-phrase"/>
 				</div>
 				<div>
 					<form:label path="book_address2">상세 주소</form:label>
-					<form:input path="book_address2" class="w-100 form-control p-3"/>
+					<form:input path="book_address2" class="w-100 form-control p-3" autocomplete="off"/>
 					<form:errors path="book_address2" cssClass="error-phrase"/>
 				</div>
 				<div>
 					<form:label path="book_maxcount">참여 인원</form:label>
 					<form:input path="book_maxcount" class="w-100 form-control p-3"
-						placeholder="최대 참여 인원을 알려주세요!"/>
+						placeholder="최대 참여 인원을 알려주세요!" autocomplete="off"/>
 					<form:errors path="book_maxcount" cssClass="error-phrase"/>	
 				</div>
 				<div>
@@ -128,12 +129,14 @@ window.onload = function(){
 				<div>
 					<form:label path="book_expense">참여 비용</form:label>
 					<input type="number" id="book_expense" name="book_expense"
-						class="w-100 form-control p-3" placeholder="비용이 발생하지 않는다면 넘어가도 좋아요!">
+						class="w-100 form-control p-3" placeholder="비용이 발생하지 않는다면 넘어가도 좋아요!"
+						autocomplete="off">
 				</div>
 				<div>
 					<form:label path="book_kit">준비물</form:label>
 					<form:input path="book_kit" class="w-100 form-control p-3" 
-						placeholder="지참해야 하는 준비물이 있다면 알려주세요!  ex. 붓, 수채화 물감"/>
+						placeholder="지참해야 하는 준비물이 있다면 알려주세요!  ex. 붓, 수채화 물감"
+						autocomplete="off"/>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
 				<input type="submit" value="모임 만들기" class="w-25 btn btn-light form-control p-3 rounded-pill active">

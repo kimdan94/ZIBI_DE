@@ -19,7 +19,7 @@ public class Appconfig implements WebMvcConfigurer {
 	@Bean
 	public LoginCheckInterceptor interceptor() { //인터셉터 객체 생성
 		loginCheck = new LoginCheckInterceptor();
-		return loginCheck;
+		return loginCheck; 
 	}
 	
 	@Override
@@ -28,7 +28,8 @@ public class Appconfig implements WebMvcConfigurer {
 		registry.addInterceptor(loginCheck)
 			.addPathPatterns("/member/mypageMain")
 			.addPathPatterns("/member/mypageUpdate")
-			.addPathPatterns("/book/write");
+			.addPathPatterns("/book/write")
+			.addPathPatterns("/secondhand/write");
 	}
 	
 	

@@ -45,6 +45,21 @@
 		   #{cinema_teenage},
 		   #{cinema_treatment})
 	</insert>
+	<!-- 공연+상영관+날짜 등록 -->
+	<insert id="insertDate" parameterType="ticketingVO">
+		INSERT INTO ticketing(
+		   ticketing_num,
+		   performance_num,
+		   cinema_num,
+		   ticketing_date,
+		   ticketing_start_time)
+		VALUES (
+		   ticketing_seq.nextval,
+		   #{performance_num},
+		   #{cinema_num},
+		   #{ticketing_date},
+		   #{ticketing_start_time})
+	</insert>
 	
 	<!-- [재사용] sql 검색어 -->
 	<sql id="performanceSearch">

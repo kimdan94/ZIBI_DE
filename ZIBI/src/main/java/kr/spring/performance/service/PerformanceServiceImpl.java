@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.performance.dao.PerformanceMapper;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
+import kr.spring.performance.vo.TicketingVO;
 
 @Service
 @Transactional
@@ -51,6 +52,12 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public List<CinemaVO> selectLocation2(String loc1) {
 		return performanceMapper.selectLocation2(loc1);
+	}
+
+	@Override
+	public void insertDate(TicketingVO ticketing) {
+		performanceMapper.insertDate(ticketing);
+		
 	}
 
 	

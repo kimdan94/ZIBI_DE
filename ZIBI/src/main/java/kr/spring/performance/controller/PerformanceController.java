@@ -149,13 +149,16 @@ public class PerformanceController {
 	 *=================================*/
 	// 상영관 선택 폼 호출
 	@GetMapping("/performance/ticketing")
-	public ModelAndView ticketPage(@RequestParam int performance_num) {
-		
+	public ModelAndView ticketPage(@RequestParam(value="performance_num", defaultValue="0") int performance_num) {
+		// 그냥 예매하기 버튼으로 간건지
+		// 영화를 클릭하고 예매하기 버튼으로 갔는지 구분하기
 		log.debug("<<티켓 페이지>>");
-		log.debug("<<영화 번호-performance_num>> : " + performance_num);
+		log.debug("<<선택한 영화 번호-performance_num>> : " + performance_num);
 		log.debug("<<오늘 날짜>> : " + PerformanceController.getCurrentDateTime());
 		
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		// 상영관 리스트 출력
 		List<CinemaVO> cinemaList = null;
 		cinemaList = performanceService.selectCinemaLoc1();
 		
@@ -164,6 +167,8 @@ public class PerformanceController {
 		// 전체/검색 레코드 수
 		int count = performanceService.selectRowCount(map);
 		log.debug("<<영화 개수>> : " + count);
+		
+		// 영화 리스트 출력
 		List<PerformanceVO> list = null;
 		if(count > 0) {
 			list = performanceService.selectList(map);
@@ -218,7 +223,24 @@ public class PerformanceController {
 
 		return mav; 
 	}
-	
+	//전송된 데이터 처리
+	@PostMapping("/performance/registerDate")
+	public String submitDate(@Valid TicketingVO  ticketingVO, BindingResult result, 
+			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
+		log.debug("<<상영 정보 저장>> : " + ticketingVO);
+		
+		// 유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return form();
+		}
+		performanceService.insertDate(ticketingVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "날짜 정보가 등록되었습니다");
+		model.addAttribute("url", request.getContextPath()+"/performance/list");
+		
+		return "common/resultAlert";
+	}
 	
 	
 	

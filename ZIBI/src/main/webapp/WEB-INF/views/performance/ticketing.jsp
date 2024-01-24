@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/selectLocation.js"></script>
 <!-- 부트스트랩 시작 원래 5.3.2버전 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -30,23 +32,38 @@
                             </div>
                             
                             <div class="overflow-hidden rounded justify-content-center">
-                            	<table style="float:left;">
-                            	<c:forEach var="cinema" items="${cinemaList}">
-                            	<tr>
-									<th>${cinema.cinema_location1}</th>
-								</tr>
-								</c:forEach>
+                            <!-- table > tbody > tr > td / > thead > tr > th -->
+
+								<!-- 지역1 -->
+                            	<table id="location1" style="float:left;">
+                            	<thead>
+                            		<tr>
+                            			<th>지역1</th>
+                            		</tr>
+                            	</thead>
+                            	<tbody>
+	                            	<c:forEach var="cinema" items="${cinemaList}">
+	                            	<tr>
+										<td style="border:1px solid black;">${cinema.cinema_location1}</td>
+									</tr>
+									</c:forEach>
+								</tbody>
                             	</table>
-                            	<table style="float:left;">
-                            	<c:forEach var="cinema" items="${cinemaList}">
-                            	<tr>
-									<th>${cinema.cinema_location1}</th>
-								</tr>
-								</c:forEach>
+                            	
+                            	
+                            	<!-- 지역2 -->
+                            	<table id="location2" style="float:left;">
+	                            	<thead>
+	                            		<tr>
+	                            			<th>지역2</th>
+	                            		</tr>
+	                            	</thead>
+	                            	<tbody>
+	                            		<!-- ajax 값! -->
+	                            	</tbody>
                             	</table>
-                            
+                            	
                             </div>
-                            
                         </div>
                     </div>
                     
@@ -181,28 +198,30 @@ ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_m
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 <script src="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.js"></script>
 <script type="text/javascript">
-	var owl = $('.owl-carousel');
-	owl.owlCarousel({
-	    loop:true,
-	    nav:true,
-	    margin:10,
-	    responsive:{
-	        0:{items:1},
-	        600:{items:3},            
-	        960:{items:5},
-	        1200:{items:6 }
-	    }
-	});
-	owl.on('mousewheel', '.owl-stage', function (e) {
-	    if (e.originalEvent.deltaY>0) {
-	        owl.trigger('next.owl');
-	    } else {
-	        owl.trigger('prev.owl');
-	    }
-	    e.preventDefault();
-	});
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+    loop:true,
+    nav:true,
+    margin:10,
+    responsive:{
+        0:{items:1},
+        600:{items:3},            
+        960:{items:5},
+        1200:{items:6 }
+    }
+});
+owl.on('mousewheel', '.owl-stage', function (e) {
+    if (e.originalEvent.deltaY>0) {
+        owl.trigger('next.owl');
+    } else {
+        owl.trigger('prev.owl');
+    }
+    e.preventDefault();
+});
+	
 </script>
 <!-- 메인 바디 끝 -->
+

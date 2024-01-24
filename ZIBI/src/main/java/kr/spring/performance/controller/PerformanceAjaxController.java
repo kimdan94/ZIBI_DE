@@ -33,7 +33,13 @@ public class PerformanceAjaxController {
 		mapJson.put("result", "success");
 		mapJson.put("listLoc2", listLoc2);
 		
+		log.debug("<<loc1>> : " + loc1);
+		log.debug("<<listLoc2>> : " + listLoc2);
+		
 		return mapJson;
 	}
-		
+	
+	
+	
+	
 }

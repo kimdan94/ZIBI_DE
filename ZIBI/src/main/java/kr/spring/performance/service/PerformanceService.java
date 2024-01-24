@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
+import kr.spring.performance.vo.TicketingVO;
 
 public interface PerformanceService {
 	// 사용자
@@ -18,5 +19,6 @@ public interface PerformanceService {
 	public void insertPerformance(PerformanceVO performance);
 	public void insertCinema(CinemaVO cinema);
 	public List<CinemaVO> selectLocation2(String loc1);
+	public void insertDate(TicketingVO ticketing);
 	
 }

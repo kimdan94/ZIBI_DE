@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
+import kr.spring.performance.vo.TicketingVO;
 
 @Mapper
 public interface PerformanceMapper {
@@ -24,5 +25,6 @@ public interface PerformanceMapper {
 	public void insertCinema(CinemaVO cinema); // 상영관 정보 저장
 	@Select("SELECT * FROM cinema WHERE cinema_location1=#{loc1}")
 	public List<CinemaVO> selectLocation2(String loc1);
+	public void insertDate(TicketingVO ticketing);
 	
 }

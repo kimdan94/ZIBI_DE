@@ -6,7 +6,7 @@
 		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
 		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 	</div>
-	<div class="carousel-inner">
+	<div class="carousel-inner"><%-- 카테고리별 최신글 링크 걸기 --%>
 		<div class="carousel-item active">
 			<img src="${pageContext.request.contextPath}/images/na/sample1.jpg" class="d-block">
 		</div>
@@ -28,7 +28,7 @@
 </div>
 <div class="container">
 	<div class="main-content">
-		<h5>ZIBI의 다양한 메뉴를 만나보세요</h5>
+		<h5>ZIBI의 다양한 메뉴를 만나보세요 🤩</h5>
 		<div class="owl-carousel">
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
@@ -44,7 +44,7 @@
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h4 class="mb-3">
-							<a href="${pageContext.request.contextPath}/ent/list">영화 감상</a>
+							<a href="${pageContext.request.contextPath}/performance/list">영화 감상</a>
 						</h4>
 						<p class="mb-1">지비러를 위한 영화를 특별한 가격으로 감상하세요</p>
 					</div>
@@ -121,6 +121,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="main-content">
+		<h5>최근 소식을 감상하세요 😉</h5>
 	</div>
 </div>
 

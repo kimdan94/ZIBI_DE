@@ -29,9 +29,9 @@
 						
 					</div>
 					<div id="photo_choice" style="display: none;">
-						<input type="file" id="upload" class="btn" accept="image/gif,image/png,image/jpeg"><br>
-						<input type="button" value="변경" class="btn" id="photo_submit"> 
-						<input type="button" value="취소" class="btn" id="photo_reset">
+						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
+						<input type="button" value="변경" class="btn mem-btn" id="photo_submit"> 
+						<input type="button" value="취소" class="btn mem-btn" id="photo_reset">
 						<div id="photo_check"></div>
 					</div>
 				</div>

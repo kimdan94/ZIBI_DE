@@ -9,18 +9,21 @@
 	<meta content="" name="description">
 	<title>${pageName}</title>
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
+	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+	
 	<!-- Icon Font Stylesheet -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 	<!-- Libraries Stylesheet -->
 	<link href="${pageContext.request.contextPath}/sample/lib/animate/animate.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/sample/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
 	<!-- Customized Bootstrap Stylesheet -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Template Stylesheet -->
 	<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
+	
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
@@ -38,7 +41,6 @@
 	<script src="${pageContext.request.contextPath}/sample/lib/easing/easing.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/lib/waypoints/waypoints.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/lib/counterup/counterup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/sample/lib/lightbox/js/lightbox.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/js/main.js"></script>
 </html>

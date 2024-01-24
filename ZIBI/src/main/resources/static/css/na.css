@@ -1,19 +1,12 @@
 /*-------------- 메인-------------*/
- /* 전체 케러셀 */
+/* 케러셀 */
 .carousel-item {
 	height: 500px;
 	width: 100%;
 	overflow: hidden;
-	
-}
-.carousel-inner img{
-	object-fit: cover;
-	width: 100%;
-	height: 100%;
-	object-position: 50% 50%;
 }
 
-/*캐러셀-메뉴 설명*/
+/*캐러셀 : 메뉴 설명*/
 .main-content h5{
 	margin: 30px 0 10px 0;
 	font-weight: 600;
@@ -21,11 +14,7 @@
 .owl-nav{
 	display:none;
 }
-        
-/*사이트 설명*/
-.site-page{
-	margin-top: 30px;
-}
+
 /*메뉴 설명*/
 .service{
 	margin:50px 0 50px 0;
@@ -92,7 +81,38 @@
 .service-item .service-content-icon {
     transition: 1s !important;
 }
-/*최신글*/
+
+
+/*--------------마이페이지--------------*/
+/* 메인 */
+.mypageMain .profile-detail{
+	height: 500px;
+}
+.mypageMain .photo-area {
+	height: 400px;
+}
+.mypageMain h6{
+	font-weight: 500;
+	padding: 10px 0 5px 0;
+	color:#8c8c8c;
+	border-bottom: 1px solid #8c8c8c;
+}
+.mypageMain p{
+	font-weight: 700;
+	padding-left: 10px;
+	color:black;
+}
+.mypageMain a{
+	font-weight: 700;
+	font-size: 1.2em;
+	text-decoration-line: none;
+	color: black;
+}
+.mypageMain .my-photo{
+	border-radius: 50%;
+}
+
+/* 프로필 사진 변경 */
 .site-content {
 	margin-top: 20px;
 	padding: 5px;
@@ -129,34 +149,6 @@
     cursor: pointer;
 }
 
-/*--------------마이페이지--------------*/
-/* 메인 */
-.mypageMain .profile-detail{
-	height: 500px;
-}
-.mypageMain .photo-area {
-	height: 400px;
-}
-.mypageMain h6{
-	font-weight: 500;
-	padding: 10px 0 5px 0;
-	color:#8c8c8c;
-	border-bottom: 1px solid #8c8c8c;
-}
-.mypageMain p{
-	font-weight: 700;
-	padding-left: 10px;
-	color:black;
-}
-.mypageMain a{
-	font-weight: 700;
-	font-size: 1.2em;
-	text-decoration-line: none;
-	color: black;
-}
-.mypageMain .my-photo{
-	border-radius: 50%;
-}
 /* 회원 정보 수정 */
 #update_member h6{
 	margin-bottom: 30px;
@@ -171,6 +163,14 @@
 /* 입력폼 페이지 넓이 */
 .form-width{ 
 	width:55%;
+}
+
+
+.carousel-inner img{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-position: 50% 50%;
 }
 
 /* 입력폼 */
@@ -199,8 +199,16 @@
 } 
 
 /* 버튼 */
-.mem-btn,
-.mem-btn:focus{
+input[type=file]::file-selector-button{
+	font-size: .9em;
+	border: 1px solid #ededed !important;
+	background: white;
+	box-shadow: none;
+	cursor: pointer;
+	border-radius: 5px;
+	padding: 5px 10px 5px 10px;
+}
+.mem-btn, .mem-btn:focus{
 	font-size: .9em;
 	border: 1px solid #ededed !important;
 	box-shadow: none;

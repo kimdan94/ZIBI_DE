@@ -3,32 +3,30 @@
  <!-- Contact Start -->
 <div class="container page-width">
 	<div class="member-form row justify-content-center">
-		<div class="col-7">
+		<div class="col-6">
 			<div id="carouselExample" class="carousel slide">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="${pageContext.request.contextPath}/sample/img/event-1.jpg" class="d-block w-100">
+						<img src="${pageContext.request.contextPath}/images/na/sample1.jpg" class="d-block w-100">
 					</div>
 					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/sample/img/event-2.jpg" class="d-block w-100">
+						<img src="${pageContext.request.contextPath}/images/na/sample2.jpg" class="d-block w-100">
 					</div>
 					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/sample/img/event-3.jpg" class="d-block w-100">
+						<img src="${pageContext.request.contextPath}/images/na/sample3.jpg" class="d-block w-100">
 					</div>
 				</div>
-				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExample" data-bs-slide="prev">
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
 					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Previous</span>
 				</button>
-				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExample" data-bs-slide="next">
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="visually-hidden">Next</span>
 				</button>
 			</div>
 		</div>
-		<div class="col-5 align-self-center">
+		<div class="col-4 align-self-center">
 			<form:form action="login" id="login" modelAttribute="memberVO">
 				<div>
 					<form:label path="mem_email">이메일</form:label>

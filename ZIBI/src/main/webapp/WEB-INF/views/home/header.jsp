@@ -42,7 +42,7 @@
 					<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">문화꿀팁</a>
 						<div class="dropdown-menu">
-							<a href="${pageContext.request.contextPath}/ent/list" class="dropdown-item">영화 예매</a> 
+							<a href="${pageContext.request.contextPath}/performance/list" class="dropdown-item">영화 예매</a> 
 							<a href="${pageContext.request.contextPath}/book/list" class="dropdown-item">소모임 예약</a> 
 							<a href="${pageContext.request.contextPath}/community/list" class="dropdown-item">커뮤니티</a>
 						</div>

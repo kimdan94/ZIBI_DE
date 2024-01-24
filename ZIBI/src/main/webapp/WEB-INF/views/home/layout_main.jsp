@@ -9,6 +9,10 @@
 	<meta content="" name="description">
 	<title>ZIBI</title>
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
+	
+	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+	
 	<!-- Icon Font Stylesheet -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">

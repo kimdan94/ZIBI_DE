@@ -39,7 +39,9 @@
 				</div>
 				<form:button class="btn mem-btn-green w-100">로그인</form:button>
 				<div class="text-center">
-					<%-- [소셜 네트워크 로그인] --%>
+					
+					
+					
 					<input type="button" class="btn mem-btn w-100" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
 					<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
 					<input type="button" class="btn mem-btn w-100" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/member/register'">

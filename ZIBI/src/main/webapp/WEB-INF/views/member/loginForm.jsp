@@ -28,27 +28,25 @@
 				</button>
 			</div>
 		</div>
-		<div class="col-5">
+		<div class="col-5 align-self-center">
 			<form:form action="login" id="login" modelAttribute="memberVO">
-				<div id="login-check">
-					<form:errors element="span"/>
-				</div>
 				<div>
 					<form:label path="mem_email">이메일</form:label>
-					<form:input path="mem_email" class="w-100 form-control p-3 mb-4" />
-				</div>
-				<div>
+					<form:input path="mem_email" class="w-100 form-control" />
 					<form:label path="mem_password">비밀번호</form:label>
-					<form:password path="mem_password" class="w-100 form-control p-3 mb-4" />
+					<form:password path="mem_password" class="w-100 form-control" />
 				</div>
-				<form:button class="btn btn-light active rounded-pill w-100 p-3">로그인</form:button>
+				<div id="register-check" style="margin-top: 30px;"> <!-- 높이 고정 후 수직 가운데 정렬 -->
+					<form:errors element="span"/>
+				</div>
+				<form:button class="btn mem-btn-green w-100">로그인</form:button>
+				<div class="text-center">
+					<%-- [소셜 네트워크 로그인] --%>
+					<input type="button" class="btn mem-btn w-100" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
+					<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
+					<input type="button" class="btn mem-btn w-100" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/member/register'">
+				</div>
 			</form:form>
-			<div class="text-center">
-				<input type="button" class="btn" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
-				<input type="button" class="btn" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
-				<input type="button" class="btn" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/member/register'">
-			</div>
-			<%-- [소셜 네트워크 로그인] --%>
 		</div>
 	</div>
 </div>
@@ -58,11 +56,11 @@
 	let mem_password = document.getElementById('mem_password');
 	//아이디, 비밀번호 입력 유효성 체크
 	document.getElementById('login').onsubmit = function() {
-		document.getElementById('memberVO.errors').innerText = ' ';
-		if (mem_email.value.trim() == '' || mem_password.value.trim() == '') {
-			document.getElementById('register-check').innerText = '이메일 혹은 비밀번호를 입력해주세요';
+		if(mem_email.value.trim() == '' || mem_password.value.trim() == '') {
+			document.getElementById('register-check').innerHTML = '<span>이메일 혹은 비밀번호를 입력해주세요</span>';
 			return false;
 		}
+		document.getElementById('memberVO.errors').innerText = ' ';
 	};
 	//자바 유효성 체크 후 이메일 재입력 시 UI 초기화
 	mem_email.onkeydown = function() {

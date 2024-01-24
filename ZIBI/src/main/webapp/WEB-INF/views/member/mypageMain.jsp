@@ -4,16 +4,16 @@
 	<div class="member-page mypageMain">
 		<div class="row">
 			<div class="col">
-				<input type="button" class="btn btn-light active w-100" value="메인" onclick="location.href='${pageContext.request.contextPath}/member/mypageMain'">
+				<input type="button" class="btn mem-btn-green w-100" value="메인" onclick="location.href='${pageContext.request.contextPath}/member/mypageMain'">
 			</div>
 			<div class="col">
-				<input type="button" class="btn btn-light w-100" value="거래 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn mem-btn w-100" value="거래 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
 			</div>
 			<div class="col">
-				<input type="button" class="btn btn-light w-100" value="활동 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn mem-btn w-100" value="활동 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
 			</div>
 			<div class="col">
-				<input type="button" class="btn btn-light w-100" value="팔로우 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn mem-btn w-100" value="팔로우 내역" onclick="location.href='${pageContext.request.contextPath}/member/'">
 			</div>
 		</div>
 		<div class="row profile-detail">
@@ -54,12 +54,12 @@
 		</div>
 		<div class="row">
 			<div class="col-6">
-				<input type="button" value="나의 오픈 프로필" class="btn btn-light active w-100" onclick="location.herf='${pageContext.request.contextPath}/member/'">
+				<input type="button" value="나의 오픈 프로필" class="btn  mem-btn-green w-100" onclick="location.herf='${pageContext.request.contextPath}/member/'">
 			</div>
 			<div class="col-6 text-center">
-				<input type="button" class="btn" value="정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">
-				<input type="button" class="btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/'">
-				<input type="button" class="btn" value="회원 탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn mem-btn" value="정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">
+				<input type="button" class="btn mem-btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn mem-btn" value="회원 탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/'">
 			</div>
 		</div>
 	</div>

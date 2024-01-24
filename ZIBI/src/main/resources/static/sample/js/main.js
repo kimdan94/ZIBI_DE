@@ -11,10 +11,8 @@
     };
     spinner(0);
     
-    
     // Initiate the wowjs
     new WOW().init();
-    
     
    // Back to top button
    $(window).scroll(function () {
@@ -47,13 +45,11 @@
         })
     });
 
-
     // Facts counter
     $('[data-toggle="counter-up"]').counterUp({
         delay: 10,
         time: 2000
     });
-
 
     // Testimonial carousel
     $(".testimonial-carousel-1").owlCarousel({
@@ -107,5 +103,5 @@
         }
     });
 
-})(jQuery);
+});
 

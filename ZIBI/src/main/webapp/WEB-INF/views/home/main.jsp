@@ -1,43 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 메인 바디 시작 -->
-<div class="container">
-	<div class="d-flex site-page">
-		<div class="align-self-center">
-			1인 가구를 위한 정보가 가득한 곳, <img src="${pageContext.request.contextPath}/images/logo_squ.png" width="90px">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	</div>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="${pageContext.request.contextPath}/images/na/sample1.jpg" class="d-block">
 		</div>
-		<div class="flex-fill align-self-center">
-			캐러셀
-			
-			<div id="carouselExampleIndicators" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="${pageContext.request.contextPath}/sample/img/event-3.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/sample/img/event-2.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="${pageContext.request.contextPath}/sample/img/event-4.jpg" class="d-block w-100" alt="...">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-			
+		<div class="carousel-item">
+			<img src="${pageContext.request.contextPath}/images/na/sample2.jpg" class="d-block">
+		</div>
+		<div class="carousel-item">
+			<img src="${pageContext.request.contextPath}/images/na/sample3.jpg" class="d-block">
 		</div>
 	</div>
-	<!-- 사이트 설명 시작 -->
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>
+
+<div class="container">
+	
+	<div id="carouselExampleIndicators2" class="carousel slide" data-bs-ride="carousel">
+		<div class="carousel-inner">
+		
+			<div class="carousel-item active">
+			
+				<div class="bg-light rounded service-item">
+					<div class="service-content d-flex justify-content-center p-4">
+						<div class="service-content-icon text-center">
+							<h4 class="mb-3">
+								<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
+							</h4>
+							<p class="mb-1">모임을 만들거나 참여하여<br>지비러들끼리 소통을 활성화하세요</p>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<div class="carousel-item">
+				
+				
+				
+			</div>
+			<div class="carousel-item">
+				
+				
+				
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+	</div>
+	
+
+	<!--
 	<div class="container-fluid service py-6">
 		<div class="row g-4">
 			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
@@ -152,66 +183,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- 사이트 설명 끝 -->
-	<!-- 개별 카테고리 최신 글 시작 --><%-- 최신글 링크 걸기 --%>
-	<div class="container-fluid event py-2">
-		<div class="tab-class text-center">
-            <div class="tab-content">
-                <div id="tab-1" class="tab-pane fade show p-0 active">
-                    <div class="row g-4">
-                        <div class="col-lg-12">
-                            <div class="row g-4">
-                                <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
-                                    <div class="event-img position-relative">
-                                        <img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/sample/img/event-1.jpg">
-                                        <div class="event-overlay d-flex flex-column p-4">
-                                            <h4 class="me-auto">닌텐도 양도합니다~!</h4>
-                                            <a href="${pageContext.request.contextPath}/sample/img/event-1.jpg" data-lightbox="event-1" class="my-auto">
-                                            	<img class="fas fa-search-plus text-dark fa-2x" width="30px" src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.3s">
-                                    <div class="event-img position-relative">
-                                        <img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/sample/img/event-2.jpg">
-                                        <div class="event-overlay d-flex flex-column p-4">
-                                            <h4 class="me-auto">전세 사기범이 잡혔다네요</h4>
-                                            <a href="img/event-2.jpg" data-lightbox="event-2" class="my-auto">
-                                            	<img class="fas fa-search-plus text-dark fa-2x" width="30px" src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.5s">
-                                    <div class="event-img position-relative">
-                                        <img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/sample/img/event-3.jpg">
-                                        <div class="event-overlay d-flex flex-column p-4">
-                                            <h4 class="me-auto">외계인 2</h4>
-                                            <a href="img/event-3.jpg" data-lightbox="event-3" class="my-auto">
-                                            	<img class="fas fa-search-plus text-dark fa-2x" width="30px" src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.7s">
-                                    <div class="event-img position-relative">
-                                        <img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/sample/img/event-4.jpg">
-                                        <div class="event-overlay d-flex flex-column p-4">
-                                            <h4 class="me-auto">퍼스널컬러 31차</h4>
-                                            <a href="img/event-4.jpg" data-lightbox="event-4" class="my-auto">
-                                            	<img class="fas fa-search-plus text-dark fa-2x" width="30px" src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- 개별 카테고리 최신 글 끝 -->
-    </div>
+	 -->
 </div>
 <!-- 메인 바디 끝 -->

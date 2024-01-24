@@ -9,41 +9,43 @@
 				</div>
 				<div class="col-6">
 					<form:label path="mem_name">이름</form:label>
-					<form:input path="mem_name" class=" form-control p-3"/>
+					<form:input path="mem_name" class=" form-control"/>
 					<form:errors path="mem_name"/>
 				</div>
 				<div class="col-6">
 					<form:label path="mem_nickname">닉네임</form:label>
-					<form:input path="mem_nickname" class="form-control p-3" placeholder="한글만 가능" autocomplete="off"/>
-					<input type="button" class="btn" value="중복체크" id="nickname_check" style="display: none;">
+					<form:input path="mem_nickname" class="form-control" placeholder="한글만 가능" autocomplete="off"/>
+					<input type="button" class="btn mem-btn" value="중복체크" id="nickname_check" style="display: none;">
 					<span id="nickname_area"></span>
 					<form:errors path="mem_nickname"/>
 				</div>
 				<div class="col-6">
 					<form:label path="mem_phone">연락처</form:label>
-					<form:input path="mem_phone" class="form-control p-3"/>
-					<input type="button" class="btn" value="중복체크" id="phone_check" style="display: none;">
+					<form:input path="mem_phone" class="form-control"/>
+					<input type="button" class="btn mem-btn" value="중복체크" id="phone_check" style="display: none;">
 					<span id="phone_area"></span>
 					<form:errors path="mem_phone"/>
 				</div>
 				<div class="col-6">
 					<form:label path="mem_zipcode">우편번호</form:label>
-					<form:input path="mem_zipcode" class="input-check w-100 form-control p-3" maxlength="5" autocomplete="off"/>
-					<input type="button" class="btn" value="찾기" id="zipcode_check" onclick="execDaumPostcode()">
+					<form:input path="mem_zipcode" class="input-check w-100 form-control" maxlength="5" autocomplete="off"/>
+					<input type="button" class="btn mem-btn" value="찾기" id="zipcode_check" onclick="execDaumPostcode()">
 					<span id="zipcode_area"></span>
 					<form:errors path="mem_zipcode"/>
 				</div>
 				<div class="col-6">
 					<form:label path="mem_address1">주소</form:label>
-					<form:input path="mem_address1" class="form-control p-3"/>
+					<form:input path="mem_address1" class="form-control"/>
 					<form:errors path="mem_address1"/>
 				</div>
 				<div class="col-6">
 					<form:label path="mem_address2">상세 주소</form:label>
-					<form:input path="mem_address2" class="form-control p-3"/>
+					<form:input path="mem_address2" class="form-control"/>
 					<form:errors path="mem_address2"/>
 				</div>
-				<form:button class="btn btn-light active rounded-pill w-100 p-3">회원 정보 수정</form:button>
+			</div>
+			<div class="row" style="margin-top: 30px;">
+				<form:button class="btn  mem-btn-green">회원 정보 수정</form:button>
 			</div>
 		</form:form>
 	</div>

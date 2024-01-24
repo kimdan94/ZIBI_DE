@@ -1,4 +1,23 @@
-/*-------------------- 메인--------------------*/
+/*-------------- 메인-------------*/
+ /* 전체 케러셀 */
+.carousel-item {
+	height: 500px;
+	width: 100%;
+	overflow: hidden;
+	
+}
+.carousel-inner img{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-position: 50% 50%;
+}
+
+/*캐러셀-메뉴 설명*/
+#carouselExampleIndicators2 .carousel-item{
+	width: 200px;
+}
+        
 /*사이트 설명*/
 .site-page{
 	margin-top: 30px;
@@ -8,11 +27,10 @@
 	margin:50px 0 50px 0;
 }
 .service-title{
-	font-size: 1.2em;
+	font-size: 1.1em;
 	padding-bottom:10px;
 }
 .service-title-content{
-	font-size: 1em;
 	padding-bottom:50px;
 }
 .service-content-icon h4{
@@ -107,9 +125,7 @@
     cursor: pointer;
 }
 
-
-
-/*--------------------마이페이지--------------------*/
+/*--------------마이페이지--------------*/
 /* 메인 */
 .mypageMain .profile-detail{
 	height: 500px;
@@ -142,14 +158,7 @@
 	margin-bottom: 30px;
 }
 
-
 /*-------------전체--------------*/
-*{
-	font-family: Arial !important;
-	padding: 0;
-	margin: 0;
-}
-
 /* 일반 페이지 넓이 */
 .page-width{ 
 	width:60%;
@@ -164,10 +173,10 @@
 .member-form label{
 	font-weight: bold;
 	color: black;
-	margin-bottom: 5px;
+	margin-top: 20px;
 }
 .member-form input{
-	margin: 10px 0 10px 0;
+	margin: 5px 0 5px 0;
 }
 .member-form input[type="text"]:focus,
 .member-form input[type="text"]:hover,
@@ -180,200 +189,34 @@
 /* 에러 메세지 */
 .mypageMain #photo_check,
 .member-form span{
-	margin-top: 5px;
+	margin: 5px 0 0 5px;
 	font-weight: bold;
 	color: #DB3954;
 } 
 
 /* 버튼 */
-.member-form .btn,
-.member-page .btn{
+.mem-btn,
+.mem-btn:focus{
 	font-size: .9em;
-    transition: .5s;
-    border: 1px solid #ededed !important;
-    transition: .5s;
-    margin: 3px;
+	border: 1px solid #ededed !important;
+	box-shadow: none;
 }
-.member-form .btn-light,
-.member-page .btn-light{
-	font-weight:bold;
-    transition: .5s;
-    background: white;
-    color: black;
-    border: 1px solid #ededed;
-    margin: 3px;
-}
-.member-form .btn-light.active,
-.member-page .btn-light.active{
-    background: #32a77b;
+.mem-btn-green,
+.mem-btn-green:focus{
+	background: #32a77b;
     color: white;
+    box-shadow: none;
 }
-.member-form .btn-light:hover,
-.member-page .btn-light:hover,
-.member-form .btn:hover,
-.member-page .btn:hover,
-.member-form .btn-light.active:hover,
-.member-page .btn-light.active:hover{
+.mem-btn:hover,active,visited,
+.mem-btn-green:hover,active,visited{
     background: white !important;
     color: #32a77b;
     border: 1px solid #ededed;
+	box-shadow: none;
 }
 
-/*--------------------헤더--------------------*/
-/* 회원 메뉴 */
-#member_menu{
-	background-color: white;
-}
-#member_menu a{
-	font-size: 0.8em;
-	color: #65756f;
-	border-left: 1px solid #6e6e6e;
-	text-decoration-line: none;
-	padding: 0 5px 0 10px;
-}
-#member_menu .nickname-area{
-	border: none;
-}
-#member_menu a:hover{
-	color: #0a2118;	
-	transition: .4s;
-}
-
-/* 전체 메뉴, 로고 */
-.main-header .nav-bar {
-    background: #fafafa;
-    border-bottom: 1px solid #ededed;
-    border-top: 1px solid #ededed;
-    font-size: 0.9em;
-
-}
-.main-header .navbar .navbar-nav .nav-link {
-    transition: .4s;
-    cursor: pointer;
-    color: black;
-}
-.main-header .navbar .navbar-nav .nav-link:hover,
-.main-header .navbar .navbar-nav .nav-link.active {
-    color: #0a2118;
-}
-.main-header .navbar .dropdown-toggle::after {
-    border: none;
-    vertical-align: middle;
-    margin-left: 8px;
-}
-@media (min-width: 1200px) {
-    .main-header .navbar .nav-item .dropdown-menu {
-        display: block;
-        visibility: hidden;
-        top: 100%;
-        transform: rotateX(-75deg);
-        transform-origin: 0% 0%;
-        transition: .3s;
-        opacity: 0;
-    }
-    .main-header .navbar .nav-item:hover .dropdown-menu {
-        transform: rotateX(0deg);
-        visibility: visible;
-        opacity: 1;
-    }
-}
-.main-header .dropdown .dropdown-menu a:hover {
-    background: #fafafa;
-    color: #0a2118;
-    transition: .4s;
-}
-.main-header .dropdown-menu{
-	 font-size: 0.9em;
-}
-
-/* 페이지 메뉴명 */
-.menu-title{
-    background: #ffffff;
-    box-shadow: 0 8px 8px 0 #ededed;
-    font-size: 0.9em;
-    margin-bottom: 70px;
-    color: black;
-}
-.menu-title #navbarCollapse{
-	font-size:1.5em;
-	font-weight: 600;
-	margin-left: 10px;
-}
-
-/*--------------------푸터--------------------*/
-footer{
-	background: #fafafa;
-	padding: 40px;
-	margin-top: 50px;
-	color: #65756f;
-}
-footer a{
-	text-decoration-line: none;
-	color: #424242;
-}
-footer a:hover{
-	color: #0a2118;
-}
-footer ul li{
-	list-style-type: none;
-	padding: 2px;
-	
-}
-footer ul>li:first-child{
-	font-size: .9em;
-	font-weight: 580;
-	padding-bottom: 6px;
-}
-footer ul li:not(:first-of-type) {
-	font-size: .8em;
-}
-footer .footer-logo{
-	margin-left:100px;
-}
-footer .info{
-	border-top: 1px solid lightgray;
-	font-size: .7em;
-	text-align:center;
-	padding-top: 20px;
-	margin-top:20px;
-}
-
-/*---------템플릿---------*/
-/* 크롬 input 태그 파란 배경색상 제거 */
-input:-webkit-autofill { 
-	-webkit-box-shadow: 0 0 0 30px #fff inset ; 
-	-webkit-text-fill-color: #000; 
-}
-input:-webkit-autofill, 
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{ 
-	transition: background-color 5000s ease-in-out 0s; 
-}
-
+/*--------------기타--------------*/
 /* 모션 */
 .wow, .animated { 
     animation-duration: 2s !important;
-}
-
-/* 로딩 */
-#spinner {
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .4s ease-out, visibility 0s linear .2s;
-    z-index: 99999;
- }
- #spinner.show {
-     transition: opacity .4s ease-out, visibility 0s linear .0s;
-     visibility: visible;
-     opacity: 1;
- }
- 
- /* 상단으로 스크롤 */
- .back-to-top {
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    z-index: 99;
-    background-color: white;
 }

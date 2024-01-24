@@ -26,125 +26,126 @@
 		<span class="visually-hidden">Next</span>
 	</button>
 </div>
-
 <div class="container">
-	
-
-	<!--
-	<div class="container-fluid service py-6">
-		<div class="row g-4">
-			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
-							</h4>
-							<p class="mb-1">모임을 만들거나 참여하여<br>지비러들끼리 소통을 활성화하세요</p>
-						</div>
+	<div class="main-content">
+		<h5>ZIBI의 다양한 메뉴를 만나보세요</h5>
+		<div class="owl-carousel">
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
+						</h4>
+						<p class="mb-1">모임을 만들어 지비러들끼리 소통을 활성화하세요</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.1s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/ent/list">영화 감상</a>
-							</h4>
-							<p class="mb-1">1인 가구를 위해 엄선된 영화를<br>특별한 가격으로 누려보세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/ent/list">영화 감상</a>
+						</h4>
+						<p class="mb-1">지비러를 위한 영화를 특별한 가격으로 감상하세요</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/rental/list">물품 대여</a>
-							</h4>
-							<p class="mb-1">한 번만 사용할 물건들을<br>지비러에게서 빌려보세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/rental/list">물품 대여</a>
+						</h4>
+						<p class="mb-1">한 번만 사용할 물건들을 지비러에게서 빌려보세요</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/checklist/list">집 체크리스트</a>
-							</h4>
-							<p class="mb-1">집을 이사할 때<br>ZIBI의 체크리스트를 활용해보세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/checklist/list">집 체크리스트</a>
+						</h4>
+						<p class="mb-1">집을 이사할 때 ZIBI의 체크리스트를 활용해보세요</p>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/secondhand/list">중고거래</a>
-							</h4>
-							<p class="mb-1">더이상 사용하지 않는<br>물품을 거래하세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/secondhand/list">중고거래</a>
+						</h4>
+						<p class="mb-1">더이상 사용하지 않는 물품을 거래하세요</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/contents/list">컬럼 구독</a>
-							</h4>
-							<p class="mb-1">지비러들과<br>유용한 정보를 주고받으세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/contents/list">컬럼 구독</a>
+						</h4>
+						<p class="mb-1">지비러들과 유용한 정보를 주고받으세요</p>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.5s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex  justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/helper/list">재능 기부</a>
-							</h4>
-							<p class="mb-1">나의 사소한 재능을<br>기부하세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex  justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/helper/list">재능 기부</a>
+						</h4>
+						<p class="mb-1">나의 사소한 재능을 기부하세요</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.7s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/">1인 가구 정보</a>
-							</h4>
-							<p class="mb-1">1인 가구 정보를<br>열람하세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/">1인 가구 정보</a>
+						</h4>
+						<p class="mb-1">1인 가구 정보를 열람하세요</p>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-2 col-md-6 col-sm-12 wow bounceInUp" data-wow-delay="0.3s">
-				<div class="bg-light rounded service-item">
-					<div class="service-content d-flex justify-content-center p-4">
-						<div class="service-content-icon text-center">
-							<h4 class="mb-3">
-								<a href="${pageContext.request.contextPath}/community/list">커뮤니티</a>
-							</h4>
-							<p class="mb-1">지비러들끼리<br>간편하게 소통하세요</p>
-						</div>
+			<div class="bg-light rounded service-item">
+				<div class="service-content d-flex justify-content-center p-4">
+					<div class="service-content-icon text-center">
+						<h4 class="mb-3">
+							<a href="${pageContext.request.contextPath}/community/list">커뮤니티</a>
+						</h4>
+						<p class="mb-1">지비러들끼리 간편하게 소통하세요</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	 -->
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.js"></script>
+<script type="text/javascript">
+	var owl = $('.owl-carousel');
+	owl.owlCarousel({
+	    loop:true,
+	    nav:true,
+	    margin:10,
+	    responsive:{
+	        0:{items:1},
+	        600:{items:3},            
+	        960:{items:5},
+	        1200:{items:6 }
+	    }
+	});
+	owl.on('mousewheel', '.owl-stage', function (e) {
+	    if (e.originalEvent.deltaY>0) {
+	        owl.trigger('next.owl');
+	    } else {
+	        owl.trigger('prev.owl');
+	    }
+	    e.preventDefault();
+	});
+</script>
 <!-- 메인 바디 끝 -->

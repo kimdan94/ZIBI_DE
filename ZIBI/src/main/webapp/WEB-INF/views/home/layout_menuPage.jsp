@@ -18,7 +18,6 @@
 	<link href="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
 	<!-- Customized Bootstrap Stylesheet -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Template Stylesheet -->
 	<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
@@ -32,4 +31,14 @@
 		<img src="${pageContext.request.contextPath}/images/na/up_menu.png" width="15px">
 	</a> 
 </body>
+	<!-- Template Javascript -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/lib/wow/wow.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/lib/easing/easing.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/lib/waypoints/waypoints.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/lib/counterup/counterup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/lib/lightbox/js/lightbox.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sample/js/main.js"></script>
 </html>

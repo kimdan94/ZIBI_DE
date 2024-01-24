@@ -7,6 +7,7 @@
 	<meta charset="utf-8">
 	<title><tiles:getAsString name="title"/></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/jy.css" rel="stylesheet">
 </head>
 <body>

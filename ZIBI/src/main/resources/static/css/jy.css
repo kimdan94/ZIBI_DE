@@ -74,6 +74,18 @@ ul.search li{
 	cursor:pointer;
 	outline:0;
 }
+.btn-main{
+	background-position:0px 0px;
+	background-repeat:no-repeat;
+	border:none;
+	cursor:pointer;
+	outline:0;
+	margin-left:10px;
+}
+button{
+	background:white !important;
+	color:black !important;
+}
 /*----------- 공통 정렬 -----------*/
 .align-center{
 	text-align:center;
@@ -158,8 +170,9 @@ input[value="우편번호 찾기"]{
     font-size:15px;
     font-weight:bold;
 }
-.ck-editor__editable {
-	height: 400px;
+/**CKEditor**/
+.ck-editor__editable_inline{
+	min-height:450px;
 }
 .ck-content {
 	font-size: 14px;

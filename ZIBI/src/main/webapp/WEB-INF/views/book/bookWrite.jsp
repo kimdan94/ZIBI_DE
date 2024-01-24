@@ -9,8 +9,11 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <%-- CKEditor --%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 window.onload = function(){
+	//참여 인원 기본값 0 초기화
 	let book_maxcount = document.getElementById('book_maxcount');
 	if(book_maxcount.value == 0){
 		book_maxcount.value = '';
@@ -59,6 +62,8 @@ window.onload = function(){
 					<form:label path="book_gatheringDate">모임 일정</form:label>
 					<form:input path="book_gatheringDate" class="w-100 form-control p-3" 
 						placeholder="모임 날짜와 시간을 선택해 주세요!" autocomplete="off"/>
+					<span class="guide-phrase">*입력창을 클릭해 모임 날짜와 시간을 선택하세요!</span>
+					<br>	
 					<form:errors path="book_gatheringDate" cssClass="error-phrase"/>
 					<script>
 					$("#book_gatheringDate").daterangepicker({

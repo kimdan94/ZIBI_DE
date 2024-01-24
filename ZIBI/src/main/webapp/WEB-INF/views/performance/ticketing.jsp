@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!-- 부트스트랩 시작 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 부트스트랩 시작 원래 5.3.2버전 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 부트스트랩 끝 -->
 
 
@@ -15,7 +15,7 @@
                     <h1 class="display-5 mb-5">Be First Who Read News</h1>
                 </div>
                 <div class="row gx-4 justify-content-center">
-                	<!-- -------------- 첫번째 -------------- -->
+                	<!-- -------------- 첫번째 : 영화관 위치 찾기 -------------- -->
                     <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.1s">
                         <div class="blog-item">
                             <div class="blog-content mx-4 d-flex rounded bg-light">
@@ -50,7 +50,7 @@
                     </div>
                     
                     
-                	<!-- -------------- 두번째 -------------- -->
+                	<!-- -------------- 두번째 : 영화 선택 -------------- -->
                     <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.3s">
                         <div class="blog-item">
                             
@@ -81,7 +81,7 @@
                     
                     
                     
-                	<!-- -------------- 세번째 -------------- -->
+                	<!-- -------------- 세번째 : 날짜 선택 -------------- -->
                     <div class="col-md-6 col-lg-4 wow bounceInUp" data-wow-delay="0.5s">
                         <div class="blog-item">
                             
@@ -112,7 +112,7 @@ ${pageContext.request.contextPath}/upload/95fd7192-7f36-4a14-ba47-f7eb1eecae5d_m
 ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_movie_2.jpg
  -->
         
-<!-- Carousel 시작 -->
+<!-- Carousel 시작 날짜에 넣기!! -->
 <!-- <div id="demo" class="carousel slide" data-bs-ride="carousel"> --><!-- 움직임 -->
 <div id="demo" class="carousel slide"><!-- 안 움직임 -->
 
@@ -126,7 +126,6 @@ ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_m
   <!-- The slideshow/carousel -->
   <div class="carousel-inner" style="width:500px;"><!-- width로 크기 조정해주깅 -->
     <div class="carousel-item active" style="width:500px;">
-      <%-- <img src="${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_movie_2.jpg" alt="Los Angeles" class="d-block" style="width:500px;"> --%>
       <span style="width:100px;height:100px;color:red;border:solid">1 asdf</span>
       <span style="width:100px;height:100px;color:red;border:solid">2 asdf</span>
       <span style="width:100px;height:100px;color:red;border:solid">3 asdf</span>
@@ -156,5 +155,6 @@ ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_m
   </button>
 </div>
 <!-- Carousel 끝 -->
+<!-- https://www.w3schools.com/bootstrap5/bootstrap_carousel.php Carousel -->
 
-       
+<br><br><br><br><br><br><br><br><br><br><br><br>

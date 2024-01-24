@@ -21,10 +21,8 @@ public class BookVO {
 	private int book_num;
 	private int mem_num;
 	private MultipartFile upload;
-	@NotBlank
 	private String book_thumbnailName;
-	private String book_fileName;
-	@NotNull
+	@Range(min=0,max=2)
 	private int book_category;//0 : 취미 소모임, 1: 원데이 클래스, 2 : 스터디 모임
 	private int book_onoff;//0 : 모집 중(default), 1 : 모임 완료, 2 : 모임 취소
 	@NotBlank
@@ -33,7 +31,8 @@ public class BookVO {
 	private String book_content;
 	@NotBlank
 	private String book_gatheringDate;
-	private int book_match;//0 : 예약 바로 확정(default), 1 : 주최자 승인 필요
+	@Range(min=1,max=2)
+	private int book_match;//0 : 예약 바로 확정, 1 : 주최자 승인 필요
 	private Date book_regDate;//SYSDATE(default)
 	private Date modifyDate;
 	@NotBlank
@@ -42,13 +41,12 @@ public class BookVO {
 	private String book_address2;
 	@Size(min=5,max=5)
 	private String book_zipcode;
-	private String book_kit;//준비물 없음(default)
+	private String book_kit;
 	@Range(min=2,max=99)
-	@NotNull
 	private int book_maxcount;
 	private int book_headcount;//0(default)
 	private String book_ip;
-	private int book_expense;//0(default)
+	private Integer book_expense;
 	
 	/*-- JOIN으로 읽어올 정보 --*/
 	private String mem_nickname;

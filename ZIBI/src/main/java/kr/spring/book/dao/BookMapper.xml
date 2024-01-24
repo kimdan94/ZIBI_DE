@@ -7,7 +7,6 @@
 			book_num,
 			mem_num,
 			book_thumbnailName,
-			book_fileName,
 			book_category,
 			book_title,
 			book_content,
@@ -23,8 +22,7 @@
 		VALUES (
 			book_seq.nextval,
 			#{mem_num},
-			#{book_thumbnailName},
-			#{book_fileName,jdbcType=VARCHAR},
+			#{book_thumbnailName,jdbcType=VARCHAR},
 			#{book_category},
 			#{book_title},
 			#{book_content},

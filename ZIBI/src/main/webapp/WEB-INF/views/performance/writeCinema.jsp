@@ -13,7 +13,7 @@
 					<form:errors path="cinema_location1" cssClass="error-color"/>
 				</li>
 				<li>
-					<form:label path="cinema_location2">장소1</form:label>
+					<form:label path="cinema_location2">장소2</form:label>
 					<form:input path="cinema_location2"/>
 					<form:errors path="cinema_location2" cssClass="error-color"/>
 				</li>
@@ -38,14 +38,19 @@
 					<form:errors path="cinema_col" cssClass="error-color"/>
 				</li>
 				<li>
-					<form:label path="cinema_adult">가격1</form:label>
+					<form:label path="cinema_adult">어른</form:label>
 					<form:input path="cinema_adult"/>
 					<form:errors path="cinema_adult" cssClass="error-color"/>
 				</li>
 				<li>
-					<form:label path="cinema_not_adult">가격2</form:label>
-					<form:input path="cinema_not_adult"/>
-					<form:errors path="cinema_not_adult" cssClass="error-color"/>
+					<form:label path="cinema_teenage">청소년</form:label>
+					<form:input path="cinema_teenage"/>
+					<form:errors path="cinema_teenage" cssClass="error-color"/>
+				</li>
+				<li>
+					<form:label path="cinema_treatment">우대</form:label>
+					<form:input path="cinema_treatment"/>
+					<form:errors path="cinema_treatment" cssClass="error-color"/>
 				</li>
 			</ul>
 			<div class="align-center">

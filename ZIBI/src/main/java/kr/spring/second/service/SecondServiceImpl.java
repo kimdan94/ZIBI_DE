@@ -32,17 +32,15 @@ public class SecondServiceImpl implements SecondService{
 	public void insertSecond(SecondVO second) {
 		secondMapper.insertSecond(second);
 	}
-
+	//상세글 정보 - 한건 
 	@Override
 	public SecondVO selectSecond(int sc_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return secondMapper.selectSecond(sc_num);
 	}
-
+	//상세페이지 조회수 증가
 	@Override
 	public void updateHit(int sc_num) {
-		// TODO Auto-generated method stub
-		
+		secondMapper.updateHit(sc_num);
 	}
 
 	@Override

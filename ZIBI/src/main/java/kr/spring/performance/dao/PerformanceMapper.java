@@ -16,7 +16,7 @@ public interface PerformanceMapper {
 	public int selectRowCount(Map<String, Object> map);
 	@Select("SELECT cinema_location1 FROM cinema GROUP BY cinema_location1")
 	public List<CinemaVO> selectCinemaLoc1();
-	public void selectCinemaLoc2();
+	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map);
 	
 	
 	// 관리자

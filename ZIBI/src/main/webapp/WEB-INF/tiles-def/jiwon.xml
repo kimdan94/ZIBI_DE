@@ -13,4 +13,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondWrite.jsp"/>
 		<put-attribute name="css" value="/WEB-INF/views/secondhand/secondCSS.jsp"/>
 	</definition>	
+	
+	<!-- 상세 글 -->
+	<definition name="secondDetail" extends="secondMain">
+		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondDetail.jsp"/>
+	</definition>	
 </tiles-definitions>

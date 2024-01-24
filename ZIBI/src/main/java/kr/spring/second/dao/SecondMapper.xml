@@ -11,6 +11,10 @@
 			sc_content,
 			sc_status,
 			sc_way,
+			sc_address,
+			sc_place,
+			sc_latitude,
+			sc_longitude,
 			sc_filename,
 			sc_ip,
 			mem_num)
@@ -22,6 +26,10 @@
 			#{sc_content},
 			#{sc_status},
 			#{sc_way},
+			#{sc_address},
+			#{sc_place},
+			#{sc_latitude},
+			#{sc_longitude},
 			#{sc_filename,jdbcType=VARCHAR},
 			#{sc_ip},
 			#{mem_num})
@@ -31,8 +39,8 @@
 	<sql id="secondSearch">
 		<where>
 			<if test="keyword != null and keyword != ''">
-					title LIKE '%' || #{keyword} || '%' OR
-					content LIKE '%' || #{keyword} || '%'
+					sc_title LIKE '%' || #{keyword} || '%' OR
+					sc_content LIKE '%' || #{keyword} || '%'
 			</if>		
 		</where>
 	</sql>
@@ -56,5 +64,12 @@
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
+	</select>
+	
+	<!-- 중고거래 글 상세 -->
+	<select id="selectSecond" parameterType="integer">
+		SELECT * FROM second JOIN member USING(mem_num)
+		LEFT OUTER JOIN member_detail USING(mem_num)
+		WHERE sc_num=#{sc_num}
 	</select>
 </mapper>

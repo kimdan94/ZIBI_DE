@@ -17,8 +17,8 @@
 	</definition>
 	
 	<!-- 공연 정보 넣는 폼 작성 -->
-	<definition name="write" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
-    	<put-attribute name="body" value="/WEB-INF/views/performance/write.jsp"/>
+	<definition name="writePerformance" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
+    	<put-attribute name="body" value="/WEB-INF/views/performance/writePerformance.jsp"/>
 	</definition>
 	
 	<!-- 상영관, 날짜 선택 -->
@@ -30,6 +30,12 @@
 	<definition name="writeCinema" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
     	<put-attribute name="body" value="/WEB-INF/views/performance/writeCinema.jsp"/>
 	</definition>
+	
+	<!-- 영화,상영관,상영날짜,상영시간 정보 넣는 폼 작성 -->
+	<definition name="writePerformanceDate" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
+    	<put-attribute name="body" value="/WEB-INF/views/performance/writePerformanceDate.jsp"/>
+	</definition>
+	
 	
 	
 </tiles-definitions>

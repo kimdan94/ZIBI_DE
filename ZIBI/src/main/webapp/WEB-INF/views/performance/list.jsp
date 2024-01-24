@@ -7,6 +7,7 @@
 <%-- <c:if test="${count == 0}"> --%>
 <input type="button" value="영화 form" onclick="location.href='write'"><!-- /ent/formPage -->
 <input type="button" value="상영관 form" onclick="location.href='writeCinema'">
+<input type="button" value="상영관 form" onclick="location.href='writePerformanceDate'">
 <%-- </c:if> --%>
 
 <form action="list" method="get">

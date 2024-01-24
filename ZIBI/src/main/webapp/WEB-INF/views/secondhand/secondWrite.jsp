@@ -18,13 +18,13 @@
 			<form:form action="write" id="sc_write" modelAttribute="secondVO" enctype="multipart/form-data">
 				<div>
 					<form:label path="sc_title">제목</form:label>
-					<form:input path="sc_title" class="w-100 form-control p-3 mb-4" placeholder="제목"/>
+					<form:input path="sc_title" class="w-100 form-control p-3" placeholder="제목"/>
 					<form:errors path="sc_title" cssClass="error-color"/>
 				</div>
 				
 				<div>
                     <form:label path="sc_category">카테고리</form:label>
-                    <form:select path="sc_category" class="w-100 form-select p-3 mb-4" id="categorm_form">
+                    <form:select path="sc_category" class="w-100 form-select p-3" id="categorm_form">
                     	<form:option value="0" disabled="disabled" label="카테고리 선택"/>
        					<form:option value="1" label="의류/액세서리" />
         				<form:option value="2" label="도서/티켓/문구" />
@@ -37,17 +37,15 @@
 				
 				<div>
 					<form:label path="sc_price">가격</form:label>
-					<form:input path="sc_price" class="w-100 form-control p-3 mb-4" placeholder="판매가격"/>
+					<input type="number" id="sc_price" class="w-100 form-control p-3" placeholder="판매가격">
+					<%-- <form:input path="sc_price" class="w-100 form-control p-3" placeholder="판매가격"/> --%>
 					<form:errors path="sc_price" cssClass="error-color"/>
 				</div>
-				
 				<div>
 					<form:label path="upload">썸네일 이미지</form:label>
+					<br>
 					<input type="file" name="upload" id="upload">
 				</div>
-				
-				
-				
 				<div>
 					<form:label path="sc_content">내용을 입력하세요</form:label>
 					<form:textarea path="sc_content"/>
@@ -72,29 +70,29 @@
 					</script>
 				</div>
 			
-				<div>
+				<div class="sc_status">
 					<form:label path="sc_status">상품 상태</form:label>
-					<form:radiobutton path="sc_status"  value="1" label="중고" checked="checked"/>
-					<form:radiobutton path="sc_status" value="2" label="새상품" />
+					<br>
+					<form:radiobutton path="sc_status" id="sc_status1" value="1"/><label for="sc_status1">중고</label>
+					<form:radiobutton path="sc_status" id="sc_status2" value="2"/><label for="sc_status2">새상품</label>
 				</div>
-				
-				<div>
+				<div class="sc_way">
 					<form:label path="sc_way">거래 방법</form:label>
-					<form:radiobutton path="sc_way"  value="1" label="직거래" checked="checked"/>
-					<form:radiobutton path="sc_way" value="2" label="택배" />
+					<br>
+					<form:radiobutton path="sc_way" id="sc_way1" value="1"/><label for="sc_way1">직거래</label>
+					<form:radiobutton path="sc_way" id="sc_way2" value="2"/><label for="sc_way2">택배</label>
 				</div>
 				
 				<!-- 거래 희망 장소 -->
 				<form:label path="sc_address">거래 희망 장소</form:label>
-				<form:input path="sc_address" placeholder="주소"/>
-				<input type="button" onclick="second_execDaumPostcode()" value="주소 검색"><br>
-				
-				<form:input path="sc_place" placeholder="거래 장소를 입력하세요"/>
+				<input type="button" onclick="second_execDaumPostcode()" class="default-btn" value="주소 검색"><br>
+				<form:input path="sc_address" placeholder="주소" class="w-100 form-control p-3 mb-1"/>
+				<form:input path="sc_place" placeholder="거래 장소를 입력하세요" class="w-100 form-control p-3"/>
 				
 				<div id="clickLatlng"></div> 
 				<div id="clickLatlng1"></div> 
 				
-				<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
+				<div id="map" style="width:700px;height:300px;margin-top:10px;display:none"></div>
 				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 				<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b2c8d108f8ba3676d57626832ac387e&libraries=services"></script>
 				<script>

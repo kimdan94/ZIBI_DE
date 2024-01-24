@@ -1,4 +1,16 @@
 @charset "UTF-8";
+/*----------- 공통 버튼 -----------*/
+.default-btn{
+	background:#32a77b;
+	font-weight:bold;
+	color:white;
+	border:none;
+	font-size:13px;
+	border-radius:5px;
+	width:100px;
+	height:24px;
+	padding:3px;
+}
 
 
 /* 중고거래 글쓰기 폼
@@ -10,6 +22,12 @@
 .sc-writeform select:hover {
 	outline:2px solid #32a77b;
 	box-shadow: none;
+}
+
+#sc_write label{
+	margin-bottom:15px;
+	margin-top:15px;
+	font-weight:bold;
 }
 
 /* 상품 등록 버튼 */
@@ -27,8 +45,61 @@
 .error-color{
 	color:#ff0000;
 }
+/* 상품 상태  */
+label[for="sc_status1"],
+label[for="sc_status2"]{
+	margin-bottom:-5px !important;
+	margin-top:-13px !important;
+}
+.sc_status input[type="radio"]{
+	display:none;
+}
+.sc_status input[type="radio"]+label{
+	display:inline-block;
+    cursor:pointer;
+    height:30px;
+    width:90px;
+    border: 1px solid #32a77b;
+    line-height:30px;
+    text-align:center;
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:13px;
+    background-color:#fff;
+    color:#333;
+}
+.sc_status input[type="radio"]:checked+label{
+	background-color:#32a77b;
+	color:white;
+}
 
-
+/* 거래 방법  */
+label[for="sc_way1"],
+label[for="sc_way2"]{
+	margin-bottom:-5px !important;
+	margin-top:-13px !important;
+}
+.sc_way input[type="radio"]{
+	display:none;
+}
+.sc_way input[type="radio"]+label{
+	display:inline-block;
+    cursor:pointer;
+    height:30px;
+    width:90px;
+    border: 1px solid #32a77b;
+    line-height:30px;
+    text-align:center;
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:13px;
+    background-color:#fff;
+    color:#333;
+}
+.sc_way input[type="radio"]:checked+label{
+	background-color:#32a77b;
+	color:white;
+}
 /* 중고거래 메인 list
 -------------------------*/
 .scmain-btn {

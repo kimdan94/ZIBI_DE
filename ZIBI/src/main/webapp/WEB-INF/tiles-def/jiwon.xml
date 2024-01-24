@@ -5,7 +5,9 @@
 <tiles-definitions>
     <definition name="secondMain" template="/WEB-INF/views/secondhand/sc_layout_main.jsp">
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/list.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
 	<!-- 판매 등록 폼 -->

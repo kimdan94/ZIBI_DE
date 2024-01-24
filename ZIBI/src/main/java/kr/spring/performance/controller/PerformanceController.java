@@ -41,7 +41,7 @@ public class PerformanceController {
 	/*=================================
 	 * 공연 리스트
 	 *=================================*/
-	@RequestMapping("/ent/list")
+	@RequestMapping("/performance/list")
 	public ModelAndView mainList(@RequestParam(value="category", defaultValue="1") int category,
 			                     String keyword) {
 		log.debug("<<목록 메서드>>");
@@ -77,14 +77,14 @@ public class PerformanceController {
 	}
 	
 	// 등록 폼 호출
-	@RequestMapping("/ent/write") // -> /performance/writePerformance로 변경하기
+	@RequestMapping("/performance/write") // -> /performance/writePerformance로 변경하기
 	public String form() {
 		log.debug("<<영화 등록 폼>>");
 		return "writePerformance"; // write.jsp명과 동일 tiles
 	}
 	
 	//전송된 데이터 처리
-	@PostMapping("/ent/register")
+	@PostMapping("/performance/register")
 	public String submit(@Valid PerformanceVO performanceVO, BindingResult result, 
 			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<영화 저장>>" + performanceVO);
@@ -102,7 +102,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "영화가 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/ent/list");
+		model.addAttribute("url", request.getContextPath()+"/performance/list");
 		
 		return "common/resultAlert";
 	}
@@ -118,13 +118,13 @@ public class PerformanceController {
 		return new CinemaVO();
 	}
 	// 상영관 등록 폼 호출
-	@RequestMapping("/ent/writeCinema")
+	@RequestMapping("/performance/writeCinema")
 	public String formCinema() {
 		log.debug("<<상영관 등록 폼>>");
 		return "writeCinema"; // write.jsp명과 동일 tiles
 	}
 	//전송된 데이터 처리
-	@PostMapping("/ent/registerCinema")
+	@PostMapping("/performance/registerCinema")
 	public String submitCinema(@Valid CinemaVO CinemaVO, BindingResult result, 
 			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<상영관 저장>>" + CinemaVO);
@@ -139,7 +139,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "상영관이 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/ent/list");
+		model.addAttribute("url", request.getContextPath()+"/performance/list");
 		
 		return "common/resultAlert";
 	}
@@ -148,7 +148,7 @@ public class PerformanceController {
 	 * 상영관 선택
 	 *=================================*/
 	// 상영관 선택 폼 호출
-	@GetMapping("/ent/ticketing")
+	@GetMapping("/performance/ticketing")
 	public ModelAndView ticketPage(@RequestParam int performance_num) {
 		
 		log.debug("<<티켓 페이지>>");
@@ -196,7 +196,7 @@ public class PerformanceController {
 	public TicketingVO initPerformanceDate() {
 		return new TicketingVO();
 	}
-	@RequestMapping("/ent/writePerformanceDate")
+	@RequestMapping("/performance/writePerformanceDate")
 	public ModelAndView formPerformanceDate() {
 		log.debug("<<영화관,상영관,상영 날짜,상영 시간 선택 폼>>");
 		Map<String, Object> map = new HashMap<String, Object>();

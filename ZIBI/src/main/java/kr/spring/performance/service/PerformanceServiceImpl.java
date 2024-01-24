@@ -48,6 +48,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 	}
 
+	@Override
+	public List<CinemaVO> selectLocation2(String loc1) {
+		return performanceMapper.selectLocation2(loc1);
+	}
+
 	
 	
 }

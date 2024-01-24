@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 <!-- 부트스트랩 시작 원래 5.3.2버전 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -115,13 +116,6 @@ ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_m
 <!-- Carousel 시작 날짜에 넣기!! -->
 <!-- <div id="demo" class="carousel slide" data-bs-ride="carousel"> --><!-- 움직임 -->
 <div id="demo" class="carousel slide"><!-- 안 움직임 -->
-
-  <!-- Indicators/dots -->
-  <!-- <div class="carousel-indicators">
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-  </div> -->
   
   <!-- The slideshow/carousel -->
   <div class="carousel-inner" style="width:500px;"><!-- width로 크기 조정해주깅 -->
@@ -158,3 +152,57 @@ ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_m
 <!-- https://www.w3schools.com/bootstrap5/bootstrap_carousel.php Carousel -->
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+	<div class="carousel-indicators">
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	</div>
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="${pageContext.request.contextPath}/images/na/sample1.jpg" class="d-block">
+		</div>
+		<div class="carousel-item">
+			<img src="${pageContext.request.contextPath}/images/na/sample2.jpg" class="d-block">
+		</div>
+		<div class="carousel-item">
+			<img src="${pageContext.request.contextPath}/images/na/sample3.jpg" class="d-block">
+		</div>
+	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Previous</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Next</span>
+	</button>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.js"></script>
+<script type="text/javascript">
+	var owl = $('.owl-carousel');
+	owl.owlCarousel({
+	    loop:true,
+	    nav:true,
+	    margin:10,
+	    responsive:{
+	        0:{items:1},
+	        600:{items:3},            
+	        960:{items:5},
+	        1200:{items:6 }
+	    }
+	});
+	owl.on('mousewheel', '.owl-stage', function (e) {
+	    if (e.originalEvent.deltaY>0) {
+	        owl.trigger('next.owl');
+	    } else {
+	        owl.trigger('prev.owl');
+	    }
+	    e.preventDefault();
+	});
+</script>
+<!-- 메인 바디 끝 -->

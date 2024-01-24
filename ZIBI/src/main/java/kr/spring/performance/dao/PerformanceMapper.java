@@ -22,5 +22,7 @@ public interface PerformanceMapper {
 	// 관리자
 	public void insertPerformance(PerformanceVO performance); // 영화 정보 저장
 	public void insertCinema(CinemaVO cinema); // 상영관 정보 저장
+	@Select("SELECT * FROM cinema WHERE cinema_location1=#{loc1}")
+	public List<CinemaVO> selectLocation2(String loc1);
 	
 }

@@ -15,7 +15,7 @@
 
 /*캐러셀-메뉴 설명*/
 .main-content h5{
-	margin-top: 30px;
+	margin: 30px 0 10px 0;
 	font-weight: 600;
 }
 .owl-nav{

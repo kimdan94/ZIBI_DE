@@ -10,6 +10,10 @@
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/jy.css" rel="stylesheet">
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
+	
+	<%-- title 아이콘 변경 --%>
+	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>

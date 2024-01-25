@@ -14,6 +14,8 @@ public interface PerformanceService {
 	
 	public List<CinemaVO> selectCinemaLoc1();
 	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map);
+	public List<CinemaVO> selectCinemaNum(String cinema_location2);
+	public List<TicketingVO> selectPerformance(int cinema_num);
 	
 	// 관리자
 	public void insertPerformance(PerformanceVO performance);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.performance.service.PerformanceService;
 import kr.spring.performance.vo.CinemaVO;
+import kr.spring.performance.vo.TicketingVO;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -39,6 +40,52 @@ public class PerformanceAjaxController {
 		return mapJson;
 	}
 	
+	@RequestMapping("/performance/selectLocList")
+	@ResponseBody
+	public Map<String, Object> selectLocList(HttpSession session, HttpServletRequest request){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		List<CinemaVO> listColor = null;
+		listColor = performanceService.selectCinemaLoc1();
+		mapJson.put("result", "success");
+		mapJson.put("listColor", listColor);
+		
+		log.debug("<<listColor>> : " + listColor);
+		
+		return mapJson;
+	}
+	
+	@RequestMapping("/performance/locationNum")
+	@ResponseBody // 지역2 str으로 해당 상영관의 번호 알아내기
+	public Map<String, Object> locationNum(@RequestParam(value="location2") String location2, HttpSession session, HttpServletRequest request){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		List<CinemaVO> locNum = null;
+		locNum = performanceService.selectCinemaNum(location2);
+		mapJson.put("result", "success");
+		mapJson.put("locNum", locNum);
+		
+		log.debug("<<locNum>> : " + locNum);
+		
+		return mapJson;
+	}
+	
+	@RequestMapping("/performance/canPerformance")
+	@ResponseBody // 지역 번호로 볼 수 있는 영화 찾아내기
+	public Map<String, Object> canPerformance(@RequestParam(value="cinema_num") Integer cinema_num, HttpSession session, HttpServletRequest request){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		
+		
+		if(cinema_num==null) {
+			mapJson.put("result", "error");
+		} else {
+			List<TicketingVO> listPerformance = null;
+			listPerformance = performanceService.selectPerformance(cinema_num);
+			
+			mapJson.put("result", "success");
+			mapJson.put("listPerformance", listPerformance);
+		}
+		
+		return mapJson;
+	}
 	
 	
 	

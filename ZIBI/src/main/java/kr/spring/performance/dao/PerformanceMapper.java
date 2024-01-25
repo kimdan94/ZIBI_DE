@@ -18,7 +18,10 @@ public interface PerformanceMapper {
 	@Select("SELECT cinema_location1 FROM cinema GROUP BY cinema_location1")
 	public List<CinemaVO> selectCinemaLoc1();
 	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map);
-	
+	@Select("SELECT cinema_num FROM cinema WHERE cinema_location2=#{cinema_location2}")
+	public List<CinemaVO> selectCinemaNum(String cinema_location2);
+	@Select("SELECT * FROM ticketing WHERE cinema_num=#{cinema_num}")
+	public List<TicketingVO> selectPerformance(int cinema_num);
 	
 	// 관리자
 	public void insertPerformance(PerformanceVO performance); // 영화 정보 저장

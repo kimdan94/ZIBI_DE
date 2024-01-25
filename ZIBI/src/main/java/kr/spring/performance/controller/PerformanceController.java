@@ -39,7 +39,7 @@ public class PerformanceController {
 	
 	
 	/*=================================
-	 * 공연 리스트
+	 * [메인] 공연 리스트
 	 *=================================*/
 	@RequestMapping("/performance/list")
 	public ModelAndView mainList(@RequestParam(value="category", defaultValue="1") int category,
@@ -75,14 +75,12 @@ public class PerformanceController {
 	public PerformanceVO initCommand() {
 		return new PerformanceVO();
 	}
-	
 	// 등록 폼 호출
 	@RequestMapping("/performance/write") // -> /performance/writePerformance로 변경하기
 	public String form() {
 		log.debug("<<영화 등록 폼>>");
 		return "writePerformance"; // write.jsp명과 동일 tiles
 	}
-	
 	//전송된 데이터 처리
 	@PostMapping("/performance/register")
 	public String submit(@Valid PerformanceVO performanceVO, BindingResult result, 
@@ -102,12 +100,10 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "영화가 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/performanceList");
+		model.addAttribute("url", request.getContextPath()+"/performance/list");
 		
 		return "common/resultAlert";
 	}
-	
-	
 	
 	/*=================================
 	 * 상영관 정보 등록
@@ -139,7 +135,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "상영관이 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/performanceList");
+		model.addAttribute("url", request.getContextPath()+"/performance/list");
 		
 		return "common/resultAlert";
 	}
@@ -147,7 +143,7 @@ public class PerformanceController {
 	/*=================================
 	 * 상영관 선택
 	 *=================================*/
-	// 상영관 선택 폼 호출
+	// 상영관+영화+날짜 중 영화 출력 페이지 호출
 	@GetMapping("/performance/ticketing")
 	public ModelAndView ticketPage(@RequestParam(value="performance_num", defaultValue="0") int performance_num) {
 		// 그냥 예매하기 버튼으로 간건지
@@ -237,7 +233,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "날짜 정보가 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/performanceList");
+		model.addAttribute("url", request.getContextPath()+"/performance/list");
 		
 		return "common/resultAlert";
 	}

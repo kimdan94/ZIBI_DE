@@ -60,6 +60,16 @@ public class PerformanceServiceImpl implements PerformanceService {
 		
 	}
 
+	@Override
+	public List<CinemaVO> selectCinemaNum(String cinema_location2) {
+		return performanceMapper.selectCinemaNum(cinema_location2);
+	}
+
+	@Override
+	public List<TicketingVO> selectPerformance(int cinema_num) {
+		return performanceMapper.selectPerformance(cinema_num);
+	}
+
 	
 	
 }

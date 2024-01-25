@@ -46,6 +46,7 @@
 										<td style="border:1px solid black;">${cinema.cinema_location1}</td>
 									</tr>
 									</c:forEach>
+									
 								</tbody>
                             	</table>
                             	
@@ -84,13 +85,15 @@
                             
                             <div class="overflow-hidden rounded">
                                 <table style="float:left;">
-                            	<c:forEach var="performance" items="${list}">
-                            	<tr>
-									<th><img src="${pageContext.request.contextPath}/upload/${performance.performance_poster}"></th>
-									<th>${performance.performance_title}</th>
-									<th>${performance.performance_age}</th>
-								</tr>
-								</c:forEach>
+                                <tbody id="ticketing_Ent">
+		                           	<c:forEach var="performance" items="${list}">
+		                           	<tr id="${performance.performance_num}">
+										<th><img src="${pageContext.request.contextPath}/upload/${performance.performance_poster}"></th>
+										<th>${performance.performance_title}</th>
+										<th>${performance.performance_age}</th>
+									</tr>
+									</c:forEach>
+								</tbody>
                             	</table>
                             </div>
                         </div>

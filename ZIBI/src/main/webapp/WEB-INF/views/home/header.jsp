@@ -10,7 +10,7 @@
 					<img src="${pageContext.request.contextPath}/images/na/header_member.png" width="15px"> ${user.mem_nickname}님
 				</a>
 				<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
-			</c:if>
+			</c:if>W
 			<c:if test="${empty user}">
 				<a href="${pageContext.request.contextPath}/member/login">로그인</a>
 			</c:if>

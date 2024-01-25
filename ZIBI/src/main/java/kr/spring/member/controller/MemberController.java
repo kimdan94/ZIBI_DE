@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PasswordCheckException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -102,5 +103,47 @@ public class MemberController {
 		return "redirect:/main/home";
 	}
 	
+	/*-----프로필 사진-----*/
+	//로그인 전용 프로필 사진 출력 (마이페이지 사용)
+	@RequestMapping("/member/photoView")
+	public String photoView(Model model, HttpServletRequest request, HttpSession session) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인 정보
+		
+		if(user==null) { //미로그인 시
+			getBasicProfileImage(request, model);
+		} else { //로그인 시
+			MemberVO memberVO = memberService.selectMember(user.getMem_num());
+			viewProfile(memberVO, request, model);
+		}
+		
+		return "imageView"; //view 클래스로
+	}
 	
+	//회원번호 지정 프로필 사진 출력 (게시판 사용)
+	@RequestMapping("/member/viewProfile")
+	public String getProfileByMem_num(@RequestParam int mem_num, HttpServletRequest request, Model model) {
+		
+		MemberVO memberVO = memberService.selectMember(mem_num);
+		viewProfile(memberVO, request, model);
+		
+		return "imageView";
+	}
+	
+	//프로필 사진 처리
+	public void viewProfile(MemberVO memberVO, HttpServletRequest request, Model model) {
+		if(memberVO==null||memberVO.getMem_photoname()==null) {
+			getBasicProfileImage(request, model);
+		} else {
+			model.addAttribute("imageFile",memberVO.getMem_photo());
+			model.addAttribute("filename",memberVO.getMem_photoname());
+		}
+	}
+	
+	//기본 프로필 사진 처리
+	public void getBasicProfileImage(HttpServletRequest request, Model model) {
+		byte[] readbyte = FileUtil.getBytes(request.getServletContext().getRealPath("/image_bundle/face.png"));
+		model.addAttribute("imageFile",readbyte);
+		model.addAttribute("filename","face.png");
+	}
 }

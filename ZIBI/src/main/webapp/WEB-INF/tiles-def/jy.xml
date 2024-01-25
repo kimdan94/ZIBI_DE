@@ -14,4 +14,8 @@
 	<put-attribute name="title" value="소모임 예약 | ZIBI"/>
 		<put-attribute name="body" value="/WEB-INF/views/book/bookList.jsp"/>
 	</definition>
+	<definition name="bookDetail" extends="bookWrite">
+	<put-attribute name="title" value="소모임 예약 | ZIBI"/>
+		<put-attribute name="body" value="/WEB-INF/views/book/bookDetail.jsp"/>
+	</definition>
 </tiles-definitions>

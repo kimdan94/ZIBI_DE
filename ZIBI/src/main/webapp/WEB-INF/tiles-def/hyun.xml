@@ -12,8 +12,8 @@
 	</definition>
 	
 	<!-- 공연 list (main 페이지) -->
-	<definition name="list" extends="menuPage">
-    	<put-attribute name="body" value="/WEB-INF/views/performance/list.jsp"/>
+	<definition name="performanceList" extends="menuPage">
+    	<put-attribute name="body" value="/WEB-INF/views/performance/performanceList.jsp"/>
 	</definition>
 	
 	<!-- 공연 정보 넣는 폼 작성 -->

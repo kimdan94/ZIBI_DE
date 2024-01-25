@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 
 <div class="page-main">
 	<h2>선택</h2>
@@ -47,7 +46,7 @@
 			</ul>
 			<div class="align-center">
 				<form:button>전송</form:button>
-				<input type="button" value="목록" onclick="location.href='list'">
+				<input type="button" value="목록" onclick="location.href='performanceList'">
 			</div>	
 	</form:form>
 </div>

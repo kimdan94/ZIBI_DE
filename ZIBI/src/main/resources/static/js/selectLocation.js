@@ -25,10 +25,7 @@ $(function(){
 	
 	
 	function location2(location1){
-		
 		console.log(location1);
-		
-		//alert("value = "+ location1);
 		
 		$.ajax({
 			url:'selectLocation',
@@ -54,9 +51,6 @@ $(function(){
 			}
 		});
 		
-		
 	}
-	
-	
 	
 });

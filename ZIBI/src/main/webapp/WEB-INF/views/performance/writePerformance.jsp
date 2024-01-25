@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
+
 <div class="page-main">
 	<h2>글쓰기/</h2>
 	<!-- form태그를 사용하려면 먼저 Controller에서 modelAttribute부터 -->
@@ -39,7 +39,7 @@
 			</ul>
 			<div class="align-center">
 				<form:button>전송</form:button>
-				<input type="button" value="목록" onclick="location.href='list'">
+				<input type="button" value="목록" onclick="location.href='performanceList'">
 			</div>	
 	</form:form>
 </div>

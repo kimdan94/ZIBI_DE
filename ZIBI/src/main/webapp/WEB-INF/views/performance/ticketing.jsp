@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/selectLocation.js"></script>
 <!-- 부트스트랩 시작 원래 5.3.2버전 -->
@@ -9,10 +8,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- 부트스트랩 끝 -->
 
+<form action="" method="post">
 
         <!-- Blog Start -->
         <div class="container-fluid blog py-6" style="padding:0 200px">
-            <!-- <div class="container"> -->
                 <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
                     <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Blog</small>
                     <h1 class="display-5 mb-5">Be First Who Read News</h1>
@@ -66,6 +65,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- -------------- 첫번째 : 영화관 위치 찾기 -------------- -->
                     
                     
                 	<!-- -------------- 두번째 : 영화 선택 -------------- -->
@@ -93,9 +93,9 @@
 								</c:forEach>
                             	</table>
                             </div>
-                            
                         </div>
                     </div>
+                    <!-- -------------- 두번째 : 영화 선택 -------------- -->
                     
                     
                     
@@ -119,12 +119,25 @@
                             
                         </div>
                     </div>
+                    <!-- -------------- 세번째 : 날짜 선택 -------------- -->
+                    
+                    
                 </div>
-            <!-- </div> -->
         </div>
         <!-- Blog End -->
         
   
+</form>
+
+
+
+
+
+
+
+
+
+
 <!-- 
 ${pageContext.request.contextPath}/upload/95fd7192-7f36-4a14-ba47-f7eb1eecae5d_movie_1.jpg
 ${pageContext.request.contextPath}/upload/55de25e2-945b-4c37-859c-29a98d098062_movie_2.jpg

@@ -59,7 +59,7 @@ public class PerformanceController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("list"); // tiles 설정
+		mav.setViewName("performanceList"); // tiles 설정 name과 동일해야 함
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 
@@ -102,7 +102,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "영화가 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/list");
+		model.addAttribute("url", request.getContextPath()+"/performance/performanceList");
 		
 		return "common/resultAlert";
 	}
@@ -139,7 +139,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "상영관이 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/list");
+		model.addAttribute("url", request.getContextPath()+"/performance/performanceList");
 		
 		return "common/resultAlert";
 	}
@@ -237,7 +237,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "날짜 정보가 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/list");
+		model.addAttribute("url", request.getContextPath()+"/performance/performanceList");
 		
 		return "common/resultAlert";
 	}

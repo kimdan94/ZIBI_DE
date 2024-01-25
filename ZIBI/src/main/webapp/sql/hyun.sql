@@ -49,6 +49,9 @@ create table ticketing(
  cinema_num number not null,
  ticketing_date date not null,
  ticketing_start_time varchar2(30) not null
+ constraint ticketing_pk primary key(ticketing_num),
+ constraint ticketing_fk1 foreign key (performance_num) references performance (performance_num) on delete cascade,
+ constraint ticketing_fk2 foreign key (cinema_num) references cinema (cinema_num)
 );
 
 create sequence ticketing_seq;

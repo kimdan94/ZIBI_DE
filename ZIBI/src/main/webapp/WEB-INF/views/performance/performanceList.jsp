@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 
 <!-- 관리자 button -->
 <%-- <c:if test="${count == 0}"> --%>
@@ -11,10 +10,10 @@
 <input type="button" value="예매하기" onclick="location.href='ticketing'">
 <%-- </c:if> --%>
 
-<form action="list" method="get">
+<form action="performanceList" method="get">
 	<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 	<input type="submit" value="검색">
-	<input type="button" value="목록" onclick="location.href='list'">
+	<input type="button" value="목록" onclick="location.href='performanceList'">
 </form>
 
 	<!-- -----------------------------부트스트랩------------------------------- -->

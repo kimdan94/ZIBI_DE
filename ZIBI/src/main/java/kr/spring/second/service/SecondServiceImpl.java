@@ -60,29 +60,27 @@ public class SecondServiceImpl implements SecondService{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	//=========   찜   ==================
+	
 	@Override
 	public SecondFavVO selectFav(SecondFavVO fav) {
-		// TODO Auto-generated method stub
-		return null;
+		return secondMapper.selectFav(fav);
 	}
 
 	@Override
 	public int selectFavCount(int sc_num) {
-		// TODO Auto-generated method stub
-		return 0;
+		return secondMapper.selectFavCount(sc_num);
 	}
 
 	@Override
 	public void insertFav(SecondFavVO fav) {
-		// TODO Auto-generated method stub
-		
+		secondMapper.insertFav(fav);
 	}
 
 	@Override
 	public void deleteFav(SecondFavVO secondFav) {
-		// TODO Auto-generated method stub
-		
+		secondMapper.deleteFav(secondFav);
 	}
 	
 }

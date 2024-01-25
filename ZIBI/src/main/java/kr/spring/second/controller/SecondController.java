@@ -141,6 +141,7 @@ public class SecondController {
 		return new ModelAndView("secondDetail","second",second);
 	}//second에 mem_num, sc_num, sc_title, sc_content, sc_category,sc_price,sc_status,sc_way,sc_place,위도,경도,조회수,등록일 등 정보 있음
 	
+	//읍면동 ~리까지 정규표현식을 이용해서 추출함 ex) 서울시 송파구 장지동 901이 저장되어있다면 서울 송파구 장지동이라고 출력
 	private String extractAddress(String originalAddress) {
         // 정규표현식 패턴
         Pattern pattern = Pattern.compile("([가-힣\\s]+[읍면동가-힣]+).*");

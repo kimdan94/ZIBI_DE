@@ -58,7 +58,7 @@ create table second_review(
 
 create sequence second_review_seq;
 
---중고거래 관심
+--중고거래 찜
 create table second_fav(
  sc_num number not null,
  mem_num number not null,

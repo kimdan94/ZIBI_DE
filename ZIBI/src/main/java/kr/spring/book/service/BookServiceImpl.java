@@ -33,8 +33,7 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public BookVO selectBook(int book_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return bookMapper.selectBook(book_num);
 	}
 
 	@Override
@@ -53,5 +52,15 @@ public class BookServiceImpl implements BookService{
 	public void deleteFile(int book_num) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<BookVO> selectMatchList(Map<String, Object> map) {
+		return bookMapper.selectMatchList(map);
+	}
+
+	@Override
+	public int selectMatchCount(Map<String, Object> map) {
+		return bookMapper.selectMatchCount(map);
 	}
 }

@@ -18,6 +18,10 @@ public interface BookMapper {
 	public void deleteBook(int book_num);
 	public void deleteFile(int book_num);
 	
+	//예약 내역
+	public List<BookVO> selectMatchList(Map<String,Object> map);
+	public int selectMatchCount(Map<String,Object> map);
+	
 	//매칭
 	//리뷰
 	//스크랩

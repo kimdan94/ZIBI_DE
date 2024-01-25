@@ -116,7 +116,6 @@ public class MemberController {
 			MemberVO memberVO = memberService.selectMember(user.getMem_num());
 			viewProfile(memberVO, request, model);
 		}
-		
 		return "imageView"; //view 클래스로
 	}
 	

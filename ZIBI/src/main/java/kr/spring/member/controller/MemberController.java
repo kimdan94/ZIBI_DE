@@ -1,6 +1,7 @@
 package kr.spring.member.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
@@ -47,18 +49,20 @@ public class MemberController {
 			model.addAttribute("pageName","회원 가입");
 			return "registerForm";
 		}
+		memberVO.setMem_num(memberService.createMemNum());
 		memberService.registerMember(memberVO);//회원가입
 		return "home"; //타일즈
 	}
 	
+	
 	//로그인 폼 호출
 	@GetMapping("/member/login")
 	public ModelAndView loginForm() {
-		return new ModelAndView("login","pageName","로그인"); //타일즈
+		return new ModelAndView("loginForm","pageName","로그인"); //타일즈
 	}
 	
 	//로그인 처리
-	@PostMapping("/member/login")
+	@RequestMapping("/member/login")
 	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
 		
 		log.debug("<<로그인>>" + memberVO);
@@ -87,17 +91,16 @@ public class MemberController {
 		} catch (PasswordCheckException e) {
 			result.reject("invalidIdOrPassword");
 			model.addAttribute("pageName","로그인");
-			return "login";
+			return "loginForm";
 		}
 	}
-	
+
 	//로그아웃 처리
 	@RequestMapping("/member/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main/home";
 	}
-
 	
 	
 }

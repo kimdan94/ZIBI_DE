@@ -1,6 +1,5 @@
 package kr.spring.member.dao;
 
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -14,10 +13,8 @@ public interface MemberMapper {
 	@Select("SELECT member_seq.nextval FROM dual")
 	public int createMemNum();
 	
-	@Insert("INSERT INTO member (mem_num,mem_email) VALUES (#{mem_num},#{mem_email})")
 	public void insertMember(MemberVO memberVO);
 	
-	@Insert("INSERT INTO member_detail (mem_num,mem_nickname,mem_password) VALUES (#{mem_num},#{mem_nickname},#{mem_password})")
 	public void insertMemberDetail(MemberVO memberVO);
 	
 	/*---------회원 정보----------*/

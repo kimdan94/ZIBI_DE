@@ -5,6 +5,7 @@ import kr.spring.member.vo.MemberVO;
 public interface MemberService {
 	
 	/*---------회원 가입----------*/
+	public int createMemNum();
 	public void registerMember(MemberVO memberVO);
 	
 	/*---------회원 정보----------*/

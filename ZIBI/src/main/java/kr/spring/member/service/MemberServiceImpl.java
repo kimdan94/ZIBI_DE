@@ -14,8 +14,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	/*---------회원 가입----------*/
 	@Override
+	public int createMemNum() {
+		return memberMapper.createMemNum();
+	}
+	
+	@Override
 	public void registerMember(MemberVO memberVO) {
-		memberVO.setMem_num(memberMapper.createMemNum());
 		memberMapper.insertMember(memberVO);
 		memberMapper.insertMemberDetail(memberVO);
 	}
@@ -54,6 +58,8 @@ public class MemberServiceImpl implements MemberService {
 	public void updateProfileImages(MemberVO memberVO) {
 		memberMapper.updateProfileImages(memberVO);
 	}
+
+	
 
 	
 	

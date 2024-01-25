@@ -37,11 +37,11 @@
 				<div id="register-check" style="margin-top: 30px;"> <!-- 높이 고정 후 수직 가운데 정렬 -->
 					<form:errors element="span"/>
 				</div>
-				<form:button class="btn mem-btn-green w-100">로그인</form:button>
+				<form:button class="btn mem-btn-green w-100" style="margin-bottom:10px;">로그인</form:button>
 				<div class="text-center">
-					
-					
-					
+					<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+						<img src="${pageContext.request.contextPath}/images/na/login_kakao.png" width="80" alt="카카오 로그인 버튼" />
+					</a>
 					<input type="button" class="btn mem-btn w-100" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
 					<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
 					<input type="button" class="btn mem-btn w-100" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/member/register'">
@@ -50,21 +50,53 @@
 		</div>
 	</div>
 </div>
-<!-- Contact End -->
-<script type="text/javascript">
-	let mem_email = document.getElementById('mem_email');
-	let mem_password = document.getElementById('mem_password');
-	//아이디, 비밀번호 입력 유효성 체크
-	document.getElementById('login').onsubmit = function() {
-		if(mem_email.value.trim() == '' || mem_password.value.trim() == '') {
-			document.getElementById('register-check').innerHTML = '<span>이메일 혹은 비밀번호를 입력해주세요</span>';
-			return false;
-		}
-		document.getElementById('memberVO.errors').innerText = ' ';
-	};
-	//자바 유효성 체크 후 이메일 재입력 시 UI 초기화
-	mem_email.onkeydown = function() {
-		document.getElementById('memberVO.errors').innerText = ' ';
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+	
+	/*---------카카오 로그인 함수--------*/
+	function loginWithKakao() { //로그인 버튼 클릭 시 실행되는 함수
+
+		Kakao.init('0f8ec7b176d3f7229af3666b33d6e9b8'); //카카오 초기화
+		console.log(Kakao.isInitialized()); // 초기화 판단여부
+
+		Kakao.Auth.login({ //카카오 서버에 로그인 요청
+			success : function(authObj) { // 성공 시 access 토큰 값(authObj) 발급 받음
+				Kakao.Auth.setAccessToken(authObj.access_token); // access 토큰 값 저장
+				getInfo(); //사용자 정보 요청 함수 실행
+			},
+			fail : function(err) {
+				alert('카카오 토큰 값 가져오기 실패');
+			}
+		});
+	}
+
+	function getInfo() { //사용자 정보 요청 함수
+		Kakao.API.request({ //카카오 서버로부터 응답을 받음
+			url : '/v2/user/me',
+			success : function(res) { //성공 시
+				let email = res.kakao_account.email; //이메일 정보 받아옴
+				$.ajax({
+					url:'loginKakao',
+					type:'post',
+					data:{mem_email:email},
+					dataType:'json',
+					success: function(param){
+						if(param.result=='success'){
+							location.replace("/main/home");
+						} else{
+							alert('카카오 로그인 오류');
+						}
+					},
+					error:function(){
+						alert('네트워크 통신 오류');
+					}
+				});
+			},
+			fail : function(error) {
+				alert('카카오 로그인/회원가입에 실패했습니다. 관리자에게 문의하세요.');
+			}
+		});
 	}
 </script>
+<!-- 유효성 체크-->
 <!-- 바디 끝 -->

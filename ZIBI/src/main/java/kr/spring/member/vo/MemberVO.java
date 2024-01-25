@@ -28,6 +28,7 @@ public class MemberVO {
 	private int mem_auth;
 	@NotBlank
 	private String mem_nickname;
+	private int mem_social; //소셜 회원 구분 (0-일반,1-카카오)
 
 	/*-----선택 입력 데이터-----*/
 	@NotBlank

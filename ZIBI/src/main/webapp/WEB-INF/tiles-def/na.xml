@@ -19,8 +19,12 @@
 	<definition name="registerForm" extends="menuPage">
     	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
 	</definition>
-	<definition name="login" extends="menuPage">
+	<definition name="loginForm" extends="menuPage">
     	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+	</definition>
+
+	<definition name="loginKakao" extends="menuPage">
+    	<put-attribute name="body" value="/WEB-INF/views/member/loginKakao.jsp"/>
 	</definition>
 	
 	<definition name="mypageMain" extends="menuPage">

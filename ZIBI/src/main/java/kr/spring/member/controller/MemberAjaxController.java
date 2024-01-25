@@ -14,12 +14,45 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class MemberAjaxController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	//카카오 로그인/회원 가입
+	@RequestMapping("/member/loginKakao")
+	@ResponseBody
+	public Map<String,String> loginKakao(@RequestParam String mem_email, HttpSession session) {
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		MemberVO db_member = memberService.checkEmail(mem_email);
+		
+		if(db_member==null) { //회원가입 이력 없음 > 회원가입 + 로그인
+			int mem_num = memberService.createMemNum();
+			MemberVO memberVO = new MemberVO();
+			
+			memberVO.setMem_num(mem_num);
+			memberVO.setMem_email(mem_email);
+			memberVO.setMem_social(1); 
+			memberVO.setMem_nickname("카카오"+mem_num);
+			
+			memberService.registerMember(memberVO); //회원가입
+			session.setAttribute("user",memberVO); //로그인 처리
+			
+			mapJson.put("result","success");
+			
+			log.debug("<<카카오 회원가입>>"+memberVO);
+		} else { //회원가입 되어있음 > 로그인
+			session.setAttribute("user",db_member);
+			mapJson.put("result","success");
+		}
+		
+		return mapJson;
+	}
 	
 	/*----------프로필 사진 업로드----------*/
 	@RequestMapping("/member/updateMyPhoto")

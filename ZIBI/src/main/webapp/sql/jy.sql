@@ -28,11 +28,11 @@ create sequence book_seq;
 -- 소모임 예약 매칭
 create table book_matching(
  book_num number not null,
- mem_num number not null,
+ apply_num number not null,
  book_state number(1) not null, -- 0:대기, 1:확정, 2: 거절, 3: 취소
  book_matchDate date default sysdate not null,
  constraint book_matching_fk1 foreign key (book_num) references book (book_num),
- constraint book_matching_fk2 foreign key (mem_num) references member (mem_num)
+ constraint book_matching_fk2 foreign key (apply_num) references member (mem_num)
 );
 
 -- 소모임 예약 리뷰

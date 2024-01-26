@@ -38,8 +38,8 @@ public class MemberController {
 	
 	//회원가입 폼 호출
 	@GetMapping("/member/register")
-	public ModelAndView memberRegister(Model model) {
-		return new ModelAndView("registerForm","pageName","회원가입"); //타일즈
+	public String memberRegister(Model model) {
+		return "registerForm"; //타일즈
 	}
 	
 	//회원가입 처리
@@ -47,19 +47,19 @@ public class MemberController {
 	public String registerSubmit(@Valid MemberVO memberVO, BindingResult result, Model model) {
 		
 		if(result.hasFieldErrors("mem_email") || result.hasFieldErrors("mem_password")) {//유효성 체크
-			model.addAttribute("pageName","회원 가입");
 			return "registerForm";
 		}
 		memberVO.setMem_num(memberService.createMemNum());
 		memberService.registerMember(memberVO);//회원가입
+		
 		return "home"; //타일즈
 	}
 	
 	
 	//로그인 폼 호출
 	@GetMapping("/member/login")
-	public ModelAndView loginForm() {
-		return new ModelAndView("loginForm","pageName","로그인"); //타일즈
+	public String loginForm() {
+		return "loginForm"; //타일즈
 	}
 	
 	//로그인 처리
@@ -91,7 +91,6 @@ public class MemberController {
 			
 		} catch (PasswordCheckException e) {
 			result.reject("invalidIdOrPassword");
-			model.addAttribute("pageName","로그인");
 			return "loginForm";
 		}
 	}

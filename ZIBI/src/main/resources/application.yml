@@ -1,6 +1,24 @@
 spring:
   profiles:
     active: local #local,dev,real
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    port: 587
+    username: 229rkawk@gmail.com
+    password: zczy gswv eyuu zduo
+    properties:
+      smtp.auth : true
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required : true
+    test-connection: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
     
   mvc:
     view: #view 경로 및 확장자 지정

@@ -2,12 +2,17 @@ package kr.spring.member.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.regex.Pattern;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +27,41 @@ public class MemberAjaxController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	JavaMailSenderImpl mailSender;
+	
+	//이메일 인증
+	@PostMapping("/member/emailAuth")
+	@ResponseBody
+	public Map<String, String> emailAuth(@RequestParam String mem_email) {
+		log.info("<<이메일 인증 - 사용자 입력 이메일>> : " + mem_email);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		
+		Random random = new Random();
+		int checkNum = random.nextInt(888888)+111111; 
+		
+		//이메일 보낼 양식
+		String setFrom = "229rkawk@gmail.com";
+		String toMail = mem_email;
+		String title = "ZIBI 회원가입 인증 이메일 입니다.";
+		String content = "인증 코드는 " + checkNum + " 입니다.<br>해당 인증 코드를 인증 코드 확인란에 기입하여 주세요.";
+		
+		try {
+			MimeMessage message = mailSender.createMimeMessage(); //Spring에서 제공하는 mail API
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content, true);
+            mailSender.send(message);
+            
+            mapJson.put("result", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mapJson;
+	}
 	
 	//카카오 로그인/회원 가입
 	@RequestMapping("/member/loginKakao")

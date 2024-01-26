@@ -31,4 +31,15 @@
 			</if>
 			)
 	</insert>
+	<update id="updateMemberDetail" parameterType="memberVO">
+		UPDATE member_detail 
+		SET 
+			<if test="mem_password == null"><!-- 정보 수정 시 -->
+				mem_nickname=#{mem_nickname},mem_name=#{mem_name},mem_phone=#{mem_phone},mem_zipcode=#{mem_zipcode},mem_address1=#{mem_address1},mem_address2=#{mem_address2},mem_modidate=SYSDATE 
+			</if>
+			<if test="mem_password != null"><!-- 비밀번호 수정 시 -->
+				mem_password=${mem_password}
+			</if>
+		WHERE mem_num=#{mem_num}
+	</update>
 </mapper>

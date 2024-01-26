@@ -59,11 +59,4 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.updateProfileImages(memberVO);
 	}
 
-	
-
-	
-	
-
-	
-
 }

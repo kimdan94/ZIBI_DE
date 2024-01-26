@@ -28,7 +28,7 @@
 						</div>
 						
 					</div>
-					<div id="photo_choice" style="display: none;">
+					<div id="photo_choice" style="display: none; margin-top:3px;">
 						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
 						<input type="button" value="변경" class="btn mem-btn" id="photo_submit"> 
 						<input type="button" value="취소" class="btn mem-btn" id="photo_reset">
@@ -58,7 +58,7 @@
 			</div>
 			<div class="col-6 text-center">
 				<input type="button" class="btn mem-btn" value="정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">
-				<input type="button" class="btn mem-btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/'">
+				<input type="button" class="btn mem-btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate'">
 				<input type="button" class="btn mem-btn" value="회원 탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/'">
 			</div>
 		</div>

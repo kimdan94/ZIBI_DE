@@ -59,4 +59,37 @@ public class MypageController {
 		
 		return new ModelAndView("mypageMain","pageName","마이페이지");
 	}
+	
+	//비밀번호 변경 폼
+	@GetMapping("/member/passwordUpdate")
+	public ModelAndView updatePasswordForm() {
+		return new ModelAndView("passwordUpdateForm","pageName","비밀번호 변경");
+	}
+	
+	//비밀번호 변경 submit
+	@PostMapping("/member/passwordUpdate")
+	public String updatePassword(@Valid MemberVO memberVO,BindingResult result,HttpSession session,Model model) {
+		
+		model.addAttribute("pageName","비밀번호 변경");
+		
+		//공란 입력 시
+		if(result.hasFieldErrors()) {
+			result.reject("passwordBlank");
+			return "passwordUpdateForm";
+		}
+		
+		MemberVO db_member = memberService.selectMember(memberVO.getMem_num());
+		
+		//현재와 똑같은 비밀번호 입력 시
+		if(memberVO.getMem_password().equals(db_member.getMem_password())) {
+			result.reject("passwordDuplicated");
+			return "passwordUpdateForm";
+		}
+		
+		model.addAttribute("pageName","마이페이지");
+		memberService.updateMemberDetail(memberVO);
+		
+		return "mypageMain";
+	}
+	
 }

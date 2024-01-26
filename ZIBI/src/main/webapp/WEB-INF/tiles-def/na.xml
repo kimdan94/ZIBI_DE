@@ -10,6 +10,7 @@
 	</definition>
 	
 	 <definition name="menuPage" template="/WEB-INF/views/home/layout_menuPage.jsp">
+	 	<put-attribute name="title" value="메뉴명"/>
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
@@ -17,23 +18,26 @@
 	</definition>
 	
 	<definition name="registerForm" extends="menuPage">
+		<put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
 	</definition>
 	<definition name="loginForm" extends="menuPage">
+		<put-attribute name="title" value="로그인"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
-	</definition>
-
-	<definition name="loginKakao" extends="menuPage">
-    	<put-attribute name="body" value="/WEB-INF/views/member/loginKakao.jsp"/>
 	</definition>
 	
 	<definition name="mypageMain" extends="menuPage">
+		<put-attribute name="title" value="마이페이지"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/mypageMain.jsp"/>
 	</definition>
 	<definition name="mypageUpdate" extends="menuPage">
+		<put-attribute name="title" value="회원 정보 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/mypageUpdateForm.jsp"/>
 	</definition>
-	
+	<definition name="passwordUpdateForm" extends="menuPage">
+		<put-attribute name="title" value="비밀번호 변경"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/passwordUpdateForm.jsp"/>
+	</definition>
 	
 	
 </tiles-definitions>

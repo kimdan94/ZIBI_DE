@@ -27,7 +27,15 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	<tiles:insertAttribute name="menu"/>
+	<div class="container-fluid nav-bar menu-title">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg py-4">
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<tiles:getAsString name="title"/>
+				</div>
+			</nav>
+		</div>
+	</div>
 	<tiles:insertAttribute name="body"/>
 	<tiles:insertAttribute name="footer"/>
 	<a href="#" class="btn btn-light btn-md-square rounded-circle back-to-top">

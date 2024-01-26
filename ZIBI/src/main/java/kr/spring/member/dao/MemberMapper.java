@@ -32,7 +32,6 @@ public interface MemberMapper {
 	public MemberVO checkPhone(String mem_phone);
 	
 	/*---------회원 정보 수정----------*/
-	@Update("UPDATE member_detail SET mem_nickname=#{mem_nickname},mem_name=#{mem_name},mem_phone=#{mem_phone},mem_zipcode=#{mem_zipcode},mem_address1=#{mem_address1},mem_address2=#{mem_address2},mem_modidate=SYSDATE WHERE mem_num=#{mem_num}")
 	public void updateMemberDetail(MemberVO memberVO);
 	
 	@Update("UPDATE member_detail SET mem_photoname=#{mem_photoname}, mem_photo=#{mem_photo} WHERE mem_num=#{mem_num}")

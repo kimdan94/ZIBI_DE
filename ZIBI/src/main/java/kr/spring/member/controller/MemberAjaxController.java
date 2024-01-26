@@ -33,10 +33,10 @@ public class MemberAjaxController {
 	//이메일 인증
 	@PostMapping("/member/emailAuth")
 	@ResponseBody
-	public Map<String, String> emailAuth(@RequestParam String mem_email) {
+	public Map<String, Integer> emailAuth(@RequestParam String mem_email) {
 		log.info("<<이메일 인증 - 사용자 입력 이메일>> : " + mem_email);
 		
-		Map<String, String> mapJson = new HashMap<String, String>();
+		Map<String, Integer> mapJson = new HashMap<String, Integer>();
 		
 		Random random = new Random();
 		int checkNum = random.nextInt(888888)+111111; 
@@ -56,7 +56,7 @@ public class MemberAjaxController {
             helper.setText(content, true);
             mailSender.send(message);
             
-            mapJson.put("result", "success");
+            mapJson.put("code", checkNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

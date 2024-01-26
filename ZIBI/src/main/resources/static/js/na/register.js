@@ -1,27 +1,28 @@
-function closeModalAction(){ //모달창 클릭 시 닫기
-	//이메일 인증 여부 확인
-	
-	/*if(confirm(이메일 인증이 완료되지 않았습니다. 그래도 닫으시겠습니까?)){
-		//닫기
-		$('#emailAuthModal').hide();
-	}*/
-}
-
 let email_checked = 0; //이메일 중복 체크 
 let nickname_checked = 0; //닉네임 중복 체크
 let password_checked = 0; //비밀번호 일치 체크 
+let code; //이메일 인증 코드 저장용
 
-//이메일 인증 API 추가 시 버튼 및 스크립트 변경 필요
+//모달창 클릭 시 닫기
+function closeModalAction(){ 
+	if(email_checked==0){//이메일 인증 여부 확인
+		if(confirm('이메일 인증이 완료되지 않았습니다. 그래도 닫으시겠습니까?')==false) 
+			return;
+	}
+	$('#emailAuthModal').hide(); //닫기
+}
 
-
-//이메일 중복 체크
+//이메일 인증버튼 클릭
 $('#email_check').click(function(){
-
-	if($('#mem_email').val().trim()==''){
+	
+	if($('#mem_email').val().trim()==''){ //유효성 체크
 		$('#email_area').text('이메일을 입력해주세요');
 		$('#mem_email').val('').focus();
 		return;
 	}
+	
+	$('#email_check').hide();
+	$('#spiner').show();
 	
 	let mem_email = $('#mem_email').val();
 	
@@ -51,39 +52,22 @@ $('#email_check').click(function(){
 			email_checked = 0;
 		}
 	});//end of ajax
+	
+	$('#spiner').hide();
+	$('#email_check').show();
+	
 });//end of email check click
 
-//이메일 중복 체크 후 값 변경 시 초기화
-$('#mem_email').keydown(function(){
-	$('#email_area').text('');
-	email_checked = 0;
-});//end of keydown
-
-function emailAuthSend(mem_email){ //인증메일 전송
+//인증메일 전송 함수
+function emailAuthSend(mem_email){
 	$.ajax({
 		url: 'emailAuth', //인증 메일 전송 컨트롤러와 통신
 		type: 'post',
 		data: {mem_email:mem_email},
 		dataType: 'json',
 		success:function(param){ //전송 성공 시
-			alert('성공');
-			//사용자 입력란 활성화, 타이머 걸기
-			$('#emailAuthModal').show();
-			
-			//사용자가 입력하면
-			$('#userEmailAuth').keyup(function(){
-				
-			});
-			
-				//param.code와 비교
-				
-				//불일치할 경우 > 재입력
-				
-				//일치할 경우 > 회원가입 진행
-			
-			//} else {
-			//	alert('인증 메일 전송 오류');
-			//}
+			code = param.code;
+			$('#emailAuthModal').show(); //모달창을 띄워서 인증코드 확인 진행
 		},
 		error:function(){
 			alert('인증 메일 네트워크 통신 오류');
@@ -91,10 +75,29 @@ function emailAuthSend(mem_email){ //인증메일 전송
 	});//end of ajax
 }//end of emailAuth
 
-function emailAuthCheck(){ //인증코드 확인 함수
+$('#email_check_btn').click(function(){ //인증하기 버튼 누르면
+	let inputEmail = $('#inputEmail').val(); //사용자가 입력한 값을 받음
 	
-}//end of emailAuthCheck
+	if(param.code==inputEmail){
+		email_checked = 1; //이메일 중복체크 & 인증 완료
+		$('#email_area').text('');
+		$('#emailAuthError').text('이메일 인증에 성공했습니다. 3초 뒤 창이 닫힙니다!');
+		setTimeout(function() {
+			$('#email_check').attr('value','인증 완료').attr('disabled','disabled');
+			closeModalAction();
+		}, 3000);
+	} else {
+		$('#emailAuthError').text('인증 코드가 불일치합니다. 확인해주세요!');
+		email_checked = 0;
+		return;
+	}
+});
 
+//이메일 중복 체크 후 값 변경 시 초기화
+$('#mem_email').keydown(function(){
+	$('#email_area').text('');
+	email_checked = 0;
+});//end of keydown
 
 //닉네임 중복 체크
 $('#nickname_check').click(function(){

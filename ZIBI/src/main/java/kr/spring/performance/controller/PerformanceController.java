@@ -150,7 +150,7 @@ public class PerformanceController {
 		// 영화를 클릭하고 예매하기 버튼으로 갔는지 구분하기
 		log.debug("<<티켓 페이지>>");
 		log.debug("<<선택한 영화 번호-performance_num>> : " + performance_num);
-		log.debug("<<오늘 날짜>> : " + PerformanceController.getCurrentDateTime());
+		log.debug("<<오늘 날짜>> : "); // 2024:01:25:17:38:33
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -169,11 +169,33 @@ public class PerformanceController {
 		if(count > 0) {
 			list = performanceService.selectList(map);
 		}
+		
+		// 날짜
+		List<TicketingVO> dayList = null;
+		dayList = performanceService.selectDate();
+		log.debug("<<날짜 출력>> : " + dayList);
+		String now = PerformanceController.getCurrentDateTime();
+		String today = now.substring(0,10); // YYYY:MM:DD:hh:mm // 시간 24시 기준
+		//String month = now.substring(5,7);
+		//String day = now.substring(8,10);
+		String time = now.substring(11,16);
+		//String minute = now.substring(14,16);
+		
+		
+		
+		
 				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("ticketing"); // tiles 설정
-		mav.addObject("cinemaList", cinemaList);
-		mav.addObject("list", list);
+		
+		mav.addObject("cinemaList", cinemaList); // 상영관
+		
+		mav.addObject("list", list); // 영화
+		
+		// 날짜
+		mav.addObject("dayList", dayList);
+		mav.addObject("today", today);
+		mav.addObject("time", time);
 		
 		return mav; 
 	}

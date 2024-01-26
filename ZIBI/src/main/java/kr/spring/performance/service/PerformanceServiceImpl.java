@@ -70,6 +70,27 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.selectPerformance(cinema_num);
 	}
 
+	@Override
+	public List<TicketingVO> selectDate() {
+		return performanceMapper.selectDate();
+	}
+
+	@Override
+	public List<CinemaVO> selectCinemaWithTicketing(int cinema_num, String day) {
+		return performanceMapper.selectCinemaWithTicketing(cinema_num, day);
+	}
+
+	@Override
+	public List<PerformanceVO> selectPerformanceWithTicketing(int cinema_num, String day) {
+		return performanceMapper.selectPerformanceWithTicketing(cinema_num, day);
+	}
+
+	@Override
+	public List<TicketingVO> selectWithTicketing(int cinema_num, String day) {
+		return performanceMapper.selectWithTicketing(cinema_num, day);
+	}
+
+	
 	
 	
 }

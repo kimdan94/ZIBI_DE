@@ -1,5 +1,8 @@
 $(function(){
-	
+	/////////////////////
+	//$('#performance_hidden').attr('value',''); // form의 hidden 값 넣어주기
+	//$('#performance_hidden').val(); // form의 hidden 값 불러오기
+	/////////////////////////
 	//--------------------------- 지역 선택 시작 ----------------------------
 	let loc1 = 'location1';
 	let loc2 = 'location2';
@@ -18,7 +21,9 @@ $(function(){
 			var tdsNum = row.childElementCount;     //아래 for문에서 사용하기 위해 row 하위에 존재하는 td의 갯수를 구합니다.
 			row.onclick = function() {
 				return function() {
-					
+				
+				// 상영관 선택할 때 영화 초기화해주기
+				$('#performance_hidden').attr('value','');
 				var str = '';
 				for (var j=0; j<tdsNum; j++) {
 					var row_value = this.cells[j].innerHTML;
@@ -35,15 +40,18 @@ $(function(){
 				} else if(location == loc2){
 					console.log('지역2');
 					console.log(str);
-					
+					$('#cinema_hidden').attr('value',str); // form의 hidden 값 넣어주기
 					// ===== [지역1, 지역2 모두 선택하면 선택할 수 있는 영화 고르기] =====
-					locationNum(str); // ajax 통신
+					//locationNum(str); // ajax 통신
+					ent(); // form hidden 값 
 				}
 				
 				};
 			}(row);
 		} // end of for
 	}
+	
+	
 	
 	// 지역2 table 생성 메소드
 	function location2(location1){
@@ -83,7 +91,170 @@ $(function(){
 					console.log(param.locNum[0].cinema_num); // 지역번호!!!
 					
 					// ===== [지역번호로 해당 지역에서 볼 수 있는 영화 알아보기] =====
-					listEnt(param.locNum[0].cinema_num);
+					//listEnt(param.locNum[0].cinema_num);
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+		
+	}
+	
+	//--------------------------- 지역 선택 끝 ----------------------------
+	
+	//--------------------------- 날짜 선택 시작 ----------------------------
+	// 날짜 선택
+	$('#date_list > input').on('click',function(){
+		//alert('버튼을 클릭했다');
+		let dayValue = $(this).attr('value');
+		//alert(dayValue); // value 값 가져오기
+		$('#day_hidden').attr('value',dayValue); // form의 hidden 값 넣어주기
+		ent(); // form hidden 값 
+		
+	});
+	// 시간 선택
+	
+	
+	//--------------------------- 날짜 선택 끝 ----------------------------
+
+	//--------------------------- 상영관 날짜 영화 선택 시작 ----------------------------
+	
+	function ent(){
+		let cinema = $('#cinema_hidden').val(); // 상영관
+		let performance = $('#performance_hidden').val(); // 영화
+		let day = $('#day_hidden').val(); // 날짜
+		
+		console.log('상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
+		// performance가 없는 것도 else if 해서 넣어주기
+		///////////////////////////////////////////////////////////
+		if(cinema==''){ // 상영관X 날짜O
+			//alert('상영관 없음');
+			$('#performance_hidden').attr('value','');
+		} else { // 상영관O 날짜O
+			// 상영관O 날짜O
+			cinemaAndDate(performance, cinema, day);
+			
+		}
+	}
+	
+	// 상영관O 날짜O
+	function cinemaAndDate(performance, cinema, day) {
+		
+		console.log('영화 있는지 확인');
+		console.log(performance);
+		if(performance == ''){ // 영화 없을때
+			console.log('영화 있는 곳');
+			cinemaAndDay(cinema, day, performance);
+		} else { // 영화 있을때
+			cinemaDayPerformance(cinema, day, performance);
+		}
+		
+	}
+	
+	//--------------------------- 상영관 날짜 영화 선택 끝 ----------------------------
+	
+	
+	//--------------------------- 영화 선택 시작 ----------------------------
+	// performance 값이 없을 경우
+	function cinemaAndDay(cinema, day, performance){
+
+			console.log('ㅁㄴㅇㄹ상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
+			
+			$.ajax({
+			url:'resultPerformance',
+			type:'post',
+			data:{cinema:cinema,day:day},
+			dataType:'json',
+			success:function(param){
+				if(param.result=='success'){
+					//alert('상영관 날짜 성공');
+					
+					// 초기화
+					$('#resultSelect').empty();
+					$('#ticketing_Ent').empty();
+
+					for(let i=0; i<param.resultCinema.length; i++){
+						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
+						// output
+						let outputResult = '<div>';
+						outputResult += '<div>'+param.resultPerformance[i].performance_title+'</div>';
+						outputResult += '<div>'+param.resultCinema[i].cinema_theater+'</div>';
+						outputResult += '<div>'+param.resultTicketing[i].ticketing_start_time+'</div>';
+						outputResult += '<div>여석</div>';
+						outputResult += '</div>';
+						//추가
+						$('#resultSelect').append(outputResult);
+						console.log(param.resultCinema[i].cinema_theater);
+						console.log(param.resultTicketing[i].ticketing_start_time);
+						
+						// 영화 목록 --> 영화 제목 / 영화 포스터 / 연령제한
+						// output
+						let outputPerformance = '<tr class="ticketing-ent-row" id='+param.resultTicketing[i].performance_num+'>';
+						outputPerformance += '<td class="ticketing-poster"><img id="ticketing-poster-img"  src="../upload/'+param.resultPerformance[i].performance_poster+'"></td>'; // js에서 파일 읽어오는 것! .. 이용
+						outputPerformance += '<td class="ticketing-info">'+param.resultPerformance[i].performance_title+'<br>'+param.resultPerformance[i].performance_age+'</td>';
+						outputPerformance += '</tr>';
+						// 추가
+						$('#ticketing_Ent').append(outputPerformance);
+						console.log(param.resultPerformance[i].performance_title);
+						console.log(param.resultPerformance[i].performance_poster);
+						console.log(param.resultPerformance[i].performance_age);
+						
+					}
+					
+				}
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	}
+	//performance 값 있는 경우
+	function cinemaDayPerformance(cinema, day, performance){
+
+			console.log('상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
+			
+			$.ajax({
+			url:'resultPerformanceWithEnt',
+			type:'post',
+			data:{cinema:cinema,day:day,performance:performance},
+			dataType:'json',
+			success:function(param){
+				if(param.result=='success'){
+					//alert('상영관 날짜 성공');
+					
+					// 초기화
+					$('#resultSelect').empty();
+					$('#ticketing_Ent').empty();
+
+					for(let i=0; i<param.resultCinema.length; i++){
+						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
+						// output
+						let outputResult = '<div>';
+						outputResult += '<div>'+param.resultPerformance[i].performance_title+'</div>';
+						outputResult += '<div>'+param.resultCinema[i].cinema_theater+'</div>';
+						outputResult += '<div>'+param.resultTicketing[i].ticketing_start_time+'</div>';
+						outputResult += '<div>여석</div>';
+						outputResult += '</div>';
+						//추가
+						$('#resultSelect').append(outputResult);
+						console.log(param.resultCinema[i].cinema_theater);
+						console.log(param.resultTicketing[i].ticketing_start_time);
+						
+						// 영화 목록 --> 영화 제목 / 영화 포스터 / 연령제한
+						// output
+						let outputPerformance = '<tr class="ticketing-ent-row" id='+param.resultTicketing[i].performance_num+'>';
+						outputPerformance += '<td class="ticketing-poster"><img id="ticketing-poster-img"  src="../upload/'+param.resultPerformance[i].performance_poster+'"></td>'; // js에서 파일 읽어오는 것! .. 이용
+						outputPerformance += '<td class="ticketing-info">'+param.resultPerformance[i].performance_title+'<br>'+param.resultPerformance[i].performance_age+'</td>';
+						outputPerformance += '</tr>';
+						// 추가
+						$('#ticketing_Ent').append(outputPerformance);
+						console.log(param.resultPerformance[i].performance_title);
+						console.log(param.resultPerformance[i].performance_poster);
+						console.log(param.resultPerformance[i].performance_age);
+						
+					}
+					
 				}
 			},
 			error:function(){
@@ -93,60 +264,16 @@ $(function(){
 	}
 	
 	
-	//============================== 수정 필요 ===============================
-	// 지역1 초기화
-	function init(){
-		$.ajax({
-				url:'selectLocList',
-				type:'post',
-				data:{},
-				dataType:'json',
-				success:function(param){
-					if(param.result=='success'){
-						$('#location1 > tbody').empty();
-						for(let k=0; k<param.listColor.length; k++){
-							let output = '<tr>';
-							output += '<td style="border:1px solid black;">' +param.listColor[k].cinema_location1+ '</td>';
-							output += '</tr>';
-							$('#location1 > tbody').append(output);
-						}
-					}
-				},
-				error:function(){
-					alert('네트워크 오류 발생');
-				}
-		});
-	} // end of init()
-	//=====================================================================
-	//--------------------------- 지역 선택 끝 ----------------------------
-	
-	//--------------------------- 영화 선택 시작 ----------------------------
-	
-	function listEnt(cinema_num){
-		
-		$.ajax({
-				url:'canPerformance',
-				type:'post',
-				data:{cinema_num:cinema_num},
-				dataType:'json',
-				success:function(param){
-					if(param.result=='success'){
-						// 기본 영화 선택 리스트 지우기
-						console.log(param.listPerformance);
-						
-						
-					}
-				},
-				error:function(){
-					alert('네트워크 오류 발생');
-				}
-		});
-	}
-	
-	
-	
-	
-	
+	// 영화 선택 클릭 이벤튼
+	$(document).on('click','.ticketing-ent-row',function(){ // script로 만든 태그는 document로 접근해야 함!!!!!
+		let rowId = $(this).attr('id');
+		if($('#cinema_hidden').val()==''){
+			alert('상영관부터 선택해주세요');
+		} else {
+			$('#performance_hidden').attr('value',rowId);
+			ent();
+		}
+	});
 	
 	
 	

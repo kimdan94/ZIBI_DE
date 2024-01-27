@@ -20,13 +20,12 @@
 			<div class="col-6 event text-center align-self-center">
 				<div class="photo-area">
 					<div class="event-img position-relative">
-						<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView" width="350" height="350">
-						<div class="event-overlay d-flex flex-column">
-							<a data-lightbox="event-1" class="my-auto" id="photo_btn">
+						<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView">
+						<div class="event-overlay">
+							<a data-lightbox="event-1" id="photo_btn">
 								<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="60px">
 							</a>
 						</div>
-						
 					</div>
 					<div id="photo_choice" style="display: none; margin-top:3px;">
 						<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
@@ -58,7 +57,9 @@
 			</div>
 			<div class="col-6 text-center">
 				<input type="button" class="btn mem-btn" value="정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">
-				<input type="button" class="btn mem-btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate'">
+				<c:if test="${user.mem_social==0}">
+					<input type="button" class="btn mem-btn" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate'">
+				</c:if>
 				<input type="button" class="btn mem-btn" value="회원 탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/'">
 			</div>
 		</div>

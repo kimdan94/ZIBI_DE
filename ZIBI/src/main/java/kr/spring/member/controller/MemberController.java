@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -36,15 +35,23 @@ public class MemberController {
 		return new MemberVO();
 	}
 	
+	/*------------------------------비밀번호 찾기----------------------------------*/
+	@RequestMapping("/member/findPassword")
+	public String findPasswordForm() {
+		return "findPassword"; //타일즈
+	}
+	
+	
+	/*------------------------------회원가입----------------------------------*/
 	//회원가입 폼 호출
 	@GetMapping("/member/register")
-	public String memberRegister(Model model) {
+	public String memberRegister() {
 		return "registerForm"; //타일즈
 	}
 	
 	//회원가입 처리
 	@PostMapping("/member/register")
-	public String registerSubmit(@Valid MemberVO memberVO, BindingResult result, Model model) {
+	public String registerSubmit(@Valid MemberVO memberVO, BindingResult result) {
 		
 		if(result.hasFieldErrors("mem_email") || result.hasFieldErrors("mem_password")) {//유효성 체크
 			return "registerForm";
@@ -55,7 +62,7 @@ public class MemberController {
 		return "home"; //타일즈
 	}
 	
-	
+	/*------------------------------로그인/로그아웃----------------------------------*/
 	//로그인 폼 호출
 	@GetMapping("/member/login")
 	public String loginForm() {
@@ -64,7 +71,7 @@ public class MemberController {
 	
 	//로그인 처리
 	@RequestMapping("/member/login")
-	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
+	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
 		
 		log.debug("<<로그인>>" + memberVO);
 		
@@ -102,7 +109,7 @@ public class MemberController {
 		return "redirect:/main/home";
 	}
 	
-	/*-----프로필 사진-----*/
+	/*------------------------------프로필 사진----------------------------------*/
 	//로그인 전용 프로필 사진 출력 (마이페이지 사용)
 	@RequestMapping("/member/photoView")
 	public String photoView(Model model, HttpServletRequest request, HttpSession session) {

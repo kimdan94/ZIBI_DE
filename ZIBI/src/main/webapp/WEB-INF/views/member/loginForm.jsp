@@ -37,13 +37,12 @@
 				<div id="register-check" style="margin-top: 30px;"> <!-- 높이 고정 후 수직 가운데 정렬 -->
 					<form:errors element="span"/>
 				</div>
-				<form:button class="btn mem-btn-green w-100" style="margin-bottom:10px;">로그인</form:button>
+				<form:button class="btn mem-btn-green w-100" style="margin:10px 0 10px 0;">로그인</form:button>
 				<div class="text-center">
 					<a id="kakao-login-btn" href="javascript:loginWithKakao()">
 						<img src="${pageContext.request.contextPath}/images/na/login_kakao.png" width="80" alt="카카오 로그인 버튼" />
 					</a>
-					<input type="button" class="btn mem-btn w-100" value="아이디 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
-					<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/'">
+					<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/findPassword'">
 					<input type="button" class="btn mem-btn w-100" value="회원가입" onclick="location.href='${pageContext.request.contextPath}/member/register'">
 				</div>
 			</form:form>

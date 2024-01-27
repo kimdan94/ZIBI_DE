@@ -3,45 +3,29 @@ let nickname_checked = 0; //닉네임 중복 체크
 let password_checked = 0; //비밀번호 일치 체크 
 let code; //이메일 인증 코드 저장용
 
-//모달창 클릭 시 닫기
-function closeModalAction(){ 
-	if(email_checked==0){//이메일 인증 여부 확인
-		if(confirm('이메일 인증이 완료되지 않았습니다. 그래도 닫으시겠습니까?')==false) 
-			return;
-	}
-	$('#emailAuthModal').hide(); //닫기
-}
-
 //이메일 인증버튼 클릭
 $('#email_check').click(function(){
-	
-	if($('#mem_email').val().trim()==''){ //유효성 체크
-		$('#email_area').text('이메일을 입력해주세요');
-		$('#mem_email').val('').focus();
-		return;
-	}
 	
 	$('#email_check').hide();
 	$('#spiner').show();
 	
-	let mem_email = $('#mem_email').val();
+	if($('#mem_email').val().trim()==''){ //이메일 공란 입력 체크
+		emailControll('이메일을 입력해주세요');
+		return;
+	}
 	
 	$.ajax({
-		url: 'checkEmail',
+		url: 'checkEmail', //이메일 유효성 체크
 		type: 'post',
-		data: {mem_email:mem_email},
+		data: {mem_email:$('#mem_email').val()},
 		dataType: 'json',
 		success:function(param){
 			if(param.result=='emailDuplicated'){
-				$('#email_area').text('이메일 중복');
-				$('#mem_email').val('').focus();
-				email_checked = 0;
+				emailControll('이메일 중복');
 			} else if(param.result=='notMatchPattern'){
-				$('#email_area').text('이메일 형식 맞지 않음');
-				$('#mem_email').val('').focus();
-				email_checked = 0;
-			} else if(param.result=='emailNotFound'){ //이메일 중복이 없는 경우 이메일 인증 api 실행
-				emailAuthSend(mem_email); //인증 메일 전송
+				emailControll('이메일 형식 맞지 않음');
+			} else if(param.result=='emailNotFound'){ //이메일 중복이 없는 경우
+				emailAuthSend($('#mem_email').val()); //인증 메일 전송
 			} else {
 				alert('이메일 중복 체크 오류');
 				email_checked = 0;
@@ -51,12 +35,17 @@ $('#email_check').click(function(){
 			alert('이메일 중복 체크 네트워크 통신 오류');
 			email_checked = 0;
 		}
-	});//end of ajax
-	
-	$('#spiner').hide();
-	$('#email_check').show();
-	
+	});//end of ajax	
 });//end of email check click
+
+//이메일 에러 메세지 표시, 입력 버튼 숨기기, 로딩 이미지 노출
+function emailControll(message){
+	$('#email_area').text(message);
+	$('#mem_email').val('').focus();
+	$('#email_check').show();
+	$('#spiner').hide();
+	email_checked = 0;
+}
 
 //인증메일 전송 함수
 function emailAuthSend(mem_email){
@@ -65,9 +54,9 @@ function emailAuthSend(mem_email){
 		type: 'post',
 		data: {mem_email:mem_email},
 		dataType: 'json',
-		success:function(param){ //전송 성공 시
-			code = param.code;
-			$('#emailAuthModal').show(); //모달창을 띄워서 인증코드 확인 진행
+		success:function(param){ //인증 메일 전송 성공 시
+			code = param.code; //인증 코드를 전역에 저장
+			$('#emailAuthModal').show(); //모달창을 호출해 인증 코드 확인 진행
 		},
 		error:function(){
 			alert('인증 메일 네트워크 통신 오류');
@@ -75,27 +64,39 @@ function emailAuthSend(mem_email){
 	});//end of ajax
 }//end of emailAuth
 
-$('#email_check_btn').click(function(){ //인증하기 버튼 누르면
-	let inputEmail = $('#inputEmail').val(); //사용자가 입력한 값을 받음
-	
-	if(param.code==inputEmail){
-		email_checked = 1; //이메일 중복체크 & 인증 완료
+//모달창에서 인증하기 버튼 누르면
+$('#email_check_btn').click(function(){ 
+	if(code==$('#inputEmail').val()){ //인증코드와 입력코드가 동일하면
+		$('#email_check').attr('value','인증 완료').attr('disabled','disabled'); //인증 버튼 비활성화
+		email_checked = 1; //이메일 중복체크 및 인증 완료 저장
 		$('#email_area').text('');
 		$('#emailAuthError').text('이메일 인증에 성공했습니다. 3초 뒤 창이 닫힙니다!');
 		setTimeout(function() {
-			$('#email_check').attr('value','인증 완료').attr('disabled','disabled');
 			closeModalAction();
 		}, 3000);
 	} else {
-		$('#emailAuthError').text('인증 코드가 불일치합니다. 확인해주세요!');
+		$('#emailAuthError').text('인증 코드가 불일치합니다. 재입력해주세요!');
 		email_checked = 0;
 		return;
 	}
 });
 
-//이메일 중복 체크 후 값 변경 시 초기화
+//모달창 클릭 시 닫기
+function closeModalAction(){ 
+	if(email_checked==0 && confirm('이메일 인증이 완료되지 않았습니다. 그래도 닫으시겠습니까?')==false){ 
+		//이메일 인증 미진행 > 닫기 > 경고창 생성
+		return false; //아니오 클릭 시 모달창을 빠져나가지 않음
+	}
+	
+	$('#email_check').show();
+	$('#spiner').hide();
+	$('#emailAuthModal').hide(); //모달창 닫기
+}
+
+//이메일 인증 후 이메일 값 변경 시 중복체크, 인증 초기화
 $('#mem_email').keydown(function(){
 	$('#email_area').text('');
+	$('#email_check').attr('value','인증').removeAttr('disabled');
 	email_checked = 0;
 });//end of keydown
 

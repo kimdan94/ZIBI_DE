@@ -1,5 +1,6 @@
 package kr.spring.member.controller;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -37,30 +38,97 @@ public class MemberAjaxController {
 		log.info("<<이메일 인증 - 사용자 입력 이메일>> : " + mem_email);
 		
 		Map<String, Integer> mapJson = new HashMap<String, Integer>();
-		
 		Random random = new Random();
 		int checkNum = random.nextInt(888888)+111111; 
 		
-		//이메일 보낼 양식
-		String setFrom = "229rkawk@gmail.com";
-		String toMail = mem_email;
-		String title = "ZIBI 회원가입 인증 이메일 입니다.";
-		String content = "인증 코드는 " + checkNum + " 입니다.<br>해당 인증 코드를 인증 코드 확인란에 기입하여 주세요.";
+		String title = "ZIBI 회원가입 인증 이메일 입니다."; //이메일 제목
+		String content = "<div style=\'text-align: border: 1px solid black; margin: 10px;\'>" //이메일 내용
+						+ "<h2 style=\'text-align: center; padding: 5px\'>ZIBI 회원가입 인증 코드입니다</h2>"
+						+ "<div style=\'text-align: center; padding: 5px\'>아래의 인증 번호 여섯 자리를<br>ZIBI의 인증코드란에 입력해주세요 😊</div>"
+						+ "<h5 style=\'text-align: center; padding: 5px; color: #32a77b;\'>"
+						+ checkNum
+						+ "</h5>";
 		
+		sendEmail(mem_email, title, content);
+		mapJson.put("code", checkNum);
+		
+		return mapJson;
+	}
+	
+	//비밀번호 찾기
+	@PostMapping("/member/findPassword")
+	@ResponseBody
+	public Map<String,String> findPassword(@RequestParam String mem_email){
+		log.info("<<비밀번호 찾기 - 사용자 입력 이메일>> : " + mem_email);
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		//이메일 존재 유무 체크
+		MemberVO db_member = memberService.checkEmail(mem_email);
+		
+		if(db_member!=null) {
+			
+			String password = randomPassword();
+			log.info("<<비밀번호 찾기 - 임시 비밀번호>> : " + password);
+			
+			String title = "ZIBI 임시 비밀번호입니다."; //이메일 제목
+			String content = "<div style=\'text-align: border: 1px solid black; margin: 10px;\'>" //이메일 내용
+							+ "<h2 style=\'text-align: center; padding: 5px\'>ZIBI 임시 비밀번호입니다.</h2>"
+							+ "<div style=\'text-align: center; padding: 5px\'>아래의 임시 비밀번호 여섯자리를<br>ZIBI 로그인 시 사용할 수 있습니다 🤗</div>"
+							+ "<h5 style=\'text-align: center; padding: 5px; color: #32a77b;\'>"
+							+ password
+							+ "</h5>";
+			
+			sendEmail(mem_email, title, content);
+			
+			db_member.setMem_password(password);
+			memberService.updateMemberDetail(db_member); //비밀번호 변경
+			
+			mapJson.put("result", "success");
+		} else {
+			mapJson.put("result", "fail");
+		}
+		
+		return mapJson;
+	}
+	
+	//임시 비밀번호 생성
+	public String randomPassword() {
+		
+		final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; //임시 비밀번호 내용물로 사용할 문자
+		
+		SecureRandom rm = new SecureRandom(); //난수 생성기
+		/* Random은 암호학적으로 안전하지 않기에 SecureRandom 클래스를 사용, Random 클래스는 난수에 패턴이 있으므로 사용 주의 */
+		StringBuffer sb = new StringBuffer(); //임시 비밀번호 저장
+		
+		for(int i=0 ; i<6 ; i++) { //6자리의 임시 비밀번호 생성
+			int index = rm.nextInt(chars.length()); //문자열의 인덱스 무작위 반환
+			sb.append(chars.charAt(index)); //설정한 문자열의 무작위로 발생된 인덱스 부분의 문자를 저장
+		}
+		
+		return sb.toString();
+	}
+	
+	//이메일 전송 메서드
+	public void sendEmail(String mem_email, String title , String content) {
+		
+		String setFrom = "229rkawk@gmail.com"; //발신자
+		String toMail = mem_email; //수신자
+			
 		try {
 			MimeMessage message = mailSender.createMimeMessage(); //Spring에서 제공하는 mail API
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-            helper.setFrom(setFrom);
-            helper.setTo(toMail);
-            helper.setSubject(title);
-            helper.setText(content, true);
-            mailSender.send(message);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8"); //true - multpart message(사진 사용 가능)를 사용함
             
-            mapJson.put("code", checkNum);
+            helper.setFrom(setFrom); //발신자
+            helper.setTo(toMail); //수신자
+            helper.setSubject(title); //이메일 제목
+            helper.setText(content, true); //이메일 내용, true - html을 사용함
+            
+            mailSender.send(message); //이메일 전송
+            
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return mapJson;
 	}
 	
 	//카카오 로그인/회원 가입
@@ -87,7 +155,7 @@ public class MemberAjaxController {
 			
 			log.debug("<<카카오 회원가입>>"+memberVO);
 		} else { //회원가입 되어있음 > 로그인
-			session.setAttribute("user",db_member);
+			session.setAttribute("user",db_member); //로그인
 			mapJson.put("result","success");
 		}
 		

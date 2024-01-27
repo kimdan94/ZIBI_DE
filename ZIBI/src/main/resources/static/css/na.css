@@ -82,9 +82,8 @@
     transition: 1s !important;
 }
 /*--------------회원가입--------------*/
-/* 이메일 인증 모달창 */
+/* 이메일 인증, 비밀번호 찾기 모달창 */
 #emailAuthModal{
-	font-size: .8em;
 	margin: 0 auto;
 	width: 100%;
 	height: 100%;
@@ -92,7 +91,6 @@
 .modal_box{
 	border-radius: 8px;
 	width: 35%;
-	height: 20%;
 	margin: 0 auto;
 	padding: 10px;
 	text-align: center;
@@ -106,12 +104,14 @@
 	z-index: 999;
 	border: 1px solid gray;
 }
+.modal_box img{
+	width: 20px;
+}
 .modal_box input{
 	text-align: center;
 }
 .modal_box button{
 	margin-top: 10px;
-	width: 100px;
 	height: 40px;
 	align-self: center;
 	cursor: pointer;
@@ -122,9 +122,17 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 120%;
+	height: 100%;
 	background-color: rgba(0,0,0,0.5);
 	z-index: 99;		
+}
+.modal_box a{
+	font-weight: 600;
+	color: #DB3954;
+	text-decoration-line: none;
+}
+.modal_box p{
+	margin: 10px;
 }
 
 /*--------------마이페이지--------------*/
@@ -157,6 +165,11 @@
 }
 
 /* 프로필 사진 변경 */
+.my-photo {
+	object-fit: cover;
+	height: 350px;
+	width: 350px;
+}
 .site-content {
 	margin-top: 20px;
 	padding: 5px;
@@ -170,23 +183,17 @@
 	font-size: 1.1em;
 	font-weight: bold;
 }
-.me-auto{
-	color: black;
-}
 .event .tab-class .nav-item a.active {
     background: var(--bs-primary) !important;
 }
 .event .event-img .event-overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 8px;
+    top: 80%;
+    left: 80%;
     transition: 0.4s;
     opacity: 0;
     z-index: 1;
+    color: black;
 }
 .event .event-img:hover .event-overlay {
     opacity: 1;

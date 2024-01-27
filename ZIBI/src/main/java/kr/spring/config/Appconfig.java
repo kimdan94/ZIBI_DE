@@ -40,7 +40,6 @@ public class Appconfig implements WebMvcConfigurer {
 		
 		//tilesdef.xml의 경로와 파일명 지정
 		configurer.setDefinitions(new String[] { //여러 개 넘겨주기 위해 배열 이용
-					"/WEB-INF/tiles-def/main.xml",
 					"/WEB-INF/tiles-def/de.xml",
 					"/WEB-INF/tiles-def/hyun.xml",
 					"/WEB-INF/tiles-def/jiwon.xml",
@@ -48,6 +47,7 @@ public class Appconfig implements WebMvcConfigurer {
 					"/WEB-INF/tiles-def/na.xml",
 					"/WEB-INF/tiles-def/yeeun.xml"
 					}); 
+		
 		configurer.setCheckRefresh(true);
 		
 		return configurer;
@@ -61,6 +61,4 @@ public class Appconfig implements WebMvcConfigurer {
 		
 		return tilesViewResolver;
 	}
-	
-	
 }

@@ -55,6 +55,7 @@ public class MypageController {
 		} 
 		
 		log.debug("<<회원 정보 수정>> : " + memberVO);
+		memberVO.setMem_email(null);
 		memberService.updateMemberDetail(memberVO);//update 진행
 		
 		return new ModelAndView("mypageMain","pageName","마이페이지");

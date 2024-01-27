@@ -5,8 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
 public class MainController {
 	
@@ -17,7 +15,7 @@ public class MainController {
 	
 	@RequestMapping("/main/home")
 	public String main() {
-		return "home";
+		return "home"; //타일스 설정명
 	}
 	
 	@RequestMapping("/sample")

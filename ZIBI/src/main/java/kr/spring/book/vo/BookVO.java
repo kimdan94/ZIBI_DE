@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
@@ -50,6 +49,8 @@ public class BookVO {
 	
 	/*-- JOIN으로 읽어올 정보 --*/
 	private String mem_nickname;
+	private int apply_num;
+	private int book_state;//0 : 대기, 1 : 확정, 2 : 거절, 3 : 취소
 	
 	private int matching_cnt;//예약 신청수
 	private int rev_cnt;//예약 리뷰 개수

@@ -112,9 +112,9 @@
 	<select id="selectMatchCount" parameterType="map" resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM book 
-		LEFT OUTER JOIN book_matching USING(book_num)
-		WHERE mem_num=#{mem_num}
+		FROM book_matching 
+		JOIN book USING(book_num)
+		WHERE mem_num=#{mem_num} OR apply_num=#{mem_num}
 	</select>
 	
 	<!-- 소모임 나의 예약 내역 -->
@@ -137,13 +137,13 @@
 					book_address1,
 					book_state,
 					book_matchDate
-				FROM book 
-				LEFT OUTER JOIN book_matching USING(book_num)
+				FROM book_matching 
+				JOIN book USING(book_num)
 				ORDER BY book_regDate DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{mstart} AND rnum <= #{mend}
 		]]>
-		AND mem_num=#{mem_num}
+		AND mem_num=#{mem_num} OR apply_num=#{mem_num}
 	</select>
 	
 	<!-- 소모임 예약 상세글 -->

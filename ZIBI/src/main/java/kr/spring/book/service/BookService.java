@@ -3,6 +3,7 @@ package kr.spring.book.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 
 public interface BookService {
@@ -20,6 +21,7 @@ public interface BookService {
 	public int selectMatchCount(Map<String,Object> map);
 	
 	//매칭
+	public void insertMatch(BookMatchingVO bookMatchingVO);
 	//리뷰
 	//스크랩
 }

@@ -3,8 +3,10 @@ package kr.spring.book.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 
 @Mapper
@@ -23,6 +25,8 @@ public interface BookMapper {
 	public int selectMatchCount(Map<String,Object> map);
 	
 	//매칭
+	@Insert("INSERT INTO book_matching (book_num, apply_num, book_state) VALUES (#{book_num},#{apply_num},#{book_state})")
+	public void insertMatch(BookMatchingVO bookMatchingVO);
 	//리뷰
 	//스크랩
 }

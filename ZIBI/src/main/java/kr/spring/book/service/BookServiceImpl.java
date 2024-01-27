@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.book.dao.BookMapper;
+import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 
 @Service
@@ -62,5 +63,10 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public int selectMatchCount(Map<String, Object> map) {
 		return bookMapper.selectMatchCount(map);
+	}
+
+	@Override
+	public void insertMatch(BookMatchingVO bookMatchingVO) {
+		bookMapper.insertMatch(bookMatchingVO);
 	}
 }

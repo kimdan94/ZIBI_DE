@@ -174,11 +174,12 @@ public class PerformanceController {
 		List<TicketingVO> dayList = null;
 		dayList = performanceService.selectDate();
 		log.debug("<<날짜 출력>> : " + dayList);
-		String now = PerformanceController.getCurrentDateTime();
-		String today = now.substring(0,10); // YYYY:MM:DD:hh:mm // 시간 24시 기준
+		log.debug("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+		String time = PerformanceController.getCurrentDateTime();
+		String today = time.substring(0,10); // YYYY:MM:DD:hh:mm // 시간 24시 기준
 		//String month = now.substring(5,7);
 		//String day = now.substring(8,10);
-		String time = now.substring(11,16);
+		String now = time.substring(0,16);
 		//String minute = now.substring(14,16);
 		
 		
@@ -195,7 +196,7 @@ public class PerformanceController {
 		// 날짜
 		mav.addObject("dayList", dayList);
 		mav.addObject("today", today);
-		mav.addObject("time", time);
+		mav.addObject("now", now);
 		
 		return mav; 
 	}
@@ -259,6 +260,39 @@ public class PerformanceController {
 		
 		return "common/resultAlert";
 	}
+	
+	// [상영관+영화+날짜] 선택 (폼) 페이지 제출 시 -> performanceSeat 페이지로 전송하려면 아래 method와 @RequestMapping이 동시에 있어야 함
+	// [상영관+영화+날짜] 선택 (폼) : 전송된 데이터 처리
+	@PostMapping("/performance/updateTicketing")
+	public String submitDate(HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
+		log.debug("<<좌석 선택 페이지로 가기>>");
+		
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "좌석 페이지로 넘어가기");
+		model.addAttribute("url", request.getContextPath()+"/performance/performanceSeat");
+		
+		return "common/resultAlert";
+	}
+	
+	
+	/*=================================
+	 * 좌석 선택
+	 *=================================*/
+	// 좌석 선택 페이지
+	@RequestMapping("/performance/performanceSeat")
+	public ModelAndView chooseSeat() {
+		log.debug("<<목록 메서드>>");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
+
+		return mav; 
+	}
+	
+	
 	
 	
 	

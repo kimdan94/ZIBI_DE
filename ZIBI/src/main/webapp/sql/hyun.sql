@@ -32,15 +32,6 @@ create table cinema(
 
 create sequence cinema_seq;
 
---상영관
-create table seat(
- cinema_num number not null,
- seat_row number not null,
- seat_left number not null,
- seat_middle number not null,
- seat_right number not null,
- constraint seat_fk1 foreign key (cinema_num) references cinema (cinema_num)
-);
 
 --
 create table ticketing(
@@ -55,6 +46,15 @@ create table ticketing(
 );
 
 create sequence ticketing_seq;
+
+
+--상영관 -- 보류
+/*create table peform_seat(
+ cinema_num number not null,
+ seat_row number not null,
+ seat_count number not null,
+ constraint seat_fk1 foreign key (cinema_num) references cinema (cinema_num)
+);*/
 
 --
 create table choose(

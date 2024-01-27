@@ -76,19 +76,25 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public List<CinemaVO> selectCinemaWithTicketing(int cinema_num, String day) {
-		return performanceMapper.selectCinemaWithTicketing(cinema_num, day);
+	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map) {
+		return performanceMapper.selectCinemaWithTicketing(map);
 	}
 
 	@Override
-	public List<PerformanceVO> selectPerformanceWithTicketing(int cinema_num, String day) {
-		return performanceMapper.selectPerformanceWithTicketing(cinema_num, day);
+	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map) {
+		return performanceMapper.selectPerformanceWithTicketing(map);
 	}
 
 	@Override
-	public List<TicketingVO> selectWithTicketing(int cinema_num, String day) {
-		return performanceMapper.selectWithTicketing(cinema_num, day);
+	public List<TicketingVO> selectWithTicketing(Map<String, Object> map) {
+		return performanceMapper.selectWithTicketing(map);
 	}
+
+	/*
+	 * @Override public List<CinemaVO> selectResultWithoutEnt(Map<String, Object>
+	 * map) { return performanceMapper.selectResultWithoutEnt(map); }
+	 */
+
 
 	
 	

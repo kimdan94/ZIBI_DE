@@ -25,15 +25,11 @@ public interface PerformanceMapper {
 	@Select("SELECT DISTINCT ticketing_date FROM ticketing")
 	public List<TicketingVO> selectDate();
 	
-	// 상영관 + 날짜로 예매할 수 있는 정보 출력
-	@Select("SELECT c.cinema_theater FROM ticketing t, performance p, cinema c WHERE t.performance_num=p.performance_num AND t.cinema_num=c.cinema_num AND t.cinema_num=#{cinema_num} AND t.ticketing_date=#{day}")
-	public List<CinemaVO> selectCinemaWithTicketing(int cinema_num, String day);
-	@Select("SELECT p.performance_title, p.performance_poster, p.performance_age FROM ticketing t, performance p, cinema c WHERE t.performance_num=p.performance_num AND t.cinema_num=c.cinema_num AND t.cinema_num=#{cinema_num} AND t.ticketing_date=#{day}")
-	public List<PerformanceVO> selectPerformanceWithTicketing(int cinema_num, String day);
-	@Select("SELECT t.ticketing_num,t.performance_num,t.cinema_num,t.ticketing_date,t.ticketing_start_time FROM ticketing t, performance p, cinema c WHERE t.performance_num=p.performance_num AND t.cinema_num=c.cinema_num AND t.cinema_num=#{cinema_num} AND t.ticketing_date=#{day}")
-	public List<TicketingVO> selectWithTicketing(int cinema_num, String day);
-	
 	// 상영관 + 날짜 + 영화로 예매할 수 있는 정보 출력
+	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map);
+	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map);
+	public List<TicketingVO> selectWithTicketing(Map<String, Object> map);
+	
 	
 	
 	

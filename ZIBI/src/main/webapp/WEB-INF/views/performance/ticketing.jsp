@@ -84,6 +84,7 @@
                             <div class="overflow-hidden rounded">
                                 <table style="float:left;">
                                 <tbody id="ticketing_Ent">
+                                	<!-- ajax -->
 		                           	<c:forEach var="performance" items="${list}">
 		                           	<tr class="ticketing-ent-row" id="${performance.performance_num}">
 										<td class="ticketing-poster"><img id="ticketing-poster-img" src="${pageContext.request.contextPath}/upload/${performance.performance_poster}"></td>
@@ -135,7 +136,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <!-- 최종 선택할 수 있는 영화 나옴 -->
                             <div class="overflow-hidden rounded" id="resultSelect">
 								<!-- ajax -->
                             </div>
@@ -149,6 +150,7 @@
         </div>
         <!-- Blog End -->
         
+<div id="newspan"></div>
   
 <form action="updateTicketing" id="update_ticketing" method="post">
 	<!-- 상영관 -->
@@ -157,7 +159,7 @@
 	<input type="hidden" id="performance_hidden" value=""/>
 	<!-- 날짜 -->
 	<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
-	<input type="hidden" id="time_hidden" value="${time}"/><!-- 기본값 항상 있어야 함 -->
+	<input type="hidden" id="time_hidden" value="${now}"/><!-- 기본값 항상 있어야 함 -->
 	<input type="hidden" id="ent_hidden" value=""/>
 	<input type="submit" value="예매하기">
 </form>
@@ -166,6 +168,5 @@
 <h2>${today}</h2>
 <h2>${time}</h2>
 
-<hr><br><br><br><br><br><br><br><br>
 
 

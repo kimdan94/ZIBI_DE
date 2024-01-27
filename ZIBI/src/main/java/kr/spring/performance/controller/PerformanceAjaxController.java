@@ -73,31 +73,52 @@ public class PerformanceAjaxController {
 	@ResponseBody // 상영관 + 날짜로 영화 list와 예매할 수 있는 상영관 찾기
 	public Map<String, Object> resultPerformance(@RequestParam(value="cinema") String cinema, 
 			                              @RequestParam(value="day") String day, 
+			                              @RequestParam(value="performance") String performance,
+			                              @RequestParam(value="now") String now, // 현재 날짜+시간
 			                              HttpSession session, HttpServletRequest request){
+		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
+		
+		log.debug("<<<<<<<<<<<<<<<<<<<<<<시작>>>>>>>>>>>>>>>>>>>>>>");
 		mapJson.put("result", "success");
 		List<CinemaVO> locationNum = null;
-		locationNum = performanceService.selectCinemaNum(cinema);
+		locationNum = performanceService.selectCinemaNum(cinema); // cinema : 지역2 -> 
 		int cinema_num = locationNum.get(0).getCinema_num();
-		log.debug("지역 번호 출력 : "+cinema_num);
-		log.debug("날짜 출력 : " + day);
+
+		log.debug("<<지역 번호 출력>> : "+ cinema_num);
+		log.debug("<<날짜 출력>> : " + day);
+		String today_date = now.substring(0,10);
+		String today_time = now.substring(11,16);
+		
+		// sql에 전송할 Map - 상영관 번호,선택 날짜, 오늘 날짜, 현재 시각 + if 영화 정보
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cinema_num", cinema_num);
+		map.put("day", day);
+		map.put("today_date", today_date);
+		map.put("today_time", today_time);
 		
 		
 		List<CinemaVO> resultCinema = null;
-		resultCinema = performanceService.selectCinemaWithTicketing(cinema_num, day);
+		List<PerformanceVO> resultPerformance = null;
+		List<TicketingVO> resultTicketing = null;
+		
+		log.debug("<<영화 출력>> : " + performance);
+		if(performance != "" || performance != null) { // 영화가 있을 때 // ""가 맞음 null은 정확성을 위해 명시
+			map.put("performance",performance);
+		}
+		resultCinema = performanceService.selectCinemaWithTicketing(map);
 		log.debug("<<resultCinema>> : " + resultCinema);
 		
-		
-		List<PerformanceVO> resultPerformance = null;
-		resultPerformance = performanceService.selectPerformanceWithTicketing(cinema_num, day);
+		resultPerformance = performanceService.selectPerformanceWithTicketing(map);
 		log.debug("<<resultPerformance>> : " + resultPerformance);
 		
-		
-		List<TicketingVO> resultTicketing = null;
-		resultTicketing = performanceService.selectWithTicketing(cinema_num, day);
+		resultTicketing = performanceService.selectWithTicketing(map);
 		log.debug("<<resultTicketing>> : " + resultTicketing);
-
+			
+		log.debug("<<<<<<<<<<<<<<<<<<<<<<끝>>>>>>>>>>>>>>>>>>>>>>");
+		
+		
 		
 		mapJson.put("resultCinema", resultCinema);
 		mapJson.put("resultPerformance", resultPerformance);
@@ -106,11 +127,11 @@ public class PerformanceAjaxController {
 		return mapJson;
 	}
 	
-	@RequestMapping("/performance/resultPerformanceWithEnt")
+	@RequestMapping("/performance/resultPerformanceWithEnt")////////////////////////////
 	@ResponseBody // 상영관 + 날짜로 영화 list와 예매할 수 있는 상영관 찾기
 	public Map<String, Object> resultPerformanceWithEnt(@RequestParam(value="cinema") String cinema, 
 			                              @RequestParam(value="day") String day, 
-			                              @RequestParam(value="performance") String performance, 
+			                              @RequestParam(value="performance") String performance,
 			                              HttpSession session, HttpServletRequest request){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
@@ -125,17 +146,17 @@ public class PerformanceAjaxController {
 		
 		
 		List<CinemaVO> resultCinema = null;
-		resultCinema = performanceService.selectCinemaWithTicketing(cinema_num, day);
+//		resultCinema = performanceService.selectCinemaWithTicketing(cinema_num, day);
 		log.debug("<<resultCinema>> : " + resultCinema);
 		
 		
 		List<PerformanceVO> resultPerformance = null;
-		resultPerformance = performanceService.selectPerformanceWithTicketing(cinema_num, day);
+//		resultPerformance = performanceService.selectPerformanceWithTicketing(cinema_num, day);
 		log.debug("<<resultPerformance>> : " + resultPerformance);
 		
 		
 		List<TicketingVO> resultTicketing = null;
-		resultTicketing = performanceService.selectWithTicketing(cinema_num, day);
+//		resultTicketing = performanceService.selectWithTicketing(cinema_num, day);
 		log.debug("<<resultTicketing>> : " + resultTicketing);
 
 		

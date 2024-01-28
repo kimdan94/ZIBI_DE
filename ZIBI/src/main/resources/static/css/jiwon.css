@@ -238,6 +238,34 @@ label[for="sc_way2"]{
 }
 /*** Services End ***/
 
+/* 중고거래 상세 
+------------------------------*/
+/* 상품 수정 이미지 */
+.sc_modifylogo, 
+.sc_status_modifylogo,
+.sc_deletelogo{ 
+	filter: opacity(0.5) drop-shadow(0 0 0 #eeeeee);
+	
+}
+a{
+	text-decoration: none;
+}
+
+/* 중고거래 내 상점
+------------------------------*/
+.separator::after {
+	content: " | ";
+	margin-left: 20px; 
+	margin-right: 20px;
+}
+.itemManagebar{
+    margin-bottom: 70px;
+	font-size: 1.2em;
+	
+}
+
+
+
 /* 공통 등록, 수정 폼
 ------------------------------*/
 
@@ -275,3 +303,14 @@ ul.search li{
 	align-items:center;
 	justify-content:center;
 }
+
+/*** Menu Start ***/
+.menu .nav-item a.active {
+    background: var(--bs-primary) !important;
+}
+
+.menu .menu-item .border-bottom {
+    border-bottom-style: dashed !important;
+}
+/*** Menu End ***/
+

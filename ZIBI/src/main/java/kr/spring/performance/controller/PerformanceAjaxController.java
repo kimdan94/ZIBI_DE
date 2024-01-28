@@ -1,5 +1,6 @@
 package kr.spring.performance.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,13 +27,36 @@ public class PerformanceAjaxController {
 	@Autowired
 	private PerformanceService performanceService;
 	
+	/*=================================
+	 * [관리자] 상영관 - 상영관 + 2관
+	 *=================================*/
+	@RequestMapping("/performance/adminSelectLocation")
+	@ResponseBody
+	public Map<String, Object> adminSelectLocation(@RequestParam(value="location1") String loc1, HttpSession session, HttpServletRequest request){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		List<CinemaVO> listLoc2 = null;
+		listLoc2 = performanceService.adminSelectLocation(loc1);
+		mapJson.put("result", "success");
+		
+		mapJson.put("listLoc2", listLoc2);
+		
+		log.debug("<<admin loc1>> : " + loc1);
+		log.debug("<<admin listLoc2>> : " + listLoc2);
+		
+		return mapJson;
+	}
+	
+	/*=================================
+	 * [사용자]
+	 *=================================*/
 	@RequestMapping("/performance/selectLocation")
 	@ResponseBody
-	public Map<String, Object> processFile(@RequestParam(value="location1") String loc1, HttpSession session, HttpServletRequest request){
+	public Map<String, Object> selectLocation(@RequestParam(value="location1") String loc1, HttpSession session, HttpServletRequest request){
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		List<CinemaVO> listLoc2 = null;
 		listLoc2 = performanceService.selectLocation2(loc1);
 		mapJson.put("result", "success");
+		
 		mapJson.put("listLoc2", listLoc2);
 		
 		log.debug("<<loc1>> : " + loc1);
@@ -73,100 +97,73 @@ public class PerformanceAjaxController {
 	@ResponseBody // 상영관 + 날짜로 영화 list와 예매할 수 있는 상영관 찾기
 	public Map<String, Object> resultPerformance(@RequestParam(value="cinema") String cinema, 
 			                              @RequestParam(value="day") String day, 
-			                              @RequestParam(value="performance") String performance,
-			                              @RequestParam(value="now") String now, // 현재 날짜+시간
+			                              @RequestParam(value="performance_num") String performance_num,
 			                              HttpSession session, HttpServletRequest request){
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		
-		
 		log.debug("<<<<<<<<<<<<<<<<<<<<<<시작>>>>>>>>>>>>>>>>>>>>>>");
+
 		mapJson.put("result", "success");
 		List<CinemaVO> locationNum = null;
-		locationNum = performanceService.selectCinemaNum(cinema); // cinema : 지역2 -> 
-		int cinema_num = locationNum.get(0).getCinema_num();
-
-		log.debug("<<지역 번호 출력>> : "+ cinema_num);
+		locationNum = performanceService.selectCinemaNum(cinema); // cinema : 지역2 -> 지역 번호 찾기
+		log.debug("<<지역번호 길이>> : "  + locationNum.size());
+		int cinema_num = locationNum.get(0).getCinema_num(); // 문제점 확인 -> 지역번호 중 0번만 나오게 함
+		log.debug("<<지역>> : " + cinema);
+		
 		log.debug("<<날짜 출력>> : " + day);
-		String today_date = now.substring(0,10);
-		String today_time = now.substring(11,16);
+		log.debug("<<영화 번호 출력>> : " + performance_num);
+
 		
 		// sql에 전송할 Map - 상영관 번호,선택 날짜, 오늘 날짜, 현재 시각 + if 영화 정보
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cinema_num", cinema_num);
 		map.put("day", day);
-		map.put("today_date", today_date);
-		map.put("today_time", today_time);
 		
+		////////////////////////////////////////////////////////
 		
-		List<CinemaVO> resultCinema = null;
-		List<PerformanceVO> resultPerformance = null;
-		List<TicketingVO> resultTicketing = null;
-		
-		log.debug("<<영화 출력>> : " + performance);
-		if(performance != "" || performance != null) { // 영화가 있을 때 // ""가 맞음 null은 정확성을 위해 명시
-			map.put("performance",performance);
+		// 지역번호가 여러 개일 경우
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i=0; i<locationNum.size(); i++) {
+			log.debug("<<지역 번호 출력>> : "+ locationNum.get(i).getCinema_num());
+			list.add(locationNum.get(i).getCinema_num());
 		}
+		if(list!=null) {
+			log.debug("<<list 값>> : " + list);
+			map.put("list", list);
+		}
+
+		////////////////////////////////////////////////////////
+		
+		// 영화가 있을 경우
+		if(performance_num != "" || performance_num != null) { // 영화가 있을 때 // ""가 맞음 null은 정확성을 위해 명시
+			map.put("performance_num",performance_num);
+		}
+		
+		// 상영관
+		List<CinemaVO> resultCinema = null;
 		resultCinema = performanceService.selectCinemaWithTicketing(map);
 		log.debug("<<resultCinema>> : " + resultCinema);
 		
+		// 영화
+		List<PerformanceVO> resultPerformance = null;
 		resultPerformance = performanceService.selectPerformanceWithTicketing(map);
 		log.debug("<<resultPerformance>> : " + resultPerformance);
 		
+		// 상영관+영화+날짜
+		List<TicketingVO> resultTicketing = null;
 		resultTicketing = performanceService.selectWithTicketing(map);
 		log.debug("<<resultTicketing>> : " + resultTicketing);
 			
 		log.debug("<<<<<<<<<<<<<<<<<<<<<<끝>>>>>>>>>>>>>>>>>>>>>>");
 		
-		
-		
 		mapJson.put("resultCinema", resultCinema);
 		mapJson.put("resultPerformance", resultPerformance);
 		mapJson.put("resultTicketing", resultTicketing);
 		
 		return mapJson;
+		
 	}
-	
-	@RequestMapping("/performance/resultPerformanceWithEnt")////////////////////////////
-	@ResponseBody // 상영관 + 날짜로 영화 list와 예매할 수 있는 상영관 찾기
-	public Map<String, Object> resultPerformanceWithEnt(@RequestParam(value="cinema") String cinema, 
-			                              @RequestParam(value="day") String day, 
-			                              @RequestParam(value="performance") String performance,
-			                              HttpSession session, HttpServletRequest request){
-		Map<String, Object> mapJson = new HashMap<String, Object>();
-		
-		mapJson.put("result", "success");
-		log.debug("<<performance 찍어보기>> : " + performance);
-		
-		List<CinemaVO> locationNum = null;
-		locationNum = performanceService.selectCinemaNum(cinema);
-		int cinema_num = locationNum.get(0).getCinema_num();
-		log.debug("지역 번호 출력 : "+cinema_num);
-		log.debug("날짜 출력 : " + day);
-		
-		
-		List<CinemaVO> resultCinema = null;
-//		resultCinema = performanceService.selectCinemaWithTicketing(cinema_num, day);
-		log.debug("<<resultCinema>> : " + resultCinema);
-		
-		
-		List<PerformanceVO> resultPerformance = null;
-//		resultPerformance = performanceService.selectPerformanceWithTicketing(cinema_num, day);
-		log.debug("<<resultPerformance>> : " + resultPerformance);
-		
-		
-		List<TicketingVO> resultTicketing = null;
-//		resultTicketing = performanceService.selectWithTicketing(cinema_num, day);
-		log.debug("<<resultTicketing>> : " + resultTicketing);
-
-		
-		mapJson.put("resultCinema", resultCinema);
-		mapJson.put("resultPerformance", resultPerformance);
-		mapJson.put("resultTicketing", resultTicketing);
-		
-		return mapJson;
-	}
-	
 	
 	
 	

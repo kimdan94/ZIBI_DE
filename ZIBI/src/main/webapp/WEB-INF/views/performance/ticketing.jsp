@@ -159,14 +159,11 @@
 	<input type="hidden" id="performance_hidden" value=""/>
 	<!-- 날짜 -->
 	<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
-	<input type="hidden" id="time_hidden" value="${now}"/><!-- 기본값 항상 있어야 함 -->
+	<!-- 최종 선택 -->
 	<input type="hidden" id="ent_hidden" value=""/>
 	<input type="submit" value="예매하기">
 </form>
 
-<!-- hidden값으로 time도 넣어주기 -->
-<h2>${today}</h2>
-<h2>${time}</h2>
 
 
 

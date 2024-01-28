@@ -19,7 +19,7 @@ public interface PerformanceMapper {
 	public List<CinemaVO> selectCinemaLoc1();
 	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map);
 	@Select("SELECT cinema_num FROM cinema WHERE cinema_location2=#{cinema_location2}")
-	public List<CinemaVO> selectCinemaNum(String cinema_location2);
+	public List<CinemaVO> selectCinemaNum(String cinema_location2); // 지역이름으로 지역번호 찾기
 	@Select("SELECT * FROM ticketing WHERE cinema_num=#{cinema_num}")
 	public List<TicketingVO> selectPerformance(int cinema_num);
 	@Select("SELECT DISTINCT ticketing_date FROM ticketing")
@@ -36,8 +36,12 @@ public interface PerformanceMapper {
 	// 관리자
 	public void insertPerformance(PerformanceVO performance); // 영화 정보 저장
 	public void insertCinema(CinemaVO cinema); // 상영관 정보 저장
+//	@Select("SELECT * FROM cinema WHERE cinema_location1=#{loc1}")
+	@Select("SELECT DISTINCT cinema_location1, cinema_location2 FROM cinema WHERE cinema_location1=#{loc1}")
+	public List<CinemaVO> selectLocation2(String loc1); // 지역1에 따른 지역2 출력
+
 	@Select("SELECT * FROM cinema WHERE cinema_location1=#{loc1}")
-	public List<CinemaVO> selectLocation2(String loc1);
+	public List<CinemaVO> adminSelectLocation(String loc1);
 	public void insertDate(TicketingVO ticketing);
 	
 }

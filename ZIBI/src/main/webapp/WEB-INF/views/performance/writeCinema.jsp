@@ -30,6 +30,11 @@
 					<form:errors path="cinema_theater_num" cssClass="error-color"/>
 				</li>
 				<li>
+					<form:label path="cinema_total">여석</form:label>
+					<form:input path="cinema_total"/>
+					<form:errors path="cinema_total" cssClass="error-color"/>
+				</li>
+				<li>
 					<form:label path="cinema_row">행</form:label>
 					<form:input path="cinema_row"/>
 					<form:errors path="cinema_row" cssClass="error-color"/>

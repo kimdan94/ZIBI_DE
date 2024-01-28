@@ -62,19 +62,19 @@ $(function(){
 		//alert("value = "+ location1);
 		
 		$.ajax({
-			url:'selectLocation',
+			url:'adminSelectLocation',
 			type:'post',
 			data:{location1:location1},
 			dataType:'json',
 			success:function(param){
 				if(param.result=='success'){
-					//alert("성공");
+					alert("성공");
 					//console.log(param.listLoc2);
 					$('#selectLoc2').empty();
 					let output = '<option value="">선택</option>';
 					for(var i=0; i<param.listLoc2.length; i++){
 						console.log(param.listLoc2[i].cinema_num);
-						output += '<option value="'+param.listLoc2[i].cinema_num+'">'+param.listLoc2[i].cinema_location2+'</option>';
+						output += '<option value="'+param.listLoc2[i].cinema_num+'">'+param.listLoc2[i].cinema_location2 + ' ' + param.listLoc2[i].cinema_theater+'</option>';
 					}
 					$('#selectLoc2').append(output);
 				}

@@ -174,17 +174,8 @@ public class PerformanceController {
 		List<TicketingVO> dayList = null;
 		dayList = performanceService.selectDate();
 		log.debug("<<날짜 출력>> : " + dayList);
-		log.debug("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
 		String time = PerformanceController.getCurrentDateTime();
 		String today = time.substring(0,10); // YYYY:MM:DD:hh:mm // 시간 24시 기준
-		//String month = now.substring(5,7);
-		//String day = now.substring(8,10);
-		String now = time.substring(0,16);
-		//String minute = now.substring(14,16);
-		
-		
-		
-		
 				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("ticketing"); // tiles 설정
@@ -196,7 +187,6 @@ public class PerformanceController {
 		// 날짜
 		mav.addObject("dayList", dayList);
 		mav.addObject("today", today);
-		mav.addObject("now", now);
 		
 		return mav; 
 	}

@@ -87,6 +87,7 @@ $(function(){
 		let dayValue = $(this).attr('value');
 		//alert(dayValue); // value 값 가져오기
 		$('#day_hidden').attr('value',dayValue); // form의 hidden 값 넣어주기
+		$('#performance_hidden').attr('value', '');
 		ent(); // form hidden 값 
 		
 	});
@@ -99,44 +100,30 @@ $(function(){
 	
 	function ent(){
 		let cinema = $('#cinema_hidden').val(); // 상영관
-		let performance = $('#performance_hidden').val(); // 영화
+		let performance_num = $('#performance_hidden').val(); // 영화
 		let day = $('#day_hidden').val(); // 날짜
 		
 		console.log('상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
-		// performance가 없는 것도 else if 해서 넣어주기
-		///////////////////////////////////////////////////////////
+
+		// 상영관이 없으면 아무것도 선택할 수 없음
 		if(cinema==''){ // 상영관X 날짜O
 			alert('상영관을 선택해주세요');
 			$('#performance_hidden').attr('value','');
 		} else { // 상영관O 날짜O
 			// 상영관O 날짜O
-			cinemaAndDate(performance, cinema, day);
-			
+			cinemaAndDay(cinema, day, performance_num);
 		}
 	}
 	
-	// 상영관O 날짜O
-	function cinemaAndDate(performance, cinema, day) {
-		console.log('영화 있는지 확인' + performance);
-		var now = $('#time_hidden').val(); // 현재 날짜+시간
-		console.log('현재 날짜+시각은? ' + now);
-		
-		cinemaAndDay(cinema, day, performance, now);
-		
-	}
 	
-	//--------------------------- 상영관 날짜 영화 선택 끝 ----------------------------
-	
-	
-	//--------------------------- 영화 선택 시작 ----------------------------
-	// performance 값이 없을 경우
-	function cinemaAndDay(cinema, day, performance, now){
+	// 상영관 + 영화 + 날짜 선택 창
+	function cinemaAndDay(cinema, day, performance_num){
 			console.log('영화OOO // 상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
 			
 			$.ajax({
 			url:'resultPerformance',
 			type:'post',
-			data:{cinema:cinema,day:day,performance:performance,now:now}, // ajax 통신 4개 이상 안되는듯
+			data:{cinema:cinema,day:day,performance_num:performance_num}, // ajax 통신 4개 이상 안되는듯
 			dataType:'json',
 			success:function(param){
 				if(param.result=='success'){
@@ -144,9 +131,6 @@ $(function(){
 					$('#resultSelect').empty(); // 최종 선택할 수 있는 영화 나옴 : 최종 선택
 					$('#ticketing_Ent').empty(); // 두번쨀 영화 리스트 나옴 : 영화 선택
 					$('newspan').empty();
-					console.log('~~~~~~~~~~~~~~~~~~~');
-					//console.log(''+resultValue);
-					console.log('~~~~~~~~~~~~~~~~~~~');
 					
 					for(let i=0; i<param.resultCinema.length; i++){
 						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
@@ -155,7 +139,7 @@ $(function(){
 						outputResult += '<div>'+param.resultPerformance[i].performance_title+'</div>';
 						outputResult += '<div>'+param.resultCinema[i].cinema_theater+'</div>';
 						outputResult += '<div>'+param.resultTicketing[i].ticketing_start_time+'</div>';
-						outputResult += '<div>여석</div>';
+						outputResult += '<div>여석:'+param.resultCinema[i].cinema_total+'/'+(param.resultCinema[i].cinema_row*param.resultCinema[i].cinema_col)+'</div>';
 						outputResult += '</div>';
 						// output 추가
 						$('#resultSelect').append(outputResult);
@@ -175,19 +159,7 @@ $(function(){
 						console.log(param.resultPerformance[i].performance_age);
 						
 						
-						
-						//////////임시
-						/*let newspan = '<div>';
-						newspan += '<div>'+param.resultValue[i].cinema_num+'</div>';
-						newspan += '<div>'+param.resultValue[i].cinema_theater+'</div>';
-						newspan += '<div>'+param.resultValue[i].cinema_location1+'</div>';
-						newspan += '<div>'+param.resultValue[i].cinema_location2+'</div>';
-						newspan += '</div>';
-						// output 추가
-						$('#newspan').append(newspan);*/
-						
 					}
-					
 				}
 			},
 			error:function(){
@@ -196,59 +168,7 @@ $(function(){
 		});
 	}
 	
-	//performance 값 있는 경우
-	function cinemaDayPerformance(cinema, day, performance){
-
-			console.log('상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
-			
-			$.ajax({
-			url:'resultPerformanceWithEnt',
-			type:'post',
-			data:{cinema:cinema,day:day,performance:performance},
-			dataType:'json',
-			success:function(param){
-				if(param.result=='success'){
-					//alert('상영관 날짜 성공');
-					
-					// 초기화
-					$('#resultSelect').empty();
-					$('#ticketing_Ent').empty();
-
-					for(let i=0; i<param.resultCinema.length; i++){
-						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
-						// output
-						let outputResult = '<div>';
-						outputResult += '<div>'+param.resultPerformance[i].performance_title+'</div>';
-						outputResult += '<div>'+param.resultCinema[i].cinema_theater+'</div>';
-						outputResult += '<div>'+param.resultTicketing[i].ticketing_start_time+'</div>';
-						outputResult += '<div>여석</div>';
-						outputResult += '</div>';
-						//추가
-						$('#resultSelect').append(outputResult);
-						console.log(param.resultCinema[i].cinema_theater);
-						console.log(param.resultTicketing[i].ticketing_start_time);
-						
-						// 영화 목록 --> 영화 제목 / 영화 포스터 / 연령제한
-						// output
-						let outputPerformance = '<tr class="ticketing-ent-row" id='+param.resultTicketing[i].performance_num+'>';
-						outputPerformance += '<td class="ticketing-poster"><img id="ticketing-poster-img"  src="../upload/'+param.resultPerformance[i].performance_poster+'"></td>'; // js에서 파일 읽어오는 것! .. 이용
-						outputPerformance += '<td class="ticketing-info">'+param.resultPerformance[i].performance_title+'<br>'+param.resultPerformance[i].performance_age+'</td>';
-						outputPerformance += '</tr>';
-						// 추가
-						$('#ticketing_Ent').append(outputPerformance);
-						console.log(param.resultPerformance[i].performance_title);
-						console.log(param.resultPerformance[i].performance_poster);
-						console.log(param.resultPerformance[i].performance_age);
-						
-					}
-					
-				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
-		});
-	}
+	//--------------------------- 상영관 날짜 영화 선택 끝 ----------------------------
 	
 	// 영화 선택 클릭 이벤튼
 	$(document).on('click','.ticketing-ent-row',function(){ // script로 만든 태그는 document로 접근해야 함!!!!!

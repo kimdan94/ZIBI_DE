@@ -21,6 +21,7 @@ create table cinema(
  cinema_location2 varchar2(40) not null,
  cinema_theater varchar2(40) not null,
  cinema_theater_num number not null,
+ cinema_total number not null,
  cinema_row number not null,
  cinema_col number not null,
  cinema_adult number not null,
@@ -39,7 +40,7 @@ create table ticketing(
  performance_num number not null,
  cinema_num number not null,
  ticketing_date date not null,
- ticketing_start_time varchar2(30) not null
+ ticketing_start_time varchar2(30) not null,
  constraint ticketing_pk primary key(ticketing_num),
  constraint ticketing_fk1 foreign key (performance_num) references performance (performance_num) on delete cascade, --영화를 지우면 영화에 해당되는 정보(상영관,날짜,시간) 삭제
  constraint ticketing_fk2 foreign key (cinema_num) references cinema (cinema_num)

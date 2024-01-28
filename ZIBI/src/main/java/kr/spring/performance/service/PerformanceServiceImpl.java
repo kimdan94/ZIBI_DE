@@ -90,10 +90,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.selectWithTicketing(map);
 	}
 
-	/*
-	 * @Override public List<CinemaVO> selectResultWithoutEnt(Map<String, Object>
-	 * map) { return performanceMapper.selectResultWithoutEnt(map); }
-	 */
+	@Override
+	public List<CinemaVO> adminSelectLocation(String loc1) {
+		return performanceMapper.adminSelectLocation(loc1);
+	}
 
 
 	

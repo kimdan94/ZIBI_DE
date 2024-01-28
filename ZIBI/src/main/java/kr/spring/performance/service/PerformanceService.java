@@ -31,6 +31,7 @@ public interface PerformanceService {
 	// 관리자
 	public void insertPerformance(PerformanceVO performance);
 	public void insertCinema(CinemaVO cinema);
+	public List<CinemaVO> adminSelectLocation(String loc1);
 	public List<CinemaVO> selectLocation2(String loc1);
 	public void insertDate(TicketingVO ticketing);
 	

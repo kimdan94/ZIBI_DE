@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -265,30 +267,54 @@ public class PerformanceController {
 		return "common/resultAlert";
 	}
 	
-	// [상영관+영화+날짜] 선택 (폼) 페이지 제출 시 -> performanceSeat 페이지로 전송하려면 아래 method와 @RequestMapping이 동시에 있어야 함
-	// [상영관+영화+날짜] 선택 (폼) : 전송된 데이터 처리
-	@PostMapping("/performance/updateTicketing")
-	public ModelAndView submitDate(HttpServletRequest request, HttpSession session) {
-				
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
-		
-		return mav; 
-	}
-	
 	/*=================================
 	 * 좌석 선택
 	 *=================================*/
 	// 좌석 선택 페이지
-	@RequestMapping("/performance/performanceSeat")
-	public ModelAndView chooseSeat() {
-		log.debug("<<목록 메서드>>");
-		
+	// [상영관+영화+날짜] 선택 (폼) 페이지 제출 시 -> performanceSeat 페이지로 전송하려면 아래 method와 @RequestMapping이 동시에 있어야 함
+	// [상영관+영화+날짜] 선택 (폼) : 전송된 데이터 처리
+	@RequestMapping("/performance/updateTicketing")
+	public ModelAndView submitDate(@RequestParam(value="ticketing_num",defaultValue="0") Integer ticketing_num,
+			HttpServletRequest request, HttpSession session) {
+		log.debug("<<좌석 선택>>");
+		log.debug("<<ticketing_num>> : " + ticketing_num); // 명량 104
+		Map<String, Object> map = new HashMap<String, Object>();
 		ModelAndView mav = new ModelAndView();
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		
+		log.debug("<<mem_num>> : " + memberVO.getMem_num());
+		log.debug("<<mem_num>> : " + memberVO.getMem_email());
+		log.debug("<<mem_num>> : " + memberVO.getMem_nickname());
+		
+		
+		map.put("ticketing_num", ticketing_num);
+		
+		List<CinemaVO> pickCinema = null;
+		List<PerformanceVO> pickPerformance = null;
+		List<TicketingVO> pickTicketing = null;
+		
+		pickCinema = performanceService.pickCinema(map);
+		pickPerformance = performanceService.pickPerformance(map);
+		pickTicketing = performanceService.pickTicketing(map);
+		
 		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
-
+		mav.addObject("pickCinema", pickCinema);
+		mav.addObject("pickPerformance", pickPerformance);
+		mav.addObject("pickTicketing", pickTicketing);
+		
 		return mav; 
 	}
+	
+	
+	/*
+	 * @RequestMapping("/performance/performanceSeat") public ModelAndView
+	 * chooseSeat() { log.debug("<<목록 메서드>>");
+	 * 
+	 * ModelAndView mav = new ModelAndView(); mav.setViewName("performanceSeat"); //
+	 * tiles 설정 name과 동일해야 함
+	 * 
+	 * return mav; }
+	 */
 	
 	// 결제창으로 이동
 	@PostMapping("/performance/submitSeat")

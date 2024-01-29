@@ -95,6 +95,21 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.adminSelectLocation(loc1);
 	}
 
+	@Override
+	public List<CinemaVO> pickCinema(Map<String, Object> map) {
+		return performanceMapper.pickCinema(map);
+	}
+
+	@Override
+	public List<PerformanceVO> pickPerformance(Map<String, Object> map) {
+		return performanceMapper.pickPerformance(map);
+	}
+
+	@Override
+	public List<TicketingVO> pickTicketing(Map<String, Object> map) {
+		return performanceMapper.pickTicketing(map);
+	}
+
 
 	
 	

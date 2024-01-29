@@ -22,13 +22,19 @@ public interface PerformanceMapper {
 	public List<CinemaVO> selectCinemaNum(String cinema_location2); // 지역이름으로 지역번호 찾기
 	@Select("SELECT * FROM ticketing WHERE cinema_num=#{cinema_num}")
 	public List<TicketingVO> selectPerformance(int cinema_num);
-	@Select("SELECT DISTINCT ticketing_date FROM ticketing")
+	@Select("SELECT DISTINCT ticketing_date FROM ticketing WHERE ticketing_date >= TRUNC(SYSDATE) ORDER BY ticketing_date ASC")
 	public List<TicketingVO> selectDate();
 	
-	// 상영관 + 날짜 + 영화로 예매할 수 있는 정보 출력
+	// 상영관 + 날짜 + 영화로 예매할 수 있는 정보
 	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map);
 	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map);
 	public List<TicketingVO> selectWithTicketing(Map<String, Object> map);
+	
+	
+	//좌석 선택 페이지
+	public List<CinemaVO> pickCinema(Map<String, Object> map);
+	public List<PerformanceVO> pickPerformance(Map<String, Object> map);
+	public List<TicketingVO> pickTicketing(Map<String, Object> map);
 	
 	
 	

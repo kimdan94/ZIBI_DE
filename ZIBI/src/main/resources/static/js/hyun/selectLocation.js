@@ -135,7 +135,7 @@ $(function(){
 					for(let i=0; i<param.resultCinema.length; i++){
 						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
 						// output
-						let outputResult = '<div>';
+						let outputResult = '<div class="ent" id="'+param.resultTicketing[i].ticketing_num+'" style="display:inline-block;margin:20px;border:1px solid black;width:120px;height:120px;text-align:center;vertical-align:middle;padding:0.5em;">'; // vertical-align이 안되어서 padding:0.5em; 했더니 됨
 						outputResult += '<div>'+param.resultPerformance[i].performance_title+'</div>';
 						outputResult += '<div>'+param.resultCinema[i].cinema_theater+'</div>';
 						outputResult += '<div>'+param.resultTicketing[i].ticketing_start_time+'</div>';
@@ -179,6 +179,12 @@ $(function(){
 			$('#performance_hidden').attr('value',rowId);
 			ent();
 		}
+	});
+	
+	
+	$(document).on('click','.ent',function(){ // script로 만든 태그는 document로 접근해야 함!!!!!
+		var ent_id = $(this).attr("id");
+		$('#ent_hidden').attr('value',ent_id);
 	});
 	
 	

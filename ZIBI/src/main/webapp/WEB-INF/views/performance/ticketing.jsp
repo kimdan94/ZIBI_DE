@@ -161,8 +161,14 @@
 	<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
 	<!-- 최종 선택 -->
 	<input type="hidden" id="ent_hidden" value=""/>
-	<input type="submit" value="예매하기">
+	<!-- <input type="submit" value="예매하기"> -->
+	<input type="button" value="예매하기" onclick='submitEnt()'>
 </form>
+<script>
+function submitEnt(){
+	location.href="${pageContext.request.contextPath}/performance/updateTicketing?ticketing_num="+$('#ent_hidden').val();
+}
+</script>
 
 
 

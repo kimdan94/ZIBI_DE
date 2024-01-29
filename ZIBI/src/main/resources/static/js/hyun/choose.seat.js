@@ -1,32 +1,27 @@
-$(function(){ // performanceSeat.jsp -> 인원 정하기
+$(function(){ // performanceSeat.jsp 
 	
-	// adult
+	/* ----------------------------------
+	 * 인원 선택 시작
+	 * ---------------------------------- */
+	
 	$('.adult-minus').on('click',function(){
-		alert('adult-minus');
 		underEight(-1, 0, 0);
 	});
 	$('.adult-plus').on('click',function(){
-		alert('adult-plus');
 		underEight(1, 0, 0);
 	});
 	
-	//teenage
 	$('.teenage-minus').on('click',function(){
-		alert('teenage-minus');
 		underEight(0, -1, 0);
 	});
 	$('.teenage-plus').on('click',function(){
-		alert('teenage-plus');
 		underEight(0, 1, 0);
 	});
-	
-	// treatement
+
 	$('.treatement-minus').on('click',function(){
-		alert('treatement-minus');
 		underEight(0, 0, -1);
 	});
 	$('.treatement-plus').on('click',function(){
-		alert('treatement-plus');
 		underEight(0, 0, 1);
 	});
 	
@@ -39,12 +34,20 @@ $(function(){ // performanceSeat.jsp -> 인원 정하기
 		if(adult<0 || teenage<0 || treatement<0){
 			alert('0 이하는 안됨');
 		} else if(adult + teenage + treatement > 8) {
-			alert('8이하만 가능');
+			alert('8 이하만 가능');
 		} else {
 			$('.adult-num').text(adult);
 			$('.teenage-num').text(teenage);
 			$('.treatement-num').text(treatement);
 		}
 	}
+	/* ----------------------------------
+	 * 인원 선택 끝
+	 * ---------------------------------- */
+	
+	
+	
+	
+	
 		
 });

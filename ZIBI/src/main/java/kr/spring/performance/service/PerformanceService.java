@@ -20,12 +20,16 @@ public interface PerformanceService {
 	public List<TicketingVO> selectPerformance(int cinema_num);
 	public List<TicketingVO> selectDate();
 	
+	
 	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map);
 	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map);
 	public List<TicketingVO> selectWithTicketing(Map<String, Object> map);
 	
-	//임시
-//	public List<CinemaVO> selectResultWithoutEnt(Map<String, Object> map);
+
+	public List<CinemaVO> pickCinema(Map<String, Object> map);
+	public List<PerformanceVO> pickPerformance(Map<String, Object> map);
+	public List<TicketingVO> pickTicketing(Map<String, Object> map);
+	
 	
 	
 	// 관리자

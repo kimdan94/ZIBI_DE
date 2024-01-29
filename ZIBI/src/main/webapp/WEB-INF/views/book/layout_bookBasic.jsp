@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><tiles:getAsString name="title"/></title>
+	<title><tiles:getAsString name="tabtitle"/></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/jy.css" rel="stylesheet">
@@ -17,7 +17,15 @@
 </head>
 <body>
 	<tiles:insertAttribute name="header"/>
-	<tiles:insertAttribute name="menu"/>
+	<div class="container-fluid nav-bar menu-title">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg py-4">
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<tiles:getAsString name="title"/>
+				</div>
+			</nav>
+		</div>
+	</div>
 	<tiles:insertAttribute name="body"/>
 	<tiles:insertAttribute name="footer"/>
 	<a href="#" class="btn btn-light btn-md-square rounded-circle back-to-top">

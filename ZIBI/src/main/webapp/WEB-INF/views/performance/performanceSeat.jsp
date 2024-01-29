@@ -4,5 +4,7 @@
 
 <form action="submitSeat" method="post">
 	
+	
+	
 	<input type="submit" value="결제하기">
 </form>

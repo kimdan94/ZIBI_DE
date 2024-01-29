@@ -37,6 +37,16 @@ public class PerformanceController {
 	@Autowired
 	private PerformanceService performanceService;
 	
+	/*=================================
+	 * 기본 레이아웃
+	 *=================================*/
+	@RequestMapping("/performance/layout")
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("performancePage"); //타일스
+		return mav; //타일스 설정명
+	}
+	
 	
 	/*=================================
 	 * [메인] 공연 리스트

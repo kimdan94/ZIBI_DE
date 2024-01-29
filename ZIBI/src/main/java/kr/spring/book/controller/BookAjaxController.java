@@ -68,7 +68,7 @@ public class BookAjaxController {
 		Map<String,String> mapJson = new HashMap<String,String>();
 		
 		//일정 중복 여부 체크
-		BookMatchingVO db_match = bookService.selectMatch(apply_gatheringDate);
+		BookMatchingVO db_match = bookService.selectMatch(apply_gatheringDate,apply_num);
 		if(db_match!=null) {
 			mapJson.put("result", "duplicated");
 		}else {
@@ -123,20 +123,7 @@ public class BookAjaxController {
 		
 		return mapJson;
 	}
-	
-	/*-- 모임 주최 취소하기 --*/
-	@PostMapping("/book/bookCancel")
-	@ResponseBody
-	public Map<String,String> bookCancel(@RequestParam int book_num){
-		
-		Map<String,String> mapJson = new HashMap<String, String>();
-		//모임 취소 처리
-		bookService.cancelBook(book_num);
-		mapJson.put("result", "cancel");
-		
-		return mapJson;
-	}
-	
+
 	/*-- 모임 참여 승인하기 --*/
 	@PostMapping("/book/applyApprove")
 	@ResponseBody
@@ -161,6 +148,18 @@ public class BookAjaxController {
 		//참여 거절 처리
 		bookService.denyMatch(book_num, apply_num);
 		mapJson.put("result", "deny");
+		
+		return mapJson;
+	}
+	
+	/*-- 모집 완료하기(참여 일괄 거절하기) --*/
+	@PostMapping("/book/complete")
+	@ResponseBody
+	public Map<String,String> applyComplete(@RequestParam int book_num){
+		Map<String,String> mapJson = new HashMap<String, String>();
+		//모집 완료 처리
+		bookService.updateAllMatch(book_num);
+		mapJson.put("result", "complete");
 		
 		return mapJson;
 	}

@@ -4,7 +4,7 @@ create table book(
  mem_num number not null,
  book_thumbnailName varchar2(150),
  book_category number(1) not null, -- 0:취미 소모임, 1:원데이 클래스, 2:스터디 모임
- book_onoff number(1) default 0 not null, -- 0:모집중, 1:모임 완료, 2:모임 취소
+ book_onoff number(1) default 0 not null, -- 0:모집중, 1:모임 완료, 2:모임 취소, 3:모집 완료
  book_title varchar2(120) not null,
  book_content clob not null,
  book_gatheringDate varchar2(100) not null,
@@ -29,7 +29,7 @@ create sequence book_seq;
 create table book_matching(
  book_num number not null,
  apply_num number not null,
- book_state number(1) not null, -- 0:대기, 1:확정, 2: 거절, 3: 취소
+ book_state number(1) not null, -- 0:대기, 1:확정, 2: 거절
  book_matchDate date default sysdate not null,
  book_gatheringDate varchar2 100 not null,
  constraint book_matching_fk1 foreign key (book_num) references book (book_num),

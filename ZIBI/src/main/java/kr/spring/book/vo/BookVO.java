@@ -23,7 +23,7 @@ public class BookVO {
 	private String book_thumbnailName;
 	@Range(min=0,max=2)
 	private int book_category;//0 : 취미 소모임, 1: 원데이 클래스, 2 : 스터디 모임
-	private int book_onoff;//0 : 모집 중(default), 1 : 모임 완료, 2 : 모임 취소
+	private int book_onoff;//0 : 모집 중(default), 1 : 모임 완료, 2 : 모임 취소, 3 : 모집 완료
 	@NotBlank
 	private String book_title;
 	@NotBlank
@@ -50,7 +50,7 @@ public class BookVO {
 	/*-- JOIN으로 읽어올 정보 --*/
 	private String mem_nickname;
 	private int apply_num;
-	private int book_state;//0 : 대기, 1 : 확정, 2 : 거절, 3 : 취소
+	private int book_state;//0 : 대기, 1 : 확정, 2 : 거절
 	private String apply_gatheringDate;
 	
 	private int matching_cnt;//예약 신청수

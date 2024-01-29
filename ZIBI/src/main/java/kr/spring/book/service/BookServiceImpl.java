@@ -43,12 +43,6 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public void deleteBook(int book_num) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void deleteFile(int book_num) {
 		bookMapper.deleteFile(book_num);
 	}
@@ -93,9 +87,16 @@ public class BookServiceImpl implements BookService{
 		bookMapper.cancelMatch(book_num);
 		bookMapper.denyMatch(book_num, apply_num);
 	}
+	
+	@Override
+	public void updateAllMatch(int book_num) {
+		//모집 완료 처리하기
+		bookMapper.updateOnoff(book_num);
+		bookMapper.updateAllMatch(book_num);
+	}
 
 	@Override
-	public BookMatchingVO selectMatch(String book_gatheringDate) {
-		return bookMapper.selectMatch(book_gatheringDate);
+	public BookMatchingVO selectMatch(String book_gatheringDate, int apply_num) {
+		return bookMapper.selectMatch(book_gatheringDate, apply_num);
 	}
 }

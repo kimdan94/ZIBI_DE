@@ -12,53 +12,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-window.onload = function(){
-	//참여 인원 기본값 0 초기화
-	let book_maxcount = document.getElementById('book_maxcount');
-	if(book_maxcount.value == 0){
-		book_maxcount.value = '';
-	}
-	
-	//썸네일 삭제
-	$('#file_del').click(function(){
-		let choice = confirm('썸네일을 삭제하시겠습니까?');
-		if(choice){
-			$.ajax({
-				url:'deleteFile',
-				data:{book_num:${bookVO.book_num}},
-				type:'post',
-				dataType:'json',
-				success:function(param){
-					if(param.result == 'logout'){
-						alert('로그인 후 사용하세요');
-					}else if(param.result == 'success'){
-						$('#book_detail').hide();
-					}else{
-						alert('파일 삭제 오류 발생');
-					}
-				},
-				error:function(){
-					alert('네트워크 오류 발생');
-				}
-			});
-		}
-	});
-	
-	//book_headcount >= 1일 경우, 일부 항목 기입 불가 처리
-	if($('#book_headcount').val() >= 1){
-		//승인 여부, 모임 일정, 모임 장소 및 우편번호, 비용, 준비물
-		$('#book_match1').attr('disabled',true);
-		$('#book_match2').attr('disabled',true);
-		$('#book_gatheringDate').attr('disabled',true);
-		$('#book_address1').attr('disabled',true);
-		$('#book_address2').attr('disabled',true);
-		$('#book_zipcode').attr('disabled',true);
-		$('#book_expense').attr('disabled',true);
-		$('#book_kit').attr('disabled',true);
-	}
-};
-</script>
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6">
@@ -74,7 +27,6 @@ window.onload = function(){
 					<h4>필수 입력사항</h4>
 				</div>
 				<hr size="3" noshade="noshade" width="100%">
-				<span <c:if test="${bookVO.book_headcount >= 1}"></c:if> class="guide-phrase2">※ 모임 참여자가 1명 이상 존재하여 일부 항목을 변경할 수 없습니다.</span>
 				<div class="book_match">
 					<form:label path="book_match">승인 여부</form:label>
 					<br>
@@ -221,6 +173,40 @@ window.onload = function(){
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+window.onload = function(){
+	//참여 인원 기본값 0 초기화
+	let book_maxcount = document.getElementById('book_maxcount');
+	if(book_maxcount.value == 0){
+		book_maxcount.value = '';
+	}
+	
+	//썸네일 삭제
+	$('#file_del').click(function(){
+		let choice = confirm('썸네일을 삭제하시겠습니까?');
+		if(choice){
+			$.ajax({
+				url:'deleteFile',
+				data:{book_num:${bookVO.book_num}},
+				type:'post',
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'logout'){
+						alert('로그인 후 사용하세요');
+					}else if(param.result == 'success'){
+						$('#book_detail').hide();
+					}else{
+						alert('파일 삭제 오류 발생');
+					}
+				},
+				error:function(){
+					alert('네트워크 오류 발생');
+				}
+			});
+		}
+	});
+};
+</script>
 <!-- 내용 끝 -->
 <!-- 우편번호 검색 시작 -->
 	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->

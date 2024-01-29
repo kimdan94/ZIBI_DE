@@ -16,7 +16,7 @@ $('#apply_btn').click(function(){
 	
 	//입력 유효성 체크
 	if($('#mem_name').val().trim()==''){
-		$('#nameValid').text('이름을 입력해 주세요.').css('color','#dd5c5e');
+		$('#nameValid').text('이름을 입력해 주세요.');
 		$('#apply_btn').show();
 		$('#apply_loading').hide();
 		return;
@@ -25,7 +25,7 @@ $('#apply_btn').click(function(){
 	}
 	
 	if($('#mem_email').val().trim()=='' || $('#mem_email').val().indexOf('@') == -1){
-		$('#emailValid').text('@이 포함된 올바른 이메일 주소를 입력해 주세요.').css('color','#dd5c5e');
+		$('#emailValid').text('@이 포함된 올바른 이메일 주소를 입력해 주세요.');
 		$('#apply_btn').show();
 		$('#apply_loading').hide();
 		return;
@@ -34,7 +34,7 @@ $('#apply_btn').click(function(){
 	}
 	
 	if($('#mem_phone').val().trim()=='' || !$('#mem_phone').val().match(/^010-([0-9]{3,4})-([0-9]{4})$/)){
-		$('#phoneValid').text('연락처를 입력해 주세요. 예)010-1234-5678').css('color','#dd5c5e');
+		$('#phoneValid').text('연락처를 입력해 주세요. 예)010-1234-5678');
 		$('#apply_btn').show();
 		$('#apply_loading').hide();
 		return;
@@ -43,7 +43,7 @@ $('#apply_btn').click(function(){
 	}
 	
 	if(!$('input[id="agree"]').is(":checked")){
-		$('#agreeValid').text('개인 정보 수집에 동의해 주세요.').css('color','#dd5c5e');
+		$('#agreeValid').text('개인 정보 수집에 동의해 주세요.');
 		$('#apply_btn').show();
 		$('#apply_loading').hide();
 		return;
@@ -52,7 +52,7 @@ $('#apply_btn').click(function(){
 	}
 		
 	if(!$('input[id="notify"]').is(":checked")){
-		$('#notifyValid').text('안내 사항 확인에 체크해 주세요.').css('color','#dd5c5e');
+		$('#notifyValid').text('안내 사항 확인에 체크해 주세요.');
 		$('#apply_btn').show();
 		$('#apply_loading').hide();
 		return;
@@ -111,7 +111,7 @@ function closeModalAction(){
 }
 
 /*-------- 모임 참여 취소 --------*/
-$('#apply_cancel').click(function(){
+$('.apply-cancel').click(function(){
 	if(confirm('선택한 모임의 참여를 취소하시겠습니까?')==false){
 		return;
 	}
@@ -138,35 +138,8 @@ $('#apply_cancel').click(function(){
 	});
 });
 
-/*-------- 모임 주최 취소 --------*/
-$('#book_cancel').click(function(){
-	if(confirm('선택한 모임을 취소하시겠습니까? 한 번 취소하면 수정이 불가합니다.')==false){
-		return;
-	}
-	
-	let book_num = $(this).attr('data-num');
-	
-	$.ajax({
-		url:'bookCancel',
-		type:'post',
-		data:{book_num:book_num},
-		dataType:'json',
-		success:function(param){
-			if(param.result == 'cancel'){
-				alert('모임이 취소되었습니다.');
-				location.replace('list');
-			}else{
-				alert('모임 취소 오류');
-			}
-		},
-		error:function(){
-			alert('네트워크 오류');
-		}
-	});
-});
-
 /*-------- 모임 참여 승인 --------*/
-$('#apply_approve').click(function(){
+$('.apply-approve').click(function(){
 	if(confirm('참여를 승인하시겠습니까? 승인 시 참여자의 예약 내역도 변경됩니다.')==false){
 		return;
 	}
@@ -194,7 +167,7 @@ $('#apply_approve').click(function(){
 });
 
 /*-------- 모임 참여 거절 --------*/
-$('#apply_deny').click(function(){
+$('.apply-deny').click(function(){
 	if(confirm('참여를 거절하시겠습니까? 거절 시 참여자의 예약 내역도 변경됩니다.')==false){
 		return;
 	}
@@ -213,6 +186,33 @@ $('#apply_deny').click(function(){
 				location.replace('list');
 			}else{
 				alert('모임 참여 거절 오류');
+			}
+		},
+		error:function(){
+			alert('네트워크 오류');
+		}
+	});
+});
+
+/*-------- 모집 완료(모임 참여 일괄 거절) --------*/
+$('#complete_btn').click(function(){
+	if(confirm('모집 완료 시 참여 신청이 일괄 거절됩니다. 완료하시겠습니까?')==false){
+		return;
+	}
+	
+	let book_num = $(this).attr('data-num');
+	
+	$.ajax({
+		url:'complete',
+		type:'post',
+		data:{book_num:book_num},
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'complete'){
+				alert('모집이 완료되었습니다.');
+				location.replace('list');
+			}else{
+				alert('모집 완료 오류');
 			}
 		},
 		error:function(){

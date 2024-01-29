@@ -108,7 +108,6 @@ public class PerformanceAjaxController {
 		List<CinemaVO> locationNum = null;
 		locationNum = performanceService.selectCinemaNum(cinema); // cinema : 지역2 -> 지역 번호 찾기
 		log.debug("<<지역번호 길이>> : "  + locationNum.size());
-		int cinema_num = locationNum.get(0).getCinema_num(); // 문제점 확인 -> 지역번호 중 0번만 나오게 함
 		log.debug("<<지역>> : " + cinema);
 		
 		log.debug("<<날짜 출력>> : " + day);
@@ -117,12 +116,9 @@ public class PerformanceAjaxController {
 		
 		// sql에 전송할 Map - 상영관 번호,선택 날짜, 오늘 날짜, 현재 시각 + if 영화 정보
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("cinema_num", cinema_num);
 		map.put("day", day);
 		
-		////////////////////////////////////////////////////////
-		
-		// 지역번호가 여러 개일 경우
+		// 지역번호 여러 개
 		List<Integer> list = new ArrayList<Integer>();
 		for(int i=0; i<locationNum.size(); i++) {
 			log.debug("<<지역 번호 출력>> : "+ locationNum.get(i).getCinema_num());
@@ -133,8 +129,6 @@ public class PerformanceAjaxController {
 			map.put("list", list);
 		}
 
-		////////////////////////////////////////////////////////
-		
 		// 영화가 있을 경우
 		if(performance_num != "" || performance_num != null) { // 영화가 있을 때 // ""가 맞음 null은 정확성을 위해 명시
 			map.put("performance_num",performance_num);

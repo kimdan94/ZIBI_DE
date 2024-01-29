@@ -115,15 +115,15 @@
 		<![CDATA[
 		WHERE 
 		TO_TIMESTAMP(TO_CHAR(t.ticketing_date, 'YYYY-MM-DD') || ' ' || t.ticketing_start_time, 'YYYY-MM-DD HH24:MI') > CURRENT_TIMESTAMP 
-		AND t.cinema_num=#{cinema_num} AND t.ticketing_date=#{day}
+		AND t.ticketing_date=#{day}
 		]]>
-		<!-- <if test="list != null and list != ''">
+		<if test="list != null and list != ''">
 			 AND t.cinema_num IN
 			 <foreach item="item" index="index" collection="list"
-	       		open="ID in (" separator="," close=")">
+	       		open="(" separator="," close=")">
 	         		#{item}
 	   		</foreach>	
-		</if> -->
+		</if>
 		<if test="performance_num != null and performance_num != ''">
 				AND p.performance_num=#{performance_num}
 		</if> 

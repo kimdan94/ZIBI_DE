@@ -254,17 +254,14 @@ public class PerformanceController {
 	// [상영관+영화+날짜] 선택 (폼) 페이지 제출 시 -> performanceSeat 페이지로 전송하려면 아래 method와 @RequestMapping이 동시에 있어야 함
 	// [상영관+영화+날짜] 선택 (폼) : 전송된 데이터 처리
 	@PostMapping("/performance/updateTicketing")
-	public String submitDate(HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
+	public ModelAndView submitDate(HttpServletRequest request, HttpSession session) {
 		log.debug("<<좌석 선택 페이지로 가기>>");
 		
-		
-		//View에 표시할 메시지
-		model.addAttribute("message", "좌석 페이지로 넘어가기");
-		model.addAttribute("url", request.getContextPath()+"/performance/performanceSeat");
-		
-		return "common/resultAlert";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
+
+		return mav; 
 	}
-	
 	
 	/*=================================
 	 * 좌석 선택
@@ -282,7 +279,18 @@ public class PerformanceController {
 		return mav; 
 	}
 	
-	
+	// 결제창으로 이동
+	@PostMapping("/performance/submitSeat")
+	public ModelAndView submitSeat() {
+		log.debug("<<결제창으로 이동>>");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("performancePayment"); // tiles 설정 name과 동일해야 함
+
+		return mav; 
+	}
+	/*=================================
+	 * 
+	 *=================================*/
 	
 	
 	

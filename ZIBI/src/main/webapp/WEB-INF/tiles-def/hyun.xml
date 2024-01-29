@@ -36,10 +36,15 @@
     	<put-attribute name="body" value="/WEB-INF/views/performance/writePerformanceDate.jsp"/>
 	</definition>
 	
+	<!-- 좌석 선택창 -->
 	<definition name="performanceSeat" extends="menuPage"><!-- jsp 명과 name을 동일하게 써야함 -->
     	<put-attribute name="body" value="/WEB-INF/views/performance/performanceSeat.jsp"/>
 	</definition>
 	
+	<!-- 결제창 -->
+	<definition name="performancePayment" extends="menuPage">
+    	<put-attribute name="body" value="/WEB-INF/views/performance/performancePayment.jsp"/>
+	</definition>
 	
 	
 </tiles-definitions>

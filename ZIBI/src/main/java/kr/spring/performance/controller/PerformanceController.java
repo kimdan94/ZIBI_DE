@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.service.PerformanceService;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
@@ -36,6 +38,9 @@ public class PerformanceController {
 	// 의존성 주입
 	@Autowired
 	private PerformanceService performanceService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	/*=================================
 	 * 기본 레이아웃 (타일즈 설정을 위한 페이지)
@@ -264,11 +269,10 @@ public class PerformanceController {
 	// [상영관+영화+날짜] 선택 (폼) : 전송된 데이터 처리
 	@PostMapping("/performance/updateTicketing")
 	public ModelAndView submitDate(HttpServletRequest request, HttpSession session) {
-		log.debug("<<좌석 선택 페이지로 가기>>");
-		
+				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
-
+		
 		return mav; 
 	}
 	

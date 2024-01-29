@@ -3,6 +3,14 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+
+	<!-- 로그인 페이지 -->
+	<definition name="loginForm" template="/WEB-INF/views/home/layout_menuPage.jsp">
+	 	<put-attribute name="title" value="로그인"/>
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
+	</definition>
 	
 	<!-- 타일스 기본 레이아웃 -->
 	<definition name="performancePage" template="/WEB-INF/views/performance/layout_menuPage.jsp">

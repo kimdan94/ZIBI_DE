@@ -58,7 +58,7 @@ create sequence ticketing_seq;
 );*/
 
 --
-create table choose(
+create table choice(
  choose_num number not null,
  choose_row number not null,
  choose_col number not null,
@@ -68,7 +68,8 @@ create table choose(
  constraint choose_fk2 foreign key (ticketing_num) references ticketing (ticketing_num)
 );
 
-create sequence choose_seq;
+create sequence choice_seq;
+
 -- 결제 정보
 create table payment(
  payment_num number not null,

@@ -38,7 +38,7 @@ public class PerformanceController {
 	private PerformanceService performanceService;
 	
 	/*=================================
-	 * 기본 레이아웃
+	 * 기본 레이아웃 (타일즈 설정을 위한 페이지)
 	 *=================================*/
 	@RequestMapping("/performance/layout")
 	public ModelAndView main() {
@@ -234,7 +234,6 @@ public class PerformanceController {
 		listCinemaLoc1 = performanceService.selectCinemaLoc1();
 		
 		
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("writePerformanceDate"); // tiles 설정
 		mav.addObject("listPerformance", listPerformance);
@@ -298,9 +297,7 @@ public class PerformanceController {
 
 		return mav; 
 	}
-	/*=================================
-	 * 
-	 *=================================*/
+	
 	
 	
 	

@@ -4,6 +4,7 @@
 
 <tiles-definitions>
 	
+	<!-- 타일스 기본 레이아웃 -->
 	<definition name="performancePage" template="/WEB-INF/views/performance/layout_menuPage.jsp">
 		<put-attribute name="title" value="예매하기"/>
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>

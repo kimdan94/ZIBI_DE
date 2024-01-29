@@ -164,21 +164,7 @@ public class PerformanceAjaxController {
 		return mapJson;
 		
 	}
-	// [상영관+영화+날짜] 선택 (폼) 페이지 제출 시 -> performanceSeat 페이지로 전송하려면 아래 method와 @RequestMapping이 동시에 있어야 함
-	// [상영관+영화+날짜] 선택 (폼) : 전송된 데이터 처리
-	/*
-	 * @RequestMapping("/performance/updateTicketing")
-	 * 
-	 * @ResponseBody public Map<String, Object> submitDate(HttpServletRequest
-	 * request, HttpSession session) { Map<String, Object> mapJson = new
-	 * HashMap<String, Object>(); // 회원번호 확인 MemberVO user =
-	 * (MemberVO)session.getAttribute("user");
-	 * 
-	 * log.debug("<<로그인 확인>> : " + user); if(user == null) { mapJson.put("result",
-	 * "logout"); } else { mapJson.put("result","success"); }
-	 * 
-	 * return mapJson; }
-	 */
+	
 	
 	
 	

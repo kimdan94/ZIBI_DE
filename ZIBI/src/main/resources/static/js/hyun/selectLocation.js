@@ -181,38 +181,5 @@ $(function(){
 		}
 	});
 	
-	// 폼 submit 한다면? form의 id값 submit
-	/*$('#update_ticketing').submit(function(event){ // 이벤트 객체
-		// hidden 값이 없는 것을 처리하기
-		// cinema_hidden 값 처리
-		// performance_hidden 값 처리
-		// day_hidden 값 처리
-		// ent_hidden 값 처리
-		/*if($('#~~').val().trim()==''){
-			return false;
-		}*/
-		/*$.ajax({
-			url:'updateTicketing',
-			type:'post',
-			data:{},
-			dataType:'json',
-			success:function(param){
-				alert('확인');
-				if(param.result=='success'){
-					
-				} else if(param.result=='logout'){
-					alert('로그인해야 좌석을 선택할 수 있습니다');
-					
-				}
-			},
-			error:function(){
-				alert('네트워크 오류 발생');
-			}
-		});
-		
-	})*/
-	
-	
-	
 	
 });

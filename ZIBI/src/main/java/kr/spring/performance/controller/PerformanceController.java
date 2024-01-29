@@ -283,8 +283,6 @@ public class PerformanceController {
 	@RequestMapping("/performance/performanceSeat")
 	public ModelAndView chooseSeat() {
 		log.debug("<<목록 메서드>>");
-		Map<String, Object> map = new HashMap<String, Object>();
-		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
@@ -301,6 +299,8 @@ public class PerformanceController {
 
 		return mav; 
 	}
+	
+	
 	
 	
 	

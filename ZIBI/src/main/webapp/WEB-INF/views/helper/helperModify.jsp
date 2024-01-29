@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-   <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <link href="${pageContext.request.contextPath}/common/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -13,16 +12,16 @@
 <div class="container-fluid contact py-6">
    <div class="d-flex justify-content-center">
 	<div class="rounded login-form col-md-4 col-lg-6">
-	<form:form action="write" modelAttribute="helperVO" id="register_form"
+	<form:form action="update" modelAttribute="helperVO" id="modify_form"
 		enctype="multipart/form-data">
+		<form:hidden path="helper_num"/>
 		<form:errors element="div" />
 		<h2>글쓰기</h2>
 		<hr size="3" noshade="noshade" width="100%">
 		<div>
-		<form:label path="helper_select">게시판</form:label>
-		<form:radiobutton path="helper_select" id="helper_select1" value="1"/><label for="helper_select">헬프미</label>
-		<form:radiobutton path="helper_select" id="helper_select2" value="2"/><label for="helper_select">헬프유</label>
-		<form:errors path="helper_select" cssClass="error-color"/>
+			<form:radiobutton path="helper_select" id="helper_select1" value="1"/><label for="helper_select1">헬프미</label>
+			<form:radiobutton path="helper_select" id="helper_select2" value="2"/><label for="helper_select1">헬프유</label>
+			<form:errors path="helper_select"/>
 		</div>
         <br>
 		<div>
@@ -35,16 +34,14 @@
 				<form:option value="4" label="소분" />
 				<form:option value="5" label="기타" />
 			</form:select>
-			<form:errors path="helper_category" cssClass="error-color"/>
         </div>
         <br>
         
         <div>
        		<form:label path="helper_title">제목</form:label> 
-			<form:input path="helper_title" class="w-100 form-control p-3" placeholder="제목을 입력하세요"/> 
+			<form:input path="helper_title" class="w-100 form-control p-3" /> 
 			<form:errors path="helper_title" cssClass="error-color"/>
         </div>
-        <br>
         <div>
         	<b>내용</b>
         	<form:textarea path="helper_content"/> 
@@ -73,33 +70,63 @@
         	<form:label path="upload">썸네일</form:label>
 			<input type="file" name="upload" id="upload"
 					accept="image/gif,image/png,image/jpeg">
-			<form:errors path="upload"/>		
+			<form:errors path="upload"/>
+			<c:if test="${!empty helperVO.helper_filename}">
+			<div id="file_detail">(${helperVO.helper_filename})사진이 등록되어 있습니다.
+				<input type="button" value="파일삭제" id="file_del">
+			</div>
+			<script type="text/javascript">
+			$(function(){
+				$('#file_del').click(function(){
+					let choice = confirm('삭제하시겠습니까?');
+					if(choice){
+						$.ajax({
+							url:'deleteFile',
+							data:{helper_num:${helperVO.helper_num}},
+							type:'post',
+							dataType:'json',
+							success:function(param){
+								if(param.result == 'logout'){
+									alert('로그인 후 사용하세요');
+								}else if(param.result == 'success'){
+									$('#file_detail').hide();
+								}else{
+									alert('파일 삭제 오류 발생');
+								}
+							},
+							error:function(){
+								alert('네트워크 오류 발생');
+							}
+						});
+					}
+				});
+			});
+			</script>
+			</c:if>
         </div>
         <br>
         <div>
         	<form:label path="helper_zipcode">우편번호</form:label>
-        	<input type="button" onclick="execDaumPostcode()" class="default_btn" value="우편번호 찾기">
-			<form:input path="helper_zipcode" autocomplete="off" class="w-100 form-control p-3"
-				placeholder="우편번호를 입력하세요"/>
+			<input type="button" onclick="execDaumPostcode()" class="default-btn" value="우편번호 찾기">
+			<form:input path="helper_zipcode" autocomplete="off" class="w-100 form-control p-3"/>
 			<form:errors path="helper_zipcode" cssClass="error-color"/>
         </div>
         <br>
         <div>
         	<form:label path="helper_address1">주소</form:label>
-			<form:input path="helper_address1" class="w-100 form-control p-3"
-				placeholder="주소를 입력하세요"/>
+			<form:input path="helper_address1" class="w-100 form-control p-3"/>
 			<form:errors path="helper_address1" cssClass="error-color"/>
         </div>
         <br>
 		<div>
 			<form:label path="helper_address2">상세주소</form:label>
 			<form:input path="helper_address2" class="w-100 form-control p-3"/>
-			<form:errors path="helper_address2" cssClass="error-color"/>
+			<form:errors path="helper_address2"/>
 		</div>
 		<br>
 		<div class="align-center">
-			<form:button class="w-25 btn btn-light form-control p-3 rounded-pill active">글 등록</form:button>
-			<input type="button" value="목록" class="w-25 btn btn-light form-control p-3 rounded-pill active"
+			<form:button class="default-btn">수정</form:button>
+			<input type="button" value="목록" class="default-btn"
 				onclick="location.href='list'">
 		</div>
 	</form:form>
@@ -164,11 +191,11 @@
                 //(수정) }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('helper_zipcode').value = data.zonecode;
+                document.getElementById('zipcode').value = data.zonecode;
                 //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
-                document.getElementById("helper_address1").value = addr + extraAddr;
+                document.getElementById("address1").value = addr + extraAddr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("helper_address2").focus();
+                document.getElementById("address2").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)

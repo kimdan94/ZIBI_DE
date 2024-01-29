@@ -13,37 +13,34 @@
  <div class="tab-class text-center">
                     <ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow" data-wow-delay="0.1s">
                         <li class="nav-item p-2">
-                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill active" data-bs-toggle="pill">
+                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill active" data-bs-toggle="pill" href="#tab-6">
                                 <span class="text-dark" style="width: 150px;">벌레</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill">
+                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-7">
                                 <span class="text-dark" style="width: 150px;">조립</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill">
+                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-8">
                                 <span class="text-dark" style="width: 150px;">수리</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill">
+                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-9">
                                 <span class="text-dark" style="width: 150px;">소분</span>
                             </a>
                         </li>
                         <li class="nav-item p-2">
-                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill">
+                            <a class="d-flex py-2 mx-2 border border-primary bg-white rounded-pill" data-bs-toggle="pill" href="#tab-10">
                                 <span class="text-dark" style="width: 150px;">기타</span>
                             </a>
                         </li>
                     </ul>
 </div>                    
 <div>
-<div class="container-fluid contact py-6">
-	<div class="d-flex justify-content-center">
-		<div class="rounded login-form col-md-4 col-lg-6">
-	<h2 class="align-center">재능기부 게시판 목록</h2>
+	<h2>재능기부 게시판 목록</h2>
 	<form action="list" id="search_form" method="get">
 			<div>
 				<select name="keyfield" id="keyfield">
@@ -66,7 +63,7 @@
 		<select id="order" name="order">
 			<option value="1" <c:if test="${param.order==1}">selected</c:if>>최신순</option>
 			<option value="2" <c:if test="${param.order==2}">selected</c:if>>조회수</option>
-			<option value="3" <c:if test="${param.order==3}">selected</c:if>>스크랩</option>
+			<%--<option value="3" <c:if test="${param.order==3}">selected</c:if>>스크랩</option> 여기보류--%>
 		</select>
 		<c:if test="${!empty user}">
 		<input type="button" value="글쓰기" onclick="location.href='write'">
@@ -77,19 +74,35 @@
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<c:forEach var="helper" items="${list}">
+	<div class="container-fluid service py-6">
+            <div class="container">
+                <div class="text-center">
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="bg-light rounded service-item">
+                            <div class="service-content d-flex align-items-center justify-content-center p-4">
+                                <div class="service-content-icon text-center">
+                                    <div class="fas fa-7x text-primary mb-4">사진</div>
+                                    <div class="mb-3">제목</div>
+                                    <p class="mb-4">지역</p>
+                                    <div class="mb-3">등록일</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>	
+
+                      
+                      
             <div class="align-center">${helper.helper_title}</div>
 			<div class="align-center"><a href="detail?helper_num=${helper.helper_num}">${helper.helper_address1}</a></div>
 			<div class="align-center">${helper.mem_nickname}</div>
 			<div class="align-center">${helper.helper_reg_date}</div>
-			<div>
-			<c:if test="${helper.helper_category ==  1}"><div>벌레</div></c:if>
-			<c:if test="${helper.helper_category ==  2}"><div>조립</div></c:if>
-			<c:if test="${helper.helper_category ==  3}"><div>수리</div></c:if>
-			<c:if test="${helper.helper_category ==  4}"><div>소분</div></c:if>
-			<c:if test="${helper.helper_category ==  5}"><div>기타</div></c:if>
-			</div>        
-</c:forEach>
+			<div class="align-center">${helper.helper_category}</div>              
+    </div>
+    </div>
+    </div>
+    </div>
 	<table class="striped-table">
 		<tr>
 			<th>글 제목</th>
@@ -104,21 +117,12 @@
 			<td class="align-center"><a href="detail?helper_num=${helper.helper_num}">${helper.helper_address1}</a></td>
 			<td class="align-center">${helper.mem_nickname}</td>
 			<td class="align-center">${helper.helper_reg_date}</td>
-			<td class="align-center">
-			<c:if test="${helper.helper_category ==  1}"><div>벌레</div></c:if>
-			<c:if test="${helper.helper_category ==  2}"><div>조립</div></c:if>
-			<c:if test="${helper.helper_category ==  3}"><div>수리</div></c:if>
-			<c:if test="${helper.helper_category ==  4}"><div>소분</div></c:if>
-			<c:if test="${helper.helper_category ==  5}"><div>기타</div></c:if>
-			</td>
+			<td class="align-center">${helper.helper_category}</td>
 		</tr>
 		</c:forEach>
 	</table>
 	<div class="align-center">${page}</div>
 	</c:if>
-</div>
-</div>
-</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">

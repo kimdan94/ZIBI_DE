@@ -1,1 +1,37 @@
-@charset "UTF-8";
+/* 공통 정렬
+-------------------------*/
+.align-center{
+	text-align:center;
+}
+.align-right{
+	text-align:right;
+}
+
+/* ck 에디터 크기 조정
+-------------------------*/
+.ck.ck-editor{
+	max-width:900px;
+}
+.ck-editor__editable{
+	min-height:300px;
+}
+
+/* 유효성 체크 문구
+-------------------------*/
+.error-color{
+	color:#ff0000;
+}	
+
+/* 버튼색
+-------------------------*/
+.helper-btn{
+	background: #32a77b;
+    color: white;
+}
+
+/* 버튼 길이
+-------------------------*/
+.helper-btn-size{
+	width:500px;
+	text-align:center
+}

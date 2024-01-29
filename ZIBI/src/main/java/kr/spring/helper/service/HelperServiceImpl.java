@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.helper.dao.HelperMapper;
+import kr.spring.helper.vo.HelperScrapVO;
 import kr.spring.helper.vo.HelperVO;
 @Service
 @Transactional
@@ -32,22 +33,67 @@ public class HelperServiceImpl implements HelperService{
 
 	@Override
 	public HelperVO selectHelper(int helper_num) {
-		return null;
+		return helperMapper.selectHelper(helper_num);
 	}
 
 	@Override
 	public void updateHit(int helper_num) {
-		
+		helperMapper.updateHit(helper_num);
 	}
 
 	@Override
 	public void updateHelper(HelperVO helper) {
-		
+		helperMapper.updateHelper(helper);
 	}
 
 	@Override
 	public void deleteHelper(int helper_num) {
+		//스크랩이 존재하면 좋아요를 우선 삭제하고 부모글 삭제
+		helperMapper.deleteScrapByHelperNum(helper_num);
+		//부모글 삭제
+		helperMapper.deleteHelper(helper_num);
+	}
+
+	@Override
+	public void deleteFile(int helper_num) {
+		helperMapper.deleteFile(helper_num);
+	}
+
+	@Override
+	public HelperScrapVO selectscrap(HelperScrapVO scrap) {
+		return helperMapper.selectscrap(scrap);
+	}
+
+	@Override
+	public int selectScrapCount(int helper_num) {
+		return helperMapper.selectScrapCount(helper_num);
+	}
+
+	@Override
+	public void insertScrap(HelperScrapVO scrap) {
+		helperMapper.insertScrap(scrap);
 		
 	}
 
+	@Override
+	public void deleteScrap(HelperScrapVO helperScrap) {
+		helperMapper.deleteScrap(helperScrap);
+		
+	}
+	
+	@Override
+	public void updateSolution0(HelperVO sol) {
+		helperMapper.updateSolution0(sol);
+	}
+	
+	@Override
+	public void updateSolution1(HelperVO sol) {
+		helperMapper.updateSolution1(sol);
+	}
+
+	@Override
+	public HelperVO selectSolution(HelperVO solution) {
+		return helperMapper.selectSolution(solution);
+	}
 }
+

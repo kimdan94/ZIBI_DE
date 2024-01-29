@@ -33,12 +33,6 @@
 		<put-attribute name="css" value="/WEB-INF/views/secondhand/secondCSS.jsp"/>
 	</definition>
 	
-	<!-- 채팅 페이지 -->
-	<definition name="secondChatDetail" extends="secondMain">
-		<put-attribute name="tabtitle" value="중고거래 채팅"/>
-		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondChatDetail.jsp"/>
-	</definition>
-	
 	<!-- 내 상점 - 판매 내역 -->
 	<definition name="secondsellList" template="/WEB-INF/views/secondhand/layout_secondManage.jsp">
 		<put-attribute name="tabtitle" value="내 상점 - 판매 내역"/>
@@ -63,5 +57,11 @@
 	<definition name="secondreviewList" extends="secondsellList">
 		<put-attribute name="tabtitle" value="내 상점 - 찜 상품"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondreviewList.jsp"/>
+	</definition>
+	
+	<!-- 채팅 페이지 -->
+	<definition name="chatDetail" extends="secondMain">
+		<put-attribute name="tabtitle" value="중고거래 채팅"/>
+		<put-attribute name="body" value="/WEB-INF/views/secondchat/chatDetail.jsp"/>
 	</definition>
 </tiles-definitions>

@@ -49,7 +49,7 @@
 	                <img id="output_fav" data-num="${second.sc_num}"
 	                	src="${pageContext.request.contextPath}/images/jiwon/sc_fav.png">
 	                <span id="output_fcount"></span>
-	                <a href="${pageContext.request.contextPath}/secondhand/secondChatDetail" class="btn btn-primary py-3 px-5 rounded-pill">채팅</a>
+	                <a href="${pageContext.request.contextPath}/secondchat/chatListForBuyer?sc_num=${second.sc_num}" class="btn btn-primary py-3 px-5 rounded-pill">채팅</a>
 	                <a href="" class="btn btn-primary py-3 px-5 rounded-pill">바로 예약</a>
                 </c:if>
                 <c:if test="${!empty user && user.mem_num == second.mem_num}">

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.secondchat.dao.ChatMapper">
+	<!-- 채팅방 화면 호출 - 채팅방 관련 정보 구하기 -->
+		<!-- chatroom_num값을 전달받아서 chatroom 테이블과 second테이블 조인해서 sc_title 가져오고, 
+		chatroom테이블과 member_detail 테이블 조인해서 seller_num과 buyer_num의 mem_nickname을 가져온다  -->
+	<select id="selectChatroomDetail" parameterType="integer" resultType="chatRoomVO">
+		SELECT 
+    		cr.chatroom_num,
+    		cr.sc_num,
+    		sec.sc_title,
+    		cr.seller_num,
+    		md_seller.mem_nickname AS seller,
+    		cr.buyer_num,
+    		md_buyer.mem_nickname AS buyer
+		FROM 
+    		chatroom cr
+		JOIN 
+    		member_detail md_seller ON cr.seller_num = md_seller.mem_num
+		JOIN 
+    		member_detail md_buyer ON cr.buyer_num = md_buyer.mem_num
+		JOIN 
+    		second sec ON cr.sc_num = sec.sc_num
+		WHERE 
+    		cr.chatroom_num = 1
+	</select>
+	
+</mapper>

@@ -206,20 +206,7 @@ public class SecondController {
 	}
 	
 	
-	/*================================
-	 * 중고거래 채팅
-	 *================================*/
-	//구매자가 상세페이지에서 채팅하기 버튼 클릭할 때 
-	@RequestMapping("/secondhand/secondChatDetail")
-	public String scChatDetail() {
-		
-		//채팅방 생성 insert
-		
-		
-		
-		
-		return "secondChatDetail";
-	}
+	
 }
 
 

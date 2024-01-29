@@ -39,8 +39,7 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public void updateBook(BookVO book) {
-		// TODO Auto-generated method stub
-		
+		bookMapper.updateBook(book);
 	}
 
 	@Override
@@ -51,8 +50,7 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public void deleteFile(int book_num) {
-		// TODO Auto-generated method stub
-		
+		bookMapper.deleteFile(book_num);
 	}
 
 	@Override
@@ -67,6 +65,37 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public void insertMatch(BookMatchingVO bookMatchingVO) {
+		//신청 인원수 반영
+		bookMapper.addMatch(bookMatchingVO.getBook_num());
 		bookMapper.insertMatch(bookMatchingVO);
+	}
+
+	@Override
+	public void deleteMatch(int book_num, int apply_num) {
+		//취소 인원수 반영
+		bookMapper.cancelMatch(book_num);
+		bookMapper.deleteMatch(book_num, apply_num);
+	}
+
+	@Override
+	public void cancelBook(int book_num) {
+		bookMapper.cancelBook(book_num);
+	}
+
+	@Override
+	public void approveMatch(int book_num, int apply_num) {
+		bookMapper.approveMatch(book_num, apply_num);
+	}
+
+	@Override
+	public void denyMatch(int book_num, int apply_num) {
+		//거절 인원수 반영
+		bookMapper.cancelMatch(book_num);
+		bookMapper.denyMatch(book_num, apply_num);
+	}
+
+	@Override
+	public BookMatchingVO selectMatch(String book_gatheringDate) {
+		return bookMapper.selectMatch(book_gatheringDate);
 	}
 }

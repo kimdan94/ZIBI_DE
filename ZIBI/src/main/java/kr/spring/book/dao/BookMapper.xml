@@ -136,10 +136,11 @@
 					book_gatheringDate,
 					book_address1,
 					book_state,
+					book_match,
 					book_matchDate
 				FROM book_matching 
 				JOIN book USING(book_num)
-				ORDER BY book_regDate DESC)a)
+				ORDER BY book_matchDate DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{mstart} AND rnum <= #{mend}
 		]]>
@@ -155,4 +156,25 @@
 		LEFT OUTER JOIN member_detail USING(mem_num)
 		WHERE book_num=#{book_num}
 	</select>
+	
+	<!-- 소모임 예약 글 수정 -->
+	<update id="updateBook" parameterType="bookVO">
+		UPDATE book SET
+			<if test="book_thumbnailName != null">
+			book_thumbnailName=#{book_thumbnailName},
+			</if>
+			book_category=#{book_category},
+			book_title=#{book_title},
+			book_content=#{book_content},
+			book_gatheringDate=#{book_gatheringDate},
+			book_match=#{book_match},
+			book_address1=#{book_address1},
+			book_address2=#{book_address2},
+			book_zipcode=#{book_zipcode},
+			book_kit=#{book_kit,jdbcType=VARCHAR},
+			book_maxcount=#{book_maxcount},
+			book_ip=#{book_ip},
+			book_expense=#{book_expense,jdbcType=VARCHAR}
+		WHERE book_num=${book_num}
+	</update>
 </mapper>

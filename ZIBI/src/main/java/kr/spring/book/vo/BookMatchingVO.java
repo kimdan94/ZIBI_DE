@@ -21,4 +21,5 @@ public class BookMatchingVO {
 	private String mem_name;
 	private String mem_email;
 	private String mem_phone;
+	private String apply_gatheringDate;
 }

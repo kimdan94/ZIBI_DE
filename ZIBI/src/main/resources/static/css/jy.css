@@ -3,6 +3,11 @@
 	font-size:12px;
 	color:#32a77b;
 }
+.guide-phrase2{
+	font-size:15px;
+	color:#dd5c5e;
+	padding-left:107px;
+}
 h4{
 	font-weight:bold;
 	color:#414142;
@@ -10,6 +15,10 @@ h4{
 .title-phrase{
 	font-size:25px;
 	margin-bottom:-37px;
+}
+.title-phrase2{
+	font-size:25px;
+	margin:2px 0 20px 0;
 }
 .error-phrase{
 	font-size:12px;
@@ -34,14 +43,13 @@ h4{
 }
 /*----------- 공통 검색폼 스타일 -----------*/
 form#search_form{
-	padding-bottom:0;
 	border:none;
 }
 ul.search{
 	width:700px;
 	list-style:none;
 	padding:0;
-	margin:20px 560px 65px 600px;
+	margin:50px 560px 20px 600px;
 }
 ul.search li{
 	margin:0 0 15px 0;
@@ -90,11 +98,32 @@ input::-webkit-search-results-decoration{
 	width:100px;
 	height:24px;
 	padding:3px;
+	cursor:pointer;
 }
 .default-btn2{
 	background:white;
 	color:#32a77b;
 	border:1px solid #32a77b;
+	font-size:13px;
+	border-radius:5px;
+	width:100px;
+	height:24px;
+	padding:3px;
+}
+.default-btn3{
+	background:#333;
+	color:white;
+	border:none;
+	font-size:13px;
+	border-radius:5px;
+	width:100px;
+	height:24px;
+	padding:3px;
+}
+.default-btn4{
+	background:white;
+	color:#333;
+	border:1px solid #333;
 	font-size:13px;
 	border-radius:5px;
 	width:100px;
@@ -144,8 +173,8 @@ input::-webkit-search-results-decoration{
 .align-right{
 	text-align:right;
 }
-/*----------- 모임글 등록폼 -----------*/
-#book_write label{
+/*----------- 모임글 등록폼, 모임글 수정폼-----------*/
+#book_write label, #book_update label{
 	margin-bottom:15px;
 	margin-top:15px;
 	font-weight:bold;
@@ -157,6 +186,8 @@ label[for="book_match2"]{
 }
 #book_write input[type="text"]:focus,
 #book_write input[type="text"]:hover,
+#book_update input[type="text"]:focus,
+#book_update input[type="text"]:hover,
 #book_expense:focus, #book_expense:hover{
 	outline:2px solid #32a77b;
 	box-shadow:none;
@@ -199,7 +230,8 @@ input[value="우편번호 찾기"]{
 #book_gatheringDate{
 	cursor:pointer;
 }
-#book_write .btn-light.active{
+#book_write .btn-light.active,
+#book_update .btn-light.active{
     background: #32a77b;
     color: white;
     font-size:15px;
@@ -208,12 +240,19 @@ input[value="우편번호 찾기"]{
 #book_write .btn-light:hover,
 #book_write .btn-light:hover,
 #book_write .btn:hover,
-#book_write .btn-light.active:hover{
+#book_write .btn-light.active:hover
+#book_update .btn-light:hover,
+#book_update .btn-light:hover,
+#book_update .btn:hover,
+#book_update .btn-light.active:hover{
     background: white !important;
     color: #32a77b;
     border: 1px solid #ededed;
     font-size:15px;
     font-weight:bold;
+}
+#file_detail{
+	margin-top:7px;
 }
 /**CKEditor**/
 .ck-editor__editable_inline{
@@ -288,13 +327,27 @@ li.book-li{
 	border:1px solid black;
 	margin-left:auto;
 	margin-right:auto;
+	min-width:890px;
 }
 #match_table td{
-	padding:0 20px;
+	padding:7px 20px;
 }
 #match_table a{
 	text-decoration:none;
 	color:black;
+}
+.btn-guide{
+	border:1px solid #32a77b;;
+	width:100px;
+	font-size:13px;
+	color:#32a77b;
+}
+.btn-guide2{
+	background:#32a77b;;
+	border:1px solid #32a77b;
+	width:100px;
+	font-size:13px;
+	color:white;
 }
 /*----------- 모임글 상세 -----------*/
 .book-thumb{
@@ -349,4 +402,96 @@ li.book-li{
 }
 #book_detail hr{
 	background:#c2d1c7;
+}
+/*----------- 모임 신청폼 -----------*/
+#bookApplyModal{
+	font-size: .8em;
+	margin: 0 auto;
+	width: 100%;
+	height: 100%;
+}
+#bookApplyModal button{
+	width:300px;
+	height:30px;
+}
+#bookApplyModal li{
+	list-style:none;
+	margin:0 7px 5px 0;
+}
+#bookApplyModal li img{
+	width:80px;
+	height:80px;
+	object-fit:cover;
+	border-radius:7px;
+	margin-left:-30px;
+}
+#close_btn{
+	width:23px;
+	cursor:pointer;
+	margin-left:375px;
+	margin-top:-27px;
+}
+.applySub{
+	font-size:17px;
+	color:#32a77b;
+	font-weight:bold;
+	margin-bottom:-10px;
+}
+.applyTitle{
+	font-size:17px;
+	font-weight:bold;
+	color:#414142;
+}
+.modal_box{
+	border-radius: 8px;
+	width: 40%;
+	height: 70%;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: white;
+	display: flex;
+	flex-flow: column;
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+	border: 1px solid gray;
+}
+
+.modal-bg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 167%;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 99;
+}
+.applyDiv{
+	height:65px;
+	margin-bottom:20px;
+}
+
+.applyDiv2{
+	height:65px;
+	margin-bottom:40px;
+}
+
+.applyDiv span{
+	font-size:12px;
+}
+#apply_btn{
+	margin:5px auto;
+}
+#apply_loading{
+	width:30px;
+	display:none;
+	margin:0 auto;
+}
+input#mem_name:hover,
+input#mem_email:hover,
+input#mem_phone:hover{
+	border:1px solid #32a77b;
+	outline:none;
 }

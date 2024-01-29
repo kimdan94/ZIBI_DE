@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 내용 시작 -->
 <%-- daterangepicker --%>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -18,21 +19,62 @@ window.onload = function(){
 	if(book_maxcount.value == 0){
 		book_maxcount.value = '';
 	}
+	
+	//썸네일 삭제
+	$('#file_del').click(function(){
+		let choice = confirm('썸네일을 삭제하시겠습니까?');
+		if(choice){
+			$.ajax({
+				url:'deleteFile',
+				data:{book_num:${bookVO.book_num}},
+				type:'post',
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'logout'){
+						alert('로그인 후 사용하세요');
+					}else if(param.result == 'success'){
+						$('#book_detail').hide();
+					}else{
+						alert('파일 삭제 오류 발생');
+					}
+				},
+				error:function(){
+					alert('네트워크 오류 발생');
+				}
+			});
+		}
+	});
+	
+	//book_headcount >= 1일 경우, 일부 항목 기입 불가 처리
+	if($('#book_headcount').val() >= 1){
+		//승인 여부, 모임 일정, 모임 장소 및 우편번호, 비용, 준비물
+		$('#book_match1').attr('disabled',true);
+		$('#book_match2').attr('disabled',true);
+		$('#book_gatheringDate').attr('disabled',true);
+		$('#book_address1').attr('disabled',true);
+		$('#book_address2').attr('disabled',true);
+		$('#book_zipcode').attr('disabled',true);
+		$('#book_expense').attr('disabled',true);
+		$('#book_kit').attr('disabled',true);
+	}
 };
 </script>
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6">
-			<form:form action="write" id="book_write" 
+			<form:form action="update" id="book_update" 
 					modelAttribute="bookVO" enctype="multipart/form-data">
+				<form:hidden path="book_num"/>
+				<form:hidden path="book_headcount"/>	
 				<div class="title-phrase">
-					${mem_nickname}님의 소모임을<br>
-					소개해 주세요!
-				</div>	
+					${mem_nickname}님의 소모임 정보를<br>
+					변경해요!
+				</div>
 				<div class="align-right">
 					<h4>필수 입력사항</h4>
 				</div>
 				<hr size="3" noshade="noshade" width="100%">
+				<span <c:if test="${bookVO.book_headcount >= 1}"></c:if> class="guide-phrase2">※ 모임 참여자가 1명 이상 존재하여 일부 항목을 변경할 수 없습니다.</span>
 				<div class="book_match">
 					<form:label path="book_match">승인 여부</form:label>
 					<br>
@@ -150,6 +192,14 @@ window.onload = function(){
 						*500 x 500px 또는 1:1 비율의 고화질 이미지를 권장하며 미선택 시 기본 이미지가 제공됩니다.
 					</span>
 				</div>
+				<c:if test="${!empty bookVO.book_thumbnailName}">
+				<div id="file_detail">
+					<input type="button" value="파일 삭제" id="file_del" class="default-btn3">
+					<img src="${pageContext.request.contextPath}/upload/${bookVO.book_thumbnailName}" width="50px;" id="book_thumb">
+					<br>
+					<span class="guide-phrase">*현재 썸네일은 ${bookVO.book_thumbnailName}입니다.</span>
+				</div>
+				</c:if>
 				<div>
 					<form:label path="book_expense">참여 비용</form:label>
 					<input type="number" id="book_expense" name="book_expense"
@@ -163,7 +213,7 @@ window.onload = function(){
 						autocomplete="off"/>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
-				<input type="submit" value="모임 만들기" class="w-25 btn btn-light form-control p-3 rounded-pill active">
+				<input type="submit" value="모임 수정하기" class="w-25 btn btn-light form-control p-3 rounded-pill active">
 				<input type="button" class="w-25 btn btn-light form-control p-3 rounded-pill active" 
 					onclick="location.href='list'" value="목록으로">
 				</div>	

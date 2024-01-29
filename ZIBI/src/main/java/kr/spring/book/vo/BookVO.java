@@ -51,6 +51,7 @@ public class BookVO {
 	private String mem_nickname;
 	private int apply_num;
 	private int book_state;//0 : 대기, 1 : 확정, 2 : 거절, 3 : 취소
+	private String apply_gatheringDate;
 	
 	private int matching_cnt;//예약 신청수
 	private int rev_cnt;//예약 리뷰 개수

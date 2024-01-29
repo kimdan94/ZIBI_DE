@@ -72,4 +72,25 @@
 		LEFT OUTER JOIN member_detail USING(mem_num)
 		WHERE sc_num=#{sc_num}
 	</select>
+	
+	<!-- 중고거래 마이페이지 - 판매내역 - 전체 글의 총 개수 -->
+		<!-- sc_show(2: 표시)2이고 로그인한 사람의 전체 글 개수  -->
+	<select id="selectMyscRowCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM second JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=2
+	</select>
+	
+	<!-- 중고거래 마이페이지 - 판매내역 - 전체 글 목록 -->
+		<!-- sc_show(2: 표시)2이고 로그인한 사람의 전체 글 보여지게  -->
+	<select id="selectMyscList" parameterType="map" resultType="secondVO">
+		SELECT * FROM (SELECT a.*, rownum rnum FROM 
+			(SELECT sc_num, sc_filename, sc_title,
+					sc_price, sc_address,sc_reg_date,
+					sc_modify_date,mem_num
+			 FROM second 
+			 JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=2)a)
+	</select>
+	
+	
+	<!-- sc_sellstatus가 0일때(판매중)  -->
+	
 </mapper>

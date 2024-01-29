@@ -36,4 +36,11 @@ public interface SecondMapper {
 	public void deleteFav(SecondFavVO secondFav);
 	@Delete("DELETE FROM second_fav WHERE sc_num=#{sc_num}")
 	public void deleteFavByScNum(int sc_num);//상세글 지울떄 찜 지우기 위해
+	
+	//=========  중고거래 마이페이지   ==================
+		//판매내역 - 전체 
+	public List<SecondVO> selectMyscList(Map<String,Object> map);
+	public int selectMyscRowCount(Map<String,Object> map);//로그인한 사람의 판매글 전체 레코드 수 
+	
+	//=========  중고거래 채팅   ==================
 }

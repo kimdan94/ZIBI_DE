@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.second.service.SecondService;
 import kr.spring.second.vo.SecondVO;
@@ -35,6 +36,9 @@ import lombok.extern.slf4j.Slf4j;
 public class SecondController {
 	@Autowired
 	private SecondService secondService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	//자바빈(VO) 초기화
 	@ModelAttribute
@@ -156,22 +160,66 @@ public class SecondController {
             return originalAddress; // 매칭되는 부분이 없을 경우 원래 주소를 반환
         }
     }
+	/*================================
+	 * 중고거래 글 수정
+	 *================================*/
+	@GetMapping("/secondhand/update")		//데이터 전달받기 위해 Model 필요
+	public String scformUpdate(@RequestParam int sc_num,Model model) {
+		SecondVO secondVO = secondService.selectSecond(sc_num);
+		
+		model.addAttribute("secondVO",secondVO);
+		
+		return "secondModify";
+	}
 	
 	
 	/*================================
-	 * 중고거래 채팅방 목록
+	 * 중고거래 내 상점
 	 *================================*/
-	@RequestMapping("/secondhand/secondChatList")
-	public String scChatList() {
-		return "secondChatList";
+	//default - 판매내역 페이지
+	@RequestMapping("/secondhand/secondsellList")
+	public String managesellList(HttpSession session,Model model) {
+		
+		//회원번호 셋팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO memberVO = memberService.selectMember(user.getMem_num());//로그인한 mem_num회원정보 가져오기
+		
+		model.addAttribute("memberVO",memberVO);
+		
+		return "secondsellList"; //타일즈
 	}
 	
+	//구매내역 페이지
+	@RequestMapping("/secondhand/secondbuyList")
+	public String managebuyList() {
+		return "secondbuyList"; //타일즈
+	}
+	//찜 상품 페이지
+	@RequestMapping("/secondhand/secondfavList")
+	public String managefavList() {
+		return "secondfavList"; //타일즈
+	}
+	//거래 후기 페이지
+	@RequestMapping("/secondhand/secondreviewList")
+	public String managereviewList() {
+		return "secondreviewList"; //타일즈
+	}
+	
+	
+	/*================================
+	 * 중고거래 채팅
+	 *================================*/
+	//구매자가 상세페이지에서 채팅하기 버튼 클릭할 때 
+	@RequestMapping("/secondhand/secondChatDetail")
+	public String scChatDetail() {
+		
+		//채팅방 생성 insert
+		
+		
+		
+		
+		return "secondChatDetail";
+	}
 }
-
-
-
-
-
-
 
 

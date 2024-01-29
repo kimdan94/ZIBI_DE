@@ -83,4 +83,18 @@ public class SecondServiceImpl implements SecondService{
 		secondMapper.deleteFav(secondFav);
 	}
 	
+	
+	//=========  중고거래 마이페이지   ==================
+	//
+	@Override
+	public List<SecondVO> selectMyscList(Map<String, Object> map) {
+		return secondMapper.selectMyscList(map);
+	}
+	@Override
+	public int selectMyscRowCount(Map<String, Object> map) {
+		return secondMapper.selectMyscRowCount(map);
+	}
+	
+	//=========  중고거래 채팅   ==================
+	
 }

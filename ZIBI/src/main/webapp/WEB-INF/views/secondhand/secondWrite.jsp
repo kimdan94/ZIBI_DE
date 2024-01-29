@@ -38,8 +38,9 @@
 				
 				<div>
 					<form:label path="sc_price">가격</form:label>
-					<input type="number" id="sc_price" class="w-100 form-control p-3" placeholder="판매가격">
+					<!-- <input type="number" id="sc_price" class="w-100 form-control p-3" placeholder="판매가격"> -->
 					<%-- <form:input path="sc_price" class="w-100 form-control p-3" placeholder="판매가격"/> --%>
+					<form:input path="sc_price" type="number" class="w-100 form-control p-3" placeholder="판매가격"/>
 					<form:errors path="sc_price" cssClass="error-color"/>
 				</div>
 				<div>
@@ -91,5 +92,3 @@
 		</div>
 	</div>
 </div>
-
-

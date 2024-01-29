@@ -21,18 +21,20 @@
 <link href="${pageContext.request.contextPath}/sample/lib/animate/animate.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/sample/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
 <!-- Customized Bootstrap Stylesheet -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/jiwon.css" rel="stylesheet">
 
 <tiles:insertAttribute name="css" ignore="true"/>
-	
+
 
 </head>
 <body>
-	<tiles:insertAttribute name="header"/>
-	<div class="container-fluid nav-bar menu-title">
+	<tiles:insertAttribute name="header"/>			<!-- 내가 style 추가함 -->
+	<div class="container-fluid nav-bar menu-title" style="margin-bottom: 0; padding-bottom: 0;">
 		<div class="container">
 			<nav class="navbar navbar-expand-lg py-4">
 				<div class="collapse navbar-collapse" id="navbarCollapse">
@@ -41,10 +43,34 @@
 			</nav>
 		</div>
 	</div>
+	
+	<div class="container-fluid nav-bar">
+		<div class="container itemManagebar">
+			<nav class="navbar navbar-expand-lg py-4">
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<a href="write">     <!-- 등록폼으로 -->
+						<span class="separator">상품 등록</span>
+					</a>
+					<a href="secondsellList">
+						<span class="separator">판매 내역</span>
+					</a>
+					<a href="secondbuyList">
+						<span class="separator">구매 내역</span>
+					</a>
+					<a href="secondfavList">
+						<span class="separator">찜 상품</span>
+					</a>
+					<a href="secondreviewList">
+						<span>거래 후기</span>
+					</a>
+				</div>
+			</nav>
+		</div>
+	</div>
 	<tiles:insertAttribute name="body"/>
 	<tiles:insertAttribute name="footer"/> 
 </body>
-<!-- Template Javascript -->
+	<!-- Template Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/lib/wow/wow.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

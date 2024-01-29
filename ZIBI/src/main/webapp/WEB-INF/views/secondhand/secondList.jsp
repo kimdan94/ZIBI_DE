@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div> 
 	<div class="scmain-btn">
-	<button type="button" class="chat-btn" onclick="location.href='write'">
+	<button type="button" class="chat-btn">
 		<img src="${pageContext.request.contextPath}/images/jiwon/chat_icon.png" width="22px">
 			<span class="chat-txt">채팅하기</span>
 	</button>
@@ -11,7 +11,7 @@
 		<img src="${pageContext.request.contextPath}/images/jiwon/sc_writelogo.png" width="22px">
 			<span class="sell-txt">판매하기</span>
 	</button>
-	<button type="button" class="sc-mypage-btn" onclick="location.href='write'">
+	<button type="button" class="sc-mypage-btn" onclick="location.href='secondsellList'">  <!-- 내상점의 판매 내역으로 감 -->
 		<img src="${pageContext.request.contextPath}/images/jiwon/second_mypage.png" width="22px">
 			<span class="scmypage-txt">내 상점</span>
 	</button>

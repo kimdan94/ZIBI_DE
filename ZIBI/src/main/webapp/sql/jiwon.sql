@@ -70,10 +70,10 @@ create table second_fav(
 
 --채팅방
 create table chatroom(
- chatroom_num number not null,
- sc_num number not null,
- seller_num number not null,
- buyer_num number not null,
+ chatroom_num number not null,  	--채팅방 식별 번호
+ sc_num number not null,			--판매글 번호
+ seller_num number not null,		--판매자 회원 번호
+ buyer_num number not null,			--구매자 회원번호
  constraint chatroom_pk primary key (chatroom_num),
  constraint chatroom_fk1 foreign key (sc_num) references second (sc_num),
  constraint chatroom_fk2 foreign key (seller_num) references member (mem_num),

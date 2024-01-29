@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/hyun/num.people.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/hyun/choose.seat.js"></script>
 
 
 <!-- 인원 선택 Start -->

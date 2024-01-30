@@ -11,6 +11,7 @@
 <div class="container-fluid contact py-6">
 	<div class="d-flex justify-content-center">
 		<div class="rounded login-form col-md-4 col-lg-6">
+		
 		<h2>글 상세</h2>
 		<!-- 해결중,해결완료 토클 넣어야함 -->
 		<div class="align-right">
@@ -23,7 +24,8 @@
 		<span id="output_text">[해결 중]</span>
 		</div>
 		<input type="button" value="글수정" onclick="location.href='update?helper_num=${helper.helper_num}'">
-		<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'">
+		<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'"
+				id="delete_btn">
 		<input type="button" value="목록" onclick="location.href='list?helper_num=${helper.helper_num}'">
 		</c:if>
 		</div>
@@ -57,9 +59,13 @@
 	</div>
 		
 	<div>
-		${helper.helper_content}
+		내용 : ${helper.helper_content}
 	</div>
-	<!-- 지도 넣어야함 -->
+	<div>
+		주소 : ${helper.helper_address1} ${helper.helper_address2}
+		<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+	</div>
+	
 	<div class="align-right">
 		<c:if test="${!empty user}">
 		<div>
@@ -73,11 +79,51 @@
 		<input type="button" value="채팅하기" onclick="location.href='talk?helper_num=${helper.helper_num}'">
 		</c:if>
 	</div>	
-	
 		
 </div>
 </div>
 </div>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=397d490d4a8bb2a2dc0a8a1612615084&libraries=services"></script>
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표(초기 값으로 주소를 좌표로 바꿔서 제공하면 중심 좌표가 바뀜)
+        level: 3 // 지도의 확대 레벨
+    };  
 
+	// 지도를 생성합니다    
+	var map = new daum.maps.Map(mapContainer, mapOption); 
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('${helper.helper_address1}', function(result, status) {
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+	    	 console.log('lat : ' + result[0].y);
+	    	 console.log('lng : ' + result[0].x);
+	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	        
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});    
+</script>	
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#delete_btn').click(function(){
+		let choice = confirm('정말 삭제하시겠습니까?');
+		if(!choice){
+			return false;
+		}
+	});
+});
+</script>
 
 <!-- 내용 끝 -->

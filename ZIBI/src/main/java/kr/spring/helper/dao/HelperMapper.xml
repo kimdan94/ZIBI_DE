@@ -9,7 +9,6 @@
 			helper_content,
 			helper_filename,
 			helper_ip,
-			helper_zipcode,
 			helper_address1,
 			helper_address2,
 			helper_category,
@@ -21,7 +20,6 @@
 			#{helper_content},
 			#{helper_filename,jdbcType=VARCHAR},
 			#{helper_ip},
-			#{helper_zipcode},
 			#{helper_address1},
 			#{helper_address2},
 			#{helper_category},
@@ -47,6 +45,15 @@
 					helper_content LIKE '%' || #{keyword} || '%'
 				</if>
 			</if> 
+			<if test="helper_select != null and helper_select!=''">
+				helper_select = #{helper_select}
+			</if>
+			<if test="helper_select != null and helper_select!='' and helper_category != null and helper_category!=''">
+				and helper_category = #{helper_category}
+			</if>
+			<if test="(helper_select == null or helper_select=='') and helper_category != null and helper_category!=''">
+				helper_category = #{helper_category}
+			</if>
 		</where>
 	</sql>
 	
@@ -89,7 +96,9 @@
 			  			helper_reg_date,
 			  			mem_num,
 			  			helper_scrap,
-			  			helper_category
+			  			helper_category,
+			  			helper_select,
+			  			helper_filename
 			  		FROM helper
 			  		LEFT OUTER JOIN (SELECT COUNT(*) helper_scrap, helper_num FROM helper_scrap GROUP BY helper_num) USING(helper_num)
 			  		JOIN member USING(mem_num)
@@ -118,10 +127,10 @@
 			</if>
 			helper_title=#{helper_title},
 			helper_content=#{helper_content},
-			helper_zipcode=#{helper_zipcode},
 			helper_address1=#{helper_address1},
 			helper_address2=#{helper_address2},
 			helper_category=#{helper_category},
+			helper_select=#{helper_select},
 			helper_modify_date=SYSDATE
 		WHERE helper_num=#{helper_num}
 	</update>

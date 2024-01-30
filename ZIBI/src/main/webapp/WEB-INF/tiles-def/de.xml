@@ -11,9 +11,9 @@
     	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 
-	<!-- 재능기부 메인 페이지 -->
+	<!-- 재능기부 목록 페이지 -->
 	<definition name="helperList" extends="menuPage">
-		<put-attribute name="title" value="재능기부 메인"/>
+		<put-attribute name="title" value="재능기부 목록"/>
 		<put-attribute name="body" value="/WEB-INF/views/helper/helperList.jsp"/>
 	</definition>
 	

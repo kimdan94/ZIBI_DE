@@ -1,49 +1,3 @@
--------------- rental 대여 ----------------
--- 대여 게시판 테이블
-create table rental(
- rental_num number not null,
- rental_name varchar2(50) not null,
- rental_filename varchar2(200) not null,
- rental_detail clob not null,
- rental_category number not null,
- rental_address1 varchar2(100) not null,
- rental_address2 varchar2(100) not null,
- rental_zipcode varchar2(100) not null,
- rental_quantity number(30) not null,
- rental_ip varchar2(40) not null,
- rental_reg_date date default sysdate not null,
- rental_modify_date date,
- mem_num number not null,
- constraint rental_pk primary key (rental_num),
- constraint rental_fk foreign key (mem_num) references member (mem_num)
-);
-
-create sequence rental_seq;
-
--- 대여 게시판 댓글 테이블
-create table rental_review(
- review_num number not null,
- review_content clob not null,
- review_reg_date date default sysdate not null,
- review_ip varchar2(40) not null,
- mem_num number not null,
- rental_num number not null,
- constraint rental_review_pk primary key (review_num),
- constraint rental_review_fk1 foreign key (rental_num) references rental (rental_num),
- constraint rental_review_fk2 foreign key (mem_num) references member (mem_num)
-);
-
-create sequence rental_review_seq;
-
-
--- 대여 게시판 스크랩 테이블
-create table rental_scrap(
- rental_num number not null,
- mem_num number not null,
- constraint rental_scrap_fk1 foreign key (rental_num) references rental (rental_num),
- constraint rental_scrap_fk2 foreign key (mem_num) references member (mem_num)
-);
-
 -------------- helper 재능기부 ----------------
 -- 재능기부 게시판 테이블
 create table helper(
@@ -53,7 +7,6 @@ create table helper(
  helper_title varchar2(120) not null,
  helper_content clob not null,
  helper_filename varchar2(200),
- helper_zipcode varchar2(100) not null,
  helper_address1 varchar2(100) not null,
  helper_address2 varchar2(100),
  helper_ip varchar2(40) not null,
@@ -74,4 +27,48 @@ create table helper_scrap(
  mem_num number not null,
  constraint helper_scrap_fk1 foreign key (helper_num) references helper (helper_num),
  constraint helper_scrap_fk2 foreign key (mem_num) references member (mem_num)
+);
+
+-------------- helper 채팅 ----------------
+
+--채팅방
+create table talkroom(
+ talkroom_num number not null,
+ basic_name varchar2(900) not null,--기본 채팅방 이름
+ talkroom_date date default sysdate not null,
+ constraint talkroom_pk primary key (talkroom_num)
+);
+create sequence talkroom_seq;
+
+--채팅방 멤버 / pk없기 때문에 sequence 없음
+create table talk_member(
+ talkroom_num number not null,
+ mem_num number not null,
+ room_name varchar2(900) not null, --멤버별 채팅방 이름
+ member_date date default sysdate not null,
+ constraint talkmember_fk1 foreign key (talkroom_num) references talkroom (talkroom_num),
+ constraint talkmember_fk2 foreign key (mem_num) references member (mem_num)
+);
+
+--채팅 메세지
+create table sptalk(
+ talk_num number not null,
+ talkroom_num number not null, --수신 그룹(여러명)
+ mem_num number not null, -- 발신자(1명)
+ message varchar2(4000) not null, -- 채팅 내용
+ chat_date date default sysdate not null, -- 채팅 날짜
+ constraint talk_pk primary key (talk_num),
+ constraint talk_fk1 foreign key (talkroom_num) references talkroom (talkroom_num),
+ constraint talk_fk2 foreign key (mem_num) references member (mem_num)
+);
+create sequence sptalk_seq;
+
+--채팅 메세지 확인 / 1:1채팅이 아니라 여러명이기 때문에 테이블 따로 만들어서 읽었는지 확인해야함
+create table talk_read(
+ talkroom_num number not null,
+ talk_num number not null,
+ mem_num number not null,
+ constraint read_fk1 foreign key (talkroom_num) references talkroom (talkroom_num),
+ constraint read_fk2 foreign key (talk_num) references talk (talk_num),
+ constraint read_fk3 foreign key (mem_num) references member (mem_num)
 );

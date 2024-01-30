@@ -39,7 +39,7 @@ public interface CommunityMapper {
 	 public void insertFav(CommunityFavVO fav);
 	 @Delete("DELETE FROM community_fav WHERE community_num=#{community_num} AND mem_num=#{mem_num}")
 	 public void deleteFav(CommunityFavVO communityFav);
-	 @Delete("DELETE FROM community_fav WHERE community_num=#{community_num")
+	 @Delete("DELETE FROM community_fav WHERE community_num=#{community_num}")
 	 public void deleteFavByCommunityNum(int community_num);
 	 
 	 //댓글

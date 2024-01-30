@@ -29,6 +29,7 @@ public interface CommunityService {
 	public void insertReply(CommunityReplyVO communityReply);
 	public void updateReply(CommunityReplyVO communityReply);
 	public void deleteReply(int re_num);
+
 }
 
 

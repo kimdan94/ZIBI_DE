@@ -7,7 +7,7 @@
 			<div class="row align-self-center">
 				<div class="col-12 text-center">
 					<h6>* 비밀번호는 영문 대소문자, 숫자 4자리에서 12자리 가능합니다</h6>
-					<form:errors element="span"/>
+					
 				</div>
 				<div class="col-6">
 					<form:label path="mem_password">비밀번호</form:label>
@@ -17,9 +17,10 @@
 				<div class="col-6">
 					<label for="c_password">비밀번호 확인</label>
 					<input type="password" id="c_password" class="w-100 form-control"  placeholder="비밀번호와 동일하게 입력" >
-					<span id="cpassword_area"></span>
 				</div>
 			</div>
+			<form:errors element="span"/>
+			<span id="cpassword_area"></span>
 			<div class="row" style="margin-top: 30px;">
 				<form:button class="btn mem-btn-green">비밀번호 변경</form:button>
 			</div>

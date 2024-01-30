@@ -4,9 +4,6 @@
 	<div class="container-fluid">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-2 col-md-10 footer-logo">
-					<img src="${pageContext.request.contextPath}/images/logo_rec.png" width="100px">
-				</div>
 				<div class="align-self-center col-lg-3 col-md-10">
 					<ul>
 						<li>홈프로텍터</li>
@@ -25,12 +22,15 @@
 					<ul>
 						<li>
 							<a href="${pageContext.request.contextPath}/notice/list">
-							고객센터 <img src="${pageContext.request.contextPath}/images/na/footer_menu.png" width="15px">
+							고객센터 >
 							</a>
 						</li>
 						<li>직접 문의 운영 시간</li>
 						<li>월요일 - 금요일, 9:00 - 18:00</li>
 					</ul>
+				</div>
+				<div class="col-lg-2 col-md-10 footer-logo">
+					<img src="${pageContext.request.contextPath}/images/logo_rec.png" width="100px">
 				</div>
 			</div>
 			<div class="info">

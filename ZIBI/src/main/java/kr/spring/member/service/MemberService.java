@@ -19,5 +19,8 @@ public interface MemberService {
 	/*---------회원 정보 수정----------*/
 	public void updateMemberDetail(MemberVO memberVO);
 	public void updateProfileImages(MemberVO memberVO);
+	public void updatePassword(MemberVO memberVO);
 	
+	/*---------회원 탈퇴----------*/
+	public void quitMember(int mem_num);
 }

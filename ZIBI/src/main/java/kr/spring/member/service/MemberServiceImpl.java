@@ -8,7 +8,6 @@ import kr.spring.member.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	
 	@Autowired
 	MemberMapper memberMapper;
 	
@@ -58,5 +57,19 @@ public class MemberServiceImpl implements MemberService {
 	public void updateProfileImages(MemberVO memberVO) {
 		memberMapper.updateProfileImages(memberVO);
 	}
+	
+	@Override
+	public void updatePassword(MemberVO memberVO) {
+		memberMapper.updatePassword(memberVO);		
+	}
+	
+	/*---------회원 탈퇴----------*/
+	@Override
+	public void quitMember(int mem_num) {
+		memberMapper.quitMemberDetail(mem_num);
+		memberMapper.quitMember(mem_num);
+	}
+
+	
 
 }

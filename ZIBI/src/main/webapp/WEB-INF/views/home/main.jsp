@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 메인 바디 시작 -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-indicators">
@@ -6,7 +7,7 @@
 		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
 		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 	</div>
-	<div class="carousel-inner"><%-- 카테고리별 최신글 링크 걸기 --%>
+	<div class="carousel-inner"><%-- 대표글 링크 걸기 --%>
 		<div class="carousel-item active">
 			<img src="${pageContext.request.contextPath}/images/na/sample1.jpg" class="d-block">
 		</div>
@@ -124,31 +125,319 @@
 	</div>
 	<div class="main-content">
 		<h5>최근 소식을 감상하세요 😉</h5>
+		<!-- Events Start -->
+		<div class="container-fluid event py-6">
+			<div class="tab-class">
+				<div class="tab-content">
+					<div id="tab-1" class="tab-pane fade show p-0 active">
+						<div class="row g-4">
+							<div class="col-lg-12">
+								<div class="row g-4">
+
+									<%-- 게시글 테이블 전체 조인 후 forEach로 돌리기 --%>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.1s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/sample/img/event-1.jpg">
+											<div class="event-overlay d-flex flex-column p-4">
+												<p>#소모임 예약</p>
+												<h4 class="me-auto">퍼스널 컬러 32차 모집</h4>
+												<a href="img/event-1.jpg" data-lightbox="event-1"class="my-auto text-center">
+													<img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+												<span>안녕하세요~ 퍼스널컬러 전문가 단무지입니다. 금주에 갑자기 모집하는...</span>
+											</div>
+										</div>
+									</div>
+									<%-- 게시글 테이블 전체 조인 후 forEach로 돌리기 --%>
+
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.3s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100" src="${pageContext.request.contextPath}/sample/img/event-2.jpg" alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">외계인 2부</h4>
+												<a href="img/event-2.jpg" data-lightbox="event-2"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.5s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-3.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">망치 대여해드립니다</h4>
+												<a href="img/event-3.jpg" data-lightbox="event-3"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.7s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-4.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">닌텐도 팔아요</h4>
+												<a href="img/event-4.jpg" data-lightbox="event-4"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.1s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-5.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">혼자서도 잘 살기</h4>
+												<a href="img/event-5.jpg" data-lightbox="event-5"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.3s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-6.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">바퀴벌레 잡아주실 분?</h4>
+												<a href="img/event-6.jpg" data-lightbox="event-6"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.5s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-7.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">사랑빌라 501호 시끄러워요</h4>
+												<a href="img/event-7.jpg" data-lightbox="event-7"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3 wow bounceInUp"
+										data-wow-delay="0.7s">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-8.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">1인 가구 정보 업뎃</h4>
+												<a href="img/event-8.jpg" data-lightbox="event-17"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-2" class="tab-pane fade show p-0">
+						<div class="row g-4">
+							<div class="col-lg-12">
+								<div class="row g-4">
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-1.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Wedding</h4>
+												<a href="img/01.jpg" data-lightbox="event-8" class="my-auto">
+													<img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-2.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Wedding</h4>
+												<a href="img/01.jpg" data-lightbox="event-9" class="my-auto">
+													<img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-3" class="tab-pane fade show p-0">
+						<div class="row g-4">
+							<div class="col-lg-12">
+								<div class="row g-4">
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-3.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Corporate</h4>
+												<a href="img/01.jpg" data-lightbox="event-10"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-4.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Corporate</h4>
+												<a href="img/01.jpg" data-lightbox="event-11"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-4" class="tab-pane fade show p-0">
+						<div class="row g-4">
+							<div class="col-lg-12">
+								<div class="row g-4">
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-5.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Cocktail</h4>
+												<a href="img/01.jpg" data-lightbox="event-12"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-6.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Cocktail</h4>
+												<a href="img/01.jpg" data-lightbox="event-13"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="tab-5" class="tab-pane fade show p-0">
+						<div class="row g-4">
+							<div class="col-lg-12">
+								<div class="row g-4">
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-7.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Buffet</h4>
+												<a href="img/01.jpg" data-lightbox="event-14"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-3">
+										<div class="event-img position-relative">
+											<img class="img-fluid rounded w-100"
+												src="${pageContext.request.contextPath}/sample/img/event-8.jpg"
+												alt="">
+											<div class="event-overlay d-flex flex-column p-4">
+												<h4 class="me-auto">Buffet</h4>
+												<a href="img/01.jpg" data-lightbox="event-15"
+													class="my-auto"> <img class="img-fluid rounded w-100"
+													src="${pageContext.request.contextPath}/images/na/main_magnifier.png">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Events End -->
 	</div>
 </div>
-
+<c:if test="${!empty message}">
+	<div class="wrap" id="mainModal">
+		<div class="modal_box">
+			<p>
+				<img src="${pageContext.request.contextPath}/images/logo_mini.png">
+				ZIBI와 함께 해주셔서 감사합니다<br>
+				<c:if test="${message=='quitNaver'}">(네이버 연동은 사용자가 직접 해지해야 합니다)</c:if>
+			</p>
+			<div>
+				<button class="btn mem-btn" id="cancel-btn" onclick="$('#mainModal').hide();">홈으로</button>
+				<c:if test="${message=='quitNaver'}"><button class="btn mem-btn-green" onclick="location.href='https://nid.naver.com/'">네이버 연동 해지</button></c:if>
+			</div>
+		</div>
+	</div>
+</c:if>
+<c:if test="${!empty user && empty user.mem_name}">
+	<div class="wrap" id="mainModal">
+		<div class="modal_box">
+			<p>
+				<img src="${pageContext.request.contextPath}/images/logo_mini.png">
+				추가 정보를 입력하시고 더 편하게 ZIBI를 즐기세요!
+			</p>
+			<div>
+				<input type="button" class="btn mem-btn-green" value="추가 정보 입력" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">
+				<button class="btn mem-btn" id="cancel-btn" onclick="$('#mainModal').hide();">홈으로</button>
+			</div>	
+		</div>
+	</div>
+</c:if>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/sample/lib/owlcarousel/owl.carousel.min.js"></script>
-<script type="text/javascript">
-	var owl = $('.owl-carousel');
-	owl.owlCarousel({
-	    loop:true,
-	    nav:true,
-	    margin:10,
-	    responsive:{
-	        0:{items:1},
-	        600:{items:3},            
-	        960:{items:5},
-	        1200:{items:6 }
-	    }
-	});
-	owl.on('mousewheel', '.owl-stage', function (e) {
-	    if (e.originalEvent.deltaY>0) {
-	        owl.trigger('next.owl');
-	    } else {
-	        owl.trigger('prev.owl');
-	    }
-	    e.preventDefault();
-	});
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/owlCarousel.js"></script>
 <!-- 메인 바디 끝 -->

@@ -35,7 +35,13 @@ public class MemberController {
 		return new MemberVO();
 	}
 	
-	/*------------------------------비밀번호 찾기----------------------------------*/
+	/*-----------------------오픈 프로필-----------------------------*/
+	@RequestMapping("/member/mypageOpen")
+	public String mypageOpen() {
+		return "mypageOpen"; //타일즈
+	}
+	
+	/*-----------------------임시 비밀번호 발급 폼-----------------------------*/
 	@RequestMapping("/member/findPassword")
 	public String findPasswordForm() {
 		return "findPassword"; //타일즈
@@ -107,6 +113,13 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/main/home";
+	}
+	
+	//네이버 로그인
+	@RequestMapping("/member/loginNaver")
+	public String loginNaver() {
+		
+		return "member/naverLogin";
 	}
 	
 	/*------------------------------프로필 사진----------------------------------*/

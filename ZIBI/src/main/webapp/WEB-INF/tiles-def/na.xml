@@ -24,18 +24,24 @@
     	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
+	 <definition name="loginPage" template="/WEB-INF/views/member/layout_login.jsp">
+	 	<put-attribute name="title" value="메뉴명"/>
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
+	</definition>
+	
+	 <definition name="myPage" template="/WEB-INF/views/member/layout_mypage.jsp">
+	 	<put-attribute name="title" value="메뉴명"/>
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
+	</definition>
+	
+	
 	<definition name="registerForm" extends="menuPage">
 		<put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
-	</definition>
-	<definition name="loginForm" extends="menuPage">
-		<put-attribute name="title" value="로그인"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
-	</definition>
-	
-	<definition name="mypageMain" extends="menuPage">
-		<put-attribute name="title" value="마이페이지"/>
-    	<put-attribute name="body" value="/WEB-INF/views/member/mypageMain.jsp"/>
 	</definition>
 	<definition name="mypageUpdate" extends="menuPage">
 		<put-attribute name="title" value="회원 정보 수정"/>
@@ -48,6 +54,38 @@
 	<definition name="findPassword" extends="menuPage">
 		<put-attribute name="title" value="비밀번호 찾기"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/findPassword.jsp"/>
+	</definition>
+	<definition name="checkPassword" extends="menuPage">
+		<put-attribute name="title" value="비밀번호 확인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/checkPassword.jsp"/>
+	</definition>
+	<definition name="mypageOpen" extends="menuPage">
+		<put-attribute name="title" value="오픈 프로필"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageOpen.jsp"/>
+	</definition>
+	
+	
+	<definition name="loginForm" extends="loginPage">
+		<put-attribute name="title" value="로그인"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+	</definition>
+	
+	
+	<definition name="mypageMain" extends="myPage">
+		<put-attribute name="title" value="마이페이지"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageMain.jsp"/>
+	</definition>
+	<definition name="mypageDeal" extends="myPage">
+		<put-attribute name="title" value="나의 거래 내역"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageDealList.jsp"/>
+	</definition>
+	<definition name="mypageAct" extends="myPage">
+		<put-attribute name="title" value="나의 활동 내역"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageActList.jsp"/>
+	</definition>
+	<definition name="mypageFollow" extends="myPage">
+		<put-attribute name="title" value="팔로우 내역"/>
+    	<put-attribute name="body" value="/WEB-INF/views/member/mypageFollowList.jsp"/>
 	</definition>
 	
 </tiles-definitions>

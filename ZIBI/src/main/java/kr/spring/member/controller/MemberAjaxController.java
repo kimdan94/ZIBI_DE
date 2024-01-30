@@ -31,6 +31,24 @@ public class MemberAjaxController {
 	@Autowired
 	JavaMailSenderImpl mailSender;
 	
+	//회원 탈퇴 - 비밀번호 확인
+	@RequestMapping("/member/quitPassword")
+	@ResponseBody
+	public Map<String,String> checkPassword(@RequestParam String input_password, HttpSession session) {
+		
+		log.debug("<<탈퇴 비밀번호 확인>> : " + input_password);
+		
+		MemberVO db_member = (MemberVO)session.getAttribute("user");
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		if( !db_member.checkPassword(input_password) ) { //비밀번호 불일치
+			mapJson.put("result","passwordNotMatch");
+		} else { //비밀번호 일치
+			mapJson.put("result","passwordMatch");
+		}
+		return mapJson;
+	}
+	
 	//이메일 인증
 	@PostMapping("/member/emailAuth")
 	@ResponseBody
@@ -131,10 +149,10 @@ public class MemberAjaxController {
 		}
 	}
 	
-	//카카오 로그인/회원 가입
-	@RequestMapping("/member/loginKakao")
+	//소셜 로그인/회원 가입
+	@RequestMapping("/member/loginSocial")
 	@ResponseBody
-	public Map<String,String> loginKakao(@RequestParam String mem_email, HttpSession session) {
+	public Map<String,String> loginKakao(@RequestParam String mem_email,@RequestParam int mem_social, HttpSession session) {
 		
 		Map<String, String> mapJson = new HashMap<String, String>();
 		MemberVO db_member = memberService.checkEmail(mem_email);
@@ -145,15 +163,21 @@ public class MemberAjaxController {
 			
 			memberVO.setMem_num(mem_num);
 			memberVO.setMem_email(mem_email);
-			memberVO.setMem_social(1); 
-			memberVO.setMem_nickname("카카오"+mem_num);
+			
+			if(mem_social==1) { //카카오
+				memberVO.setMem_social(1); 
+				memberVO.setMem_nickname("카카오"+mem_num);
+			} else if(mem_social==2) {
+				memberVO.setMem_social(2); 
+				memberVO.setMem_nickname("네이버"+mem_num);
+			}
 			
 			memberService.registerMember(memberVO); //회원가입
 			session.setAttribute("user",memberVO); //로그인 처리
 			
 			mapJson.put("result","success");
 			
-			log.debug("<<카카오 회원가입>>"+memberVO);
+			log.debug("<<소셜 회원가입>>"+memberVO);
 		} else { //회원가입 되어있음 > 로그인
 			session.setAttribute("user",db_member); //로그인
 			mapJson.put("result","success");

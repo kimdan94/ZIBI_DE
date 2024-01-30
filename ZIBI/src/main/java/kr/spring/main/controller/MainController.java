@@ -15,6 +15,7 @@ public class MainController {
 	
 	@RequestMapping("/main/home")
 	public String main() {
+
 		return "home"; //타일스 설정명
 	}
 	

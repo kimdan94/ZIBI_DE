@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -29,52 +29,67 @@ public class MypageController {
 	@ModelAttribute
 	public MemberVO initCommand(HttpSession session) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		MemberVO memberVO = memberService.selectMember(user.getMem_num());
-		return memberVO;
+		return memberService.selectMember(user.getMem_num());
 	}
 	
 	//마이페이지 메인
 	@RequestMapping("/member/mypageMain")
-	public String mypageMain(HttpSession session, Model model) {
-		model.addAttribute("pageName","마이페이지");
+	public String mypageMain() {
 		return "mypageMain"; //타일즈
+	}
+	
+	//마이페이지-거래내역
+	@RequestMapping("/member/mypageDeal")
+	public String mypageDeal() {
+		return "mypageDeal"; //타일즈
+	}
+	
+	//마이페이지-활동내역
+	@RequestMapping("/member/mypageAct")
+	public String mypageAct() {
+		return "mypageAct"; //타일즈
+	}
+	
+	//마이페이지-팔로우내역
+	@RequestMapping("/member/mypageFollow")
+	public String mypageFollow() {
+		return "mypageFollow"; //타일즈
 	}
 	
 	//회원 정보 수정폼
 	@GetMapping("/member/mypageUpdate")
-	public ModelAndView mypageUpdateForm() {
-		return new ModelAndView("mypageUpdate","pageName","회원 정보 수정");
+	public String mypageUpdateForm() {
+		return "mypageUpdate";
 	}
 	
 	//회원 정보 수정 submit
 	@PostMapping("/member/mypageUpdate")
-	public ModelAndView mypageUpdateSubmit(@Valid MemberVO memberVO, BindingResult result, Model model) {
+	public String mypageUpdateSubmit(@Valid MemberVO memberVO, BindingResult result,HttpSession session) {
+		
+		log.debug("<<회원 정보 수정 1>> : " + memberVO);
 		
 		if(result.hasErrors()) { //유효성 체크
-			return new ModelAndView("mypageUpdate","pageName","회원 정보 수정");
-		} 
+			return"mypageUpdate";
+		}
 		
-		log.debug("<<회원 정보 수정>> : " + memberVO);
-		memberVO.setMem_email(null);
 		memberService.updateMemberDetail(memberVO);//update 진행
+		session.setAttribute("user",memberVO);
 		
-		return new ModelAndView("mypageMain","pageName","마이페이지");
+		return "redirect:/member/mypageMain";
 	}
 	
 	//비밀번호 변경 폼
 	@GetMapping("/member/passwordUpdate")
-	public ModelAndView updatePasswordForm() {
-		return new ModelAndView("passwordUpdateForm","pageName","비밀번호 변경");
+	public String updatePasswordForm() {
+		return "passwordUpdateForm";
 	}
 	
 	//비밀번호 변경 submit
 	@PostMapping("/member/passwordUpdate")
-	public String updatePassword(@Valid MemberVO memberVO,BindingResult result,HttpSession session,Model model) {
-		
-		model.addAttribute("pageName","비밀번호 변경");
+	public String updatePassword(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
 		
 		//공란 입력 시
-		if(result.hasFieldErrors()) {
+		if(result.hasFieldErrors("mem_password")) {
 			result.reject("passwordBlank");
 			return "passwordUpdateForm";
 		}
@@ -87,10 +102,31 @@ public class MypageController {
 			return "passwordUpdateForm";
 		}
 		
-		model.addAttribute("pageName","마이페이지");
-		memberService.updateMemberDetail(memberVO);
-		
-		return "mypageMain";
+		memberService.updatePassword(memberVO);
+				
+		return "redirect:/member/mypageMain";
 	}
 	
+	//회원 탈퇴 비밀번호 확인폼
+	@RequestMapping("/member/checkPassword")
+	public String passwordForm() {
+		return "checkPassword";
+	}
+	
+	//회원 탈퇴
+	@RequestMapping("/member/quitMember")
+	public String quitMember(HttpSession session, RedirectAttributes attr) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		log.debug("<<회원 탈퇴>> : " +  user );
+		
+		session.invalidate(); //로그아웃
+		memberService.quitMember(user.getMem_num()); //탈퇴
+		
+		if(user.getMem_social()==2) attr.addFlashAttribute("message","quitNaver");
+		else attr.addFlashAttribute("message","quit");
+		
+		return "redirect:/main/home";
+	}
 }

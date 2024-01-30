@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!-- 헤더 시작 -->
 <header class="main-header" style="padding-top: 20px;">
 	<div class="container">
@@ -9,7 +10,14 @@
 				<a class="nickname-area">
 					<img src="${pageContext.request.contextPath}/images/na/header_member.png" width="15px"> ${user.mem_nickname}님
 				</a>
-				<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+				<c:if test="${user.mem_social!=1}">
+					<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
+				</c:if>
+				<c:if test="${user.mem_social==1}">
+					<a onclick="javascript:logoutKakao()">로그아웃</a><!-- 카카오에서 제공하는 로그아웃 기능 이용 -->
+					<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+					<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/kakao.js"></script><!-- 유효성 체크 -->
+				</c:if>
 			</c:if>
 			<c:if test="${empty user}">
 				<a href="${pageContext.request.contextPath}/member/login">로그인</a>
@@ -57,9 +65,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="collapse navbar-collapse justify-content-end">
-
-			</div>
+			<div class="collapse navbar-collapse justify-content-end"></div>
 		</nav>
 	</div>
 </header>

@@ -9,7 +9,7 @@
 		<div>
 			<button class="btn mem-btn-green" onclick="javascript:loginDirect()">로그인</button><br>
 		</div>
-		<p>혹시 이메일을 받지 못하셨나요? <a href="findPassword">이메일을 다시 입력해주세요</a></p>
+		<p>혹시 이메일을 받지 못하셨나요? <a onclick="javascript:replaceEmailForm()">이메일을 다시 입력해주세요</a></p>
 	</div>
 	<div class="modal_bg"></div>
 </div>

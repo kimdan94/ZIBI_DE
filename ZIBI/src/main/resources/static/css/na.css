@@ -63,9 +63,6 @@
     position: relative;
     z-index: 2;
 }
-.service-item .service-content-icon a {
-	transition: .5s;
-}
 .service-item .service-content-icon p {
     transition: 1s;
 }
@@ -81,6 +78,36 @@
 .service-item .service-content-icon {
     transition: 1s !important;
 }
+/* 최신글 */
+
+.main-content .event .event-img .event-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255, 0.8);
+    border-radius: 8px;
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 1;
+}
+.main-content  .event-overlay img{
+ 	width: 40px !important;
+ }
+.main-content .event .event-img:hover .event-overlay {
+    opacity: 1;
+}
+
+/*-------------로그인-------------*/
+.register-info div{
+	margin: 10px 0 10px 0;
+}
+.register-info a{
+	color: black;
+	text-decoration-line: none;
+}
+
 /*--------------회원가입--------------*/
 /* 이메일 인증, 비밀번호 찾기 모달창 */
 #emailAuthModal{
@@ -111,7 +138,6 @@
 	text-align: center;
 }
 .modal_box button{
-	margin-top: 10px;
 	height: 40px;
 	align-self: center;
 	cursor: pointer;
@@ -130,6 +156,7 @@
 	font-weight: 600;
 	color: #DB3954;
 	text-decoration-line: none;
+	cursor: pointer;
 }
 .modal_box p{
 	margin: 10px;
@@ -165,28 +192,28 @@
 }
 
 /* 프로필 사진 변경 */
-.my-photo {
+.mypageMain .my-photo {
 	object-fit: cover;
 	height: 350px;
 	width: 350px;
 }
-.site-content {
+.mypageMain .site-content {
 	margin-top: 20px;
 	padding: 5px;
 	font-size: .9em;
 	font-weight: bold;
 }
-.event{
+.mypageMain .event{
 	padding: 50px 0 50px 0;
 }
-.event h4{
+.mypageMain .event h4{
 	font-size: 1.1em;
 	font-weight: bold;
 }
-.event .tab-class .nav-item a.active {
+.mypageMain .event .tab-class .nav-item a.active {
     background: var(--bs-primary) !important;
 }
-.event .event-img .event-overlay {
+.mypageMain .event .event-img .event-overlay {
     position: absolute;
     top: 80%;
     left: 80%;
@@ -195,7 +222,7 @@
     z-index: 1;
     color: black;
 }
-.event .event-img:hover .event-overlay {
+.mypageMain .event .event-img:hover .event-overlay {
     opacity: 1;
     cursor: pointer;
 }
@@ -204,6 +231,73 @@
 #update_member h6{
 	margin-bottom: 30px;
 }
+
+/* 마이페이지 내역 */
+.mypage-category{
+	margin: 20px;
+}
+.mypage-list{
+	margin: 20px;
+	padding: 5px;
+	border-bottom: 1px solid gray;
+}
+.mypage-list .row div{
+	border-top: 1px solid gray;
+	padding: 5px;
+}
+.mypage-list a, .mypage-follow a{
+	text-decoration: none;
+	color: black;
+	font-weight: 600;
+}
+.mypage-list a:hover, .mypage-follow a:hover{
+	text-decoration: none;
+	color: #32a77b;
+	font-weight: 600;
+	transition: .3s;
+}
+
+/* 마이페이지 팔로우 */
+.mypage-follow .col-5{
+	height: 100px;
+	width: 300px;
+	overflow: hidden;
+}
+.mypage-follow .col-5 img,
+.mypage-follow .col-4 img{
+	border-radius: 8px;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-position: 50% 50%;
+}
+.mypage-follow .col-7{
+	text-align: left;
+	border-bottom: 1px solid lightgray;
+}
+
+/* 오픈 프로필 */
+.mypage-follow .col-4{
+	height: 100px;
+	width: 200px;
+	overflow: hidden;
+}
+.mypage-follow .col-3{
+	text-align: left;
+}
+.all-card{
+	margin-top: 40px;
+	display: felx;
+	flex-wrap: wrap-reverse;
+	align-items: flex-start;
+}
+.card{
+	width:18em;
+	margin:5px;
+	display: inline-block;
+	align-self: flex-start;
+}
+
 
 /*-------------전체--------------*/
 /* 일반 페이지 넓이 */

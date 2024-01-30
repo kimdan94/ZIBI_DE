@@ -4,6 +4,12 @@ function loginDirect(){
 	location.replace('/member/login');
 }
 
+function replaceEmailForm(){
+	location.replace('/member/findPassword');
+	$(window).scrollTop(0);
+	$('body').css('overflow-y','');
+}
+
 //이메일 인증버튼 클릭
 $('#find_email').submit(function(event){
 	
@@ -26,6 +32,8 @@ $('#find_email').submit(function(event){
 		success:function(param){ //메일 전송 성공 시
 			if(param.result=="success"){
 				$('#passwordModal').show(); //모달창 호출, 로그인 유도
+				$(window).scrollTop(0);
+				$('body').css('overflow-y','hidden');
 			} //이메일 유출을 막기 위해 없는 이메일이더라도 사용자에게 보여주지 않음
 		},
 		error:function(){

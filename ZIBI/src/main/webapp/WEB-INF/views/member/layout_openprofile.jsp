@@ -12,7 +12,7 @@
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>	
+	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	
 	<!-- Icon Font Stylesheet -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -38,7 +38,9 @@
 			</nav>
 		</div>
 	</div>
-	<tiles:insertAttribute name="body"/>
+	<div class="container page-width">
+		<tiles:insertAttribute name="body"/>
+	</div>	
 	<tiles:insertAttribute name="footer"/>
 	<a href="#" class="btn btn-light btn-md-square rounded-circle back-to-top">
 		<img src="${pageContext.request.contextPath}/images/na/up_menu.png" width="15px">

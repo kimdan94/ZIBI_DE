@@ -32,8 +32,8 @@ create sequence member_seq;
 
 --팔로우
 create table follow(
-	mem_num number not null, --나
-	fmem_num number not null, --내가 팔로우 한 사람
-	constraint member_follow_fk foreign key (mem_num) references member (mem_num)
+	mem_num number not null, --내가 팔로우 한 사람
+	fmem_num number not null, --나
+	constraint member_follow_fk foreign key (mem_num) references member (mem_num),
 	constraint member_follow_fk2 foreign key (fmem_num) references member (mem_num)
 );

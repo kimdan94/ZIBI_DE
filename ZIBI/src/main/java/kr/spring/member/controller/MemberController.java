@@ -35,9 +35,17 @@ public class MemberController {
 		return new MemberVO();
 	}
 	
+	
 	/*-----------------------오픈 프로필-----------------------------*/
-	@RequestMapping("/member/mypageOpen")
-	public String mypageOpen() {
+	@GetMapping("/member/mypageOpen")
+	public String mypageOpen(@RequestParam int mem_num, HttpSession session, Model model) {
+		
+		log.debug("<<오픈 프로필 진입 mem_num>> : " + mem_num);
+		
+		//글 목록
+		
+		//회원 정보
+		
 		return "mypageOpen"; //타일즈
 	}
 	

@@ -261,14 +261,12 @@
 .mypage-follow .col-5{
 	height: 100px;
 	width: 300px;
-	overflow: hidden;
 }
-.mypage-follow .col-5 img,
-.mypage-follow .col-4 img{
+.mypage-follow .col-5 img{
 	border-radius: 8px;
-	object-fit: cover;
 	width: 100%;
 	height: 100%;
+	object-fit: cover;
 	object-position: 50% 50%;
 }
 .mypage-follow .col-7{
@@ -277,32 +275,29 @@
 }
 
 /* 오픈 프로필 */
-.mypage-follow .col-4{
-	height: 100px;
-	width: 200px;
-	overflow: hidden;
+.openProfile .col-5{
+	height: 150px;
+	width: 300px;
 }
-.mypage-follow .col-3{
-	text-align: left;
+.openProfile .col-5 img{
+	border-radius: 8px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
 }
-.all-card{
-	margin-top: 40px;
-	display: felx;
-	flex-wrap: wrap-reverse;
-	align-items: flex-start;
+.openProfile .row{
+	margin: 20px;
 }
-.card{
-	width:18em;
-	margin:5px;
-	display: inline-block;
-	align-self: flex-start;
+.openProfile .col{
+	text-align: center;
+	margin-bottom: 10px;
 }
-
 
 /*-------------전체--------------*/
 /* 일반 페이지 넓이 */
 .page-width{ 
-	width:60%;
+	width:80%;
 }
 
 /* 입력폼 페이지 넓이 */

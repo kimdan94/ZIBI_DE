@@ -38,7 +38,7 @@
 	</div>
 	<div class="row">
 		<div class="col-6">
-			<input type="button" value="나의 오픈 프로필" class="btn  mem-btn-green w-100" onclick="location.href='${pageContext.request.contextPath}/member/mypageOpen'">
+			<input type="button" value="나의 오픈 프로필" class="btn  mem-btn-green w-100" onclick="location.href='${pageContext.request.contextPath}/member/mypageOpen?mem_num=${user.mem_num}'">
 		</div>
 		<div class="col-6 text-center">
 			<input type="button" class="btn mem-btn" value="정보 수정하기" onclick="location.href='${pageContext.request.contextPath}/member/mypageUpdate'">

@@ -49,6 +49,9 @@ public class MemberVO {
 	private String mem_photoname;
 	private String mem_auid;
 	
+	private int follow_count; //팔로우 수
+	
+	
 	/*---비밀번호 체크---*/
 	public boolean checkPassword(String input_password) {
 		if(input_password.equals(mem_password)) return true;

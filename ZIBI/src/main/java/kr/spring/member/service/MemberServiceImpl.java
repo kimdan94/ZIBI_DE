@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.member.dao.MemberMapper;
+import kr.spring.member.vo.FollowVO;
 import kr.spring.member.vo.MemberVO;
 
 @Service
@@ -69,7 +70,25 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.quitMemberDetail(mem_num);
 		memberMapper.quitMember(mem_num);
 	}
-
+	/*---------회원 팔로우----------*/
+	@Override
+	public FollowVO selectFollow(FollowVO followVO) {
+		return memberMapper.selectFollow(followVO);
+	}
 	
+	@Override
+	public void followMember(FollowVO followVO){
+		memberMapper.followMember(followVO);
+	}
+
+	@Override
+	public void unfollowMember(FollowVO followVO) {
+		memberMapper.unfollowMember(followVO);
+	}
+
+	@Override
+	public int followCount(int mem_num) {
+		return memberMapper.followCount(mem_num);
+	}
 
 }

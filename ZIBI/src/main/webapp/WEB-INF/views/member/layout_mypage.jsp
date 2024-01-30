@@ -8,12 +8,9 @@
 	<meta content="" name="keywords">
 	<meta content="" name="description">
 	<meta name="google-signin-client_id" content="476509144939-btrm06kr4s6cfaqc76n3m01g5seb8582.apps.googleusercontent.com">
-	
 	<title><tiles:getAsString name="title"/></title>
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
-	
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	
 	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	

@@ -1,10 +1,12 @@
 package kr.spring.member.dao;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.member.vo.FollowVO;
 import kr.spring.member.vo.MemberVO;
 
 @Mapper
@@ -47,4 +49,19 @@ public interface MemberMapper {
 	
 	@Delete("DELETE FROM member_detail where mem_num=#{mem_num}")
 	public void quitMemberDetail(int mem_num);
+	
+	/*---------회원 팔로우/언팔로우----------*/
+	@Select("SELECT * FROM follow JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND fmem_num=#{fmem_num}") //회원의 팔로우 목록을 불러옴
+	public FollowVO selectFollow(FollowVO followVO);
+	
+	@Select("SELECT COUNT(*) FROM follow WHERE mem_num=#{mem_num}") //회원의 팔로우 수를 불러옴
+	public int followCount(int mem_num);
+	
+	@Insert("INSERT INTO follow (mem_num,fmem_num) VALUES (#{mem_num},#{fmem_num})") //팔로잉
+	public void followMember(FollowVO followVO);
+	
+	@Delete("DELETE FROM follow WHERE mem_num=#{mem_num} AND fmem_num=#{fmem_num}") //언팔로우
+	public void unfollowMember(FollowVO followVO);
+	
+	
 }

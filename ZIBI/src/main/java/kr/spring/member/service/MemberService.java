@@ -1,5 +1,6 @@
 package kr.spring.member.service;
 
+import kr.spring.member.vo.FollowVO;
 import kr.spring.member.vo.MemberVO;
 
 public interface MemberService {
@@ -23,4 +24,11 @@ public interface MemberService {
 	
 	/*---------회원 탈퇴----------*/
 	public void quitMember(int mem_num);
+	
+	
+	/*---------회원 팔로우----------*/
+	public FollowVO selectFollow(FollowVO followVO);
+	public void followMember(FollowVO followVO);
+	public void unfollowMember(FollowVO followVO);
+	public int followCount(int mem_num);
 }

@@ -32,7 +32,6 @@
 	</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/mypageProfileImage.js"></script><!-- 프로필 사진 변경 -->
 <script>
 	$('#deal_btn').toggleClass("mem-btn");
 	$('#deal_btn').toggleClass("mem-btn-green");

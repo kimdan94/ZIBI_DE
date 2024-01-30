@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.FollowVO;
 import kr.spring.member.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,67 @@ public class MemberAjaxController {
 	private MemberService memberService;
 	@Autowired
 	JavaMailSenderImpl mailSender;
+	
+	//팔로우/언팔로우 읽기
+	@RequestMapping("/member/getFollow")
+	@ResponseBody
+	public Map<String,Object> followProcess(HttpSession session, FollowVO followVO) {
+		
+		log.debug("<<팔로우/언팔로우>> : " + followVO);
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인한 회원
+		
+		if(user==null) { //로그아웃
+			mapJson.put("status","logout");
+		} else {
+			followVO.setFmem_num(user.getMem_num());
+			FollowVO db_follow = memberService.selectFollow(followVO);
+			
+			if(db_follow!=null) { //이미 팔로우 되어 있음
+				mapJson.put("status","yesFollow");
+			} else { //팔로우 되어있지 않음
+				mapJson.put("status","noFollow");
+			}
+		}
+		
+		mapJson.put("count",memberService.followCount(followVO.getMem_num()));
+		
+		return mapJson;
+	}
+	
+	//팔로우,언팔로우
+	@RequestMapping("/member/writeFollow")
+	@ResponseBody
+	public Map<String,Object> writeFollow(FollowVO followVO, HttpSession session){
+		
+		log.debug("<<팔로우 : >>" + followVO);
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		
+		if(user==null) {
+			mapJson.put("result", "logout");
+		} else {
+			followVO.setFmem_num(user.getMem_num()); //로그인된 사용자 번호
+			FollowVO db_follow = memberService.selectFollow(followVO); //해당 회원의 팔로우 정보
+			
+			if(db_follow!=null) { //이미 팔로우 되어 있음 
+				memberService.unfollowMember(followVO); //언팔로우
+				mapJson.put("status","noFollow");
+			} else {
+				memberService.followMember(followVO); //팔로우
+				mapJson.put("status","yesFollow");
+			}
+			
+			mapJson.put("result","success");
+		}
+		
+		mapJson.put("count",memberService.followCount(followVO.getMem_num()));
+		
+		return mapJson;
+	}
 	
 	//회원 탈퇴 - 비밀번호 확인
 	@RequestMapping("/member/quitPassword")

@@ -42,7 +42,6 @@ $(function(){
 					console.log(str);
 					$('#cinema_hidden').attr('value',str); // form의 hidden 값 넣어주기
 					// ===== [지역1, 지역2 모두 선택하면 선택할 수 있는 영화 고르기] =====
-					//locationNum(str); // ajax 통신
 					ent(); // form hidden 값 
 				}
 				
@@ -91,7 +90,6 @@ $(function(){
 		ent(); // form hidden 값 
 		
 	});
-	// 시간 선택
 	
 	
 	//--------------------------- 날짜 선택 끝 ----------------------------

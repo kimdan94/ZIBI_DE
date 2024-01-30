@@ -166,6 +166,42 @@ public class PerformanceAjaxController {
 	}
 	
 	
+	/*=================================
+	 * 좌석 선택 페이지 - 좌석 선택
+	 *=================================*/
+	@RequestMapping("/performance/drawSeat")
+	@ResponseBody // 지역2 str으로 해당 상영관의 번호 알아내기
+	public Map<String, Object> drawSeat(@RequestParam(value="ticketing_num",defaultValue="0") Integer ticketing_num, HttpSession session, HttpServletRequest request){
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		log.debug("<<ticketing_num 값 알아내기>>: " + ticketing_num);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<CinemaVO> pickCinema = null;
+		List<PerformanceVO> pickPerformance = null;
+		List<TicketingVO> pickTicketing = null;
+
+		map.put("ticketing_num", ticketing_num);
+		
+		pickCinema = performanceService.pickCinema(map);
+		pickPerformance = performanceService.pickPerformance(map);
+		pickTicketing = performanceService.pickTicketing(map);
+		
+		log.debug("===================<<Ajax>>======================");
+		log.debug("<<pickCinema>> : " + pickCinema);
+		log.debug("<<pickPerformance>> : " + pickPerformance);
+		log.debug("<<pickTicketing>> : " + pickTicketing);
+		log.debug("===================<<Ajax>>======================");
+		
+
+		mapJson.put("pickCinema", pickCinema);
+		mapJson.put("pickPerformance", pickPerformance);
+		mapJson.put("pickTicketing", pickTicketing);
+		return mapJson;
+	}
+	
+	
+	
 	
 	
 }

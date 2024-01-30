@@ -297,6 +297,12 @@ public class PerformanceController {
 		pickPerformance = performanceService.pickPerformance(map);
 		pickTicketing = performanceService.pickTicketing(map);
 		
+		log.debug("================================================");
+		log.debug("<<pickCinema>> : " + pickCinema);
+		log.debug("<<pickPerformance>> : " + pickPerformance);
+		log.debug("<<pickTicketing>> : " + pickTicketing);
+		log.debug("================================================");
+		
 		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
 		mav.addObject("pickCinema", pickCinema);
 		mav.addObject("pickPerformance", pickPerformance);
@@ -306,15 +312,6 @@ public class PerformanceController {
 	}
 	
 	
-	/*
-	 * @RequestMapping("/performance/performanceSeat") public ModelAndView
-	 * chooseSeat() { log.debug("<<목록 메서드>>");
-	 * 
-	 * ModelAndView mav = new ModelAndView(); mav.setViewName("performanceSeat"); //
-	 * tiles 설정 name과 동일해야 함
-	 * 
-	 * return mav; }
-	 */
 	
 	// 결제창으로 이동
 	@PostMapping("/performance/submitSeat")

@@ -58,20 +58,20 @@ create sequence ticketing_seq;
 );*/
 
 --
-create table choice(
- choose_num number not null,
- choose_row number not null,
- choose_col number not null,
+create table perform_choice(
+ choice_num number not null,
+ choice_row number not null,
+ choice_col number not null,
  mem_num number not null,
  ticketing_num number not null,
- constraint choose_fk1 foreign key (mem_num) references member (mem_num),
- constraint choose_fk2 foreign key (ticketing_num) references ticketing (ticketing_num)
+ constraint choice_fk1 foreign key (mem_num) references member (mem_num),
+ constraint choice_fk2 foreign key (ticketing_num) references ticketing (ticketing_num)
 );
 
-create sequence choice_seq;
+create sequence perform_choice_seq;
 
 -- 결제 정보
-create table payment(
+create table perform_payment(
  payment_num number not null,
  payment_type varchar2(30) not null,
  payment_price number not null,
@@ -84,7 +84,7 @@ create table payment(
  constraint payment_fk2 foreign key (choose_num) references choose (choose_num)
 );
 
-create sequence payment_seq;
+create sequence perform_payment_seq;
 
 
 -- 고객센터 --

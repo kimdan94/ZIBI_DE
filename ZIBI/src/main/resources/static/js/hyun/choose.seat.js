@@ -45,9 +45,54 @@ $(function(){ // performanceSeat.jsp
 	 * 인원 선택 끝
 	 * ---------------------------------- */
 	
+	let ticketing_num = $('#ticketing-num').text();
 	
+	rowAndCol(ticketing_num);
+	// ticketing-num으로 row, col 알아내기
+	function rowAndCol(ticketing_num){
+		$.ajax({
+			url:'drawSeat',
+			type:'post',
+			data:{ticketing_num:ticketing_num},
+			dataType:'json',
+			success:function(param){
+				seat(param);
+			},
+			error:function(){
+				alert('네트워크 오류 발생');
+			}
+		});
+	}
 	
-	
-	
+	// 좌석 그리기
+	function seat(param){
+		console.log(param.pickCinema[0]);
+		console.log(param.pickPerformance[0]);
+		console.log(param.pickTicketing[0]);
 		
+		console.log(param.pickCinema[0].cinema_row);
+		console.log(param.pickCinema[0].cinema_col);
+		let standard = param.pickCinema[0].cinema_col * 0.2;
+		console.log('standard : ' + standard);
+		console.log(param.pickCinema[0].cinema_col-standard);
+		
+		
+		$('#seat').empty();
+		let output = '';
+		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
+			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
+				if(j == standard || j == (param.pickCinema[0].cinema_col-standard)){
+					output += ' ';
+				}
+				output += '<div id="'+i+'_'+j+'" class="" style="display:inline-block;width:50px;height:50px;border:1px solid black;"></div>';
+			}
+			output += '<br>';
+		}
+		$('#seat').append(output);
+				
+	}
+	
+	
+	
+	
 });

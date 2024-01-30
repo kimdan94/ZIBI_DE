@@ -7,6 +7,7 @@ community_hit number(9) default 0 not null,
 community_reg_date date default sysdate not null,
 community_modify_date date,
 community_filename varchar2(150),
+community_category number(1) not null,
 mem_num number not null,
 constraint member_pk primary key (community_num),
  constraint member_fk foreign key (mem_num) 

@@ -3,7 +3,7 @@ $(function(){ // performanceSeat.jsp
 	/* ----------------------------------
 	 * 인원 선택 시작
 	 * ---------------------------------- */
-	
+	let totalPeople = calculatePeopleNum();
 	$('.adult-minus').on('click',function(){
 		underEight(-1, 0, 0);
 	});
@@ -40,7 +40,16 @@ $(function(){ // performanceSeat.jsp
 			$('.teenage-num').text(teenage);
 			$('.treatement-num').text(treatement);
 		}
+		// 최종 인원 수
+		calculatePeopleNum();
 	}
+	// 전체 인원 수 계산
+	function calculatePeopleNum(){
+		let result = Number($('.adult-num').text()) + Number($('.teenage-num').text()) + Number($('.treatement-num').text());
+		console.log('전체 인원 수 : ' + result);
+		return result;
+	}
+	
 	/* ----------------------------------
 	 * 인원 선택 끝
 	 * ---------------------------------- */
@@ -57,6 +66,10 @@ $(function(){ // performanceSeat.jsp
 			dataType:'json',
 			success:function(param){
 				seat(param);
+				
+				mouseoverSeat(param);
+				mouseoutSeat(param);
+				clickSeat(param);
 			},
 			error:function(){
 				alert('네트워크 오류 발생');
@@ -89,10 +102,48 @@ $(function(){ // performanceSeat.jsp
 			output += '<br>';
 		}
 		$('#seat').append(output);
+		
 				
 	}
 	
+	// 마우스 오버
+	function mouseoverSeat(param){
+		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
+			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
+				$('#'+i+'_'+j).on('mouseover', (e) => {
+					$('#'+i+'_'+j).css({ "background-color": "blue" });
+					console.log('total 인원 : ' + calculatePeopleNum());
+				});
+			}
+		}
+	}
 	
+	// 클래스 추가 삭제 변경 : https://sharphail.tistory.com/45
+	
+	// 클릭하고 mouseout하면 색 그대로 // mouseout을 clickSeat에 들어거야 할지도
+	function mouseoutSeat(param){
+		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
+			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
+				$('#'+i+'_'+j).on('mouseout', (e) => {
+					$('#'+i+'_'+j).css({ "background-color": "" });
+				});
+			}
+		}
+	}
+	
+	
+	
+	// 클릭 + 클릭한 좌석 id 구하기 -> 토글 형태로 구현하기 + 좌석 여러 개 구현하기
+	function clickSeat(param){
+		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
+			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
+				$('#'+i+'_'+j).click(function(){
+					$(this).css("background-color", "red"); // css 값을 주지 말고 class값 주기
+					console.log($(this).prop("id"));
+				});
+			}
+		}
+	}
 	
 	
 });

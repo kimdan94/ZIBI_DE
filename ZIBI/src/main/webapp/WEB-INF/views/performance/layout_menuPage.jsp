@@ -21,7 +21,7 @@
 	<!-- Customized Bootstrap Stylesheet -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Template Stylesheet -->
-	<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/hyun.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 	
 </head>

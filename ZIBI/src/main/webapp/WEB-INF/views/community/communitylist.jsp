@@ -12,6 +12,7 @@
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=4">건강</a></span>|
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=5">육아</a></span>
 	</span>
+	<br>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -49,11 +50,12 @@
 		<tr>
 			<th class="align-center">번호</th>
 			<th class="align-center">카테고리</th>
-			<th width="400">제목</th>
+			<th width="300">제목</th>
 			<th class="align-center">작성자</th>
 			<th class="align-center">작성일</th>
 			<th class="align-center">조회수</th>
 			<th class="align-center">좋아요수</th>
+			<th class="align-center">댓글수</th>
 		</tr>
 		<c:forEach var="community" items="${list}">
 		<tr>
@@ -70,6 +72,7 @@
 			<td class="align-center">${community.community_reg_date}</td>
 			<td class="align-center">${community.community_hit}</td>
 			<td class="align-center">${community.fav_cnt}</td>
+			<td class="align-center">${community.re_cnt}</td>
 		</tr>	
 		</c:forEach>
 	</table>

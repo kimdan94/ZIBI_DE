@@ -56,9 +56,12 @@
 							<img class="book-profile" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${book.mem_num}">
 							<span class="book-nick">${book.mem_nickname}</span>
 						</c:if>
-						<c:if test="${!empty user && user.mem_num == book.mem_num}">
+						<c:if test="${!empty user && user.mem_num == book.mem_num && book.book_onoff == 0}">
 							<input type="button" value="모집 완료하기" class="bookd-btn-green w-100"
 								id="complete_btn" data-num="${book.book_num}">
+						</c:if>
+						<c:if test="${!empty user && user.mem_num == book.mem_num && book.book_onoff == 3}">
+							<input type="button" value="모집 마감" class="btn btn-light w-100" disabled>
 						</c:if>
 					</td>
 				</tr>
@@ -105,9 +108,12 @@
 						onclick="location.href='cancel?book_num=${book.book_num}'"
 						class="bookd-btn-green w-25">	
 				</c:if>
-				<c:if test="${!empty user && user.mem_num != book.mem_num}">
+				<c:if test="${!empty user && user.mem_num != book.mem_num && book.book_onoff == 0}">
 					<input type="button" value="참여 신청하기" id="book_apply" 
 						class="bookd-btn-green w-25">
+				</c:if>
+				<c:if test="${!empty user && user.mem_num != book.mem_num && book.book_onoff == 3}">
+					<input type="button" value="모집 마감" class="btn btn-light w-25" disabled>
 				</c:if>
 					<input type="button" value="목록으로" 
 						onclick="location.href='list'" class="bookd-btn w-25">
@@ -198,7 +204,7 @@
 				<input type="checkbox" id="notify" required>
 				<br>
 				<span id="notifyValid" class="error-phrase"></span>
-			</div>	
+			</div>
 			<button id="apply_btn" class="default-btn" data-num="${book.book_num}" 
 				data-apply="${user.mem_num}" data-state="${book.book_state}" 
 				data-onoff="${book.book_onoff}" data-g="${book.book_gatheringDate}">참여하기</button>

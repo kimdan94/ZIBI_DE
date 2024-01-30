@@ -183,8 +183,8 @@ label[for="book_match2"]{
 #book_write input[type="text"]:hover,
 #book_update input[type="text"]:focus,
 #book_update input[type="text"]:hover,
-#book_cancel input[type="password"]:focus,
-#book_cancel input[type="password"]:hover,
+#book_cancel input[type="email"]:focus,
+#book_cancel input[type="email"]:hover,
 #book_expense:focus, #book_expense:hover{
 	outline:2px solid #32a77b;
 	box-shadow:none;
@@ -505,9 +505,9 @@ li.book-li{
 	display:none;
 	margin:0 auto;
 }
-input#mem_name:hover,
-input#mem_email:hover,
-input#mem_phone:hover{
-	border:1px solid #32a77b;
-	outline:none;
+input#mem_name:hover,input#mem_name:focus,
+input#mem_email:hover,input#mem_email:focus,
+input#mem_phone:hover,input#mem_phone:focus{
+	outline:2px solid #32a77b;
+	box-shadow:none;
 }

@@ -1,30 +1,40 @@
 $(function(){ // performanceSeat.jsp 
+
+   let rev_cnt; //인원수
+   const set_choice = {}; // 객체 -> 두 개 이상의 좌석을 선택할 때 사용 key value로
 	
 	/* ----------------------------------
 	 * 인원 선택 시작
 	 * ---------------------------------- */
-	let totalPeople = calculatePeopleNum();
+	
 	$('.adult-minus').on('click',function(){
 		underEight(-1, 0, 0);
+		rev_cnt = calculatePeopleNum();
 	});
 	$('.adult-plus').on('click',function(){
 		underEight(1, 0, 0);
+		rev_cnt = calculatePeopleNum();
 	});
 	
 	$('.teenage-minus').on('click',function(){
 		underEight(0, -1, 0);
+		rev_cnt = calculatePeopleNum();
 	});
 	$('.teenage-plus').on('click',function(){
 		underEight(0, 1, 0);
+		rev_cnt = calculatePeopleNum();
 	});
 
 	$('.treatement-minus').on('click',function(){
 		underEight(0, 0, -1);
+		rev_cnt = calculatePeopleNum();
 	});
 	$('.treatement-plus').on('click',function(){
 		underEight(0, 0, 1);
+		rev_cnt = calculatePeopleNum();
 	});
 	
+	let people_num = 0;
 	// 전체 인원수 확인 0명 이상 8명 이하 (음수가 될 수 없고 전체 인원은 8명 이하만 가능)
 	function underEight(adult_num, teenage_num, treatement_num){
 		let adult = Number($('.adult-num').text())+adult_num;
@@ -40,9 +50,27 @@ $(function(){ // performanceSeat.jsp
 			$('.teenage-num').text(teenage);
 			$('.treatement-num').text(treatement);
 		}
-		// 최종 인원 수
-		calculatePeopleNum();
+		
+		totalMoney(adult,teenage,treatement); // 가격 정보
 	}
+	
+	// 가격 정보
+	function totalMoney(adult,teenage,treatement){
+		
+		let multiplication = ' X ';
+		// UI 업데이트
+		$('.adult-money').text(multiplication + adult);
+		$('.teenage-money').text(multiplication + teenage);
+		$('.treatement-money').text(multiplication + treatement);
+		
+		// form에 전송
+		$('#adult-money').attr('value',adult);
+		$('#teenage-money').attr('value',teenage);
+		$('#treatement-money').attr('value',treatement);
+		
+	}
+	
+	
 	// 전체 인원 수 계산
 	function calculatePeopleNum(){
 		let result = Number($('.adult-num').text()) + Number($('.teenage-num').text()) + Number($('.treatement-num').text());
@@ -56,9 +84,10 @@ $(function(){ // performanceSeat.jsp
 	
 	let ticketing_num = $('#ticketing-num').text();
 	
-	rowAndCol(ticketing_num);
+	rowAndCol(ticketing_num,people_num); // 맨 처음 실행 됨
 	// ticketing-num으로 row, col 알아내기
-	function rowAndCol(ticketing_num){
+	function rowAndCol(ticketing_num, people_num){
+		console.log('진입');
 		$.ajax({
 			url:'drawSeat',
 			type:'post',
@@ -66,10 +95,6 @@ $(function(){ // performanceSeat.jsp
 			dataType:'json',
 			success:function(param){
 				seat(param);
-				
-				mouseoverSeat(param);
-				mouseoutSeat(param);
-				clickSeat(param);
 			},
 			error:function(){
 				alert('네트워크 오류 발생');
@@ -78,17 +103,10 @@ $(function(){ // performanceSeat.jsp
 	}
 	
 	// 좌석 그리기
+	// 클릭 가능한 seat 출력
 	function seat(param){
-		console.log(param.pickCinema[0]);
-		console.log(param.pickPerformance[0]);
-		console.log(param.pickTicketing[0]);
 		
-		console.log(param.pickCinema[0].cinema_row);
-		console.log(param.pickCinema[0].cinema_col);
 		let standard = param.pickCinema[0].cinema_col * 0.2;
-		console.log('standard : ' + standard);
-		console.log(param.pickCinema[0].cinema_col-standard);
-		
 		
 		$('#seat').empty();
 		let output = '';
@@ -97,53 +115,92 @@ $(function(){ // performanceSeat.jsp
 				if(j == standard || j == (param.pickCinema[0].cinema_col-standard)){
 					output += ' ';
 				}
-				output += '<div id="'+i+'_'+j+'" class="" style="display:inline-block;width:50px;height:50px;border:1px solid black;"></div>';
+				output += '<div id="'+i+'_'+j+'" class="seat-style" data-row="'+param.pickCinema[0].cinema_row+'" data-col="'+param.pickCinema[0].cinema_col+'"></div>';
 			}
 			output += '<br>';
 		}
 		$('#seat').append(output);
 		
+		// 이미 선택된 좌석은 선택할 수 없음
+		for(let i=0; i<param.choosenSeat.length; i++){
+			console.log(param.choosenSeat[i].choice_row+'_'+param.choosenSeat[i].choice_col);
+			$('#'+(param.choosenSeat[i].choice_row-1)+'_'+(param.choosenSeat[i].choice_col-1)).addClass("seat-full");
+		}
 				
 	}
 	
-	// 마우스 오버
-	function mouseoverSeat(param){
-		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
-			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
-				$('#'+i+'_'+j).on('mouseover', (e) => {
-					$('#'+i+'_'+j).css({ "background-color": "blue" });
-					console.log('total 인원 : ' + calculatePeopleNum());
-				});
+	$(document).on('mouseover','.seat-style',function(){
+		if(rev_cnt == 1){
+			$(this).addClass('rev-over-style');
+		}else if(rev_cnt >= 2 && rev_cnt <= 8){
+			$(this).addClass('rev-over-style');
+			let colNum = $(this).attr('id').split('_')[1];
+			
+			if($(this).next()[0].tagName != 'BR'){
+				$(this).next().addClass('rev-over-style');
+			}else{
+				$(this).prev().addClass('rev-over-style');
 			}
 		}
-	}
+	});
 	
-	// 클래스 추가 삭제 변경 : https://sharphail.tistory.com/45
+	$(document).on('mouseout','.seat-style',function(){
+		$('.seat-style').removeClass('rev-over-style');
+	});
 	
-	// 클릭하고 mouseout하면 색 그대로 // mouseout을 clickSeat에 들어거야 할지도
-	function mouseoutSeat(param){
-		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
-			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
-				$('#'+i+'_'+j).on('mouseout', (e) => {
-					$('#'+i+'_'+j).css({ "background-color": "" });
-				});
+	let count = 0;
+	
+	/* ----------------------------
+	 * 좌석 선택
+	 * ---------------------------- */
+	// 좌석 선택
+	$(document).on('click','.seat-style',function(){ // 토글 형태
+		if(rev_cnt == 1){ // 인원 : 1
+			if(!$(this).hasClass('seat-click')){ // 선택 가능한 좌석 -> 선택
+				if(count != rev_cnt){
+					$(this).addClass('seat-click');
+					count += 1;
+				}
+			} else { // 방금 선택한 좌석 -> 취소
+				$(this).removeClass('seat-click');
+				count -= 1;
+			}
+		}else if(rev_cnt >= 2 && rev_cnt <= 8){ // 인원 : 2 이상 8 이하
+			if($(this).next()[0].tagName != 'BR'){ // 맨 끝자리 X
+				if(!$(this).hasClass('seat-click') && !$(this).next().hasClass('seat-click')){ // 두 좌석 모두 선택할 수 있을 때
+					$(this).addClass('seat-click'); // 선택한 좌석에 class 추가
+					$(this).next().addClass('seat-click'); // 선택 옆 좌석 class 추가
+					set_choice[$(this).attr('id')] = $(this).next().attr('id'); // key(선택좌석) : value(오른쪽 좌석) 
+					set_choice[$(this).next().attr('id')] = $(this).attr('id'); // key(오른쪽 좌석) : value(선택좌석)
+					console.log(set_choice);
+					
+				} else if($(this).hasClass('seat-click')) { // 좌석 취소
+					$(this).removeClass('seat-click');
+					let value = set_choice[$(this).attr('id')];
+					$('#'+value).removeClass('seat-click'); // 선택한 좌석(key) = 옆 좌석(value) 삭제
+				}
+				
+			} else { // 맨 끝자리 O
+				if(!$(this).hasClass('seat-click') && !$(this).prev().hasClass('seat-click')){ // 두 좌석 모두 선택할 수 있을 때
+					$(this).addClass('seat-click'); // 선택한 좌석에 class 추가
+					$(this).prev().addClass('seat-click'); // 선택 옆 좌석 class 추가
+					set_choice[$(this).attr('id')] = $(this).prev().attr('id'); // key(선택좌석) : value(왼쪽 좌석)
+					set_choice[$(this).prev().attr('id')] = $(this).attr('id'); // key(왼쪽 좌석) : value(선택좌석)
+					console.log(set_choice);
+				} else if($(this).hasClass('seat-click')) { // 좌석 취소
+					$(this).removeClass('seat-click');
+					let value = set_choice[$(this).attr('id')];
+					$('#'+value).removeClass('seat-click'); // 선택한 좌석(key) = 옆 좌석(value) 삭제
+				}
 			}
 		}
-	}
+		
+	});
+
+
 	
 	
 	
-	// 클릭 + 클릭한 좌석 id 구하기 -> 토글 형태로 구현하기 + 좌석 여러 개 구현하기
-	function clickSeat(param){
-		for(let i=0; i<param.pickCinema[0].cinema_row; i++){
-			for(let j=0; j<param.pickCinema[0].cinema_col; j++){
-				$('#'+i+'_'+j).click(function(){
-					$(this).css("background-color", "red"); // css 값을 주지 말고 class값 주기
-					console.log($(this).prop("id"));
-				});
-			}
-		}
-	}
 	
 	
 });

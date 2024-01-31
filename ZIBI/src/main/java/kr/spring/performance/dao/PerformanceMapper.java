@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
@@ -36,7 +37,9 @@ public interface PerformanceMapper {
 	public List<PerformanceVO> pickPerformance(Map<String, Object> map);
 	public List<TicketingVO> pickTicketing(Map<String, Object> map);
 	
-	
+	//좌석 출력
+	@Select("SELECT * FROM perform_choice WHERE ticketing_num=#{ticketing_num}")
+	public List<ChoiceVO> selectChoice(Map<String, Object> map);
 	
 	
 	// 관리자

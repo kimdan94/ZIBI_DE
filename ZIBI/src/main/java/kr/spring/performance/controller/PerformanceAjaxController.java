@@ -13,11 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.service.PerformanceService;
+import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
@@ -172,31 +172,41 @@ public class PerformanceAjaxController {
 	@RequestMapping("/performance/drawSeat")
 	@ResponseBody // 지역2 str으로 해당 상영관의 번호 알아내기
 	public Map<String, Object> drawSeat(@RequestParam(value="ticketing_num",defaultValue="0") Integer ticketing_num, HttpSession session, HttpServletRequest request){
-		Map<String, Object> mapJson = new HashMap<String, Object>();
-		log.debug("<<ticketing_num 값 알아내기>>: " + ticketing_num);
-
-		Map<String, Object> map = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		log.debug("<<Mem_num>> : " + user.getMem_num());
+		log.debug("<<ticketing_num 값 알아내기>>: " + ticketing_num);
+//		map.put("mem_num", user.getMem_num());
+		map.put("ticketing_num", ticketing_num);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+
 		List<CinemaVO> pickCinema = null;
 		List<PerformanceVO> pickPerformance = null;
 		List<TicketingVO> pickTicketing = null;
-
-		map.put("ticketing_num", ticketing_num);
+		List<ChoiceVO> choosenSeat = null;
 		
+		// sql
 		pickCinema = performanceService.pickCinema(map);
 		pickPerformance = performanceService.pickPerformance(map);
 		pickTicketing = performanceService.pickTicketing(map);
+		
+		// 이미 예약된 좌석 선택
+		choosenSeat = performanceService.selectChoice(map);
 		
 		log.debug("===================<<Ajax>>======================");
 		log.debug("<<pickCinema>> : " + pickCinema);
 		log.debug("<<pickPerformance>> : " + pickPerformance);
 		log.debug("<<pickTicketing>> : " + pickTicketing);
+		log.debug("<<choosenSeat>> : " + choosenSeat);
 		log.debug("===================<<Ajax>>======================");
 		
-
+		// ajax
 		mapJson.put("pickCinema", pickCinema);
 		mapJson.put("pickPerformance", pickPerformance);
 		mapJson.put("pickTicketing", pickTicketing);
+		mapJson.put("choosenSeat", choosenSeat);
 		return mapJson;
 	}
 	

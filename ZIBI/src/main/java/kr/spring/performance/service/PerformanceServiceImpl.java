@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.performance.dao.PerformanceMapper;
+import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
@@ -108,6 +109,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public List<TicketingVO> pickTicketing(Map<String, Object> map) {
 		return performanceMapper.pickTicketing(map);
+	}
+
+	@Override
+	public List<ChoiceVO> selectChoice(Map<String, Object> map) {
+		return performanceMapper.selectChoice(map);
 	}
 
 

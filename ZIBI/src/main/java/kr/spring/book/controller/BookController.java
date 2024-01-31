@@ -134,6 +134,7 @@ public class BookController {
 				for(int i=0;i<mlist.size();i++) {
 					apply_num = mlist.get(i).getApply_num();
 					//신청자 닉네임 구하기
+					//신청자 닉네임 구하기
 					MemberVO member = memberService.selectMember(apply_num);
 					nick = member.getMem_nickname();
 					mlist.get(i).setMem_nickname(nick);

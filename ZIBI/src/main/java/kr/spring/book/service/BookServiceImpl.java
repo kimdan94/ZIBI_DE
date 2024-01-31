@@ -89,14 +89,23 @@ public class BookServiceImpl implements BookService{
 	}
 	
 	@Override
-	public void updateAllMatch(int book_num) {
-		//모집 완료 처리하기
-		bookMapper.updateOnoff(book_num);
-		bookMapper.updateAllMatch(book_num);
+	public void denyAllMatch(int book_num) {
+		//게시글 모집 완료 처리
+		bookMapper.updateOnoff3(book_num);
+		//대기 중인 나머지 참여 신청 일괄 거절
+		bookMapper.denyAllMatch(book_num);
 	}
 
 	@Override
 	public BookMatchingVO selectMatch(String book_gatheringDate, int apply_num) {
 		return bookMapper.selectMatch(book_gatheringDate, apply_num);
+	}
+
+	@Override
+	public void updateOnoff1(int book_num) {
+		//대기 중인 나머지 참여 신청 일괄 거절
+		bookMapper.denyAllMatch(book_num);
+		//모임 완료 처리
+		bookMapper.updateOnoff1(book_num);
 	}
 }

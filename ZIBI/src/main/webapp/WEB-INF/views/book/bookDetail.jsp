@@ -52,16 +52,24 @@
 				</tr>	
 				<tr class="book-profileArea">
 					<td>
+						<%-- 참여자 --%>
 						<c:if test="${user.mem_num != book.mem_num}">
 							<img class="book-profile" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${book.mem_num}">
 							<span class="book-nick">${book.mem_nickname}</span>
 						</c:if>
-						<c:if test="${!empty user && user.mem_num == book.mem_num && book.book_onoff == 0}">
-							<input type="button" value="모집 완료하기" class="bookd-btn-green w-100"
-								id="complete_btn" data-num="${book.book_num}">
-						</c:if>
-						<c:if test="${!empty user && user.mem_num == book.mem_num && book.book_onoff == 3}">
-							<input type="button" value="모집 마감" class="btn btn-light w-100" disabled>
+						<%-- 주최자 --%>
+						<c:if test="${user.mem_num == book.mem_num}">
+							<c:if test="${book.book_onoff == 0 && book.compareNow == 2}">
+								<input type="button" value="모집 완료하기" class="bookd-btn-green w-100"
+									id="complete_btn" data-num="${book.book_num}">
+							</c:if>
+							<c:if test="${book.book_onoff == 3 && book.compareNow == 2}">
+								<input type="button" value="모집 마감" class="btn btn-light w-100" disabled>
+							</c:if>
+							<c:if test="${book.compareNow == 1}">
+								<input type="button" value="새로 모집하기" class="bookd-btn w-75"
+									id="restart_btn" data-num="${book.book_num}">
+							</c:if>
 						</c:if>
 					</td>
 				</tr>
@@ -100,7 +108,8 @@
 				</c:if>
 			</div>
 			<div class="align-center">
-				<c:if test="${!empty user && user.mem_num == book.mem_num}">
+				<%-- 주최자 --%>
+				<c:if test="${!empty user && user.mem_num == book.mem_num && book.compareNow == 2}">
 					<input type="button" value="수정"
 						onclick="location.href='update?book_num=${book.book_num}'"
 						class="bookd-btn w-25">
@@ -108,12 +117,14 @@
 						onclick="location.href='cancel?book_num=${book.book_num}'"
 						class="bookd-btn-green w-25">	
 				</c:if>
-				<c:if test="${!empty user && user.mem_num != book.mem_num && book.book_onoff == 0}">
-					<input type="button" value="참여 신청하기" id="book_apply" 
-						class="bookd-btn-green w-25">
-				</c:if>
-				<c:if test="${!empty user && user.mem_num != book.mem_num && book.book_onoff == 3}">
-					<input type="button" value="모집 마감" class="btn btn-light w-25" disabled>
+				<%-- 참여자 --%>
+				<c:if test="${!empty user && user.mem_num != book.mem_num}">
+					<c:if test="${book.book_onoff == 0 && book.compareNow == 2}">
+						<input type="button" value="참여 신청하기" id="book_apply" class="bookd-btn-green w-25">
+					</c:if>
+					<c:if test="${book.book_onoff == 3 || book.compareNow == 1}">
+						<input type="button" value="모집 마감" class="btn btn-light w-25" disabled>
+					</c:if>
 				</c:if>
 					<input type="button" value="목록으로" 
 						onclick="location.href='list'" class="bookd-btn w-25">

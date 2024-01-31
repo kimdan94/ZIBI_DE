@@ -68,7 +68,7 @@ window.onload = function(){
 					<script>
 					$("#book_gatheringDate").daterangepicker({
 					    locale: {
-					    "format": 'YYYY-MM-DD a HH:mm',
+					    "format": 'YYYY-MM-DD HH:mm',
 					    "applyLabel": "확인",
 					    "cancelLabel": "취소",
 					    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
@@ -77,7 +77,7 @@ window.onload = function(){
 					    timePicker: true,
 					    showDropdowns: true,
 					    autoApply: true,
-					    timePicker24Hour: false,
+					    timePicker24Hour: true,
 					    singleDatePicker: true
 					}).on('cancel.daterangepicker',function(ev,picker){
 						$(ev.currentTarget).val('');

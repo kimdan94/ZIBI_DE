@@ -3,6 +3,8 @@ package kr.spring.book.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 
@@ -35,7 +37,10 @@ public interface BookService {
 	public void denyMatch(int book_num, int apply_num);
 	
 	//모집 완료하기
-	public void updateAllMatch(int book_num);
+	public void denyAllMatch(int book_num);
+	
+	//모임 완료하기
+	public void updateOnoff1(int book_num);
 	
 	//리뷰
 	//스크랩

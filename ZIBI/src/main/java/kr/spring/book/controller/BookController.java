@@ -1,6 +1,8 @@
 package kr.spring.book.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil_cust;
+import kr.spring.util.PageUtil_cust2;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -87,7 +90,8 @@ public class BookController {
 	@RequestMapping("/book/list")
 	public ModelAndView process(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
 			@RequestParam(value = "order", defaultValue = "1") int order, 
-			String keyfield, String keyword, HttpSession session){
+			@RequestParam(value = "pageNum2", defaultValue = "1") int currentPage2,
+			String keyfield, String keyword, HttpSession session) throws ParseException{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -116,12 +120,12 @@ public class BookController {
 			// 나의 모임 레코드 수
 			int mcount = bookService.selectMatchCount(map2);
 			
-			PageUtil_cust mpage = new PageUtil_cust(currentPage, mcount, 6, 10, "list");
+			PageUtil_cust2 mpage = new PageUtil_cust2(currentPage2, mcount, 5, 10, "list");
 			List<BookVO> mlist = null;
 			int apply_num = 0;
 			String nick = null;
 			
-			if(count > 0) {//나의 모임 목록
+			if(mcount > 0) {//나의 모임 목록
 				map2.put("mstart", mpage.getStartRow());
 				map2.put("mend", mpage.getEndRow());
 				
@@ -137,7 +141,7 @@ public class BookController {
 			}
 			mav.addObject("mcount", mcount);
 			mav.addObject("mlist", mlist);
-			mav.addObject("mpage", page.getPage());
+			mav.addObject("mpage", mpage.getPage());
 		}
 		
 		mav.setViewName("bookList");
@@ -162,7 +166,7 @@ public class BookController {
 			int book_state = 1;
 			book.setBook_state(book_state);
 		}
-
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bookDetail");
 		mav.addObject("book", book);

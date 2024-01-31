@@ -62,7 +62,7 @@
 					<script>
 					$("#book_gatheringDate").daterangepicker({
 					    locale: {
-					    "format": 'YYYY-MM-DD a HH:mm',
+					    "format": 'YYYY-MM-DD HH:mm',
 					    "applyLabel": "확인",
 					    "cancelLabel": "취소",
 					    "daysOfWeek": ["일", "월", "화", "수", "목", "금", "토"],
@@ -71,7 +71,7 @@
 					    timePicker: true,
 					    showDropdowns: true,
 					    autoApply: true,
-					    timePicker24Hour: false,
+					    timePicker24Hour: true,
 					    singleDatePicker: true
 					}).on('cancel.daterangepicker',function(ev,picker){
 						$(ev.currentTarget).val('');
@@ -192,7 +192,8 @@ window.onload = function(){
 				dataType:'json',
 				success:function(param){
 					if(param.result == 'logout'){
-						alert('로그인 후 사용하세요');
+						alert('로그인 후 이용하세요!');
+						location.replace('/member/login');
 					}else if(param.result == 'success'){
 						$('#book_detail').hide();
 					}else{

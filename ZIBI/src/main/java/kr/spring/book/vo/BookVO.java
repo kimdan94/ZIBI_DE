@@ -52,8 +52,8 @@ public class BookVO {
 	private int apply_num;
 	private int book_state;//0 : 대기, 1 : 확정, 2 : 거절
 	private String apply_gatheringDate;
+	private int compareNow;//1 : 모임 일정 지남, 2 : 모임 일정 이전
 	
-	private int matching_cnt;//예약 신청수
 	private int rev_cnt;//예약 리뷰 개수
 	private int scrap_cnt;//스크랩 개수
 }

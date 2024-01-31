@@ -56,10 +56,16 @@ public interface BookMapper {
 	public void denyMatch(int book_num, int apply_num);
 	
 	//모집 완료하기(참여 신청 일괄 거절하기)
-	@Update("UPDATE book_matching SET book_state = 2 WHERE book_num=#{book_num}")
-	public void updateAllMatch(int book_num);
+	@Update("UPDATE book_matching SET book_state = 2 WHERE book_num=#{book_num} AND book_state = 0")
+	public void denyAllMatch(int book_num);
 	@Update("UPDATE book SET book_onoff = 3 WHERE book_num=#{book_num}")
-	public void updateOnoff(int book_num);
+	public void updateOnoff3(int book_num);
+	
+	//모임 완료하기
+	@Update("UPDATE book SET book_onoff = 1 WHERE book_num=#{book_num}")
+	public void updateOnoff1(int book_num);
+	
+	//다시 모집하기
 
 	//리뷰
 	//스크랩

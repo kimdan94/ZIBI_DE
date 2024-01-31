@@ -134,6 +134,11 @@
 					book_onoff,
 					book_regDate,
 					book_gatheringDate,
+					<![CDATA[
+					CASE WHEN SYSDATE >= TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
+                       	 WHEN SYSDATE < TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '2'
+                  	END compareNow,
+                  	]]>
 					book_address1,
 					book_state,
 					book_match,
@@ -141,17 +146,39 @@
 				FROM book_matching
 				JOIN book USING(book_num)
 				JOIN member_detail USING(mem_num)
+				WHERE mem_num=#{mem_num} OR apply_num=#{mem_num}
 				ORDER BY book_matchDate DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{mstart} AND rnum <= #{mend}
 		]]>
-		AND mem_num=#{mem_num} OR apply_num=#{mem_num}
+		
 	</select>
 	
 	<!-- 소모임 예약 상세글 -->
 	<select id="selectBook" parameterType="integer" resultType="bookVO">
 		SELECT
-			*
+			book_num,
+			mem_num,
+			book_category,
+			book_thumbnailName,
+			book_match,
+			book_title,
+			book_headcount,
+			book_maxcount,
+			book_expense,
+			book_onoff,
+			book_content,
+			book_address1,
+			book_address2,
+			book_zipcode,
+			book_gatheringDate,
+			<![CDATA[
+			CASE WHEN SYSDATE >= TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
+                 WHEN SYSDATE < TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '2'
+            END compareNow,
+            ]]>
+            book_kit,
+            mem_nickname
 		FROM book
 		JOIN member USING(mem_num) 
 		LEFT OUTER JOIN member_detail USING(mem_num)

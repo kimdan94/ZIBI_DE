@@ -92,7 +92,7 @@ table.basic-table td, table.basic-table th{
 	padding:5px;
 }
 table.striped-table{
-	width:100%;
+	width:90%;
 	margin:7px 0;
 	border:1px solid #FFF;
 	font-size:15px;
@@ -121,7 +121,7 @@ form#search_form #order{
 -------------------------*/
 form#register_form, form#update_form{
 	padding:0 0 10px 0;
-	width:800px;
+	width:900px;
 }
 form#register_form ul, form#update_form ul{
 	padding:20px;
@@ -173,15 +173,14 @@ spam.letter-count{
 	color:#999;
 }
 textarea.rep-content{
-	width:90%;
+	width:150%;
 	height:50px;
-	margin:10px 10px;
+	resize: none;;
 }
 div#re_first,div#mre_first{
 	float:left;
 	width:"70%";
-	padding-left:15px;
-	margin-bottom:10px;
+	margin-bottom:5px;
 }
 div#loading{
 	width:100px;
@@ -250,11 +249,32 @@ form#mre_form{
 	width:100px;
 	height:24px;
 	padding:3px;
+	cursor:pointer;
 }
 .default-btn2{
 	background:white;
 	color:#32a77b;
 	border:1px solid #32a77b;
+	font-size:13px;
+	border-radius:5px;
+	width:100px;
+	height:24px;
+	padding:3px;
+}
+.default-btn3{
+	background:#333;
+	color:white;
+	border:none;
+	font-size:13px;
+	border-radius:5px;
+	width:100px;
+	height:24px;
+	padding:3px;
+}
+.default-btn4{
+	background:white;
+	color:#333;
+	border:1px solid #333;
 	font-size:13px;
 	border-radius:5px;
 	width:100px;
@@ -270,15 +290,43 @@ form#mre_form{
 	cursor:pointer;
 	outline:0;
 }
-#community_write .btn-light:hover,
-#community_write .btn-light:hover,
-#community_write .btn:hover,
-#community_write .btn-light.active:hover{
+.com-btn, .com-btn:focus{
+	font-size: 15px;
+	border: 1px solid #ededed !important;
+	box-shadow: none;
+	height:50px;
+	border-radius:7px;
+}
+.com-btn-green,
+.com-btn-green:focus{
+	background: #32a77b;
+    color: white;
+    box-shadow: none;
+    border:none;
+    font-size: 15px;
+    height:50px;
+    border-radius:7px;
+}
+.com-btn:hover,active,visited,
+.com-btn-green:hover,active,visited{
     background: white !important;
     color: #32a77b;
     border: 1px solid #ededed;
-    font-size:15px;
-    font-weight:bold;
+	box-shadow: none;
+	height:50px;
+	border-radius:7px;
+	font-size: 15px;
+}
+
+.page-main-1{
+	padding-left:160px;
+	padding-top:25px;
+}
+.com-page{
+	clear:both;
+	text-align:center;
+	font-family:fantasy;
+	padding-top:20px;
 }
 .link-icon { position: relative; display: inline-block; width: auto; font-size: 14px; font-weight: 500; color: #333; margin-right: 10px; padding-top: 50px; }
 .link-icon.twitter { background-image: url(./images/icon-twitter.png); background-repeat: no-repeat; }

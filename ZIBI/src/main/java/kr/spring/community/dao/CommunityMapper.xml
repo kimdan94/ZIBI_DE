@@ -153,7 +153,6 @@
 		  	        mem_nickname
 		  	    FROM community_reply
 		  	    JOIN member USING(mem_num)
-		  	    LEFT OUTER JOIN member_detail USING(mem_num)
 		  	    ORDER BY re_num DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}

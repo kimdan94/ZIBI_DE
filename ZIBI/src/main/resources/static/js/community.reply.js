@@ -276,14 +276,17 @@ $(function(){
 	*-------------------------------*/
 	function displayReplyCount(param){
 		let count = param.count;
-		let output;
-		if(count==0){
+		let output,output2;
+		if(count!=0){
 			output = '댓글수('+count+')';
+			output2 = '('+count+')';
 		}else{
 			output = '0';
+			output2 = '(0)';
 		}
 		//문서 객체의 추가
 		$('#output_rcount').text(output);
+		$('#output_wcount').text(output2);
 	}
 	/*------------------------------
 	* 초기 데이터(목록) 호출

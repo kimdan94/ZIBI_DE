@@ -64,6 +64,8 @@ public class BookAjaxController {
 										@RequestParam int apply_num,
 										@RequestParam int book_state,
 										@RequestParam String apply_gatheringDate,
+										@RequestParam String apply_title,
+										@RequestParam String apply_address1,
 										HttpSession session){
 		
 		Map<String,String> mapJson = new HashMap<String,String>();
@@ -83,6 +85,8 @@ public class BookAjaxController {
 				bookMatchingVO.setApply_num(apply_num);
 				bookMatchingVO.setBook_state(book_state);
 				bookMatchingVO.setApply_gatheringDate(apply_gatheringDate);
+				bookMatchingVO.setApply_title(apply_title);
+				bookMatchingVO.setApply_address1(apply_address1);
 				
 				//예약 신청 완료
 				bookService.insertMatch(bookMatchingVO);
@@ -176,7 +180,7 @@ public class BookAjaxController {
 		return mapJson;
 	}
 	
-	/*-- 모집 완료하기(참여 일괄 거절 및 모집 마감하기) --*/
+	/*-- 모집 마감하기(참여 일괄 거절) --*/
 	@PostMapping("/book/applyClose")
 	@ResponseBody
 	public Map<String,String> applyClose(@RequestParam int book_num, HttpSession session){
@@ -207,6 +211,24 @@ public class BookAjaxController {
 			bookService.updateOnoff1(book_num);
 			mapJson.put("result", "complete");
 		}
+		return mapJson;
+	}
+	
+	/*-- 새로 모집하기 --*/
+	@PostMapping("/book/bookReset")
+	@ResponseBody
+	public Map<String,String> bookReset(@RequestParam int book_num, HttpSession session){
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			//새로 모집 처리
+			bookService.resetOnoff(book_num);
+			mapJson.put("result", "reset");
+		}
+		
 		return mapJson;
 	}
 }

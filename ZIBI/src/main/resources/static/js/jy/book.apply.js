@@ -65,17 +65,19 @@ $('#apply_btn').click(function(){
 	let apply_num = $(this).attr('data-apply');
 	let book_state = $(this).attr('data-state');
 	let apply_gatheringDate = $(this).attr('data-g');
+	let apply_title = $(this).attr('data-title');
+	let apply_address1 = $(this).attr('data-addr');
 	
-	emailApplySend(email, book_num, apply_num, book_state,apply_gatheringDate);
+	emailApplySend(email, book_num, apply_num, book_state,apply_gatheringDate,apply_title,apply_address1);
 	
 });
 
 //참여 완료 메일 전송 함수
-function emailApplySend(email, book_num, apply_num, book_state,apply_gatheringDate){
+function emailApplySend(email, book_num, apply_num, book_state,apply_gatheringDate,apply_title,apply_address1){
 	$.ajax({
 		url:'bookApply',
 		type:'post',
-		data:{email:email,book_num:book_num,apply_num:apply_num,book_state:book_state,apply_gatheringDate:apply_gatheringDate},
+		data:{email:email,book_num:book_num,apply_num:apply_num,book_state:book_state,apply_gatheringDate:apply_gatheringDate,apply_title:apply_title,apply_address1:apply_address1},
 		dataType:'json',
 		success:function(param){
 			if(param.result == 'apply'){
@@ -208,13 +210,17 @@ $('.apply-deny').click(function(){
 	});
 });
 
-/*-------- 모집 완료(모임 참여 일괄 거절 및 모집 마감하기) --------*/
+/*-------- 모집 마감(모임 참여 일괄 거절하기) --------*/
 $('#complete_btn').click(function(){
-	if(confirm('모집 완료 시 참여 신청이 일괄 거절됩니다. 완료하시겠습니까?')==false){
+	if(confirm('모집 마감 시 참여 신청이 일괄 거절됩니다. 마감하시겠습니까?')==false){
 		return;
 	}
 	
 	let book_num = $(this).attr('data-num');
+	if($(this).attr('data-head') == 0){
+		alert('모임 참여자가 존재하지 않아 모집 마감이 불가합니다.');
+		return;
+	}
 	
 	$.ajax({
 		url:'applyClose',
@@ -223,13 +229,13 @@ $('#complete_btn').click(function(){
 		dataType:'json',
 		success:function(param){
 			if(param.result == 'close'){
-				alert('모집이 완료되었습니다.');
+				alert('모집이 마감되었습니다.');
 				location.replace('list');
 			}else if(param.result == 'logout'){
 				alert('로그인 후 이용하세요!');
 				location.replace('/member/login');
 			}else{
-				alert('모집 완료 오류');
+				alert('모집 마감 오류');
 			}
 		},
 		error:function(){
@@ -240,7 +246,7 @@ $('#complete_btn').click(function(){
 
 /*-------- 모임 완료하기 --------*/
 $('.book-complete').click(function(){
-	alert('즐거운 모임 되셨나요? 모임 완료 후 새로운 모집이 가능합니다. 이용해 주셔서 감사합니다.');
+	alert('즐거운 모임 되셨나요? 이용해 주셔서 감사합니다.');
 	
 	let book_num = $(this).attr('data-num');
 	
@@ -251,13 +257,43 @@ $('.book-complete').click(function(){
 		dataType:'json',
 		success:function(param){
 			if(param.result == 'complete'){
-				alert('모임이 완료되었습니다.');
+				alert('모임이 완료되었습니다. 새로운 모임을 원하시면 새로 모집하기 버튼을 클릭해 주세요.');
 				location.replace('list');
 			}else if(param.result == 'logout'){
 				alert('로그인 후 이용하세요!');
 				location.replace('/member/login');
 			}else{
 				alert('모임 완료 오류');
+			}
+		},
+		error:function(){
+			alert('네트워크 오류');
+		}
+	});
+});
+
+/*-------- 새로 모집하기 --------*/
+$('#reset_btn').click(function(){
+	if(confirm('새로 모집하시겠습니까?')==false){
+		return;
+	}
+	
+	let book_num = $(this).attr('data-num');
+	
+	$.ajax({
+		url:'bookReset',
+		type:'post',
+		data:{book_num:book_num},
+		dataType:'json',
+		success:function(param){
+			if(param.result == 'reset'){
+				alert('새로운 모임이 시작됩니다. 일정을 변경해 주세요.');
+				history.go(0);
+			}else if(param.result == 'logout'){
+				alert('로그인 후 이용하세요!');
+				location.replace('/member/login');
+			}else{
+				alert('새로 모집 오류');
 			}
 		},
 		error:function(){

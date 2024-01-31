@@ -30,7 +30,9 @@ create table book_matching(
  apply_num number not null,
  book_state number(1) not null, -- 0:대기, 1:확정, 2: 거절
  book_matchDate date default sysdate not null,
- book_gatheringDate varchar2 100 not null,
+ apply_gatheringDate varchar2(100) not null,
+ apply_title varchar2(120) not null,
+ apply_address1 varchar(100) not null,
  constraint book_matching_fk1 foreign key (book_num) references book (book_num),
  constraint book_matching_fk2 foreign key (apply_num) references member (mem_num)
 );

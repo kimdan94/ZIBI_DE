@@ -90,7 +90,7 @@ public class BookServiceImpl implements BookService{
 	
 	@Override
 	public void denyAllMatch(int book_num) {
-		//게시글 모집 완료 처리
+		//게시글 모집 마감 처리
 		bookMapper.updateOnoff3(book_num);
 		//대기 중인 나머지 참여 신청 일괄 거절
 		bookMapper.denyAllMatch(book_num);
@@ -107,5 +107,13 @@ public class BookServiceImpl implements BookService{
 		bookMapper.denyAllMatch(book_num);
 		//모임 완료 처리
 		bookMapper.updateOnoff1(book_num);
+	}
+
+	@Override
+	public void resetOnoff(int book_num) {
+		//참여 인원수 초기화
+		bookMapper.resetHeadcount(book_num);
+		//새로 모집 처리
+		bookMapper.resetOnoff(book_num);
 	}
 }

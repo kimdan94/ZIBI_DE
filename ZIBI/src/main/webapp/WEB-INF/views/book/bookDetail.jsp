@@ -59,16 +59,24 @@
 						</c:if>
 						<%-- 주최자 --%>
 						<c:if test="${user.mem_num == book.mem_num}">
-							<c:if test="${book.book_onoff == 0 && book.compareNow == 2}">
-								<input type="button" value="모집 완료하기" class="bookd-btn-green w-100"
-									id="complete_btn" data-num="${book.book_num}">
-							</c:if>
-							<c:if test="${book.book_onoff == 3 && book.compareNow == 2}">
-								<input type="button" value="모집 마감" class="btn btn-light w-100" disabled>
+							<c:if test="${book.compareNow == 2}">
+								<c:if test="${book.book_onoff == 0}">
+									<input type="button" value="모집 마감하기" class="bookd-btn-green w-75"
+										id="complete_btn" data-num="${book.book_num}" data-head="${book.book_headcount}">
+								</c:if>
+								<c:if test="${book.book_onoff == 3}">
+									<input type="button" value="모집 마감" class="btn btn-light w-100" disabled>
+								</c:if>
 							</c:if>
 							<c:if test="${book.compareNow == 1}">
-								<input type="button" value="새로 모집하기" class="bookd-btn w-75"
-									id="restart_btn" data-num="${book.book_num}">
+								<c:if test="${book.book_onoff == 0 || book.book_onoff == 3}">
+									<input type="button" value="모임 완료하기" class="bookd-btn-green w-100 book-complete"
+										data-num="${book.book_num}">
+								</c:if>
+								<c:if test="${book.book_onoff == 1}">
+									<input type="button" value="새로 모집하기" class="bookd-btn w-75"
+										id="reset_btn" data-num="${book.book_num}">
+								</c:if>
 							</c:if>
 						</c:if>
 					</td>
@@ -110,13 +118,23 @@
 			</div>
 			<div class="align-center">
 				<%-- 주최자 --%>
-				<c:if test="${!empty user && user.mem_num == book.mem_num && book.compareNow == 2}">
-					<input type="button" value="수정하기"
-						onclick="location.href='update?book_num=${book.book_num}'"
-						class="bookd-btn w-25">
-					<input type="button" value="모임 취소하기"
-						onclick="location.href='cancel?book_num=${book.book_num}'"
-						class="bookd-btn-green w-25">	
+				<c:if test="${!empty user && user.mem_num == book.mem_num && book.book_onoff == 0}">
+					<input type="button" value="수정하기" class="bookd-btn w-25" id="update_btn"
+						onclick="location.href='update?book_num=${book.book_num}'">
+					<input type="hidden" value="${book.compareNow}" id="compare">
+					<input type="hidden" value="${book.book_headcount}" id="head">	
+					<script type="text/javascript">
+						$('#update_btn').click(function(){
+							if($('#compare').val() == 1 && $('#head').val() >= 1){
+								alert('모임 완료하기 버튼을 클릭하여 모임 완료를 확정해 주세요.');
+								history.go(0);
+							}
+						});
+					</script>
+					<c:if test="${book.compareNow == 2}">	
+						<input type="button" value="모임 취소하기" class="bookd-btn-green w-25"
+							onclick="location.href='cancel?book_num=${book.book_num}'">	
+					</c:if>	
 				</c:if>
 				<%-- 참여자 --%>
 				<c:if test="${!empty user && user.mem_num != book.mem_num}">
@@ -219,11 +237,13 @@
 			</div>
 			<button id="apply_btn" class="default-btn" data-num="${book.book_num}" 
 				data-apply="${user.mem_num}" data-state="${book.book_state}" 
-				data-onoff="${book.book_onoff}" data-g="${book.book_gatheringDate}">참여하기</button>
+				data-onoff="${book.book_onoff}" data-g="${book.book_gatheringDate}"
+				data-title="${book.book_title}" data-addr="${book.book_address1}">참여하기</button>
 			<img src="${pageContext.request.contextPath}/images/jy/loading.gif" id="apply_loading">		
 	</div>
 	<div class="modal-bg"></div>
 </div>
+<!-- Daum 지도 API 시작 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=397d490d4a8bb2a2dc0a8a1612615084&libraries=services"></script>
 	<script>
@@ -255,6 +275,7 @@
 	    } 
 	});    
 </script>
+<!-- Daum 지도 API 끝 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <!-- 내용 끝 -->

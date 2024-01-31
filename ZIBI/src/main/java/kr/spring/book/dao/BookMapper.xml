@@ -125,17 +125,17 @@
 					mem_num,
 					apply_num,
 					<![CDATA[
-					REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') book_title,
+					REPLACE(REPLACE(apply_title,'<','&lt;'),'>','&gt;') apply_title,
 					]]>
 					book_onoff,
 					book_regDate,
-					book_gatheringDate,
+					apply_gatheringDate,
 					<![CDATA[
-					CASE WHEN SYSDATE >= TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
-                       	 WHEN SYSDATE < TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '2'
+					CASE WHEN SYSDATE >= TO_DATE(apply_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
+                       	 WHEN SYSDATE < TO_DATE(apply_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '2'
                   	END compareNow,
                   	]]>
-					book_address1,
+					apply_address1,
 					book_state,
 					book_match,
 					book_matchDate

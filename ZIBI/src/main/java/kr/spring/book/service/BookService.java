@@ -36,12 +36,14 @@ public interface BookService {
 	//예약 거절하기
 	public void denyMatch(int book_num, int apply_num);
 	
-	//모집 완료하기
+	//모집 마감하기
 	public void denyAllMatch(int book_num);
 	
 	//모임 완료하기
 	public void updateOnoff1(int book_num);
 	
+	//새로 모집하기
+	public void resetOnoff(int book_num);
 	//리뷰
 	//스크랩
 }

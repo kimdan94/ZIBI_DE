@@ -66,10 +66,10 @@
 			</c:if>
 		</td>
 		<td>
-			${mbook.book_gatheringDate}
+			${mbook.apply_gatheringDate}
 		</td>
 		<td>
-			<c:set var="maddr" value="${mbook.book_address1}"/>
+			<c:set var="maddr" value="${mbook.apply_address1}"/>
 			<c:if test="${maddr.startsWith('서울') || maddr.startsWith('경기')}">
 				${fn:substring(maddr,0,6)}
             </c:if>
@@ -80,7 +80,7 @@
 		<td>
 			<c:if test="${mbook.book_onoff != 2}">
 				<a href="detail?book_num=${mbook.book_num}">
-					<c:set var="mtitle" value="${mbook.book_title}"/>
+					<c:set var="mtitle" value="${mbook.apply_title}"/>
 						${fn:substring(mtitle,0,13)}
 					<c:if test="${fn:length(mtitle) > 13}">
 						...
@@ -88,7 +88,7 @@
 				</a>
 			</c:if>
 			<c:if test="${mbook.book_onoff == 2}">
-				<c:set var="mtitle" value="${mbook.book_title}"/>
+				<c:set var="mtitle" value="${mbook.apply_title}"/>
 					${fn:substring(mtitle,0,13)}
 				<c:if test="${fn:length(mtitle) > 13}">
 					...
@@ -109,20 +109,20 @@
 				<c:if test="${mbook.book_match == 2 && mbook.book_state == 0}">
 					<input type="button" value="승인하기" class="default-btn3 apply-approve"
 						data-num="${mbook.book_num}" data-apply="${mbook.apply_num}">
-					<input type="button" value="거절하기" class="default-btn4 apply-deny"
+					<input type="button" value="거절하기" class="default-btn3 apply-deny"
 						data-num="${mbook.book_num}" data-apply="${mbook.apply_num}">
 				</c:if>
 				<input type="button" value="모임 취소하기" class="default-btn3 book-cancel"
 					onclick="location.href='cancel?book_num=${mbook.book_num}'">
 			</c:if>
-			<c:if test="${user.mem_num == mbook.mem_num && mbook.compareNow == 1 && mbook.book_onoff != 1}">
-				<input type="button" value="모임 완료하기" class="default-btn4 book-complete"
+			<c:if test="${user.mem_num == mbook.mem_num && mbook.book_state == 0 && mbook.book_onoff != 1 && mbook.compareNow == 1}">
+				<input type="button" value="모임 완료하기" class="default-btn3 book-complete"
 					data-num="${mbook.book_num}">
 			</c:if>
 			<%-- 참여자 --%>
 			<c:if test="${user.mem_num == mbook.apply_num && mbook.book_state != 2}">
 				<c:if test="${mbook.compareNow == 2 && mbook.book_onoff == 0}">
-					<input type="button" value="참여 취소하기" class="default-btn3 apply-cancel" 
+					<input type="button" value="참여 취소하기" class="default-btn4 apply-cancel" 
 						data-num="${mbook.book_num}" data-apply="${mbook.apply_num}">
 				</c:if>
 				<c:if test="${mbook.compareNow == 1 && mbook.book_state == 1}">

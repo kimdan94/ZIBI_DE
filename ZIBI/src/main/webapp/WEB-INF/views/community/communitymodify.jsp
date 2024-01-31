@@ -19,11 +19,14 @@
 </script>
 <div class="container">
 	<div class="d-flex justify-content-center">
-		<div class="rounded col-md-4 col-lg-6">
+		<div class="rounded col-md-4 col-lg-6" style="width:800px;">
 			<form:form action="update" id="community_write"
 				modelAttribute="communityVO" enctype="multipart/form-data">
 				<form:hidden path="community_num"/>
 				<div>
+				<h2>글 수정</h2>
+				<div style="border-bottom:1px solid black;height=5px;"></div>
+				<br>
 					<form:label path="community_category">카테고리</form:label>
 					<br>
 					<form:select path="community_category">
@@ -71,7 +74,7 @@
 						accept="image/gif,image/png,image/jpeg">
 					<form:errors path="community_filename" cssClass="error-phrase"/>	
 					
-					<br>
+					<br><br>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
 				<input type="submit" value="수정" class="w-25 btn btn-light form-control p-3 rounded-pill active">

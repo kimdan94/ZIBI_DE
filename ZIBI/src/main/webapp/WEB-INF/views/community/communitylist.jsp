@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/yeeun.css" rel="stylesheet">   
 <!-- 내용 시작 -->
-<div class="page-main">
+<div class="page-main-1">
 	<span style="font-size :13pt;">
 	<span style="font-weight:bold;margin:0 10px 0 10px;"><a href="list">전체</a></span>|
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=1">핫플레이스</a></span>|
@@ -11,8 +12,8 @@
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=3">취미</a></span>|
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=4">건강</a></span>|
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=5">육아</a></span>
-	</span>
-	<br>
+	</span>	
+	<br><br><br><br>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -23,14 +24,14 @@
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword"
-				                                  value="${param.keyword}">
+				<input type="search" name="keyword" id="keyword" 
+				                                  value="${param.keyword}" class="w-50 p-2" autocomplete="off">
 			</li>
 			<li>
 				<input type="submit" value="찾기">
 			</li>
 		</ul>
-		<div class="align-right">
+		<div class="align-right" style="padding-right:120px;">
 			<select id="order" name="order">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
@@ -48,9 +49,9 @@
 	<c:if test="${count > 0}">
 	<table class="striped-table">
 		<tr>
-			<th class="align-center">번호</th>
+			<th class="align-center">No</th>
 			<th class="align-center">카테고리</th>
-			<th width="300">제목</th>
+			<th width="300"><div class="align-center">제목</div></th>
 			<th class="align-center">작성자</th>
 			<th class="align-center">작성일</th>
 			<th class="align-center">조회수</th>
@@ -67,7 +68,7 @@
 			<c:if test="${community.community_category==4}">건강</c:if>
 			<c:if test="${community.community_category==5}">육아</c:if>
 			</td>
-			<td><a href="detail?community_num=${community.community_num}">${community.community_title}(${community.re_cnt})</a></td>
+			<td><a href="detail?community_num=${community.community_num}">${community.community_title}</a></td>
 			<td class="align-center">${community.mem_nickname}</td>
 			<td class="align-center">${community.community_reg_date}</td>
 			<td class="align-center">${community.community_hit}</td>
@@ -76,7 +77,11 @@
 		</tr>	
 		</c:forEach>
 	</table>
-	<div class="align-center">${page}</div>
+	<table class="striped-table">
+		<tr style="background:transparent;">
+			<td class="align-center" style="border:none;">${page}</td>
+		</tr>
+	</table>
 	</c:if>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
@@ -93,11 +98,15 @@ $(function(){
 	
 	//정렬 선택
 	$('#order').change(function(){
-		location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+		if(${!empty param.community_category}){
+			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val()+'&community_category=${param.community_category}');
+		}else{
+			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+		}
+		
 	});
 	
 });	
 </script>
 <!-- 내용 끝 -->
-
 		

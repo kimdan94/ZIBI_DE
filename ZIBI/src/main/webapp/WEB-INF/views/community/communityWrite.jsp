@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 내용 시작 -->
-<%--<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--%>
+<link href="${pageContext.request.contextPath}/common/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/yeeun.css" rel="stylesheet">
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript"
@@ -19,10 +21,13 @@
 </script>
 <div class="container">
 	<div class="d-flex justify-content-center">
-		<div class="rounded col-md-4 col-lg-6">
+		<div class="rounded col-md-4 col-lg-6" style="width:800px;">
 			<form:form action="write" id="community_write"
 				modelAttribute="communityVO" enctype="multipart/form-data">
 				<div>
+					<h2>글 등록</h2>
+					<div style="border-bottom:1px solid black;height=5px;"></div>
+					<br>
 					<form:label path="community_category">카테고리</form:label>
 					<br>
 					<form:select path="community_category">
@@ -37,7 +42,7 @@
 				</div>
 				<div>
 					<form:label path="community_title">제목</form:label>
-					<form:input path="community_title" class="w-100 form-control p-3" placeholder="제목"/>
+					<form:input path="community_title" class="w-100 form-control p-3" placeholder="제목을 입력하세요."/>
 					<form:errors path="community_title" cssClass="error-phrase" />
 				</div>
 				<div>
@@ -70,11 +75,10 @@
 						accept="image/gif,image/png,image/jpeg">
 					<form:errors path="community_filename" cssClass="error-phrase"/>	
 					
-					<br>
+					<br><br>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
-				<input type="submit" value="전송" class="w-25 btn btn-light form-control p-3 rounded-pill active">
-				<input type="button" class="w-25 btn btn-light form-control p-3 rounded-pill active" 
+				<input type="submit" value="전송" class="w-25 btn btn-light form-control p-3 rounded-pill active"><input type="button" class="w-25 btn btn-light form-control p-3 rounded-pill active" 
 					onclick="location.href='list'" value="글 상세">
 				</div>
 			</form:form>

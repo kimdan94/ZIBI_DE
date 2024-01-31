@@ -27,6 +27,7 @@ import kr.spring.community.vo.CommunityVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.PageUtil_cust2;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -85,6 +86,7 @@ public class CommunityController {
 	@RequestMapping("/community/list")
 	public ModelAndView process(
 			       @RequestParam(value="pageNum",defaultValue="1") int currentPage,
+			       @RequestParam(value="order",defaultValue="") String order,
 			       @RequestParam(value="community_category",defaultValue="") Integer community_category,
 			       String keyfield, String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -96,11 +98,12 @@ public class CommunityController {
 		int count = communityService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
-		PageUtil page = new PageUtil(keyfield,keyword,currentPage,
-				                     count,20,10,"list","&community_category="+community_category);
+		PageUtil_cust2 page = new PageUtil_cust2(keyfield,keyword,currentPage,
+				                     count,20,10,"list","&community_category="+community_category+"&order="+order);
 		
 		List<CommunityVO> list = null;
 		if(count > 0) {
+			map.put("order",order);
 			map.put("start",page.getStartRow());
 			map.put("end", page.getEndRow());
 			

@@ -27,7 +27,7 @@
 		<br>
 		<h2>인원 선택</h2>
 		<div>
-			<span class="people">성인</span>
+			<span class="people">일반</span>
 			<span class="people adult-minus">-</span>
 			<span class="people adult-num">0</span>
 			<span class="people adult-plus">+</span>
@@ -78,17 +78,29 @@
 <div class="container-fluid contact py-6 wow bounceInUp" data-wow-delay="0.1s">
 	<div class="container">
 	<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
-		<div>일반 : ${cinema.cinema_adult}</div>
-		<div>청소년 : ${cinema.cinema_teenage}</div>
-		<div>우대 : ${cinema.cinema_treatment}</div>
+		<div>일반 : ${cinema.cinema_adult} <span class="adult-money"></span></div>
+		<div>청소년 : ${cinema.cinema_teenage} <span class="teenage-money"></span></div>
+		<div>우대 : ${cinema.cinema_treatment} <span class="treatement-money"></span></div>
 	</c:forEach>
-	<div>총 금액 : </div>
+	<div><span class="total-money"></span></div>
 	</div>
 </div>
 <!-- 총 금액 End -->
 
 
 <form action="submitSeat" method="post">
+	<!-- mem_num -->
+	<input type="hidden" id="mem_num" value=""/>
+	<!-- ticketing_num -->
+	<input type="hidden" id="ticketing_num" value=""/>
+	<!-- 선택한 좌석 정보 -->
+	<input type="hidden" id="seat_info" value=""/>
+	<!-- 일반 가격 -->
+	<input type="hidden" id="adult-money" value=""/>
+	<!-- 청소년 가격 -->
+	<input type="hidden" id="teenage-money" value=""/>	
+	<!-- 우대 가격 -->
+	<input type="hidden" id="treatement-money" value=""/>
 	
 	<input type="submit" value="결제하기">
 </form>

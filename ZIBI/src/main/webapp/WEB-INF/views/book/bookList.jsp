@@ -70,10 +70,10 @@
 		</td>
 		<td>
 			<c:set var="maddr" value="${mbook.book_address1}"/>
-			<c:if test="${!maddr.contains('제주')}">
+			<c:if test="${maddr.startsWith('서울') || maddr.startsWith('경기')}">
 				${fn:substring(maddr,0,6)}
             </c:if>
-            <c:if test="${maddr.contains('제주')}">
+            <c:if test="${!maddr.startsWith('서울') && !maddr.startsWith('경기')}">
 				${fn:substring(maddr,0,2)}
 			</c:if>	
 		</td>
@@ -221,12 +221,12 @@
                             <p>
                             <div class="align-right">
                             <c:set var="addr" value="${book.book_address1}"/>
-                            <c:if test="${!addr.contains('제주')}">
-                            	${fn:substring(addr,0,6)}
-                            </c:if>
-                            <c:if test="${addr.contains('제주')}">
+                            <c:if test="${addr.startsWith('서울') || addr.startsWith('경기')}">
+								${fn:substring(addr,0,6)}
+				            </c:if>
+				            <c:if test="${!addr.startsWith('서울') && !addr.startsWith('경기')}">
 								${fn:substring(addr,0,2)}
-							</c:if>	
+							</c:if>
                             </div>
                         </div>
                     </div>

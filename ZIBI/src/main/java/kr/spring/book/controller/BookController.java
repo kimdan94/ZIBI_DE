@@ -194,7 +194,6 @@ public class BookController {
 	public String submitUpdate(@Valid BookVO bookVO,BindingResult result,
 							HttpServletRequest request, HttpSession session,
 							Model model) throws IllegalStateException, IOException {
-		log.debug("<<수정 사항>> : " + bookVO);
 		MemberVO user = (MemberVO) session.getAttribute("user");
 		
 		// 유효성 체크 결과 오류가 있으면 폼 호출

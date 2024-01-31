@@ -38,8 +38,6 @@ public class BookVO {
 	private String book_address1;
 	@NotEmpty
 	private String book_address2;
-	@Size(min=5,max=5)
-	private String book_zipcode;
 	private String book_kit;
 	@Range(min=2,max=99)
 	private int book_maxcount;

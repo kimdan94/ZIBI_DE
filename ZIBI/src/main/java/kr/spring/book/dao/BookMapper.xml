@@ -14,7 +14,6 @@
 			book_match,
 			book_address1,
 			book_address2,
-			book_zipcode,
 			book_kit,
 			book_maxcount,
 			book_ip,
@@ -30,7 +29,6 @@
 			#{book_match},
 			#{book_address1},
 			#{book_address2},
-			#{book_zipcode},
 			#{book_kit,jdbcType=VARCHAR},
 			#{book_maxcount},
 			#{book_ip},
@@ -168,7 +166,6 @@
 			book_content,
 			book_address1,
 			book_address2,
-			book_zipcode,
 			book_gatheringDate,
 			<![CDATA[
 			CASE WHEN SYSDATE >= TO_DATE(book_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
@@ -195,7 +192,6 @@
 			book_match=#{book_match},
 			book_address1=#{book_address1},
 			book_address2=#{book_address2},
-			book_zipcode=#{book_zipcode},
 			book_kit=#{book_kit,jdbcType=VARCHAR},
 			book_maxcount=#{book_maxcount},
 			book_ip=#{book_ip},

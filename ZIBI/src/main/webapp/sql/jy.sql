@@ -13,7 +13,6 @@ create table book(
  book_modifyDate date,
  book_address1 varchar2(100) not null,
  book_address2 varchar2(80) not null,
- book_zipcode varchar2(5) not null,
  book_kit varchar2(100) not null,
  book_maxcount number not null,
  book_headcount number default 0 not null,

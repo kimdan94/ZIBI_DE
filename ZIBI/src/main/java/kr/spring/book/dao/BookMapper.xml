@@ -69,7 +69,6 @@
 			COUNT(*)
 		FROM book 
 		LEFT OUTER JOIN member USING(mem_num) 
-		LEFT OUTER JOIN member_detail USING(mem_num)
 		<include refid="bookSearch"></include>
 	</select>
 	

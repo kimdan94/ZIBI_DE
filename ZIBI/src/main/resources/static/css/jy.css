@@ -421,6 +421,18 @@ li.book-li{
 #book_detail hr{
 	background:#c2d1c7;
 }
+.scrap-area{
+	position:absolute;
+	top:70%;
+	left:97%;
+	width:100%;
+	transform:translate(-50%,-50%);
+	cursor:pointer;
+}
+#output_scount{
+	font-size:13px;
+	color:lightgray;
+}
 /*----------- 모임 신청폼 (모달) -----------*/
 #bookApplyModal{
 	font-size: .8em;

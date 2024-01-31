@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 
 public interface BookService {
@@ -44,6 +45,11 @@ public interface BookService {
 	
 	//새로 모집하기
 	public void resetOnoff(int book_num);
-	//리뷰
-	//스크랩
+	
+	/*------- 리뷰 -------*/
+	/*------- 스크랩 -------*/
+	public BookScrapVO selectScrap(BookScrapVO scrap);
+	public int selectScrapCount(int book_num);
+	public void insertScrap(BookScrapVO scrap);
+	public void deleteScrap(BookScrapVO scrapVO);
 }

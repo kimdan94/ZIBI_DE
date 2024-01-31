@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.book.service.BookService;
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -229,6 +230,64 @@ public class BookAjaxController {
 			mapJson.put("result", "reset");
 		}
 		
+		return mapJson;
+	}
+	
+	/*-- 스크랩 읽기 --*/
+	@RequestMapping("/book/getScrap")
+	@ResponseBody
+	public Map<String,Object> getScrap(BookScrapVO scrap, HttpSession session){
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("status", "noScrap");
+		}else if(user != null && bookService.selectBook(scrap.getBook_num()).getMem_num() == user.getMem_num()){
+			mapJson.put("status", "noScrap");
+		}else {
+			//로그인한 회원의 회원번호 세팅
+			scrap.setMem_num(user.getMem_num());
+			
+			//스크랩 존재 여부 확인
+			BookScrapVO db_scrap = bookService.selectScrap(scrap);
+			if(db_scrap!=null) {
+				mapJson.put("status", "yesScrap");
+			}else {
+				mapJson.put("status", "noScrap");
+			}
+		}
+		//스크랩 개수
+		mapJson.put("count", bookService.selectScrapCount(scrap.getBook_num()));
+		return mapJson;
+	}
+	
+	/*-- 스크랩 등록/삭제 --*/
+	@RequestMapping("/book/clickScrap")
+	@ResponseBody
+	public Map<String,Object> clickScrap(BookScrapVO scrap, HttpSession session){
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			mapJson.put("result", "logout");
+		}else if(user != null && bookService.selectBook(scrap.getBook_num()).getMem_num() == user.getMem_num()){
+			mapJson.put("result", "bookWriter");
+		}else {
+			//로그인된 회원 번호 세팅
+			scrap.setMem_num(user.getMem_num());
+			
+			//스크랩 존재 여부 확인
+			BookScrapVO db_scrap = bookService.selectScrap(scrap);
+			
+			if(db_scrap!=null) {
+				bookService.deleteScrap(scrap);
+				mapJson.put("status", "noScrap");
+			}else {
+				bookService.insertScrap(scrap);
+				mapJson.put("status", "yesScrap");
+			}
+			mapJson.put("result", "success");
+			mapJson.put("count", bookService.selectScrapCount(scrap.getBook_num()));
+		}
 		return mapJson;
 	}
 }

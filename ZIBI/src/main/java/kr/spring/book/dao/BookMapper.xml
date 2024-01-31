@@ -56,10 +56,10 @@
 			ORDER BY book_regDate DESC
 		</if>
 		<if test="order == 2">
-			ORDER BY rev_cnt DESC
+			ORDER BY rev_cnt DESC NULLS LAST
 		</if>
 		<if test="order == 3">
-			ORDER BY scrap_cnt DESC
+			ORDER BY scrap_cnt DESC NULLS LAST
 		</if>
 	</sql>
 	
@@ -94,9 +94,11 @@
 					book_maxcount,
 					book_headcount,
 					book_expense,
-					mem_nickname
+					mem_nickname,
+					scrap_cnt
 				FROM book
 				LEFT OUTER JOIN member USING(mem_num)
+				LEFT OUTER JOIN (SELECT COUNT(*) scrap_cnt, book_num FROM book_scrap GROUP BY book_num) USING(book_num)
 				<include refid="bookSearch"></include> 
 				<include refid="bookOrder"></include>)a)
 		<![CDATA[

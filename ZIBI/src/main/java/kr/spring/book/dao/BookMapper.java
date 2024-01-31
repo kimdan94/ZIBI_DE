@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 
 @Mapper
@@ -71,7 +72,17 @@ public interface BookMapper {
 	//새로 모집하기
 	@Update("UPDATE book SET book_onoff = 0 WHERE book_num=#{book_num}")
 	public void resetOnoff(int book_num);
-
-	//리뷰
-	//스크랩
+	
+	/*------- 리뷰 -------*/
+	
+	/*------- 스크랩 -------*/
+	@Select("SELECT * FROM book_scrap WHERE book_num=#{book_num} AND mem_num=#{mem_num}")
+	public BookScrapVO selectScrap(BookScrapVO scrap);
+	@Select("SELECT COUNT(*) FROM book_scrap WHERE book_num=#{book_num}")
+	public int selectScrapCount(int book_num);
+	@Insert("INSERT INTO book_scrap (book_num, mem_num) VALUES (#{book_num},#{mem_num})")
+	public void insertScrap(BookScrapVO scrap);
+	@Delete("DELETE FROM book_scrap WHERE book_num=#{book_num} AND mem_num=#{mem_num}")
+	public void deleteScrap(BookScrapVO scrapVO);
+	
 }

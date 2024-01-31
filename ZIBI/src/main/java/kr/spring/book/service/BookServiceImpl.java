@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.book.dao.BookMapper;
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 
 @Service
@@ -115,5 +116,25 @@ public class BookServiceImpl implements BookService{
 		bookMapper.resetHeadcount(book_num);
 		//새로 모집 처리
 		bookMapper.resetOnoff(book_num);
+	}
+
+	@Override
+	public BookScrapVO selectScrap(BookScrapVO scrap) {
+		return bookMapper.selectScrap(scrap);
+	}
+
+	@Override
+	public int selectScrapCount(int book_num) {
+		return bookMapper.selectScrapCount(book_num);
+	}
+
+	@Override
+	public void insertScrap(BookScrapVO scrap) {
+		bookMapper.insertScrap(scrap);
+	}
+
+	@Override
+	public void deleteScrap(BookScrapVO scrapVO) {
+		bookMapper.deleteScrap(scrapVO);
 	}
 }

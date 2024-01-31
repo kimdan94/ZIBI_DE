@@ -11,10 +11,16 @@
 <div class="container" id="book_detail">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-lg-10">
-			<div class="text-center" style="margin-left:20px;">
+			<div class="text-center" style="margin-left:20px;position:relative;">
 				<c:if test="${book.book_category == 0}"><div style="background:#0f4b43;" class="book-first">취미 소모임</div></c:if>
                 <c:if test="${book.book_category == 1}"><div style="background:#5eaf08;" class="book-first">원데이 클래스</div></c:if>
                 <c:if test="${book.book_category == 2}"><div style="background:#486627;" class="book-first">스터디 모임</div></c:if>
+				<div class="scrap-area">
+             		<img id="output_scrap" data-num="${book.book_num}"
+             			src="${pageContext.request.contextPath}/images/jy/noScrap.png" width="50px">
+             		<br>	
+             		<span id="output_scount"></span>	
+             	</div>
 			</div>
 			<div style="float:left;">
 				<c:if test="${empty book.book_thumbnailName}">
@@ -278,4 +284,5 @@
 <!-- Daum 지도 API 끝 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.scrap.js"></script>
 <!-- 내용 끝 -->

@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 내용 시작 -->
+<div class="container">
 <c:if test="${!empty user}">
 <h4 class="align-center">[ 나의 모임 ]</h4>
 <table id="match_table">
@@ -174,72 +175,69 @@
 <c:if test="${count > 0}">
 <c:forEach var="book" items="${list}">
 <ul class="book-ul">
-<li class="book-li">
-    <div class="container">
-        <div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
-                <div class="book-section">
-                    <div class="d-flex align-items-center justify-content-center p-7">
-                        <div class="text-center">
-                        	<div>
-                            	<c:if test="${book.book_category == 0}"><div style="background:#0f4b43;" class="book-first">취미 소모임</div></c:if>
-                            	<c:if test="${book.book_category == 1}"><div style="background:#5eaf08;" class="book-first">원데이 클래스</div></c:if>
-                            	<c:if test="${book.book_category == 2}"><div style="background:#486627;" class="book-first">스터디 모임</div></c:if>
-                            </div>
-                            <div class="thumb-wrap">
-	                            <div class="thumb-img" <c:if test="${book.book_onoff == 2}">style="opacity:20%;"</c:if>>
-	                        	<c:if test="${!empty book.book_thumbnailName}">
-	                        		<img src="${pageContext.request.contextPath}/upload/${book.book_thumbnailName}" class="book-img">
-	                        	</c:if>
-	                        	<c:if test="${empty book.book_thumbnailName}">
-	                        		<img src="${pageContext.request.contextPath}/images/jy/thumbnail_basic.png" class="book-img">
-	                        	</c:if>
-	                        	</div>
-	                        	<div class="thumb-cancel">
-	                        		<c:if test="${book.book_onoff == 2}">취소된<br>모임이에요🥲</c:if>
-	                        	</div>
-                        	</div>                    
-                            <div>
-                            	<c:if test="${book.book_onoff != 2}">
-                            		<a href="detail?book_num=${book.book_num}" class="a-style"><b>${book.book_title}</b></a>
-                            	</c:if>
-                            	<c:if test="${book.book_onoff == 2}">
-                            		<b>${book.book_title}</b>
-                            	</c:if>
-                            </div>
-                            <span class="book-second">후기 ${book.rev_cnt}</span>
-                            <hr size="3" width="270px" class="align-center">
-                            <div class="book-third">
-                            	<c:if test="${!empty book.book_expense}">
-                            		<fmt:formatNumber value="${book.book_expense}"/>원
-                            	</c:if>
-                            	<c:if test="${empty book.book_expense}">
-                            		무료
-                            	</c:if>
-                            </div>
-                            <div class="book-third">${book.book_headcount}/${book.book_maxcount}명</div>
-                            <p>
-                            <div class="align-right">
-                            <c:set var="addr" value="${book.book_address1}"/>
-                            <c:if test="${addr.startsWith('서울') || addr.startsWith('경기')}">
-								${fn:substring(addr,0,6)}
-				            </c:if>
-				            <c:if test="${!addr.startsWith('서울') && !addr.startsWith('경기')}">
-								${fn:substring(addr,0,2)}
-							</c:if>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</li>	
+	<li class="book-li">
+		<div class="col-lg-3 col-md-6 col-sm-12">
+		    <div class="book-section">
+		        <div class="d-flex align-items-center justify-content-center p-7">
+		            <div class="text-center">
+		            	<div>
+		                	<c:if test="${book.book_category == 0}"><div style="background:#0f4b43;" class="book-first">취미 소모임</div></c:if>
+		                	<c:if test="${book.book_category == 1}"><div style="background:#5eaf08;" class="book-first">원데이 클래스</div></c:if>
+		                	<c:if test="${book.book_category == 2}"><div style="background:#486627;" class="book-first">스터디 모임</div></c:if>
+		                </div>
+		                <div class="thumb-wrap">
+		                 <div class="thumb-img" <c:if test="${book.book_onoff == 2}">style="opacity:20%;"</c:if>>
+		             	<c:if test="${!empty book.book_thumbnailName}">
+		             		<img src="${pageContext.request.contextPath}/upload/${book.book_thumbnailName}" class="book-img">
+		             	</c:if>
+		             	<c:if test="${empty book.book_thumbnailName}">
+		             		<img src="${pageContext.request.contextPath}/images/jy/thumbnail_basic.png" class="book-img">
+		             	</c:if>
+		             	</div>
+		             	<div class="thumb-cancel">
+		             		<c:if test="${book.book_onoff == 2}">취소된<br>모임이에요🥲</c:if>
+		             	</div>
+		            	</div>                    
+		                <div>
+		                	<c:if test="${book.book_onoff != 2}">
+		                		<a href="detail?book_num=${book.book_num}" class="a-style"><b>${book.book_title}</b></a>
+		                	</c:if>
+		                	<c:if test="${book.book_onoff == 2}">
+		                		<b>${book.book_title}</b>
+		                	</c:if>
+		                </div>
+		                <span class="book-second">후기 ${book.rev_cnt}</span>
+		                <hr size="3" width="270px" class="align-center">
+		                <div class="book-third">
+		                	<c:if test="${!empty book.book_expense}">
+		                		<fmt:formatNumber value="${book.book_expense}"/>원
+		                	</c:if>
+		                	<c:if test="${empty book.book_expense}">
+		                		무료
+		                	</c:if>
+		                </div>
+		                <div class="book-third">${book.book_headcount}/${book.book_maxcount}명</div>
+		                <p>
+		                <div class="align-right">
+		                <c:set var="addr" value="${book.book_address1}"/>
+		                <c:if test="${addr.startsWith('서울') || addr.startsWith('경기')}">
+		${fn:substring(addr,0,6)}
+		    </c:if>
+		    <c:if test="${!addr.startsWith('서울') && !addr.startsWith('경기')}">
+		${fn:substring(addr,0,2)}
+		</c:if>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</li>	
 </ul>	
 </c:forEach>
 <div class="book-page">${page}</div>	
 </c:if>
 <div style="clear:both;"></div>
+</div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <script type="text/javascript">

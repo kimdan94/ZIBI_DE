@@ -44,7 +44,7 @@ ul.search{
 	width:700px;
 	list-style:none;
 	padding:0;
-	margin:50px 560px 20px 600px;
+	margin:35px 410px 10px 410px;
 }
 ul.search li{
 	margin:0 0 15px 0;
@@ -63,7 +63,7 @@ ul.search li{
 	font-size:13px;
 }
 div.order{
-	width:1450px;
+	width:1260px;
 	margin-bottom:20px;
 	text-align:right;
 }
@@ -283,8 +283,7 @@ ul.book-ul{
 }
 li.book-li{
 	float:left;
-	margin-left:186px;
-	margin-right:-200px;
+	margin-left:7px;
 }
 .book-page{
 	clear:both;

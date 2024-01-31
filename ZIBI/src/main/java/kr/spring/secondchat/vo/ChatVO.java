@@ -17,5 +17,5 @@ public class ChatVO {
 	private int chatroom_num;		//채팅방 식별 번호//fk
 	private int mem_num;			//회원 식별 번호//fk
 	
-	private int read_count;			//읽지 않은 메시지수
+	private int read_count;			//읽지 않은 메시지수 
 }

@@ -32,6 +32,7 @@ public class MemberAjaxController {
 	@Autowired
 	JavaMailSenderImpl mailSender;
 	
+	/*---------------------팔로우/언팔로우-----------------------*/
 	//팔로우/언팔로우 읽기
 	@RequestMapping("/member/getFollow")
 	@ResponseBody
@@ -44,6 +45,8 @@ public class MemberAjaxController {
 		
 		if(user==null) { //로그아웃
 			mapJson.put("status","logout");
+		} else if(user.getMem_num()==followVO.getMem_num()){ //나 자신인 경우
+			mapJson.put("status","disabledFollow");
 		} else {
 			followVO.setFmem_num(user.getMem_num());
 			FollowVO db_follow = memberService.selectFollow(followVO);
@@ -73,6 +76,8 @@ public class MemberAjaxController {
 		
 		if(user==null) {
 			mapJson.put("result", "logout");
+		} else if(user.getMem_num()==followVO.getMem_num()){ //나 자신인 경우
+			mapJson.put("status","disabledFollow");
 		} else {
 			followVO.setFmem_num(user.getMem_num()); //로그인된 사용자 번호
 			FollowVO db_follow = memberService.selectFollow(followVO); //해당 회원의 팔로우 정보
@@ -93,17 +98,20 @@ public class MemberAjaxController {
 		return mapJson;
 	}
 	
-	//회원 탈퇴 - 비밀번호 확인
+	/*---------------------회원 탈퇴-----------------------*/
+	//비밀번호 확인
 	@RequestMapping("/member/quitPassword")
 	@ResponseBody
 	public Map<String,String> checkPassword(@RequestParam String input_password, HttpSession session) {
 		
 		log.debug("<<탈퇴 비밀번호 확인>> : " + input_password);
 		
-		MemberVO db_member = (MemberVO)session.getAttribute("user");
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		Map<String,String> mapJson = new HashMap<String, String>();
 		
-		if( !db_member.checkPassword(input_password) ) { //비밀번호 불일치
+		if(user==null) {
+			mapJson.put("result","logout");
+		} else if( !user.checkPassword(input_password) ) { //비밀번호 불일치
 			mapJson.put("result","passwordNotMatch");
 		} else { //비밀번호 일치
 			mapJson.put("result","passwordMatch");
@@ -111,7 +119,7 @@ public class MemberAjaxController {
 		return mapJson;
 	}
 	
-	//이메일 인증
+	/*--------------------이메일 인증 html 생성-----------------------*/
 	@PostMapping("/member/emailAuth")
 	@ResponseBody
 	public Map<String, Integer> emailAuth(@RequestParam String mem_email) {
@@ -135,7 +143,8 @@ public class MemberAjaxController {
 		return mapJson;
 	}
 	
-	//비밀번호 찾기
+	/*---------------------비밀번호 찾기-----------------------*/
+	//비밀번호 찾기 폼
 	@PostMapping("/member/findPassword")
 	@ResponseBody
 	public Map<String,String> findPassword(@RequestParam String mem_email){
@@ -189,7 +198,7 @@ public class MemberAjaxController {
 		return sb.toString();
 	}
 	
-	//이메일 전송 메서드
+	/*---------------------이메일 전송-----------------------*/
 	public void sendEmail(String mem_email, String title , String content) {
 		
 		String setFrom = "229rkawk@gmail.com"; //발신자
@@ -211,7 +220,7 @@ public class MemberAjaxController {
 		}
 	}
 	
-	//소셜 로그인/회원 가입
+	/*---------------------소셜 로그인/회원 가입-----------------------*/
 	@RequestMapping("/member/loginSocial")
 	@ResponseBody
 	public Map<String,String> loginKakao(@RequestParam String mem_email,@RequestParam int mem_social, HttpSession session) {
@@ -235,20 +244,24 @@ public class MemberAjaxController {
 			}
 			
 			memberService.registerMember(memberVO); //회원가입
-			session.setAttribute("user",memberVO); //로그인 처리
+			session.setAttribute("user", memberVO); //로그인 처리
 			
 			mapJson.put("result","success");
 			
 			log.debug("<<소셜 회원가입>>"+memberVO);
 		} else { //회원가입 되어있음 > 로그인
-			session.setAttribute("user",db_member); //로그인
-			mapJson.put("result","success");
+			
+			if( db_member.getMem_social() != mem_social ) { //다른 방법으로 가입된 이메일인 경우
+				mapJson.put("result","socialNotMatch");
+			} else {
+				session.setAttribute("user",db_member); //로그인
+				mapJson.put("result","success");
+			}
 		}
-		
 		return mapJson;
 	}
 	
-	/*----------프로필 사진 업로드----------*/
+	/*---------------------프로필 사진 업로드-----------------------*/
 	@RequestMapping("/member/updateMyPhoto")
 	@ResponseBody
 	public Map<String,String> updateMyPhoto(HttpSession session, MemberVO memberVO){
@@ -266,7 +279,8 @@ public class MemberAjaxController {
 		return mapJson;
 	}
 	
-	/*----------이메일 중복 체크 : 회원 가입----------*/
+	/*-----------------------중복 체크-----------------------------*/
+	//이메일 중복 체크 - 회원가입
 	@RequestMapping("/member/checkEmail")
 	@ResponseBody
 	public Map<String,String> checkEmail(@RequestParam String mem_email, HttpSession session){
@@ -286,7 +300,7 @@ public class MemberAjaxController {
 		return map;
 	}
 	
-	/*----------닉네임 중복 체크 : 회원 가입----------*/
+	//닉네임 중복 체크 : 회원 가입
 	@RequestMapping("/member/registerNickname")
 	@ResponseBody
 	public Map<String,String> registerNickname(@RequestParam String mem_nickname){
@@ -306,7 +320,7 @@ public class MemberAjaxController {
 		return map;
 	}
 	
-	/*----------닉네임 중복 체크 : 마이페이지----------*/
+	//닉네임 중복 체크 : 마이페이지
 	@RequestMapping("/member/checkNickname")
 	@ResponseBody
 	public Map<String,String> checkNickname(@RequestParam String mem_nickname, HttpSession session){
@@ -331,7 +345,7 @@ public class MemberAjaxController {
 		return map;
 	}
 	
-	/*----------연락처 중복 체크 : 마이페이지----------*/
+	//연락처 중복 체크
 	@RequestMapping("/member/checkPhone")
 	@ResponseBody
 	public Map<String,String> checkPhone(@RequestParam String mem_phone, HttpSession session){
@@ -356,5 +370,4 @@ public class MemberAjaxController {
 		}
 		return map;
 	}
-	
 }

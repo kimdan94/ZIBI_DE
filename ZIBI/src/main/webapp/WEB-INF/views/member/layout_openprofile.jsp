@@ -38,7 +38,7 @@
 			</nav>
 		</div>
 	</div>
-	<div class="container page-width">
+	<div class="container page-open">
 		<tiles:insertAttribute name="body"/>
 	</div>	
 	<tiles:insertAttribute name="footer"/>

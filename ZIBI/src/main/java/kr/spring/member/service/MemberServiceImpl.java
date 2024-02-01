@@ -1,9 +1,15 @@
 package kr.spring.member.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.member.dao.MemberMapper;
+import kr.spring.member.vo.ActListVO;
+import kr.spring.member.vo.DealListVO;
+import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.FollowVO;
 import kr.spring.member.vo.MemberVO;
 
@@ -67,9 +73,18 @@ public class MemberServiceImpl implements MemberService {
 	/*---------회원 탈퇴----------*/
 	@Override
 	public void quitMember(int mem_num) {
+		
+		//커뮤니티 좋아요, 댓글, 부모글 삭제
+		
+		
+		//팔로우, 팔로잉 삭제
+		memberMapper.deleteFollowByFmem_num(mem_num);
+		memberMapper.deleteFollowByMem_num(mem_num);
+		
+		//회원 개인정보만 삭제
 		memberMapper.quitMemberDetail(mem_num);
-		memberMapper.quitMember(mem_num);
 	}
+	
 	/*---------회원 팔로우----------*/
 	@Override
 	public FollowVO selectFollow(FollowVO followVO) {
@@ -90,5 +105,56 @@ public class MemberServiceImpl implements MemberService {
 	public int followCount(int mem_num) {
 		return memberMapper.followCount(mem_num);
 	}
+	
+	@Override
+	public int selectFollowByFmem_numCount(int fmem_num) {
+		return memberMapper.selectFollowByFmem_numCount(fmem_num);
+	}
+	
+	@Override
+	public List<FollowVO> selectFollowByFmem_num(int fmem_num) {
+		return memberMapper.selectFollowByFmem_num(fmem_num);
+	}
+	
+	/*---------회원 글 내역----------*/
 
+	@Override
+	public List<DealListVO> selectDealList(Map<String, Object> map) {
+		return memberMapper.selectDealList(map);
+	}
+
+	@Override
+	public int selectDealCount(Map<String,Object> map) {
+		return memberMapper.selectDealCount(map);
+	}
+
+	@Override
+	public List<ActListVO> selectActList(Map<String, Object> map) {
+		return memberMapper.selectActList(map);
+	}
+
+	@Override
+	public int selectActCount(Map<String, Object> map) {
+		return memberMapper.selectActCount(map);
+	}
+
+	@Override
+	public List<FollowListVO> selectFollowList(Map<String,Integer> map) {
+		return memberMapper.selectFollowList(map);
+	}
+
+	@Override
+	public int selectFollowCount(int fmem_num) {
+		return memberMapper.selectFollowCount(fmem_num);
+	}
+
+	@Override
+	public int selectOpenCount(int mem_num) {
+		return memberMapper.selectOpenCount(mem_num);
+	}
+
+	@Override
+	public List<FollowListVO> selectOpenList(Map<String, Integer> map) {
+		return memberMapper.selectOpenList(map);
+	}
 }

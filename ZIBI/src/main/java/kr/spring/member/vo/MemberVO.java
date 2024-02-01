@@ -25,10 +25,10 @@ public class MemberVO {
 	@Email
 	@NotBlank
 	private String mem_email;
-	private int mem_auth;
 	@NotBlank
 	private String mem_nickname;
 	private int mem_social; //소셜 회원 구분 (0-일반,1-카카오)
+	private int mem_auth;
 
 	/*-----선택 입력 데이터-----*/
 	@NotBlank

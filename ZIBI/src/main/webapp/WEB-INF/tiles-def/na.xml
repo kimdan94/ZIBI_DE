@@ -12,12 +12,13 @@
     </definition>
 
     <definition name="home" template="/WEB-INF/views/home/layout_main.jsp">
+    	<put-attribute name="popup" value="/WEB-INF/views/home/popup.jsp"/>
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
     	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
-	 <definition name="menuPage" template="/WEB-INF/views/home/layout_menuPage.jsp">
+	 <definition name="menuPageYena" template="/WEB-INF/views/home/layout_menuPage.jsp">
 	 	<put-attribute name="title" value="메뉴명"/>
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
@@ -45,23 +46,23 @@
     	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
-	<definition name="registerForm" extends="menuPage">
+	<definition name="registerForm" extends="menuPageYena">
 		<put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
 	</definition>
-	<definition name="mypageUpdate" extends="menuPage">
+	<definition name="mypageUpdate" extends="menuPageYena">
 		<put-attribute name="title" value="회원 정보 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/mypageUpdateForm.jsp"/>
 	</definition>
-	<definition name="passwordUpdateForm" extends="menuPage">
+	<definition name="passwordUpdateForm" extends="menuPageYena">
 		<put-attribute name="title" value="비밀번호 변경"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/passwordUpdateForm.jsp"/>
 	</definition>
-	<definition name="findPassword" extends="menuPage">
+	<definition name="findPassword" extends="menuPageYena">
 		<put-attribute name="title" value="비밀번호 찾기"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/findPassword.jsp"/>
 	</definition>
-	<definition name="checkPassword" extends="menuPage">
+	<definition name="checkPassword" extends="menuPageYena">
 		<put-attribute name="title" value="비밀번호 확인"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/checkPassword.jsp"/>
 	</definition>

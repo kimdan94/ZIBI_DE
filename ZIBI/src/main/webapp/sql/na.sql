@@ -4,13 +4,14 @@ create table member(
 	mem_email varchar2(40) not null,
 	mem_auth number(1) default 2 not null,
 	mem_social number(1) default 0 not null, -- 0:사이트, 1:카카오, 2:네이버, 3:구글
+	mem_nickname varchar2(30) not null,
 	constraint member_pk primary key (mem_num)
 );
 
 --회원 상세 (선택 입력 데이터)
 create table member_detail(
 	mem_num number not null,
-	mem_nickname varchar2(30) not null,
+	
 	mem_name varchar2(30),
 	mem_password varchar2(12),
 	mem_phone varchar2(15),

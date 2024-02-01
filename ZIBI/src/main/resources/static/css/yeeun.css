@@ -104,13 +104,13 @@ table.striped-table td, table.striped-table th{
 }
 table.striped-table th{
 	font-weight:bold;
-	background:#E1E1E1;
+	background:#a3c7b9;
 }
 table.striped-table td{
 	border-bottom:1px solid rgba(0,0,0,.1);
 }
 table.striped-table tr:nth-child(odd){
-	background-color:rgb(250,250,247);
+	background-color:rgb(242, 247, 244);
 }
 /* 게시판 목록
 -------------------------*/
@@ -163,9 +163,9 @@ form#re_form{
 	width:650px;
 	border:none;
 }
-span.re-tite{
+span.re-title{
 	color:#000;
-	font-size:12pt;
+	font-size:14pt;
 	line-height:200%
 }
 spam.letter-count{

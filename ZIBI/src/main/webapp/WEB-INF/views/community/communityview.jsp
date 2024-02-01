@@ -31,7 +31,7 @@
 		<li><img
 			src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${community.mem_num}"
 			width="40" height="40" class="my-photo"></li>
-		<li style="text-size:10pt;">${community.mem_nickname} <input type="button" value="팔로우"><br> <c:if
+		<li><span style="color:#32a77b;font-size:13pt;">${community.mem_nickname}</span>&nbsp;<input type="button" value="팔로우"><br> <c:if
 				test="${!empty community.community_modify_date}">
 			최근 수정일 : ${community.community_modify_date}
 			</c:if> <c:if test="${empty community.community_modify_date}">
@@ -63,15 +63,16 @@
 		</div>
 	</c:if>
 	<div class="detail-content">${community.community_content}</div>
+	<br><br>
 	<div class="fav-div">
 		<%-- 좋아요 --%>
 		<img id="output_fav" data-num="${community.community_num}"
 			src="${pageContext.request.contextPath}/images/yeeun/co_fav.png"
-			width="40"> <span id="output_fcount"></span>
+			width="22"> <span id="output_fcount"></span>
 		<%-- 댓글수 --%>
 		<img id="output_reply" data-num="${community.community_num}"
 			src="${pageContext.request.contextPath}/images/yeeun/co_reply.jpg"
-			width="40"> <span id="output_rcount"></span>
+			width="22"> <span id="output_rcount"></span>
 	</div>
 	<!-- SNS share websites -->
 	<script type="text/javascript" async>
@@ -118,10 +119,38 @@
 			class="sharebtn_custom" style="width: 32px;">
 		</a>
 	</div>
-	
 	<hr size="1" width="100%">
 	<hr>
-	<div class="align-right">
+
+	<hr size="1" width="100%">
+	<!-- 댓글 시작 -->
+	<div id="reply_div">
+		<span class="re-title">댓글<span id="output_wcount"></span></span>
+		<form id="re_form">
+			<input type="hidden" name="community_num"
+				value="${community.community_num}" id="community_num">
+			<c:if test="${!empty user}">
+				<div id="re_first">
+					<span class="letter-count">300/300</span>
+				</div>
+				<textarea rows="3" cols="500" name="re_content" id="re_content"
+					class="rep-content" placeholder="댓글을 남겨주세요."
+					<c:if test="${empty user}">disabled="disabled"</c:if>=""><c:if
+						test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea><input type="submit" value="등록">
+			</c:if>
+		</form>
+	</div>
+	<!-- 댓글 목록 출력 시작 -->
+	<div id="output"></div>
+	<div class="paging-button" style="display: none;">
+		<input type="button" value="더보기">
+	</div>
+	<div id="loading" style="display: none;">
+		<img src="${pageContext.request.contextPath}/images/yeeun/loading.gif"
+			width="100" height="100">
+	</div>
+	
+	<div class="align-center">
 		<c:if test="${!empty user && user.mem_num == community.mem_num}">
 			<input type="button" value="수정"
 				onclick="location.href='update?community_num=${community.community_num}'">
@@ -137,33 +166,6 @@
 			</script>
 		</c:if>
 		<input type="button" value="목록" onclick="location.href='list'">
-	</div>
-	<hr size="1" width="100%">
-	<!-- 댓글 시작 -->
-	<div id="reply_div">
-		<span class="re-title">댓글<span id="output_wcount"></span></span>
-		<form id="re_form">
-			<input type="hidden" name="community_num"
-				value="${community.community_num}" id="community_num">
-			<c:if test="${!empty user}">
-				<div id="re_first">
-					<span class="letter-count">300/300</span>
-				</div>
-				<textarea rows="3" cols="500" name="re_content" id="re_content"
-					class="rep-content" placeholder="댓글을 남겨주세요."
-					<c:if test="${empty user}">disabled="disabled"</c:if>=""><c:if
-						test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea><input type="submit" value="전송">
-			</c:if>
-		</form>
-	</div>
-	<!-- 댓글 목록 출력 시작 -->
-	<div id="output"></div>
-	<div class="paging-button" style="display: none;">
-		<input type="button" value="더보기">
-	</div>
-	<div id="loading" style="display: none;">
-		<img src="${pageContext.request.contextPath}/images/yeeun/loading.gif"
-			width="100" height="100">
 	</div>
 	<!-- 댓글 목록 출력 끝 -->
 	<!-- 댓글 끝 -->

@@ -115,7 +115,7 @@
 		   *
 		FROM helper
 		JOIN member USING(mem_num)
-		LEFT OUTER JOIN member_detail USING(mem_num)
+		LEFT OUTER JOIN member USING(mem_num)
 		WHERE helper_num=#{helper_num}
 	</select>
 	

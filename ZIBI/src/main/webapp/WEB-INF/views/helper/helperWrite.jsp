@@ -74,7 +74,7 @@
         <div>
         	<form:label path="upload">芥匙老</form:label>
 			<input type="file" name="upload" id="upload"
-					accept="image/gif,image/png,image/jpeg">
+					accept="image/gif,image/png,image/jpeg,image/jpg">
 			<form:errors path="upload"/>		
         </div>
         <br>
@@ -85,7 +85,7 @@
 			<form:errors path="helper_address1" cssClass="error-color"/>
         </div>
         <input type="button" onclick="sample5_execDaumPostcode()" value="林家 八祸"
-        		class="align-right">
+        		class="default-btn">
         <br><br>
 		<div>
 			<form:label path="helper_address2">惑技林家</form:label>

@@ -66,7 +66,7 @@
 			<div>
 				<input type="search" name="keyword" id="keyword"
 				class="form-control bg-transparent p-2 helper-btn-size" value="${param.keyword}">
-				<input type="submit" value="찾기">
+				<input type="submit" value="찾기" class="input-group-text p-3">
 				<input type="button" value="목록" onclick="location.href='list'">
 			</div>
 				
@@ -98,19 +98,18 @@
 			</div>
             <div class="align-center">${helper.helper_title}</div>
 			<div class="align-center"><a href="detail?helper_num=${helper.helper_num}">${helper.helper_address1}</a></div>
-			<div class="align-center">${helper.mem_nickname}</div>
-			<div class="align-center">${helper.helper_reg_date}</div>
-			<div>
+			<div class="align-center">${helper.mem_nickname}</div><div class="align-center">
+			${helper.helper_reg_date}</div>
+			<div class="align-right"> 
 			<c:if test="${helper.helper_select == 1}"><div>헬프미</div></c:if>
 			<c:if test="${helper.helper_select == 2}"><div>헬프유</div></c:if>
-			</div>
-			<div class="align-right">
 			<c:if test="${helper.helper_category ==  1}"><div>벌레</div></c:if>
 			<c:if test="${helper.helper_category ==  2}"><div>조립</div></c:if>
 			<c:if test="${helper.helper_category ==  3}"><div>수리</div></c:if>
 			<c:if test="${helper.helper_category ==  4}"><div>소분</div></c:if>
 			<c:if test="${helper.helper_category ==  5}"><div>기타</div></c:if>
 			</div>        
+			<hr size="3" noshade="noshade" width="100%"> 
 </c:forEach>
 	<div class="align-center">${page}</div>
 	</c:if>

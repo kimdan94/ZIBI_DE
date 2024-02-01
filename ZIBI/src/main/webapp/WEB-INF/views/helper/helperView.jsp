@@ -13,7 +13,6 @@
 		<div class="rounded login-form col-md-4 col-lg-6">
 		
 		<h2>글 상세</h2>
-		<!-- 해결중,해결완료 토클 넣어야함 -->
 		<div class="align-right">
 		<c:if test="${!empty user}">
 		<!-- 해결중&해결완료 토글 -->
@@ -43,6 +42,10 @@
 		</c:if>
 		</div>
 		<div>
+			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${helper.mem_num}"
+						width="40" height="40" class="my-photo">
+		</div>
+			<div>
 		<!-- 프로필 이미지 넣어야함 -->
 			닉네임 : ${helper.mem_nickname}
 			<br>
@@ -76,7 +79,7 @@
 		<span id="output_scount"></span>	
 	</div>
 									<!-- 채팅 보류 -->
-		<input type="button" value="채팅하기" onclick="location.href='talk?helper_num=${helper.helper_num}'">
+		<input type="button" value="채팅하기" onclick="location.href=''">
 		</c:if>
 	</div>	
 		

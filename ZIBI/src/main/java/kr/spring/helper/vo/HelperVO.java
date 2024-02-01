@@ -29,8 +29,6 @@ public class HelperVO {
 	private String helper_content;
 	private MultipartFile upload;
 	private String helper_filename;
-	@Size(min=5,max=5)
-	private String helper_zipcode;
 	@NotBlank
 	private String helper_address1;
 	private String helper_address2;

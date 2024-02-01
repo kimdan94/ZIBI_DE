@@ -4,7 +4,7 @@
 
 <tiles-definitions>
 
-	<definition name="menuPage" template="/WEB-INF/views/home/layout_menuPage.jsp">
+	<definition name="menuPage" template="/WEB-INF/views/helper/layout_menuPage.jsp">
     	<put-attribute name="title" value="메뉴명"/>
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="body" value="/WEB-INF/views/home/main.jsp"/>
@@ -34,4 +34,11 @@
 		<put-attribute name="title" value="재능기부 글수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/helper/helperModify.jsp"/>
 	</definition>
+	
+	<!-- 재능기부 채팅 페이지 -->
+	<definition name="talkDetail" extends="menuPage">
+		<put-attribute name="tabtitle" value="재능기부 채팅"/>
+		<put-attribute name="body" value="/WEB-INF/views/helper/talkDetail.jsp"/>
+	</definition>
+	
 </tiles-definitions>

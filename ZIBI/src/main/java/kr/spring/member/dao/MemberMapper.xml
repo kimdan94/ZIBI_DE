@@ -23,13 +23,13 @@
 	<insert id="insertMemberDetail" parameterType="memberVO">
 		INSERT 
 		INTO member_detail 
-			(mem_num,mem_nickname
+			(mem_num
 			<if test="mem_password!=null">
 				,mem_password
 			</if>
 			) 
 		VALUES 
-			(#{mem_num},#{mem_nickname}
+			(#{mem_num}
 			<if test="mem_password!=null">
 				,#{mem_password}
 			</if>

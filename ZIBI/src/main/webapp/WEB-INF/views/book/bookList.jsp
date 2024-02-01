@@ -160,8 +160,9 @@
 	<div class="order">
 		<select id="order" name="order">
 			<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순
-			<option value="2" <c:if test="${param.order == 2}">selected</c:if>>리뷰수
-			<option value="3" <c:if test="${param.order == 3}">selected</c:if>>스크랩수
+			<option value="2" <c:if test="${param.order == 2}">selected</c:if>>리뷰순
+			<option value="3" <c:if test="${param.order == 3}">selected</c:if>>스크랩순
+			<option value="4" <c:if test="${param.order == 4}">selected</c:if>>마감임박순
 		</select>
 			<input type="button" value="목록으로" onclick="location.href='list'" class="default-btn2">
 		<c:if test="${!empty user}">

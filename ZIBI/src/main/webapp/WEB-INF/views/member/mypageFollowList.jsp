@@ -1,34 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="member-page">
-	<div class="text-end mypage-category">
-		<select id="order" name="order">
-			<option value="1" <c:if test="${param.order==1}">selected</c:if>>커뮤니티</option>
-			<option value="2" <c:if test="${param.order==2}">selected</c:if>>댓글</option>
-			<option value="3" <c:if test="${param.order==3}">selected</c:if>>찜</option>
-			<option value="4" <c:if test="${param.order==4}">selected</c:if>>좋아요</option>
-			<option value="5" <c:if test="${param.order==5}">selected</c:if>>스크랩</option>
-			<option value="6" <c:if test="${param.order==6}">selected</c:if>>직접 문의</option>
-		</select>
-	</div>
 	<div class="mypage-follow">
-	
-		<%-- forEach 사용 --%>
-			<div class="row justify-content-center">
-				<div class="col-5">
-					<img src="${pageContext.request.contextPath}/sample/img/event-1.jpg">
-				</div>
-				<div class="col-7">
-					<span>
-						<a href="#">🗣️단무지</a>
-					</span>
-					<h5>
-						<a href="#">고기 무료 나눔</a>
-					</h5>
-					<p>고기를 받았는데 다 못 먹을 것 같아서...</p>
-				</div>
+		<c:if test="${count==0}">
+			<div class="justify-content-center no-data">
+				팔로우한 회원이 없습니다 😟
 			</div>
-		
+		</c:if>
+		<c:if test="${count>0}">
+			<c:forEach var="follow" items="${list}">
+				<div class="row">
+					<div class="col-5">
+						<c:if test="${!empty follow.photo}">
+							<img src="${pageContext.request.contextPath}/upload/${follow.photo}">
+						</c:if>
+						<c:if test="${empty follow.photo}">
+							<img src="${pageContext.request.contextPath}/images/na/no-image.png">
+						</c:if>
+					</div>
+					<div class="col-7">
+						<span>
+							<c:if test="${follow.category==1}">👥 소모임 예약</c:if>
+							<c:if test="${follow.category==2}">🙋 재능 기부</c:if>
+							<c:if test="${follow.category==3}">✍️ 커뮤니티</c:if>
+							<c:if test="${follow.category==4}">🤝 중고 거래</c:if>
+							(${follow.reg_date})
+						</span>
+						<div>
+							<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${follow.mem_num}">${follow.mem_nickname}</a>
+						</div>
+						<h5>
+							<c:if test="${follow.category==1}">
+								<a href="${pageContext.request.contextPath}/book/detail?book_num=${follow.num}">${follow.title}</a>
+							</c:if>
+							<c:if test="${follow.category==2}">
+								<a href="${pageContext.request.contextPath}/helper/detail?helper_num=${follow.num}">${follow.title}</a>
+							</c:if>
+							<c:if test="${follow.category==3}">
+								<a href="${pageContext.request.contextPath}/community/detail?community_num=${follow.num}">${follow.title}</a>
+							</c:if>
+							<c:if test="${follow.category==4}">
+								<a href="${pageContext.request.contextPath}/secondhand/detail?sc_num=${follow.num}">${follow.title}</a>
+							</c:if>
+						</h5>
+					</div>
+				</div>
+			</c:forEach>
+			<div class="text-center">${page}</div>
+		</c:if>
 	</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>

@@ -27,6 +27,9 @@ function getInfoKakao() { //사용자 정보 요청 함수
 				success: function(param){
 					if(param.result=='success'){
 						location.replace("/main/home");
+					} else if(param.result=='socialNotMatch'){
+						alert('이미 가입된 이메일입니다. 다른 방법으로 로그인하세요');
+						window.close();
 					} else{
 						alert('카카오 로그인 오류');
 					}

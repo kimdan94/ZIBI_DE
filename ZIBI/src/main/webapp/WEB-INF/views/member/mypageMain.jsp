@@ -8,7 +8,7 @@
 					<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView">
 					<div class="event-overlay">
 						<a data-lightbox="event-1" id="photo_btn">
-							<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="60px">
+							<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="50px">
 						</a>
 					</div>
 				</div>

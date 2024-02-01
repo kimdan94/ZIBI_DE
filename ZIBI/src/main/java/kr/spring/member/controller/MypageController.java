@@ -1,5 +1,9 @@
 package kr.spring.member.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,19 +15,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.ActListVO;
+import kr.spring.member.vo.DealListVO;
+import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PageUtil_na;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class MypageController {
 	
-	//의존 관계 주입
+	/*---------------------의존 관계 주입-----------------------*/
 	@Autowired
-	private MemberService memberService;
+	private MemberService memberService;	
 	
 	//VO 초기화
 	@ModelAttribute
@@ -32,30 +41,106 @@ public class MypageController {
 		return memberService.selectMember(user.getMem_num());
 	}
 	
-	//마이페이지 메인
+	//메인
 	@RequestMapping("/member/mypageMain")
 	public String mypageMain() {
 		return "mypageMain"; //타일즈
 	}
 	
-	//마이페이지-거래내역
+	/*---------------------페이지 호출-----------------------*/
+	//거래내역 목록
 	@RequestMapping("/member/mypageDeal")
-	public String mypageDeal() {
+	public String mypageDeal(@RequestParam(value="pageNum",defaultValue="1") int currentPage, @RequestParam(value="category",defaultValue="1") String category, HttpSession session, Model model) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		map.put("category", category);
+		map.put("mem_num", user.getMem_num());
+		
+		log.debug("<<카운트 읽어오기 시작>>");
+		int count = memberService.selectDealCount(map);
+		
+		PageUtil_na page = new PageUtil_na(category, null, currentPage, count, 10, 10,"mypageDeal");
+		
+		List<DealListVO> list = null;
+		
+		if(count>0) {
+			map.put("category", category);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			log.debug("<<리스트 읽어오기 시작>> : "+map);
+			list = memberService.selectDealList(map);
+		}
+		
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("page",page.getPage());
+		
 		return "mypageDeal"; //타일즈
 	}
 	
-	//마이페이지-활동내역
+	//활동내역 목록
 	@RequestMapping("/member/mypageAct")
-	public String mypageAct() {
+	public String mypageAct(@RequestParam(value="pageNum",defaultValue="1") int currentPage, @RequestParam(value="category",defaultValue="1") String category, HttpSession session, Model model) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		map.put("category", category);
+		map.put("mem_num", user.getMem_num());
+		
+		log.debug("<<카운트 읽어오기 시작>> : " + map);
+		int count = memberService.selectActCount(map);
+		
+		PageUtil_na page = new PageUtil_na(category, null, currentPage, count, 10,10,"mypageAct");
+		
+		List<ActListVO> list = null;
+		
+		if(count>0) {
+			map.put("category", category);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			log.debug("<<리스트 읽어오기 시작>> : "+map);
+			list = memberService.selectActList(map);
+		}
+		
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("page",page.getPage());
+		
 		return "mypageAct"; //타일즈
 	}
 	
-	//마이페이지-팔로우내역
+	//팔로우내역 목록
 	@RequestMapping("/member/mypageFollow")
-	public String mypageFollow() {
+	public String mypageFollow(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session, Model model) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		int count = memberService.selectFollowCount(user.getMem_num());
+		
+		PageUtil_na page = new PageUtil_na(null,null, currentPage, count, 10,10,"mypageFollow"); //총 글 갯수?
+
+		List<FollowListVO> list = null;
+		Map<String,Integer> map = new HashMap<String, Integer>();
+		
+		if(count>0) {
+			
+			map.put("fmem_num", user.getMem_num());
+			map.put("start",page.getStartRow());
+			map.put("end",page.getEndRow());
+			
+			list = memberService.selectFollowList(map);
+		}
+		
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("page",page.getPage());
+		
 		return "mypageFollow"; //타일즈
 	}
 	
+	/*---------------------회원 정보 수정-----------------------*/
 	//회원 정보 수정폼
 	@GetMapping("/member/mypageUpdate")
 	public String mypageUpdateForm() {
@@ -78,6 +163,7 @@ public class MypageController {
 		return "redirect:/member/mypageMain";
 	}
 	
+	/*---------------------비밀번호 변경-----------------------*/
 	//비밀번호 변경 폼
 	@GetMapping("/member/passwordUpdate")
 	public String updatePasswordForm() {
@@ -107,6 +193,7 @@ public class MypageController {
 		return "redirect:/member/mypageMain";
 	}
 	
+	/*---------------------회원 탈퇴-----------------------*/
 	//회원 탈퇴 비밀번호 확인폼
 	@RequestMapping("/member/checkPassword")
 	public String passwordForm() {

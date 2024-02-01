@@ -3,23 +3,21 @@ let mem_num = urlParams.get('mem_num');
 
 selectFollow(mem_num);
 
+function followBtn(value,button){
+	$('#follow_btn').attr('value',value);
+	$('#follow_btn').attr('class',button);
+}
+
 function displayFollow(param){ //팔로우 표시
-	
-	let value;
-	let button;
-	
 	if(param.status == 'yesFollow'){ //팔로우 중
-		value = '언팔로우';
-		button = 'btn mem-btn';
+		followBtn('언팔로우','btn mem-btn');
 	} else if(param.status == 'noFollow'){ //팔로우 하지 않음
-		value = '팔로우';
-		button = 'btn mem-btn-green';
+		followBtn('팔로우','btn mem-btn-green');
+	} else if(param.status == 'disabledFollow'){ //나 자신인 경우
+		$('#follow_btn').hide();
 	} else {
 		alert('팔로우 표시 오류');
 	}
-	
-	$('#follow_btn').attr('value',value);
-	$('#follow_btn').attr('class',button);
 	$('#follower').text(param.count);
 }
 

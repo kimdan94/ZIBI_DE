@@ -25,6 +25,9 @@
 					if(param.result=='success'){
 						window.opener.location.href = "/main/home";
 						window.close();
+					} else if(param.result=='socialNotMatch'){
+						alert('이미 가입된 이메일입니다. 다른 방법으로 로그인하세요');
+						window.close();
 					} else{
 						alert('네이버 로그인 오류');
 					}

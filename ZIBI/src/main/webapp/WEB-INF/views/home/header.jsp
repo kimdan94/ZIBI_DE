@@ -42,7 +42,6 @@
 					<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">득템찬스</a>
 						<div class="dropdown-menu">
-							<a href="${pageContext.request.contextPath}/rental/list" class="dropdown-item">물품 대여</a> 
 							<a href="${pageContext.request.contextPath}/secondhand/list" class="dropdown-item">중고거래</a> 
 							<a href="${pageContext.request.contextPath}/helper/list" class="dropdown-item">재능기부</a>
 						</div>
@@ -58,7 +57,6 @@
 					<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">척척박사</a>
 						<div class="dropdown-menu">
-							<a href="${pageContext.request.contextPath}/contents/list" class="dropdown-item">컬럼 구독</a> 
 							<a href="${pageContext.request.contextPath}/" class="dropdown-item">1인 가구 정보</a> 
 							<a href="${pageContext.request.contextPath}/checklist/list" class="dropdown-item">집 체크리스트</a>
 						</div>

@@ -1,9 +1,39 @@
 /*-------------- 메인-------------*/
+/* 추가 정보 입력 유도 */
+#userInfoModal{
+	text-align: center;
+	padding: 10px;
+	font-size: .9em;
+}
+#userInfoModal b{
+	cursor: pointer;
+}
+
 /* 케러셀 */
 .carousel-item {
 	height: 500px;
 	width: 100%;
 	overflow: hidden;
+	display: felx;
+}
+.cmain-photo{
+	position: absolute;
+	left: 60%;
+	transform: translateX(-40%);
+}
+.cmain-content{
+	position: absolute;
+	left: 35%;
+	top: 50%;
+	transform: translateX(-60%);
+	z-index: 2;
+}
+.cmain-content h2, .cmain-content h1{
+	font-weight: 700;
+}
+.cmain-content #img_site{
+	font-size: .6em;
+	color: lightgray;
 }
 
 /*캐러셀 : 메뉴 설명*/
@@ -30,10 +60,6 @@
 .service-content-icon h4{
 	font-size: 1em;
 	font-weight: bold;
-}
-.service-content-icon h4 a{
-	color: black;
-	text-decoration-line: none;
 }
 .service-content-icon p{
 	font-size: 0.9em;
@@ -79,25 +105,24 @@
 .service-item .service-content-icon {
     transition: 1s !important;
 }
-/* 최신글 */
 
-.main-content .event .event-img .event-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(255,255,255, 0.8);
-    border-radius: 8px;
-    transition: 0.5s;
-    opacity: 0;
-    z-index: 1;
+/* 최신글 */
+.main-content .team-item{
+	border: 1px solid lightgray;
 }
-.main-content  .event-overlay img{
- 	width: 40px !important;
- }
-.main-content .event .event-img:hover .event-overlay {
-    opacity: 1;
+.main-content .team-item .team-img{
+	height: 180px;
+	width: 100%;
+	overflow: hidden;
+}
+.main-content .team-img img{
+	object-fit:cover;
+}
+.main-content .team-item h6{
+	font-weight: 600;
+}
+.main-content .team-item p{
+	font-size: .8em;
 }
 
 /*-------------로그인-------------*/
@@ -149,7 +174,6 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
 	background-color: rgba(0,0,0,0.5);
 	z-index: 99;		
 }
@@ -272,8 +296,24 @@
 }
 .mypage-follow .col-7{
 	text-align: left;
-	border-bottom: 1px solid lightgray;
+	border-bottom: 1px solid #ededed;
+	width: 40%;
 }
+.mypage-follow .row{
+	margin: 8px;
+}
+.mypage-follow span{
+	font-size: .9em;
+	
+}
+.mypage-follow div{
+	margin-top: 10px;
+}
+.no-data{
+	text-align: center;
+	margin-top: 40px !important;
+}
+
 
 /* 오픈 프로필 */
 .openProfile .col-5{
@@ -294,11 +334,25 @@
 	text-align: center;
 	margin-bottom: 10px;
 }
+.openProfile .card-img{
+	height: 250px;
+	width: 100%;
+	overflow: hidden;
+}
+.openProfile .card img{
+	object-fit:cover;
+}
+.openProfile .card-title{
+	font-size: .9em;
+}
+.openProfile .card-footer{
+	font-size: .8em;
+}
 
 /*-------------전체--------------*/
 /* 일반 페이지 넓이 */
 .page-width{ 
-	width:80%;
+	width:60%;
 }
 
 /* 입력폼 페이지 넓이 */
@@ -306,6 +360,10 @@
 	width:45%;
 }
 
+/* 오픈 프로필 페이지 넓이 */
+.page-open{
+	width: 80%;
+}
 
 .carousel-inner img{
 	object-fit: cover;
@@ -366,6 +424,17 @@ input[type=file]::file-selector-button{
     color: #32a77b;
     border: 1px solid #ededed;
 	box-shadow: none;
+}
+
+a{
+	color: black;
+	text-decoration-line: none;
+}
+a:hover{
+	text-decoration: none;
+	color: #32a77b;
+	font-weight: 600;
+	transition: .3s;
 }
 
 /*--------------기타--------------*/

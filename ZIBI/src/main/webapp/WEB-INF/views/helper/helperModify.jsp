@@ -66,7 +66,7 @@
 				</script>
         </div>
         <br>
-        <div>
+        <div> 
         	<form:label path="upload">½æ³×ÀÏ</form:label>
 			<input type="file" name="upload" id="upload"
 					accept="image/gif,image/png,image/jpeg,image/jpg">

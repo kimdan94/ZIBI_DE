@@ -17,7 +17,7 @@ create table helper(
  mem_num number not null,
  constraint helper_pk primary key (helper_num),
  constraint helper foreign key (mem_num) references member (mem_num)
-);
+); 
 
 create sequence helper_seq;
 

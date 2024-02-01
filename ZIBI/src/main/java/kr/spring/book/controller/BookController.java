@@ -27,8 +27,8 @@ import kr.spring.book.vo.BookVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
-import kr.spring.util.PageUtil_cust;
-import kr.spring.util.PageUtil_cust2;
+import kr.spring.util.PageUtil_book;
+import kr.spring.util.PageUtil_mbook;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -99,7 +99,7 @@ public class BookController {
 		// 전체/검색 레코드 수
 		int count = bookService.selectRowCount(map);
 
-		PageUtil_cust page = new PageUtil_cust(keyfield, keyword, currentPage, count, 4, 10, "list", "&order=" + order);
+		PageUtil_book page = new PageUtil_book(keyfield, keyword, currentPage, count, 4, 10, "list", "&order=" + order);
 		List<BookVO> list = null;
 		if (count > 0) {//전체/검색 목록
 			map.put("order", order);
@@ -120,7 +120,7 @@ public class BookController {
 			// 나의 모임 레코드 수
 			int mcount = bookService.selectMatchCount(map2);
 			
-			PageUtil_cust2 mpage = new PageUtil_cust2(currentPage2, mcount, 5, 10, "list");
+			PageUtil_mbook mpage = new PageUtil_mbook(currentPage2, mcount, 5, 10, "list");
 			List<BookVO> mlist = null;
 			int apply_num = 0;
 			String nick = null;

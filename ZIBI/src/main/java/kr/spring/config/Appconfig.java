@@ -7,11 +7,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
+import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
+import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import kr.spring.interceptor.LoginCheckInterceptor;
+import kr.spring.websocket.SocketHandler;
 
 @Configuration
-public class Appconfig implements WebMvcConfigurer {
+@EnableWebSocket
+public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 	
 	/*---------------------------로그인 interceptor----------------------------*/
 	private LoginCheckInterceptor loginCheck;
@@ -64,4 +69,11 @@ public class Appconfig implements WebMvcConfigurer {
 		
 		return tilesViewResolver;
 	}
+
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(new SocketHandler(), "message-ws").setAllowedOrigins("*");
+	}
+	
+	
 }

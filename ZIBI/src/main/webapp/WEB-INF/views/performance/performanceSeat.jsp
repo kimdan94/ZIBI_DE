@@ -57,7 +57,7 @@
 
 
 <!-- 좌석 선택 Start -->
-<div class="container-fluid contact py-6 wow bounceInUp" data-wow-delay="0.1s">
+<div class="container-fluid contact py-6 wow" data-wow-delay="0.1s">
 	<div class="container">
 		<h2>좌석 선택</h2>
 		<div id="seat">
@@ -75,7 +75,7 @@
 
 
 <!-- 총 금액 Start -->
-<div class="container-fluid contact py-6 wow bounceInUp" data-wow-delay="0.1s">
+<div class="container-fluid contact py-6 wow" data-wow-delay="0.1s">
 	<div class="container">
 	<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
 		<div>일반 : ${cinema.cinema_adult} <span class="adult-money"></span></div>

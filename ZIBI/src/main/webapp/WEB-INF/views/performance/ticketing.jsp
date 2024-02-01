@@ -42,7 +42,7 @@
                             	<tbody>
 	                            	<c:forEach var="cinema" items="${cinemaList}">
 	                            	<tr>
-										<td style="border:1px solid black;">${cinema.cinema_location1}</td>
+										<td>${cinema.cinema_location1}</td>
 									</tr>
 									</c:forEach>
 									

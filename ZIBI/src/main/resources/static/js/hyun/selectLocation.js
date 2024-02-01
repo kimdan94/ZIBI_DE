@@ -1,8 +1,5 @@
 $(function(){
-	/////////////////////
-	//$('#performance_hidden').attr('value',''); // form의 hidden 값 넣어주기
-	//$('#performance_hidden').val(); // form의 hidden 값 불러오기
-	/////////////////////////
+
 	//--------------------------- 지역 선택 시작 ----------------------------
 	let loc1 = 'location1';
 	let loc2 = 'location2';
@@ -84,13 +81,11 @@ $(function(){
 	// 날짜 선택
 	$('#date_list > input').on('click',function(){
 		let dayValue = $(this).attr('value');
-		//alert(dayValue); // value 값 가져오기
 		$('#day_hidden').attr('value',dayValue); // form의 hidden 값 넣어주기
 		$('#performance_hidden').attr('value', '');
 		ent(); // form hidden 값 
 		
 	});
-	
 	
 	//--------------------------- 날짜 선택 끝 ----------------------------
 
@@ -101,8 +96,6 @@ $(function(){
 		let performance_num = $('#performance_hidden').val(); // 영화
 		let day = $('#day_hidden').val(); // 날짜
 		
-		console.log('상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
-
 		// 상영관이 없으면 아무것도 선택할 수 없음
 		if(cinema==''){ // 상영관X 날짜O
 			alert('상영관을 선택해주세요');
@@ -116,7 +109,7 @@ $(function(){
 	
 	// 상영관 + 영화 + 날짜 선택 창
 	function cinemaAndDay(cinema, day, performance_num){
-			console.log('영화OOO // 상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
+			console.log('상영관 : ' + cinema + ' 날짜 : ' + day + ' 영화 : ' + performance);
 			
 			$.ajax({
 			url:'resultPerformance',

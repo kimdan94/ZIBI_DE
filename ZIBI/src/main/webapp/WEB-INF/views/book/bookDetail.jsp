@@ -93,7 +93,48 @@
 				<span class="book-span">모임 후기</span>
 				<br><br>
 				<%-- 모임 후기 --%>
-			</div>
+				<div class="owl-carousel">
+					<div class="bg-light rounded service-item">
+						<div class="service-content d-flex justify-content-center p-4">
+							<div class="service-content-icon text-center">
+								<h4 class="mb-3">
+									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
+								</h4>
+								<p class="mb-1">모임을 만들어 지비러들끼리 소통을 활성화하세요</p>
+							</div>
+						</div>
+					</div>
+					<div class="bg-light rounded service-item">
+						<div class="service-content d-flex justify-content-center p-4">
+							<div class="service-content-icon text-center">
+								<h4 class="mb-3">
+									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
+								</h4>
+								<p class="mb-1">샘플2</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					$(document).ready(function(){
+						var owl = $('.owl-carousel');
+						owl.owlCarousel({
+							items:4,
+						    loop:true,
+						    nav:true,
+						    margin:10
+						});
+						owl.on('mousewheel', '.owl-stage', function (e) {
+						    if (e.originalEvent.deltaY>0) {
+						        owl.trigger('next.owl');
+						    } else {
+						        owl.trigger('prev.owl');
+						    }
+						    e.preventDefault();
+						});
+					});
+				</script>
+			</div>	
 			<hr size="3" width="100%">
 			<div class="book-listDiv">
 				<span class="book-span">모임 소개</span>
@@ -159,7 +200,7 @@
 </div>
 <%-- 참여 신청 폼(모달) --%>
 <div id="bookApplyModal" style="display: none">
-	<div class="modal_box">
+	<div class="modal-box">
 		<div class="title-phrase2">
 			이 모임에 참여할래요!
 			<img src="${pageContext.request.contextPath}/images/jy/close.png" 
@@ -285,4 +326,5 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.scrap.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/owl.carousel.js"></script>
 <!-- 내용 끝 -->

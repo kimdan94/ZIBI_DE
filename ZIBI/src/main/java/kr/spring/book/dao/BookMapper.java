@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 
@@ -39,8 +40,8 @@ public interface BookMapper {
 	@Update("UPDATE book SET book_headcount=book_headcount+1 WHERE book_num=#{book_num}")
 	public void addMatch(int book_num);
 	//일정 중복 여부 체크하기
-	@Select("SELECT * FROM book_matching WHERE apply_gatheringDate=#{book_gatheringDate} AND apply_num=#{apply_num}")
-	public BookMatchingVO selectMatch(String book_gatheringDate, int apply_num);
+	@Select("SELECT * FROM book_matching WHERE apply_gatheringDate=#{apply_gatheringDate} AND apply_num=#{apply_num}")
+	public BookMatchingVO selectMatch(String apply_gatheringDate, int apply_num);
 	
 	//참여 취소하기
 	@Delete("DELETE FROM book_matching WHERE book_num=#{book_num} AND apply_num=#{apply_num}")
@@ -74,6 +75,16 @@ public interface BookMapper {
 	public void resetOnoff(int book_num);
 	
 	/*------- 리뷰 -------*/
+	@Select("SELECT CASE WHEN COUNT(*) > 0 THEN '2' ELSE '1' END AS rev_status FROM book_review WHERE book_num=#{book_num} AND mem_num=#{mem_num} AND apply_gatheringDate=#{apply_gatheringDate}")
+	public int selectRevByrev_num(int book_num, int mem_num, String apply_gatheringDate);
+	public List<BookReviewVO> selectListRev(Map<String,Object> map);
+	public int selectRevCount(Map<String,Object> map);
+	public BookReviewVO selectRev(int rev_num);
+	public void insertRev(BookReviewVO rev);
+	public void updateRepv(BookReviewVO rev);
+	public void deleteReply(int rev_num);
+	@Select("SELECT * FROM book_matching WHERE book_num=#{book_num} AND apply_num=#{apply_num} AND apply_gatheringDate=#{apply_gatheringDate}")
+	public BookMatchingVO selectMatchForRev(int book_num, int apply_num, String apply_gatheringDate);
 	
 	/*------- 스크랩 -------*/
 	@Select("SELECT * FROM book_scrap WHERE book_num=#{book_num} AND mem_num=#{mem_num}")

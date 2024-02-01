@@ -35,4 +35,10 @@
 		<put-attribute name="title" value="소모임 예약"/>
 		<put-attribute name="body" value="/WEB-INF/views/book/bookCancel.jsp"/>
 	</definition>
+	
+	<definition name="bookReview" extends="bookWrite">
+		<put-attribute name="tabtitle" value="소모임 후기 남기기 | ZIBI"/>
+		<put-attribute name="title" value="소모임 예약"/>
+		<put-attribute name="body" value="/WEB-INF/views/book/bookReview.jsp"/>
+	</definition>
 </tiles-definitions>

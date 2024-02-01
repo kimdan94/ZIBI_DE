@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 
@@ -47,6 +48,15 @@ public interface BookService {
 	public void resetOnoff(int book_num);
 	
 	/*------- 리뷰 -------*/
+	public int selectRevByrev_num(int book_num, int apply_num, String apply_gatheringDate);
+	public List<BookReviewVO> selectListRev(Map<String,Object> map);
+	public int selectRevCount(Map<String,Object> map);
+	public BookReviewVO selectRev(int rev_num);
+	public void insertRev(BookReviewVO rev);
+	public void updateRepv(BookReviewVO rev);
+	public void deleteReply(int rev_num);
+	public BookMatchingVO selectMatchForRev(int book_num, int apply_num, String apply_gatheringDate);
+	
 	/*------- 스크랩 -------*/
 	public BookScrapVO selectScrap(BookScrapVO scrap);
 	public int selectScrapCount(int book_num);

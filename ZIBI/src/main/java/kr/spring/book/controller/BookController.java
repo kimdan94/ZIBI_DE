@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.book.service.BookService;
+import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -62,8 +64,8 @@ public class BookController {
 
 	// 전송된 데이터 처리
 	@PostMapping("/book/write")
-	public String submit(@Valid BookVO bookVO, BindingResult result, HttpServletRequest request, HttpSession session,
-			Model model) throws IllegalStateException, IOException {
+	public String submit(@Valid BookVO bookVO, BindingResult result, HttpServletRequest request, 
+						HttpSession session, Model model) throws IllegalStateException, IOException {
 
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
@@ -130,13 +132,16 @@ public class BookController {
 				map2.put("mend", mpage.getEndRow());
 				
 				mlist = bookService.selectMatchList(map2);
-				//신청자 회원번호 구하기
 				for(int i=0;i<mlist.size();i++) {
 					apply_num = mlist.get(i).getApply_num();
 					//신청자 닉네임 구하기
 					MemberVO member = memberService.selectMember(apply_num);
 					nick = member.getMem_nickname();
 					mlist.get(i).setMem_nickname(nick);
+					
+					//신청자 리뷰 작성 여부 구하기
+					int rev_status = bookService.selectRevByrev_num(mlist.get(i).getBook_num(), apply_num, mlist.get(i).getApply_gatheringDate());
+					mlist.get(i).setRev_status(rev_status);
 				}
 			}
 			mav.addObject("mcount", mcount);
@@ -267,6 +272,46 @@ public class BookController {
 			model.addAttribute("message", "모임이 취소되었습니다.");
 			model.addAttribute("url", "list");
 		}
+		return "common/resultAlert";
+	}
+	
+	/*-- 예약 리뷰 작성 --*/
+	//리뷰 작성 폼 호출
+	@GetMapping("/book/review")
+	public ModelAndView insertRev(@RequestParam int book_num,
+								@RequestParam String apply_gatheringDate,
+								HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BookMatchingVO match = bookService.selectMatchForRev(book_num, user.getMem_num(), apply_gatheringDate);
+		//제목 html 불허
+		match.setApply_title(StringUtil.useNoHtml(match.getApply_title()));
+		//닉네임 세팅
+		match.setMem_nickname(user.getMem_nickname());
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("bookReview");
+		mav.addObject("match", match);
+		
+		return mav;
+	}
+	
+	//전송된 데이터 처리
+	@PostMapping("/book/review")
+	public String submitReview(@Valid BookReviewVO bookReviewVO,
+							HttpSession session,
+							HttpServletRequest request,
+							Model model) {
+		//회원 번호 세팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		bookReviewVO.setMem_num(user.getMem_num());
+		//댓글 작성자 ip 세팅
+		bookReviewVO.setBook_revIp(request.getRemoteAddr());
+		//후기 남기기
+		bookService.insertRev(bookReviewVO);
+		
+		model.addAttribute("message", "후기 작성이 완료되었습니다. 감사합니다!");
+		model.addAttribute("url", "list");
+		
 		return "common/resultAlert";
 	}
 }

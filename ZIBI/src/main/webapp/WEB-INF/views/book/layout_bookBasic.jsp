@@ -7,8 +7,10 @@
 	<meta charset="utf-8">
 	<title><tiles:getAsString name="tabtitle"/></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/jy/owl.carousel.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/jy/owl.theme.default.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/css/jy.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/css/jy/jy.css" rel="stylesheet">
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
 	
 	<%-- title 아이콘 변경 --%>

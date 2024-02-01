@@ -1,3 +1,5 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 /*----------- 공통 문구 스타일 -----------*/
 .guide-phrase{
 	font-size:12px;
@@ -168,7 +170,7 @@ input::-webkit-search-results-decoration{
 .align-right{
 	text-align:right;
 }
-/*----------- 모임글 등록폼, 모임글 수정폼 모임 취소폼-----------*/
+/*----------- 공통 폼 -----------*/
 #book_write label, #book_update label, #book_cancel label{
 	margin-bottom:15px;
 	margin-top:15px;
@@ -189,6 +191,7 @@ label[for="book_match2"]{
 	outline:2px solid #32a77b;
 	box-shadow:none;
 }
+
 #book_zipcode:hover,#book_content:hover{
 	border:none;
 }
@@ -229,7 +232,8 @@ input[value="우편번호 찾기"]{
 }
 #book_write .btn-light.active,
 #book_update .btn-light.active,
-#book_cancel .btn-light.active{
+#book_cancel .btn-light.active,
+#book_review .btn-light.active{
     background: #32a77b;
     color: white;
     font-size:15px;
@@ -243,7 +247,9 @@ input[value="우편번호 찾기"]{
 #book_update .btn-light.active:hover,
 #book_cancel .btn-light:hover,
 #book_cancel .btn:hover,
-#book_cancel .btn-light.active:hover{
+#book_cancel .btn-light.active:hover,
+#book_review .btn:hover,
+#book_review .btn-light.active:hover{
     background: white !important;
     color: #32a77b;
     border: 1px solid #ededed;
@@ -269,6 +275,59 @@ input[value="우편번호 찾기"]{
 	object-fit:cover;
 	border-radius:7px;
 	margin-left:-30px;
+}
+#book_rev{
+	resize:none;
+	width:100%;
+	outline:none;
+	border:1px solid #c3c4c2;
+	margin-bottom:10px;
+}
+#book_review li{
+	list-style:none;
+	margin:0 0 0 -30px;
+}
+.rate span{
+	position:absolute;
+	background:url(https://aldo814.github.io/jobcloud/html/images/user/star02.png);
+	width:auto;
+	height:20px;
+}
+.rate {
+	display:inline-block;
+	border:0;
+}
+.rate > input {
+	display:none;
+}
+.rate > label {
+	float:right;
+	color:#ddd;
+}
+.rate > label:before {
+	display:inline-block;
+	font-size:1.5rem;
+	padding:.3rem .2rem;
+	margin:0;
+	cursor:pointer;
+	font-family:FontAwesome;
+	content: "\f005 ";
+}
+.rate .half:before {
+	content: "\f089 ";
+	position: absolute;
+	padding-right: 0;
+}
+.rate input:checked ~ label, 
+.rate label:hover,
+.rate label:hover ~ label { 
+	color: #32a77b !important;
+} 
+.rate input:checked + .rate label:hover,
+.rate input input:checked ~ label:hover,
+.rate input:checked ~ .rate label:hover ~ label,  
+.rate label:hover ~ input:checked ~ label { 
+	color: #32a77b !important;
 }
 /**CKEditor**/
 .ck-editor__editable_inline{
@@ -339,7 +398,7 @@ li.book-li{
 }
 /*----------- 나의 예약 내역(나의 모임) -----------*/
 #match_table{
-	border:1px solid black;
+	border:1px solid #c3c4c2;
 	margin-left:auto;
 	margin-right:auto;
 	min-width:890px;
@@ -354,17 +413,20 @@ li.book-li{
 	color:black;
 }
 .btn-guide{
-	border:1px solid #32a77b;;
+	border:1px solid #32a77b;
 	width:100px;
 	font-size:13px;
 	color:#32a77b;
 }
 .btn-guide2{
-	background:#32a77b;;
+	background:#32a77b;
 	border:1px solid #32a77b;
 	width:100px;
 	font-size:13px;
 	color:white;
+}
+.rev-complete{
+	font-size:13px;
 }
 /*----------- 모임글 상세 -----------*/
 .book-thumb{
@@ -471,7 +533,7 @@ li.book-li{
 	font-weight:bold;
 	color:#414142;
 }
-.modal_box{
+.modal-box{
 	border-radius: 8px;
 	width: 40%;
 	height: 70%;

@@ -39,13 +39,19 @@ create table book_matching(
 
 -- 소모임 예약 리뷰
 create table book_review(
+ rev_num number not null;
  book_num number not null,
  mem_num number not null,
  book_rev varchar2(300) not null,
- book_grade number(1) not null, -- min:1, max:5
+ book_grade varchar2(9) not null,
+ book_revIp varchar2(400) not null,
+ apply_gatheringDate varchar2(100) not null,
+ constraint book_review_pk primary key (rev_num),
  constraint book_review_fk1 foreign key (book_num) references book (book_num),
  constraint book_review_fk2 foreign key (mem_num) references member (mem_num)
 );
+
+create sequence book_rev_seq;
 
 -- 소모임 스크랩
 create table book_scrap(

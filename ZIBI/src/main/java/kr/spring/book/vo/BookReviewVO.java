@@ -1,8 +1,5 @@
 package kr.spring.book.vo;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,10 +8,14 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BookReviewVO {
+	private int rev_num;
 	private int book_num;
 	private int mem_num;
-	@NotBlank
 	private String book_rev;
-	@Size(min=1,max=5)
-	private int book_grade;
+	private String book_grade;
+	private String book_revIp;
+	
+	/*-- 읽어올 정보 --*/
+	private String apply_gatheringDate;
+	private String nick_name;
 }

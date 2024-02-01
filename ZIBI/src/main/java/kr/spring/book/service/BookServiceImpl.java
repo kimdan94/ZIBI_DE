@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.book.dao.BookMapper;
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 
@@ -136,5 +137,50 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public void deleteScrap(BookScrapVO scrapVO) {
 		bookMapper.deleteScrap(scrapVO);
+	}
+
+	@Override
+	public List<BookReviewVO> selectListRev(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int selectRevCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public BookReviewVO selectRev(int rev_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertRev(BookReviewVO rev) {
+		bookMapper.insertRev(rev);
+	}
+
+	@Override
+	public void updateRepv(BookReviewVO rev) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteReply(int rev_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public BookMatchingVO selectMatchForRev(int book_num, int apply_num, String apply_gatheringDate) {
+		return bookMapper.selectMatchForRev(book_num, apply_num, apply_gatheringDate);
+	}
+
+	@Override
+	public int selectRevByrev_num(int book_num, int apply_num, String apply_gatheringDate) {
+		return bookMapper.selectRevByrev_num(book_num, apply_num, apply_gatheringDate);
 	}
 }

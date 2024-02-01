@@ -37,7 +37,8 @@ public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 			.addPathPatterns("/secondhand/write")
 			.addPathPatterns("/book/update")
 			.addPathPatterns("/performance/updateTicketing")
-			.addPathPatterns("/book/cancel");
+			.addPathPatterns("/book/cancel")
+			.addPathPatterns("/book/review");
 	}
 	
 	

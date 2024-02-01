@@ -126,8 +126,12 @@
 					<input type="button" value="참여 취소하기" class="default-btn4 apply-cancel" 
 						data-num="${mbook.book_num}" data-apply="${mbook.apply_num}">
 				</c:if>
-				<c:if test="${mbook.compareNow == 1 && mbook.book_state == 1}">
-					<input type="button" value="리뷰 작성하기" class="default-btn4">
+				<c:if test="${mbook.compareNow == 1 && mbook.book_state == 1 && mbook.rev_status == 1}">
+					<input type="button" value="후기 작성하기" class="default-btn4" 
+						onclick="location.href='review?book_num=${mbook.book_num}&apply_gatheringDate=${mbook.apply_gatheringDate}'">
+				</c:if>
+				<c:if test="${mbook.compareNow == 1 && mbook.book_state == 1 && mbook.rev_status == 2}">
+					<span class="rev-complete">👏후기 작성 완료👏</span>
 				</c:if>
 			</c:if>
 		</td>
@@ -220,13 +224,13 @@
 		                <div class="book-third">${book.book_headcount}/${book.book_maxcount}명</div>
 		                <p>
 		                <div class="align-right">
-		                <c:set var="addr" value="${book.book_address1}"/>
-		                <c:if test="${addr.startsWith('서울') || addr.startsWith('경기')}">
-		${fn:substring(addr,0,6)}
-		    </c:if>
-		    <c:if test="${!addr.startsWith('서울') && !addr.startsWith('경기')}">
-		${fn:substring(addr,0,2)}
-		</c:if>
+			                <c:set var="addr" value="${book.book_address1}"/>
+			                <c:if test="${addr.startsWith('서울') || addr.startsWith('경기')}">
+								${fn:substring(addr,0,6)}
+							</c:if>
+							<c:if test="${!addr.startsWith('서울') && !addr.startsWith('경기')}">
+								${fn:substring(addr,0,2)}
+							</c:if>
 		                </div>
 		            </div>
 		        </div>

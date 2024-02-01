@@ -46,7 +46,6 @@
 						width="40" height="40" class="my-photo">
 		</div>
 			<div>
-		<!-- 프로필 이미지 넣어야함 -->
 			닉네임 : ${helper.mem_nickname}
 			<br>
 			<c:if test="${!empty helper.helper_modify_date}">

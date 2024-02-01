@@ -9,6 +9,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/jy/owl.carousel.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/jy/owl.theme.default.min.css" rel="stylesheet">
+	
 	<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/css/jy/jy.css" rel="stylesheet">
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
@@ -17,7 +18,7 @@
 	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 </head>
-<body>
+<body style="overflow-x:hidden;">
 	<tiles:insertAttribute name="header"/>
 	<div class="container-fluid nav-bar menu-title">
 		<div class="container">

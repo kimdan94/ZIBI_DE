@@ -82,18 +82,15 @@ $(function(){
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'apply'){
-					$('body').css('overflow-y','');
-					$('#bookApplyModal').hide();
+					closeModalAction();
 					location.replace('list');
 				}else if(param.result == 'duplicated'){
 					alert('이 모임과 중복된 일정이 존재하여 예약이 불가합니다.');
-					$('body').css('overflow-y','');
-					$('#bookApplyModal').hide();
+					closeModalAction();
 					location.replace('list');
 				}else if(param.result == 'logout'){
 					alert('로그인 후 이용하세요!');
-					$('body').css('overflow-y','');
-					$('#bookApplyModal').hide();
+					closeModalAction();
 					location.replace('/member/login');
 				}else{
 					alert('참여 신청 메일 전송 오류');
@@ -111,9 +108,6 @@ $(function(){
 	
 	//모달창 닫기 함수
 	function closeModalAction(){
-		if(confirm('작성 및 변경한 내용은 저장되지 않습니다. 나가시겠습니까?')==false){ 
-				return;
-		}
 		$('body').css('overflow-y','');
 		$('#bookApplyModal').hide();
 	}

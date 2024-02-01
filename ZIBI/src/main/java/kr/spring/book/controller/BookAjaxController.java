@@ -100,8 +100,12 @@ public class BookAjaxController {
 				String setFrom = "229rkawk@gmail.com";
 				String toMail = email;
 				String title = "[ZIBI] 소모임 참여 신청 안내";
-				String content = nickname + "님의 소모임 예약이 완료되었습니다.<br>";
-				content += "변경 사항이 발생할 수 있으니 ZIBI [나의 모임]에서 꼭 확인하세요!";
+				String content = "<div><h2>"+ nickname + "님의 소모임 예약이 완료되었습니다.</h2>";
+					   content += "변경 사항이 발생할 수 있으니 ZIBI [나의 모임]에서 꼭 확인하세요!";
+					   content += "<h3 style=\'color:#32a77b;margin:10px 0;\'>신청한 모임</h3>";
+					   content += "✅ <b>참여 모임</b> : " + apply_title + "<br>";
+					   content += "✅ <b>모임 장소</b> : " + apply_address1 + "<br>";
+					   content += "✅ <b>참여 일자</b> : " + apply_gatheringDate + "<br></div>";
 				
 				try {
 					MimeMessage message = mailSender.createMimeMessage();

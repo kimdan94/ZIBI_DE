@@ -94,9 +94,9 @@
 				<br><br>
 				<%-- 모임 후기 --%>
 				<div class="owl-carousel">
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
+					<div class="bg-light rounded">
+						<div class="d-flex justify-content-center p-4">
+							<div class="text-center">
 								<h4 class="mb-3">
 									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
 								</h4>
@@ -104,9 +104,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="bg-light rounded service-item">
-						<div class="service-content d-flex justify-content-center p-4">
-							<div class="service-content-icon text-center">
+					<div class="bg-light rounded">
+						<div class="d-flex justify-content-center p-4">
+							<div class="text-center">
 								<h4 class="mb-3">
 									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
 								</h4>
@@ -203,8 +203,7 @@
 	<div class="modal-box">
 		<div class="title-phrase2">
 			이 모임에 참여할래요!
-			<img src="${pageContext.request.contextPath}/images/jy/close.png" 
-				id="close_btn" onclick="javascript:closeModalAction()">
+			<img src="${pageContext.request.contextPath}/images/jy/close.png" id="close_btn">	
 		</div>
 		<div class="applySub">
 			참여 신청 모임
@@ -327,4 +326,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.scrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/owl.carousel.js"></script>
+<script type="text/javascript">
+$(document).on('click','#close_btn',function(){
+	$('body').css('overflow-y','');
+	$('#bookApplyModal').hide();
+});
+</script>
 <!-- 내용 끝 -->

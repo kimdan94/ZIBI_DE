@@ -7,7 +7,7 @@
 <input type="button" value="영화 form" onclick="location.href='write'"><!-- /performance/formPage -->
 <input type="button" value="상영관 form" onclick="location.href='writeCinema'">
 <input type="button" value="날짜 form" onclick="location.href='writePerformanceDate'">
-<input type="button" value="예매하기" onclick="location.href='ticketing'">
+<input type="button" value="예매하기" onclick="location.href='ticketing'" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">
 <%-- </c:if> --%>
 
 <form action="performanceList" method="get">

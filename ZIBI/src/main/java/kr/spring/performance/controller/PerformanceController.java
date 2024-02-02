@@ -93,13 +93,15 @@ public class PerformanceController {
 		return new PerformanceVO();
 	}
 	// 등록 폼 호출
-	@RequestMapping("/performance/write") // -> /performance/writePerformance로 변경하기
+//	@RequestMapping("/performance/write")
+	@RequestMapping("/admin/write") // -> /performance/writePerformance로 변경하기
 	public String form() {
 		log.debug("<<영화 등록 폼>>");
 		return "writePerformance"; // write.jsp명과 동일 tiles
 	}
 	//전송된 데이터 처리
-	@PostMapping("/performance/register")
+//	@PostMapping("/performance/register")
+	@PostMapping("/admin/register")
 	public String submit(@Valid PerformanceVO performanceVO, BindingResult result, 
 			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<영화 저장>>" + performanceVO);
@@ -131,13 +133,15 @@ public class PerformanceController {
 		return new CinemaVO();
 	}
 	// 상영관 등록 폼 호출
-	@RequestMapping("/performance/writeCinema")
+//	@RequestMapping("/performance/writeCinema")
+	@RequestMapping("/admin/writeCinema")
 	public String formCinema() {
 		log.debug("<<상영관 등록 폼>>");
 		return "writeCinema"; // write.jsp명과 동일 tiles
 	}
 	//전송된 데이터 처리
-	@PostMapping("/performance/registerCinema")
+//	@PostMapping("/performance/registerCinema")
+	@PostMapping("/admin/registerCinema")
 	public String submitCinema(@Valid CinemaVO CinemaVO, BindingResult result, 
 			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<상영관 저장>>" + CinemaVO);
@@ -228,6 +232,7 @@ public class PerformanceController {
 		return new TicketingVO();
 	}
 	@RequestMapping("/performance/writePerformanceDate")
+//	@RequestMapping("/admin/writePerformanceDate")
 	public ModelAndView formPerformanceDate() {
 		log.debug("<<영화관,상영관,상영 날짜,상영 시간 선택 폼>>");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -250,6 +255,7 @@ public class PerformanceController {
 	}
 	//전송된 데이터 처리
 	@PostMapping("/performance/registerDate")
+//	@PostMapping("/admin/registerDate")
 	public String submitDate(@Valid TicketingVO  ticketingVO, BindingResult result, 
 			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<상영 정보 저장>> : " + ticketingVO);

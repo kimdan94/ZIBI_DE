@@ -78,6 +78,13 @@ public class PolicyController {
 		return "adminPage";
 	}
 	
+	@RequestMapping("/admin/performanceMain")
+	public String adminCinemaMain(PolicyVO policyVO,Model model) {
+		
+		
+		return "adminPerformanceMain";
+	}
+	
 	/* ---------- 관리자 페이지 - 수정  ----------*/
 	@GetMapping("/admin/policyModify")
 	public String adminPolicyModifyForm(@RequestParam int district_num) {

@@ -44,7 +44,7 @@
 				<input type="button" class="btn mem-btn w-100" value="1인 가구 정보" onclick="location.href='${pageContext.request.contextPath}/admin/policy'" id="policy_btn">
 			</div>
 			<div class="col">
-				<input type="button" class="btn mem-btn w-100" value="영화" onclick="location.href='${pageContext.request.contextPath}/'" id="perf_btn">
+				<input type="button" class="btn mem-btn w-100" value="영화" onclick="location.href='${pageContext.request.contextPath}/admin/performanceMain'" id="perf_btn">
 			</div>
 		</div>
 		<tiles:insertAttribute name="body"/>

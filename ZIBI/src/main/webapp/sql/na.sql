@@ -30,11 +30,29 @@ create table member_detail(
 --회원 식별용 primary key
 create sequence member_seq;
 
-
 --팔로우
 create table follow(
 	mem_num number not null, --내가 팔로우 한 사람
 	fmem_num number not null, --나
 	constraint member_follow_fk foreign key (mem_num) references member (mem_num),
 	constraint member_follow_fk2 foreign key (fmem_num) references member (mem_num)
+);
+
+
+--정책 : 지자체 저장
+create table district(
+	district_num number not null, 
+	district_name varchar2(30) not null,
+	district_latitude varchar2(100) not null,
+	district_lonitude varchar2(100) not null,
+	constraint district_pk primary key (district_num)
+);
+
+create sequence district_seq;
+
+--정책 : 지자체 저장
+create table policy(
+	district_num number not null, 
+	policy_url varchar2(300) not null,
+	constraint policy_fk foreign key (district_num) references district (district_num)
 );

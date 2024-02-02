@@ -231,8 +231,8 @@ public class PerformanceController {
 	public TicketingVO initPerformanceDate() {
 		return new TicketingVO();
 	}
-	@RequestMapping("/performance/writePerformanceDate")
-//	@RequestMapping("/admin/writePerformanceDate")
+//	@RequestMapping("/performance/writePerformanceDate")
+	@RequestMapping("/admin/writePerformanceDate")
 	public ModelAndView formPerformanceDate() {
 		log.debug("<<영화관,상영관,상영 날짜,상영 시간 선택 폼>>");
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -254,8 +254,8 @@ public class PerformanceController {
 		return mav; 
 	}
 	//전송된 데이터 처리
-	@PostMapping("/performance/registerDate")
-//	@PostMapping("/admin/registerDate")
+//	@PostMapping("/performance/registerDate")
+	@PostMapping("/admin/registerDate")
 	public String submitDate(@Valid TicketingVO  ticketingVO, BindingResult result, 
 			             HttpServletRequest request, HttpSession session, Model model) throws IllegalStateException, IOException {
 		log.debug("<<상영 정보 저장>> : " + ticketingVO);
@@ -268,7 +268,7 @@ public class PerformanceController {
 		
 		//View에 표시할 메시지
 		model.addAttribute("message", "날짜 정보가 등록되었습니다");
-		model.addAttribute("url", request.getContextPath()+"/performance/list");
+		model.addAttribute("url", request.getContextPath()+"/admin/policy");
 		
 		return "common/resultAlert";
 	}

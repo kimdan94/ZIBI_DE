@@ -49,11 +49,14 @@ create table ticketing(
 create sequence ticketing_seq;
 
 
---
+-- 테이블 변경
 create table perform_choice(
  choice_num number not null,
  choice_row number not null,
  choice_col number not null,
+ choice_adult number not null, -- 명
+ choice_teenage number not null,
+ choice_treatment number not null,
  mem_num number not null,
  ticketing_num number not null,
  constraint choice_fk1 foreign key (mem_num) references member (mem_num),

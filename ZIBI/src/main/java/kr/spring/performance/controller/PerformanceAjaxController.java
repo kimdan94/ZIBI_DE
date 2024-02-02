@@ -36,7 +36,7 @@ public class PerformanceAjaxController {
 	/*=================================
 	 * [관리자] 상영관 - 상영관 + 2관
 	 *=================================*/
-	@RequestMapping("/performance/adminSelectLocation")
+	@RequestMapping("/admin/adminSelectLocation")
 	@ResponseBody
 	public Map<String, Object> adminSelectLocation(@RequestParam(value="location1") String loc1, HttpSession session, HttpServletRequest request){
 		Map<String, Object> mapJson = new HashMap<String, Object>();

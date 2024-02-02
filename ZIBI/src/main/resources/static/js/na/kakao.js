@@ -1,4 +1,4 @@
-const KaApiKey = '0f8ec7b176d3f7229af3666b33d6e9b8';
+const KaApiKey = $('#apikey').val();
 Kakao.init(KaApiKey); //카카오 초기화
 Kakao.isInitialized(); // 초기화 판단
 

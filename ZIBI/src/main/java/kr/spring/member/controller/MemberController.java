@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +35,14 @@ public class MemberController {
 	//의존 관계 주입
 	@Autowired
 	private MemberService memberService;
+	
+	//카카오 앱키 호출
+	@Value("${YENA-KAKAO-API-KEY.appKey}")
+	private String kakao_apikey;
+	
+	//네이버 앱키 호출
+	@Value("${YENA-NAVER-KEY.appKey}")
+	private String naver_apikey;
 	
 	//VO 초기화
 	@ModelAttribute
@@ -105,7 +114,11 @@ public class MemberController {
 	/*------------------------------로그인/로그아웃----------------------------------*/
 	//로그인 폼 호출
 	@GetMapping("/member/login")
-	public String loginForm() {
+	public String loginForm(Model model) {
+		
+		String apikey = kakao_apikey;
+		model.addAttribute("apikey",apikey);
+		
 		return "loginForm"; //타일즈
 	}
 	
@@ -159,7 +172,10 @@ public class MemberController {
 	
 	//네이버 로그인
 	@RequestMapping("/member/loginNaver")
-	public String loginNaver() {
+	public String loginNaver(Model model) {
+		
+		String apikey = naver_apikey;
+		model.addAttribute("apikey",apikey);
 		
 		return "member/naverLogin";
 	}

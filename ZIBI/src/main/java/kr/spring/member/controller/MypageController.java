@@ -69,7 +69,7 @@ public class MypageController {
 			map.put("category", category);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			log.debug("<<리스트 읽어오기 시작>> : "+map);
+			log.debug("<<리스트 읽어오기 시작>> : " + map);
 			list = memberService.selectDealList(map);
 		}
 		

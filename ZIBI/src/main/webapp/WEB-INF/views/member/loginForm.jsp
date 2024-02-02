@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <!-- Contact Start -->
+<input type="hidden" id="apikey" value="${apikey}"/>">
 <div class="container page-width">
 	<div class="member-form row justify-content-center">
 		<div class="col-7 align-self-center register-info">
@@ -32,7 +34,7 @@
 	</div>
 </div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js?appkey=${kakao_apikey}"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/kakao.js"></script><!-- 소셜 로그인/회원가입 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/naver.js"></script><!-- 소셜 로그인/회원가입 -->

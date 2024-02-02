@@ -10,6 +10,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,9 @@ public class MemberAjaxController {
 	private MemberService memberService;
 	@Autowired
 	JavaMailSenderImpl mailSender;
+	
+	@Value("${spring.mail.username}")
+	private String email;
 	
 	/*---------------------팔로우/언팔로우-----------------------*/
 	//팔로우/언팔로우 읽기
@@ -201,14 +205,13 @@ public class MemberAjaxController {
 	/*---------------------이메일 전송-----------------------*/
 	private void sendEmail(String mem_email, String title , String content) {
 		
-		String setFrom = "229rkawk@gmail.com"; //발신자
 		String toMail = mem_email; //수신자
 			
 		try {
 			MimeMessage message = mailSender.createMimeMessage(); //Spring에서 제공하는 mail API
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8"); //true - multpart message(사진 사용 가능)를 사용함
             
-            helper.setFrom(setFrom); //발신자
+            helper.setFrom(email); //발신자
             helper.setTo(toMail); //수신자
             helper.setSubject(title); //이메일 제목
             helper.setText(content, true); //이메일 내용, true - html을 사용함

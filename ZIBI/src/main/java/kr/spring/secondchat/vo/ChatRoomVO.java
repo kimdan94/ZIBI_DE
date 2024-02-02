@@ -15,4 +15,9 @@ public class ChatRoomVO {
 	private String seller; //seller의 mem_nickname
 	private int buyer_num;		//구매자 회원번호 //fk
 	private String buyer; //buyer의 mem_nickname
+	
+	
+	private int read_count;			//읽지 않은 메시지수 
+	//매핑
+	private ChatVO chatVO; 
 }

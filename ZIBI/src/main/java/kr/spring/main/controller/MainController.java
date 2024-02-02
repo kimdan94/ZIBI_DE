@@ -19,11 +19,13 @@ public class MainController {
 	@Autowired
 	private MainService mainService;
 	
+	/* ---------- 루트 경로 진입 ----------*/
 	@RequestMapping("/")
 	public String init(HttpSession session) {
 		return "redirect:/main/home";
 	}
 	
+	/* ---------- 메인 ----------*/
 	@RequestMapping("/main/home")
 	public String main(Model model) {
 		
@@ -45,8 +47,9 @@ public class MainController {
 		return "home"; //타일스 설정명
 	}
 	
+	/* ---------- 템플릿 샘플 ----------*/
 	@RequestMapping("/sample")
 	public String sample() {
-		return "sample";//샘플페이지
+		return "sample";
 	}
 }

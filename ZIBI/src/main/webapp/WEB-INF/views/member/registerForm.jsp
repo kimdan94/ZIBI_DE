@@ -41,7 +41,7 @@
 				</div>
 				<div class="col-6">
 					<label for="c_password">비밀번호 확인</label>
-					<input type="password" id="c_password" class="w-100 form-control"  placeholder="비밀번호와 동일하게 입력" >
+					<input type="password" id="c_password" class="w-100 form-control" placeholder="비밀번호와 동일하게 입력" >
 					<span id="cpassword_area"></span>
 				</div>
 			</div>

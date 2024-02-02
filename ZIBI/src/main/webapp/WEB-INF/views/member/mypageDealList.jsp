@@ -31,16 +31,16 @@
 					<c:if test="${deal.category==3}">
 						<div class="col-3 text-center">재능 기부</div>
 					</c:if>
-				<div class="col-5">
-					<c:if test="${deal.category==2}">
-						<a href="${pageContext.request.contextPath}/book/detail?book_num=${deal.num}">${deal.title}</a>
-					</c:if>
-					<c:if test="${deal.category==3}">
-						<a href="${pageContext.request.contextPath}/helper/detail?helper_num=${deal.num}">${deal.title}</a>
-					</c:if>
+					<div class="col-5">
+						<c:if test="${deal.category==2}">
+							<a href="${pageContext.request.contextPath}/book/detail?book_num=${deal.num}">${deal.title}</a>
+						</c:if>
+						<c:if test="${deal.category==3}">
+							<a href="${pageContext.request.contextPath}/helper/detail?helper_num=${deal.num}">${deal.title}</a>
+						</c:if>
+					</div>
+					<div class="col-4 text-center">${deal.reg_date}</div>
 				</div>
-				<div class="col-4 text-center">${deal.reg_date}</div>
-			</div>
 			</c:forEach>
 		</div>
 		<div class="text-center">${page}</div>

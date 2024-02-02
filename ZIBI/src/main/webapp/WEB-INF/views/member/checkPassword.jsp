@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <div class="container form-width">
 	<div class="member-form">					
 		<form:form action="quitMember" id="check_password" modelAttribute="memberVO">
@@ -28,6 +27,5 @@
 		</form:form>
 	</div>
 </div>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/checkPassword.js"></script>

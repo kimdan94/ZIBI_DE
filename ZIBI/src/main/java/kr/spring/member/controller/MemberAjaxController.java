@@ -199,7 +199,7 @@ public class MemberAjaxController {
 	}
 	
 	/*---------------------이메일 전송-----------------------*/
-	public void sendEmail(String mem_email, String title , String content) {
+	private void sendEmail(String mem_email, String title , String content) {
 		
 		String setFrom = "229rkawk@gmail.com"; //발신자
 		String toMail = mem_email; //수신자

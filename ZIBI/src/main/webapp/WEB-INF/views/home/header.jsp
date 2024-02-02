@@ -29,7 +29,7 @@
 				<a href="${pageContext.request.contextPath}/member/mypageMain">마이페이지</a>
 			</c:if>
 			<c:if test="${!empty user && user.mem_auth==9}">
-				<a href="${pageContext.request.contextPath}/">관리자 페이지</a>
+				<a href="${pageContext.request.contextPath}/admin/policy">관리자 페이지</a>
 			</c:if>
 			<a href="${pageContext.request.contextPath}/notice/list">고객센터</a>
 		</div>
@@ -57,7 +57,7 @@
 					<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">척척박사</a>
 						<div class="dropdown-menu">
-							<a href="${pageContext.request.contextPath}/" class="dropdown-item">1인 가구 정보</a> 
+							<a href="${pageContext.request.contextPath}/policy/main" class="dropdown-item">1인 가구 정보</a> 
 							<a href="${pageContext.request.contextPath}/checklist/list" class="dropdown-item">집 체크리스트</a>
 						</div>
 					</div>

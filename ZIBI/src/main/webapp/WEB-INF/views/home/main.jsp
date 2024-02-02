@@ -100,7 +100,7 @@
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h4 class="mb-3">
-							<a href="${pageContext.request.contextPath}/">ℹ️ 1인 가구 정보</a>
+							<a href="${pageContext.request.contextPath}/policy/main">ℹ️ 1인 가구 정보</a>
 						</h4>
 						<p class="mb-1">1인 가구 정보를 열람하세요</p>
 					</div>

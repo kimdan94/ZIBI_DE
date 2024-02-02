@@ -46,6 +46,18 @@
     	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
 	</definition>
 	
+	<definition name="adminPage" template="/WEB-INF/views/admin/layout_adminPage.jsp">
+	 	<put-attribute name="title" value="관리자 페이지"/>
+    	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
+    	<put-attribute name="body" value="/WEB-INF/views/admin/adminPolicyMain.jsp"/>
+    	<put-attribute name="footer" value="/WEB-INF/views/home/footer.jsp"/>
+	</definition>
+	
+	<definition name="adminPolicyModify" extends="adminPage">
+		<put-attribute name="title" value="1인 가구 정책 사이트 수정"/>
+    	<put-attribute name="body" value="/WEB-INF/views/admin/adminPolicyModify.jsp"/>
+	</definition>
+	
 	<definition name="registerForm" extends="menuPageYena">
 		<put-attribute name="title" value="회원가입"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp"/>
@@ -65,6 +77,10 @@
 	<definition name="checkPassword" extends="menuPageYena">
 		<put-attribute name="title" value="비밀번호 확인"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/checkPassword.jsp"/>
+	</definition>
+	<definition name="policyMain" extends="menuPageYena">
+		<put-attribute name="title" value="1인 가구 정보"/>
+    	<put-attribute name="body" value="/WEB-INF/views/policy/policyMain.jsp"/>
 	</definition>
 	
 	<definition name="loginForm" extends="loginPage">

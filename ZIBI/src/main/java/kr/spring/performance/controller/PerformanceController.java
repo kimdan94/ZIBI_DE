@@ -298,11 +298,9 @@ public class PerformanceController {
 		pickTicketing = performanceService.pickTicketing(map);
 		
 		TicketingVO tmpTicket = performanceService.choosingTicketing(map);
-		log.debug("================================================");
 		log.debug("<<pickCinema>> : " + pickCinema);
 		log.debug("<<pickPerformance>> : " + pickPerformance);
 		log.debug("<<pickTicketing>> : " + pickTicketing);
-		log.debug("================================================");
 		
 		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
 		mav.addObject("pickCinema", pickCinema);
@@ -315,13 +313,57 @@ public class PerformanceController {
 	
 	
 	
-	// 결제창으로 이동
-	@PostMapping("/performance/submitSeat")
-	public ModelAndView submitSeat() {
+	// 좌석 정보 저장 -> 결제창으로 이동
+	@GetMapping("/performance/submitSeat")
+	public ModelAndView submitSeat(String seat_info, int ticketing_num,
+			@RequestParam(value="adult_money",defaultValue="0") int adult_money, 
+			@RequestParam(value="teenage_money",defaultValue="0") int teenage_money, 
+			@RequestParam(value="treatement_money",defaultValue="0") int treatement_money) {
 		log.debug("<<결제창으로 이동>>");
 		ModelAndView mav = new ModelAndView();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ticketing_num", ticketing_num);
+		
+		log.debug("<<좌석 정보>>" + seat_info); // 공백으로 split하기
+		log.debug("<<일반>> : " + adult_money); // 명
+		log.debug("<<청소년>> : " + teenage_money); // 명
+		log.debug("<<우대>> : " + treatement_money); // 명
+		
+		String[] seatNum = seat_info.split(" ");
+		
+		for(int i=0; i<seatNum.length; i++) {
+			log.debug(i + "번째 : " + seatNum[i]);
+		}
+		
+		
+		// -------------------------------------------------------------------
+		CinemaVO payCinema = null;
+		PerformanceVO payPerformance = null;
+		TicketingVO payTicketing = null;
+		
+		payCinema = performanceService.choosingCinema(map);
+		payPerformance = performanceService.choosingPerformance(map);
+		payTicketing = performanceService.choosingTicketing(map);
+		
+		log.debug("================================================");
+		log.debug("<<payCinema>> : " + payCinema);
+		log.debug("<<payPerformance>> : " + payPerformance);
+		log.debug("<<payTicketing>> : " + payTicketing);
+		log.debug("================================================");
+		// -------------------------------------------------------------------
+		
+		
+		
+		
 		mav.setViewName("performancePayment"); // tiles 설정 name과 동일해야 함
-
+		// ticketing_num에 대한 값 넣어주기
+		mav.addObject("payCinema", payCinema);
+		mav.addObject("payPerformance", payPerformance);
+		mav.addObject("payTicketing", payTicketing);
+		
+		//가격 -- 나중에 넣어주기
+		
+		
 		return mav; 
 	}
 	

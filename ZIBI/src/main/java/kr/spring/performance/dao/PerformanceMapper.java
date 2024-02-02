@@ -32,13 +32,19 @@ public interface PerformanceMapper {
 	public List<TicketingVO> selectWithTicketing(Map<String, Object> map);
 	
 	
-	//좌석 선택 페이지
+	// 좌석 선택 페이지
 	public List<CinemaVO> pickCinema(Map<String, Object> map);
 	public List<PerformanceVO> pickPerformance(Map<String, Object> map);
 	public List<TicketingVO> pickTicketing(Map<String, Object> map);
 	
-	// 임시
+	// ticketing_num에 대한 값 (1행)
+	public CinemaVO choosingCinema(Map<String, Object> map);
+	public PerformanceVO choosingPerformance(Map<String, Object> map);
 	public TicketingVO choosingTicketing(Map<String, Object> map);
+
+	
+	// 결제 페이지
+	
 	
 	
 	//좌석 출력

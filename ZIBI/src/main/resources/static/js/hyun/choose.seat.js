@@ -50,9 +50,9 @@ $(function(){ // performanceSeat.jsp
 			$('.treatement-num').text(treatement);
 			
 			// 폼에 값 넣어주기
-			$('#adult-money').attr('value',adult);
-			$('#teenage-money').attr('value',teenage);
-			$('#treatement-money').attr('value',treatement);
+			$('#adult_money').attr('value',adult);
+			$('#teenage_money').attr('value',teenage);
+			$('#treatement_money').attr('value',treatement);
 			
 			// 인원 수 업데이트
 			rev_cnt = calculatePeopleNum();
@@ -66,14 +66,14 @@ $(function(){ // performanceSeat.jsp
 		
 		let multiplication = ' X ';
 		// UI 업데이트
-		$('.adult-money').text(multiplication + adult);
-		$('.teenage-money').text(multiplication + teenage);
-		$('.treatement-money').text(multiplication + treatement);
+		$('.adult_money').text(multiplication + adult);
+		$('.teenage_money').text(multiplication + teenage);
+		$('.treatement_money').text(multiplication + treatement);
 		
 		// form에 전송
-		$('#adult-money').attr('value',adult);
-		$('#teenage-money').attr('value',teenage);
-		$('#treatement-money').attr('value',treatement);
+		$('#adult_money').attr('value',adult);
+		$('#teenage_money').attr('value',teenage);
+		$('#treatement_money').attr('value',treatement);
 		
 	}
 	

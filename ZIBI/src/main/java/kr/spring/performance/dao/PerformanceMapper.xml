@@ -148,6 +148,18 @@
 		<include refid="pick_performance"></include>
 	</select>
 	
+	<!-- 티켓번호에 따른 cinema 정보 -->
+	<select id="choosingCinema" parameterType="map">
+		SELECT c.cinema_num,c.cinema_location1,c.cinema_location2,c.cinema_theater,c.cinema_theater_num,c.cinema_total,c.cinema_row,c.cinema_col,c.cinema_adult,c.cinema_teenage,c.cinema_treatment
+		<include refid="pick_performance"></include>
+	</select>
+	
+	<!-- 티켓번호에 따른 performance 정보 -->
+	<select id="choosingPerformance" parameterType="map">
+		SELECT p.performance_num, p.performance_title, p.performance_poster, p.performance_start_date, p.performance_age, p.performance_category
+		<include refid="pick_performance"></include>
+	</select>
+	
 	<!-- [임시] 티켓번호에 따른 ticketing 정보 -->
 	<select id="choosingTicketing" parameterType="map">
 		SELECT t.ticketing_num,t.performance_num, t.cinema_num, t.ticketing_date, t.ticketing_start_time

@@ -117,9 +117,21 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
+	public CinemaVO choosingCinema(Map<String, Object> map) {
+		return performanceMapper.choosingCinema(map);
+	}
+
+	@Override
+	public PerformanceVO choosingPerformance(Map<String, Object> map) {
+		return performanceMapper.choosingPerformance(map);
+	}
+	
+	@Override
 	public TicketingVO choosingTicketing(Map<String, Object> map) {
 		return performanceMapper.choosingTicketing(map);
 	}
+
+	
 
 
 	

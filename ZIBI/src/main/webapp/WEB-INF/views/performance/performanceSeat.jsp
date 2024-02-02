@@ -79,9 +79,9 @@
 <div class="container-fluid contact py-6 wow" data-wow-delay="0.1s">
 	<div class="container">
 	<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
-		<div>일반 : ${cinema.cinema_adult} <span class="adult-money"></span></div>
-		<div>청소년 : ${cinema.cinema_teenage} <span class="teenage-money"></span></div>
-		<div>우대 : ${cinema.cinema_treatment} <span class="treatement-money"></span></div>
+		<div>일반 : ${cinema.cinema_adult} <span class="adult_money"></span></div>
+		<div>청소년 : ${cinema.cinema_teenage} <span class="teenage_money"></span></div>
+		<div>우대 : ${cinema.cinema_treatment} <span class="treatement_money"></span></div>
 	</c:forEach>
 	<div><span class="total-money"></span></div>
 	</div>
@@ -89,18 +89,18 @@
 <!-- 총 금액 End -->
 
 
-<form action="submitSeat" method="post">
+<form action="submitSeat" method="get">
 	<!-- mem_num -->
 	<!-- ticketing_num -->
-	<input type="hidden" id="ticketing_num" value="${tmpTicket.ticketing_num}"/>
+	<input type="hidden" id="ticketing_num" name="ticketing_num" value="${tmpTicket.ticketing_num}"/>
 	<!-- 선택한 좌석 정보 -->
-	<input type="hidden" id="seat_info" value=""/>
+	<input type="hidden" id="seat_info" name="seat_info" value=""/>
 	<!-- 일반 명 수 -->
-	<input type="hidden" id="adult-money" value=""/>
+	<input type="hidden" id="adult_money" name="adult_money" value=""/>
 	<!-- 청소년 명 수 -->
-	<input type="hidden" id="teenage-money" value=""/>	
+	<input type="hidden" id="teenage_money" name="teenage_money" value=""/>	
 	<!-- 우대 명 수 -->
-	<input type="hidden" id="treatement-money" value=""/>
+	<input type="hidden" id="treatement_money" name="treatement_money" value=""/>
 	
 	<input type="submit" value="결제하기">
 </form>

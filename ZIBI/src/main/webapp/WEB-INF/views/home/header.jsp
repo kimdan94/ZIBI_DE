@@ -14,9 +14,7 @@
 					<a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
 				</c:if>
 				<c:if test="${user.mem_social==1}">
-					<a onclick="javascript:logoutKakao()">로그아웃</a><!-- 카카오에서 제공하는 로그아웃 기능 이용 -->
-					<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-					<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/kakao.js"></script><!-- 유효성 체크 -->
+					<a href="${pageContext.request.contextPath}/member/logoutKakao">로그아웃</a><!-- 카카오에서 제공하는 로그아웃 기능 이용 -->
 				</c:if>
 			</c:if>
 			<c:if test="${empty user}">

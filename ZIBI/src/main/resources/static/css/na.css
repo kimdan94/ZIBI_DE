@@ -1,9 +1,21 @@
 /*-------------- 정책 -------------*/
 /* 정책 관리자 메인 */
+.admin-page,
+.policy-page{
+	margin: 0 auto;
+}
+.admin-page .text-end{
+	margin-bottom: 20px;
+}
 .policy-main .row{
 	border-bottom: 1px solid #8c8c8c;
 	padding: 10px;
 }
+.policy-main .row div{
+	margin: 0 auto;
+	overflow: hidden;
+}
+
 /* 정책 관리자 수정 */
 .policy-main,
 .policy-page{ 
@@ -18,8 +30,10 @@
 
 /* 정책 사용자 메인 */
 .policy-map{
-	font-size: .8em;
-	margin-top: 20px;
+	margin: 40px 0 20px 0;
+}
+#map{
+	margin-bottom: 10px;
 }
 
 /*-------------- 메인-------------*/
@@ -388,7 +402,7 @@
 }
 /* 관리자 페이지 넓이 */
 .admin-page{
-	width: 95%
+	width: 80%
 }
 
 .carousel-inner img{

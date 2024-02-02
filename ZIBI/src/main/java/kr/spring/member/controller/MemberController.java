@@ -180,6 +180,16 @@ public class MemberController {
 		return "member/naverLogin";
 	}
 	
+	//카카오 로그아웃 처리
+	@RequestMapping("/member/logoutKakao")
+	public String logoutKakao(Model model, HttpSession session) {
+		
+		model.addAttribute("apikey",kakao_apikey);
+		session.invalidate();
+		
+		return "/member/logout";
+	}
+	
 	/*------------------------------프로필 사진----------------------------------*/
 	//로그인 전용 프로필 사진 출력 (마이페이지 사용)
 	@RequestMapping("/member/photoView")

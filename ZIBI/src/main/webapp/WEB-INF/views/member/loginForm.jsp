@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <!-- Contact Start -->
-<input type="hidden" id="apikey" value="${apikey}"/>">
+<input type="hidden" id="apikey" value="${apikey}"/>
 <div class="container page-width">
 	<div class="member-form row justify-content-center">
 		<div class="col-7 align-self-center register-info">

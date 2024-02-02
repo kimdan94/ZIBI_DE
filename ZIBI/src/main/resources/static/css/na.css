@@ -7,10 +7,10 @@
 /* 정책 관리자 수정 */
 .policy-main,
 .policy-page{ 
-	margin-top: 30px;
+	margin-top: 40px;
 }
 .policy-page .row{
-	margin-top: 10px;
+	margin-top: 20px;
 }
 .policy-page button{
 	margin-top: 30px;
@@ -378,15 +378,17 @@
 .page-width{ 
 	width:60%;
 }
-
 /* 입력폼 페이지 넓이 */
 .form-width{ 
 	width:45%;
 }
-
 /* 오픈 프로필 페이지 넓이 */
 .page-open{
 	width: 80%;
+}
+/* 관리자 페이지 넓이 */
+.admin-page{
+	width: 95%
 }
 
 .carousel-inner img{
@@ -415,7 +417,8 @@
 
 /* 에러 메세지 */
 .mypageMain #photo_check,
-.member-form span{
+.member-form span,
+.policy-page span{
 	margin: 5px 0 0 5px;
 	font-weight: bold;
 	color: #DB3954;

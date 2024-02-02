@@ -172,9 +172,18 @@ public class BookController {
 			book.setBook_state(book_state);
 		}
 		
+		//후기 레코드 수
+		int rcount = bookService.selectRevCount(book_num);
+		List<BookReviewVO> rlist = null;
+		if(rcount > 0) {
+			rlist = bookService.selectListRev(book_num);
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("bookDetail");
 		mav.addObject("book", book);
+		mav.addObject("rcount", rcount);
+		mav.addObject("rlist", rlist);
 
 		return mav;
 	}
@@ -275,8 +284,8 @@ public class BookController {
 		return "common/resultAlert";
 	}
 	
-	/*-- 예약 리뷰 작성 --*/
-	//리뷰 작성 폼 호출
+	/*-- 예약 후기 작성 --*/
+	//후기 작성 폼 호출
 	@GetMapping("/book/review")
 	public ModelAndView insertRev(@RequestParam int book_num,
 								@RequestParam String apply_gatheringDate,
@@ -314,4 +323,5 @@ public class BookController {
 		
 		return "common/resultAlert";
 	}
+	
 }

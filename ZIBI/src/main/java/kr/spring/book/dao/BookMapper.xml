@@ -228,4 +228,28 @@
 			#{apply_gatheringDate})
 	</insert>
 	
+	<!-- 소모임 댓글 목록 개수 -->
+	<select id="selectRevCount" parameterType="integer" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM book_review
+		WHERE book_num=#{book_num}
+	</select>
+	
+	<!-- 소모임 댓글 목록 -->
+	<select id="selectListRev" parameterType="integer" resultType="bookReviewVO">
+		SELECT
+			book_num,
+			mem_num,
+			book_grade,
+			<![CDATA[
+			REPLACE(REPLACE(REPLACE(book_rev,'<','&lt;'),'>','&gt;'),'<br>','/\r\n/g') book_rev,
+			]]>
+			rev_num,
+			apply_gatheringDate,
+			mem_nickname
+		FROM book_review
+		LEFT OUTER JOIN member USING(mem_num)
+		WHERE book_num = #{book_num}
+	</select>
 </mapper>

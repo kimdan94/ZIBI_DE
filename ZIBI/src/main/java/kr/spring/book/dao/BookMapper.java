@@ -74,15 +74,12 @@ public interface BookMapper {
 	@Update("UPDATE book SET book_onoff = 0 WHERE book_num=#{book_num}")
 	public void resetOnoff(int book_num);
 	
-	/*------- 리뷰 -------*/
+	/*------- 후기 -------*/
 	@Select("SELECT CASE WHEN COUNT(*) > 0 THEN '2' ELSE '1' END AS rev_status FROM book_review WHERE book_num=#{book_num} AND mem_num=#{mem_num} AND apply_gatheringDate=#{apply_gatheringDate}")
 	public int selectRevByrev_num(int book_num, int mem_num, String apply_gatheringDate);
-	public List<BookReviewVO> selectListRev(Map<String,Object> map);
-	public int selectRevCount(Map<String,Object> map);
-	public BookReviewVO selectRev(int rev_num);
+	public List<BookReviewVO> selectListRev(int book_num);
+	public int selectRevCount(int book_num);
 	public void insertRev(BookReviewVO rev);
-	public void updateRepv(BookReviewVO rev);
-	public void deleteReply(int rev_num);
 	@Select("SELECT * FROM book_matching WHERE book_num=#{book_num} AND apply_num=#{apply_num} AND apply_gatheringDate=#{apply_gatheringDate}")
 	public BookMatchingVO selectMatchForRev(int book_num, int apply_num, String apply_gatheringDate);
 	

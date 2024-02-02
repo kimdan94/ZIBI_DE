@@ -140,38 +140,18 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public List<BookReviewVO> selectListRev(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<BookReviewVO> selectListRev(int book_num) {
+		return bookMapper.selectListRev(book_num);
 	}
 
 	@Override
-	public int selectRevCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public BookReviewVO selectRev(int rev_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public int selectRevCount(int book_num) {
+		return bookMapper.selectRevCount(book_num);
 	}
 
 	@Override
 	public void insertRev(BookReviewVO rev) {
 		bookMapper.insertRev(rev);
-	}
-
-	@Override
-	public void updateRepv(BookReviewVO rev) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteReply(int rev_num) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

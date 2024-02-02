@@ -17,5 +17,5 @@ public class BookReviewVO {
 	
 	/*-- 읽어올 정보 --*/
 	private String apply_gatheringDate;
-	private String nick_name;
+	private String mem_nickname;
 }

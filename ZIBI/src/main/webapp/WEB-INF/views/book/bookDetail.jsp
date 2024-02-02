@@ -17,7 +17,7 @@
                 <c:if test="${book.book_category == 2}"><div style="background:#486627;" class="book-first">스터디 모임</div></c:if>
 				<div class="scrap-area">
              		<img id="output_scrap" data-num="${book.book_num}"
-             			src="${pageContext.request.contextPath}/images/jy/noScrap.png" width="50px">
+             			src="${pageContext.request.contextPath}/images/jy/noScrap.png" width="40px">
              		<br>	
              		<span id="output_scount"></span>	
              	</div>
@@ -90,39 +90,42 @@
 			</table>
 			<hr size="3" width="100%">
 			<div>
-				<span class="book-span">모임 후기</span>
+				<span class="book-span">모임 후기 (${rcount})</span>
 				<br><br>
 				<%-- 모임 후기 --%>
+				<c:if test="${rcount == 0}">
+					<div class="align-center">
+						이 모임의 첫 번째 후기 작성자가 되어주세요!
+					</div>
+				</c:if>
+				<c:if test="${rcount > 0}">	
 				<div class="owl-carousel">
-					<div class="bg-light rounded">
-						<div class="d-flex justify-content-center p-4">
-							<div class="text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
-								</h4>
-								<p class="mb-1">모임을 만들어 지비러들끼리 소통을 활성화하세요</p>
+					<c:forEach var="rev" items="${rlist}">
+						<div class="owl-items">
+							<div class="d-flex justify-content-center p-4">
+								<div class="text-center">
+									<p class="mb-1">${rev.book_rev}</p>
+									<hr size="3" width="100%">
+									<p class="mb-1">
+										✒️ ${rev.mem_nickname} (<span class="owl-grade">${rev.book_grade}점</span>)
+									</p>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="bg-light rounded">
-						<div class="d-flex justify-content-center p-4">
-							<div class="text-center">
-								<h4 class="mb-3">
-									<a href="${pageContext.request.contextPath}/book/list">모임 참여</a>
-								</h4>
-								<p class="mb-1">샘플2</p>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
+				</c:if>	
 				<script>
 					$(document).ready(function(){
 						var owl = $('.owl-carousel');
 						owl.owlCarousel({
-							items:4,
+							items:1,
 						    loop:true,
 						    nav:true,
-						    margin:10
+						    navText:['◀','▶'],
+						    margin:10,
+						    autoplay:true,
+						    autoplayHoverPause:true
 						});
 						owl.on('mousewheel', '.owl-stage', function (e) {
 						    if (e.originalEvent.deltaY>0) {
@@ -328,6 +331,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/owl.carousel.js"></script>
 <script type="text/javascript">
 $(document).on('click','#close_btn',function(){
+	if(confirm('작성 및 변경한 내용은 유지되지 않습니다. 나가시겠습니까?')==false){
+		return;
+	}
+	
 	$('body').css('overflow-y','');
 	$('#bookApplyModal').hide();
 });

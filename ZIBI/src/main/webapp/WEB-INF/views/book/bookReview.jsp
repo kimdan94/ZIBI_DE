@@ -10,7 +10,7 @@
 			<input type="hidden" value="${match.book_num}" name="book_num">
 			<input type="hidden" value="${match.apply_gatheringDate}" name="apply_gatheringDate">
 				<div class="title-phrase2">
-					${match.mem_nickname}님은 이 모임이 어떠셨나요?
+					${match.mem_nickname}님은 이 모임 어떠셨나요?
 				</div>
 				<div class="applySub">
 					참여 모임
@@ -41,7 +41,8 @@
 	                <input type="radio" id="rating2" name="book_grade" value="1"><label for="rating2"></label>
 	                <input type="radio" id="rating1" name="book_grade" value="0.5"><label class="half" for="rating1"></label>
                 </fieldset>
-				<textarea rows="10" id="book_rev" name="book_rev" placeholder="후기는 한 번 작성하면 수정할 수 없으니 신중하게 작성해 주세요."></textarea>
+				<textarea rows="5" id="book_rev" name="book_rev" placeholder="후기는 한 번 작성하면 수정, 삭제할 수 없으니 신중하게 작성해 주세요."></textarea>
+				<div class="letter-count">100/100</div>
 				<div id="revValid" class="error-phrase"></div>
 				<div class="align-center">
 					<input type="submit" value="후기 남기기" class="w-25 btn btn-light form-control p-3 rounded-pill active">
@@ -53,32 +54,5 @@
 	</div>
 </div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-window.onload = function(){
-	//입력 유효성 체크
-	$('#book_review').submit(function(){
-		//평점
-		let check = false;
-		for(let i=0;i<book_review.book_grade.length;i++){
-			if(book_review.book_grade[i].checked == true){
-				check = true;
-			}
-		}
-		if(check == false){
-			$('#gradeValid').text('평점을 선택해 주세요.');
-			return false;
-		}else{
-			$('#gradeValid').text('');
-		}
-		
-		//후기 내용
-		if($('#rev_content').val().trim()==''){
-			$('#revValid').text('후기 내용을 입력해 주세요.');
-			return false;
-		}else{
-			$('#revValid').text('');
-		}
-	});
-};
-</script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.review.js"></script>
 <!-- 내용 끝 -->

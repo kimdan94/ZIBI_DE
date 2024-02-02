@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.checklist.dao.CheckListMapper">
+<!-- 체크리스트 글 등록 -->
+	<insert id="insertCheckList" parameterType="CheckListVO">
+		INSERT INTO CheckList(
+		   check_id,
+		   room_name,
+		   room_address1,
+		   room_address2,
+		   room_deposit,
+		   room_expense,
+		   room_size,
+		   room_star,
+		   room_description,
+		   room_filname,
+		   room_check1,
+		   room_check2,
+		   room_check3,
+		   room_check4,
+		   room_check5,
+		   room_check6)
+		VALUES (
+		   CheckList_seq.nextval,
+		   #{check_id},
+		   #{room_name},
+		   #{room_address1},
+		   #{room_address2},
+		   #{room_deposit},
+		   #{room_expense},
+		   #{room_size},
+		   #{room_star},
+		   #{room_description},
+		   #{room_filname},
+		   #{room_check1},
+		   #{room_check2},
+		   #{room_check3},
+		   #{room_check4},
+		   #{room_check5},
+		   #{room_check6})
+	</insert>
+</mapper>	

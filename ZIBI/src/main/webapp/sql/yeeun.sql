@@ -53,3 +53,23 @@ create table community_reply(
 create sequence community_reply_seq;
 
 -- 원룸 체크리스트
+create table checklist(
+ check_id number not null, --Pk
+ room_name varchar2(300) not null,
+ room_address1 varchar2(90) not null,
+ room_address2 varchar2(90) not null,
+ room_deposit number(10) not null,
+ room_expense number(7) not null,
+ room_size number(3) not null,
+ room_star number(1),
+ room_description clob not null,
+ room_filename varchar2(300),
+ room_check1 number(1) not null,
+ room_check2 number(1) not null, 
+ room_check3 number(1) not null, 
+ room_check4 number(1) not null,
+ room_check5 number(1) not null,
+ room_check6 number(1) not null,
+ constraint checklist_pk primary key (check_id)
+);
+create sequence checklist_seq;

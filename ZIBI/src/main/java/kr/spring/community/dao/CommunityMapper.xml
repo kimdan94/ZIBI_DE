@@ -89,7 +89,7 @@
 		            FROM community 
 		            LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, community_num FROM community_reply GROUP BY community_num) USING(community_num)
 		            LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, community_num FROM community_fav GROUP BY community_num) USING(community_num)
-		  	    	LEFT OUTER JOIN member_detail USING(mem_num) 
+		  	    	LEFT OUTER JOIN member USING(mem_num) 
 		            <include refid="communitySearch"></include>
 		            <include refid="communityOrder"></include>)a)
 		<![CDATA[
@@ -103,7 +103,7 @@
 		  * 
 		FROM community 
 		JOIN member USING(mem_num)
-		LEFT OUTER JOIN member_detail USING(mem_num)
+		LEFT OUTER JOIN member USING(mem_num)
 		WHERE community_num=#{community_num} 
 	</select>
 	

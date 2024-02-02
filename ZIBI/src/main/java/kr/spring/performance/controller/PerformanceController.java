@@ -297,6 +297,7 @@ public class PerformanceController {
 		pickPerformance = performanceService.pickPerformance(map);
 		pickTicketing = performanceService.pickTicketing(map);
 		
+		TicketingVO tmpTicket = performanceService.choosingTicketing(map);
 		log.debug("================================================");
 		log.debug("<<pickCinema>> : " + pickCinema);
 		log.debug("<<pickPerformance>> : " + pickPerformance);
@@ -307,6 +308,7 @@ public class PerformanceController {
 		mav.addObject("pickCinema", pickCinema);
 		mav.addObject("pickPerformance", pickPerformance);
 		mav.addObject("pickTicketing", pickTicketing);
+		mav.addObject("tmpTicket", tmpTicket);
 		
 		return mav; 
 	}

@@ -116,6 +116,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.selectChoice(map);
 	}
 
+	@Override
+	public TicketingVO choosingTicketing(Map<String, Object> map) {
+		return performanceMapper.choosingTicketing(map);
+	}
+
 
 	
 	

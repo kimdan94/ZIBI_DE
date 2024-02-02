@@ -31,6 +31,10 @@ public interface PerformanceService {
 	public List<PerformanceVO> pickPerformance(Map<String, Object> map);
 	public List<TicketingVO> pickTicketing(Map<String, Object> map);
 	
+	// 임시
+	public TicketingVO choosingTicketing(Map<String, Object> map);
+	
+	
 	
 	public List<ChoiceVO> selectChoice(Map<String, Object> map);
 	

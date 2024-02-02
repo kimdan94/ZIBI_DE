@@ -37,6 +37,10 @@ public interface PerformanceMapper {
 	public List<PerformanceVO> pickPerformance(Map<String, Object> map);
 	public List<TicketingVO> pickTicketing(Map<String, Object> map);
 	
+	// 임시
+	public TicketingVO choosingTicketing(Map<String, Object> map);
+	
+	
 	//좌석 출력
 	@Select("SELECT * FROM perform_choice WHERE ticketing_num=#{ticketing_num}")
 	public List<ChoiceVO> selectChoice(Map<String, Object> map);

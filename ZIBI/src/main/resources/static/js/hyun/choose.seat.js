@@ -3,7 +3,7 @@ $(function(){ // performanceSeat.jsp
 	let ticketing_num = $('#ticketing-num').text();
 	let rev_cnt; //인원수
 	const set_choice = {}; // 객체 -> 두 개 이상의 좌석을 선택할 때 사용 key value로
-	let count = 0;
+	let count = 0; // 선택한 인원 수(rev_cnt와 비교)
 	
 	/* ----------------------------------
 	 * 인원 선택 시작
@@ -44,9 +44,15 @@ $(function(){ // performanceSeat.jsp
 		} else if(adult + teenage + treatement > 8) {
 			alert('8 이하만 가능');
 		} else {
+			// 값 업데이트
 			$('.adult-num').text(adult);
 			$('.teenage-num').text(teenage);
 			$('.treatement-num').text(treatement);
+			
+			// 폼에 값 넣어주기
+			$('#adult-money').attr('value',adult);
+			$('#teenage-money').attr('value',teenage);
+			$('#treatement-money').attr('value',treatement);
 			
 			// 인원 수 업데이트
 			rev_cnt = calculatePeopleNum();
@@ -80,7 +86,7 @@ $(function(){ // performanceSeat.jsp
 	}
 	
 	/* ----------------------------------
-	 * 인원 선택 끝
+	 * 좌석
 	 * ---------------------------------- */
 	
 	rowAndCol(ticketing_num); // 맨 처음 실행 됨
@@ -127,6 +133,8 @@ $(function(){ // performanceSeat.jsp
 			console.log(param.choosenSeat[i].choice_row+'_'+param.choosenSeat[i].choice_col);
 			$('#'+(param.choosenSeat[i].choice_row-1)+'_'+(param.choosenSeat[i].choice_col-1)).addClass("seat-full");
 		}
+		
+		
 				
 	}
 	
@@ -155,60 +163,15 @@ $(function(){ // performanceSeat.jsp
 	/* ----------------------------
 	 * 좌석 선택
 	 * ---------------------------- */
-	// 좌석 선택
-	/*$(document).on('click','.seat-style',function(){ // 토글 형태
-		if(rev_cnt == 1){ // 인원 : 1
-			if(!$(this).hasClass('seat-click')){ // 선택 가능한 좌석 -> 선택
-				$(this).addClass('seat-click');
-				count += 1;
-			} else { // 방금 선택한 좌석 -> 취소
-				$(this).removeClass('seat-click');
-				count -= 1;
-			}
-		}else if(rev_cnt >= 2 && rev_cnt <= 8){ // 인원 : 2 이상 8 이하
-			if($(this).next()[0].tagName != 'BR'){ // 맨 끝자리 X
-				if(!$(this).hasClass('seat-click') && !$(this).next().hasClass('seat-click')){ // 두 좌석 모두 선택할 수 있을 때
-					$(this).addClass('seat-click'); // 선택한 좌석에 class 추가
-					$(this).next().addClass('seat-click'); // 선택 옆 좌석 class 추가
-					set_choice[$(this).attr('id')] = $(this).next().attr('id'); // key(선택좌석) : value(오른쪽 좌석) 
-					set_choice[$(this).next().attr('id')] = $(this).attr('id'); // key(오른쪽 좌석) : value(선택좌석)
-					console.log(set_choice);
-					count += 2;
-				} else if($(this).hasClass('seat-click')) { // 좌석 취소
-					$(this).removeClass('seat-click');
-					let value = set_choice[$(this).attr('id')];
-					$('#'+value).removeClass('seat-click'); // 선택한 좌석(key) = 옆 좌석(value) 삭제
-					count -= 2;
-				}
-				
-			} else { // 맨 끝자리 O
-				if(!$(this).hasClass('seat-click') && !$(this).prev().hasClass('seat-click')){ // 두 좌석 모두 선택할 수 있을 때
-					$(this).addClass('seat-click'); // 선택한 좌석에 class 추가
-					$(this).prev().addClass('seat-click'); // 선택 옆 좌석 class 추가
-					set_choice[$(this).attr('id')] = $(this).prev().attr('id'); // key(선택좌석) : value(왼쪽 좌석)
-					set_choice[$(this).prev().attr('id')] = $(this).attr('id'); // key(왼쪽 좌석) : value(선택좌석)
-					console.log(set_choice);
-					count += 2;
-				} else if($(this).hasClass('seat-click')) { // 좌석 취소
-					$(this).removeClass('seat-click');
-					let value = set_choice[$(this).attr('id')];
-					$('#'+value).removeClass('seat-click'); // 선택한 좌석(key) = 옆 좌석(value) 삭제
-					count -= 2;
-				}
-			}
-		}
-		
-	});*/
-
-	
 	
 	 
 	$(document).on('click','.seat-style',function(){ // 토글 형태
 		// 좌석 취소
 		if($(this).hasClass('seat-click')) { // 좌석 취소
-			$(this).removeClass('seat-click');
+			$(this).removeClass('seat-click'); // 선택한 좌석 class 제거
 			let value = set_choice[$(this).attr('id')];
 			count -= 1;
+			
 			if(value != ''){ // 좌석이 2자리일 때
 				$('#'+value).removeClass('seat-click'); // 선택한 좌석(key) = 옆 좌석(value) 삭제
 				count -= 1;
@@ -233,7 +196,7 @@ $(function(){ // performanceSeat.jsp
 						}
 						
 					} else { // 맨 끝자리 O
-						if(!$(this).hasClass('seat-click') && !$(this).prev().hasClass('seat-click')){ // 두 좌석 모두 선택할 수 있을 때
+						if(!$(this).hasClass('seat-click') && !$(this).prev().hasClass('seat-click') && !$(this).hasClass('seat-full') && !$(this).next().hasClass('seat-full')){ // 두 좌석 모두 선택할 수 있을 때
 							$(this).addClass('seat-click'); // 선택한 좌석에 class 추가
 							$(this).prev().addClass('seat-click'); // 선택 옆 좌석 class 추가
 							set_choice[$(this).attr('id')] = $(this).prev().attr('id'); // key(선택좌석) : value(왼쪽 좌석)
@@ -245,17 +208,25 @@ $(function(){ // performanceSeat.jsp
 			}	
 		}	
 		
+		let row = $('.seat-style').data('row');
+		let col = $('.seat-style').data('col');
+		resultChoiceSeat(row, col)
 		
 	});
-		
 	
-	
-	
-	
-	
-	
-	
-	
+	// 선택한 좌석 값 form에 넣기
+	function resultChoiceSeat(row, col){
+		let output = '';
+		for(let i=0; i<row; i++){
+			for(let j=0; j<col; j++){
+				if($('#'+i+'_'+j).hasClass('seat-click')){
+					let thisSeat = i+'_'+j+' ';
+					output += thisSeat;
+				}
+			}
+		}
+		$('#seat_info').attr('value',output);
+	}
 	
 	
 	

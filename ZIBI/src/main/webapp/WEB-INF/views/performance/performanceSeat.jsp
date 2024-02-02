@@ -24,6 +24,7 @@
 		<c:forEach var="ticketing" items="${pickTicketing}" varStatus="status">
 			<div>예매 정보: ${ticketing.ticketing_date} ${ticketing.ticketing_start_time}</div>
 		</c:forEach>
+		
 		<br>
 		<h2>인원 선택</h2>
 		<div>
@@ -90,16 +91,15 @@
 
 <form action="submitSeat" method="post">
 	<!-- mem_num -->
-	<input type="hidden" id="mem_num" value=""/>
 	<!-- ticketing_num -->
-	<input type="hidden" id="ticketing_num" value=""/>
+	<input type="hidden" id="ticketing_num" value="${tmpTicket.ticketing_num}"/>
 	<!-- 선택한 좌석 정보 -->
 	<input type="hidden" id="seat_info" value=""/>
-	<!-- 일반 가격 -->
+	<!-- 일반 명 수 -->
 	<input type="hidden" id="adult-money" value=""/>
-	<!-- 청소년 가격 -->
+	<!-- 청소년 명 수 -->
 	<input type="hidden" id="teenage-money" value=""/>	
-	<!-- 우대 가격 -->
+	<!-- 우대 명 수 -->
 	<input type="hidden" id="treatement-money" value=""/>
 	
 	<input type="submit" value="결제하기">

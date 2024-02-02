@@ -148,6 +148,13 @@
 		<include refid="pick_performance"></include>
 	</select>
 	
+	<!-- [임시] 티켓번호에 따른 ticketing 정보 -->
+	<select id="choosingTicketing" parameterType="map">
+		SELECT t.ticketing_num,t.performance_num, t.cinema_num, t.ticketing_date, t.ticketing_start_time
+		<include refid="pick_performance"></include>
+	</select>
+	
+	
 	<!-- [include] 좌석 예매 페이지 -->
 	<sql id="pick_performance">
 		FROM performance p JOIN ticketing t ON p.performance_num = t.performance_num JOIN cinema c ON t.cinema_num = c.cinema_num

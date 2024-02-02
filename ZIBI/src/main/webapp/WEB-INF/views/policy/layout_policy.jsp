@@ -41,14 +41,14 @@
 	<div class="container page-width">
 		<div class="row">
 			<div class="col">
-				<input type="button" class="btn mem-btn w-100" value="1인 가구 정보" onclick="location.href='${pageContext.request.contextPath}/admin/policy'" id="policy_btn">
+				<input type="button" class="btn mem-btn w-100" value="1인 가구 정책" onclick="location.href='${pageContext.request.contextPath}/policy/main'" id="policy_btn">
 			</div>
 			<div class="col">
-				<input type="button" class="btn mem-btn w-100" value="영화" onclick="location.href='${pageContext.request.contextPath}/'" id="perf_btn">
+				<input type="button" class="btn mem-btn w-100" value="1인 가구 비율" onclick="location.href='${pageContext.request.contextPath}/policy/count'" id="count_btn">
 			</div>
 		</div>
-		<tiles:insertAttribute name="body"/>
 	</div>	
+	<tiles:insertAttribute name="body"/>
 	<tiles:insertAttribute name="footer"/>
 	<a href="#" class="btn btn-light btn-md-square rounded-circle back-to-top">
 		<img src="${pageContext.request.contextPath}/images/na/up_menu.png" width="15px">

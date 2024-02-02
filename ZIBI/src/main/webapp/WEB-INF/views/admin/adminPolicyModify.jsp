@@ -30,6 +30,6 @@
 	</form:form>
 </div>
 <script type="text/javascript">
-	$('#deal_btn').toggleClass("mem-btn");
-	$('#deal_btn').toggleClass("mem-btn-green");
+	$('#policy_btn').toggleClass("mem-btn");
+	$('#policy_btn').toggleClass("mem-btn-green");
 </script>

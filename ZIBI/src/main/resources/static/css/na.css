@@ -4,8 +4,6 @@
 	border-bottom: 1px solid #8c8c8c;
 	padding: 10px;
 }
-
-
 /* 정책 관리자 수정 */
 .policy-main,
 .policy-page{ 
@@ -16,6 +14,12 @@
 }
 .policy-page button{
 	margin-top: 30px;
+}
+
+/* 정책 사용자 메인 */
+.policy-map{
+	font-size: .8em;
+	margin-top: 20px;
 }
 
 /*-------------- 메인-------------*/

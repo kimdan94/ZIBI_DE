@@ -42,8 +42,24 @@ public class PolicyController {
 		
 		return "policyMain";
 	}
-	
-
+		
+	@RequestMapping("/policy/count")
+	public String policyCount(Model model) {
+		
+		//policyVO 리스트 넘겨주기
+		//리스트 반환 (페이징 처리 x)
+		PolicyVO policyVO = new PolicyVO();
+		
+		policyVO.setDistrict_num(1);
+		policyVO.setDistrict_name("서울");
+		policyVO.setPolicy_url("dd");
+		policyVO.setDistrict_lonitude("123");
+		policyVO.setDistrict_latitude("234");
+		
+		model.addAttribute("policyVO", policyVO);
+		
+		return "policyCount";
+	}
 
 	/* ---------- 관리자 페이지 - 진입 ----------*/
 	@RequestMapping("/admin/policy")

@@ -47,8 +47,8 @@
 				<input type="button" class="btn mem-btn w-100" value="영화" onclick="location.href='${pageContext.request.contextPath}/admin/performanceMain'" id="perf_btn">
 			</div>
 		</div>
-		<tiles:insertAttribute name="body"/>
-	</div>	
+	</div>
+	<tiles:insertAttribute name="body"/>
 	<tiles:insertAttribute name="footer"/>
 	<a href="#" class="btn btn-light btn-md-square rounded-circle back-to-top">
 		<img src="${pageContext.request.contextPath}/images/na/up_menu.png" width="15px">

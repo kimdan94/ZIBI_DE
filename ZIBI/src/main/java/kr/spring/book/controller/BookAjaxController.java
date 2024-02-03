@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,9 @@ public class BookAjaxController {
 	private MemberService memberService;
 	@Autowired
 	JavaMailSenderImpl mailSender;
+	
+	@Value("${spring.mail.username")
+	private String fromemail;
 	
 	/*-- 부모글 수정 시 썸네일 삭제 --*/
 	@RequestMapping("/book/deleteFile")
@@ -97,7 +101,6 @@ public class BookAjaxController {
 				String nickname = member.getMem_nickname();
 				
 				//예약 완료 이메일 양식
-				String setFrom = "229rkawk@gmail.com";
 				String toMail = email;
 				String title = "[ZIBI] 소모임 참여 신청 안내";
 				String content = "<div><h2>"+ nickname + "님의 소모임 예약이 완료되었습니다.</h2>";
@@ -110,7 +113,7 @@ public class BookAjaxController {
 				try {
 					MimeMessage message = mailSender.createMimeMessage();
 					MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-					helper.setFrom(setFrom);
+					helper.setFrom(fromemail);
 					helper.setTo(toMail);
 					helper.setSubject(title);
 					helper.setText(content, true);

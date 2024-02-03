@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container page-width text-center">
 	<div class="policy-map text-center">
-		<h3>1인 가구 정책</h3>
-		<p>지도의 지자체를 클릭하시면 해당 지자체의 1인 가구 정책 사이트로 연결됩니다</p>
+		<h3>지자체에서 시행 중인 1인 가구 정책을 찾아보세요 🔍</h3>
+		<span>지도의 지자체를 클릭하시면 해당 지자체의 1인 가구 정책 사이트로 연결됩니다</span>
+		<span>(없는 지자체는 표시되지 않습니다)</span>
 	</div>
 	<div id="map" style="width:100%; height:600px;"></div>
+	<p>연결된 사이트가 유효하지 않은 URL일 경우 관리자에게 문의해주세요</p>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0f8ec7b176d3f7229af3666b33d6e9b8"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}"></script>
 <script>
 	$('#policy_btn').toggleClass("mem-btn");
 	$('#policy_btn').toggleClass("mem-btn-green");
-
-	//ajax로 데이터 주고받기 - 성공 시 지도 함수 호출
-	//페이지 진입 시 데이터를 넘겨주는 방법?
 
 	var MARKER_WIDTH = 33, // 기본, 클릭 마커의 너비
 		MARKER_HEIGHT = 36, // 기본, 클릭 마커의 높이
@@ -33,18 +33,24 @@
 		overMarkerOffset = new kakao.maps.Point(OVER_OFFSET_X, OVER_OFFSET_Y), // 오버 마커의 기준 좌표
 		spriteImageSize = new kakao.maps.Size(SPRITE_WIDTH, SPRITE_HEIGHT); // 스프라이트 이미지의 크기
 
-	var positions = [ // 마커의 위치
-			{ url:'https://apis.map.kakao.com/web/sample/basicMarkerImage/', place:new kakao.maps.LatLng(37.566553811240155, 126.9781458100309)},
-			{ url:'https://apis.map.kakao.com/web/sample/basicMarkerImage/', place:new kakao.maps.LatLng(37.45567194748538, 126.7056012678951)},
-			{ url:'https://apis.map.kakao.com/web/sample/basicMarkerImage/', place:new kakao.maps.LatLng(35.23768885494837, 128.69129810466606)},
-			{ url:'https://apis.map.kakao.com/web/sample/basicMarkerImage/', place:new kakao.maps.LatLng(37.2882956928164, 127.05442095096278)}
-		], selectedMarker = null; // 클릭한 마커를 담을 변수
+		var positions = [] , selectedMarker = null;
+		
+	//루프를 돌면서 관리자가 저장한 행정구역의 정보를 읽어 옴
+	<c:forEach var="policyVO" items="${list}" varStatus="status">
+		var district_num = ${policyVO.district_num};
+		var district_name = '${policyVO.district_name}';
+		var district_latitude = ${policyVO.district_latitude};
+		var district_lonitude = ${policyVO.district_lonitude};
+		var policy_url = '${policyVO.policy_url}';
+		
+		if(policy_url!='-' && policy_url!=null) //url이 -이 아니고 존재하는 경우에만 표시
+			positions.push( {url:policy_url, place:new kakao.maps.LatLng(district_latitude,district_lonitude), content:district_name} );
+	</c:forEach>
 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		mapOption = {
 			center : new kakao.maps.LatLng(35.724906989225346,128.0894168414805), // 지도의 중심좌표
-			level : 13
-		// 지도의 확대 레벨
+			level : 13 // 지도의 확대 레벨
 		};
 
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -59,7 +65,7 @@
 			overOrigin = new kakao.maps.Point(gapX * 2, overOriginY); // 스프라이트 이미지에서 클릭 마커로 사용할 영역의 좌상단 좌표
 
 		// 마커를 생성하고 지도위에 표시합니다
-		addMarker(positions[i].place, positions[i].url, overOrigin, clickOrigin);
+		addMarker(positions[i].place, positions[i].url, positions[i].content, overOrigin, clickOrigin);
 	}
 
 	//마커를 생성하고 지도 위에 표시하고, 마커에 mouseover, mouseout, click 이벤트를 등록하는 함수입니다
@@ -69,6 +75,12 @@
 		var marker = new kakao.maps.Marker({
 			map : map, position : position
 		});
+		
+		
+		// 마커에 표시할 인포윈도우를 생성합니다 
+	    var infowindow = new kakao.maps.InfoWindow({
+	        content: '<div style="padding:5px;">🚩'+positions[i].content+'</div>' // 인포윈도우에 표시할 내용
+	    });
 		
 		// 마커에 click 이벤트를 등록합니다
 		kakao.maps.event.addListener(marker, 'click', function() {
@@ -82,9 +94,23 @@
 		});
 		
 		// 마커에 mouseover 이벤트를 등록합니다
-		kakao.maps.event.addListener(marker, 'mouseover', function() {});
+		kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow) );
 
 		// 마커에 mouseout 이벤트를 등록합니다
-		kakao.maps.event.addListener(marker, 'mouseout', function() {});
+		kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow) );
+	}
+	
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) {
+	    return function() {
+	        infowindow.open(map, marker);
+	    };
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
 	}
 </script>

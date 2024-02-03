@@ -59,6 +59,10 @@
     	<put-attribute name="body" value="/WEB-INF/views/policy/policyCount.jsp"/>
 	</definition>
 	
+	<definition name="adminPolicyInsert" extends="adminPage">
+		<put-attribute name="title" value="[관리자] 1인 가구 정책 사이트 등록"/>
+    	<put-attribute name="body" value="/WEB-INF/views/admin/adminPolicyInsert.jsp"/>
+	</definition>
 	<definition name="adminPolicyModify" extends="adminPage">
 		<put-attribute name="title" value="[관리자] 1인 가구 정책 사이트 수정"/>
     	<put-attribute name="body" value="/WEB-INF/views/admin/adminPolicyModify.jsp"/>

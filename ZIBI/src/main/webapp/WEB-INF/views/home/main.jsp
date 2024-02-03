@@ -20,18 +20,17 @@
 		</div>
 		<div class="carousel-item" style="background: #ededed;">
 			<div class="cmain-photo">
-				<img src="${pageContext.request.contextPath}/upload/${perf.performance_poster}" height="500">
+				<img src="${pageContext.request.contextPath}/upload/${perf.performance_poster}" height="700">
 			</div>
 			<div class="cmain-content">
+				<small>ZIBI 회원들을 위해 관리자가 엄선한 영화를 놀라운 가격으로 만나세요</small>
 				<h1>
 					<a href="${pageContext.request.contextPath}/performance/detail?performance_num=${perf.performance_num}">${perf.performance_title}</a>
 				</h1>
 				<h5>${perf.performance_content}</h5>
 				<small>${perf.performance_start_date}</small>
 			</div>
-			
 		</div>
-
 	</div>
 	<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>

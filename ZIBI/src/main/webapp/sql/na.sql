@@ -50,9 +50,9 @@ create table district(
 
 create sequence district_seq;
 
---정책 : 지자체 저장
+--정책 : url 저장
 create table policy(
 	district_num number not null, 
-	policy_url varchar2(300) not null,
+	policy_url varchar2(300) default '-' not null,
 	constraint policy_fk foreign key (district_num) references district (district_num)
 );

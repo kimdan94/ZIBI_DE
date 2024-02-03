@@ -23,6 +23,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil_mem_num;
 import kr.spring.util.PageUtil_na;
 import kr.spring.util.PasswordCheckException;
 import kr.spring.util.socialMemberCheckException;
@@ -52,27 +53,26 @@ public class MemberController {
 	
 	
 	/*-----------------------오픈 프로필-----------------------------*/
-	@GetMapping("/member/mypageOpen")
+	@RequestMapping("/member/mypageOpen")
 	public String mypageOpen(@RequestParam int mem_num, Model model, @RequestParam(value="pageNum",defaultValue="1") int currentPage) {
 		
 		log.debug("<<오픈 프로필 회원 번호, mem_num>> : " + mem_num);
 		
 		int count = memberService.selectOpenCount(mem_num);
-		String nickname = "";
+		String nickname = memberService.selectMember(mem_num).getMem_nickname();
 		
-		PageUtil_na page = new PageUtil_na(null,null, currentPage, count, 10,10,"mypageOpen"); //총 글 갯수?
+		PageUtil_mem_num page = new PageUtil_mem_num(Integer.toString(mem_num),null, currentPage, count, 8,10,"mypageOpen"); //총 글 갯수?
 
 		List<FollowListVO> list = null;
 		Map<String,Integer> map = new HashMap<String, Integer>();
 		
-		if(count>0) { //내가 팔로우한 사람이 있는 경우
+		if(count>0) { //회원이 글을 쓴 경우
 			
 			map.put("mem_num", mem_num);
 			map.put("start",page.getStartRow());
 			map.put("end",page.getEndRow());
 			
 			list = memberService.selectOpenList(map);
-			nickname = list.get(1).getMem_nickname();
 		}
 		
 		model.addAttribute("list",list);

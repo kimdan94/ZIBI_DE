@@ -28,9 +28,9 @@ create sequence second_seq;
 -- 중고거래 거래 내역
 create table second_order(
  sc_order_num number not null,
- sc_buyer varchar2(30) not null,
+ sc_buyer_num number not null,
+ sc_order_status number(1) default 1 not null,--1:대기, 2:예약중(확정), 3:거래완료 4:거절
  sc_order_reg_date date default sysdate not null,
- sc_order_status number(1) default 1 not null,
  sc_num number not null,
  constraint second_order_pk primary key (sc_order_num),
  constraint second_order_fk foreign key (sc_num) references second (sc_num)

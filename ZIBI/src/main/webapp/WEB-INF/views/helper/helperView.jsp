@@ -4,62 +4,87 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+<link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.scrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.reply.js"></script>
 <!-- 내용 시작 -->
 <div class="container-fluid contact py-6">
 	<div class="d-flex justify-content-center">
 		<div class="rounded login-form col-md-4 col-lg-6">
-		
-		<h2>글 상세</h2>
+		<c:if test="${helper.helper_category ==  1}"><div style="background:#04B486;" class="border_cate">벌레</div></c:if>
+		<c:if test="${helper.helper_category ==  2}"><div>[ 조립 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  3}"><div>[ 수리 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  4}"><div>[ 소분 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  5}"><div>[ 기타 ]</div></c:if>
+		<br>
+		<div class="title">
+		${helper.helper_title}
+		</div>
 		<div class="align-right">
 		<c:if test="${!empty user}">
-		<!-- 해결중&해결완료 토글 -->
-		<div>
-		<img id="output_solution" data-num="${helper.helper_num}" class="toggle"
-			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="50">
-		<br>
-		<span id="output_text">[해결 중]</span>
-		</div>
-		<input type="button" value="글수정" onclick="location.href='update?helper_num=${helper.helper_num}'">
-		<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'"
-				id="delete_btn">
-		<input type="button" value="목록" onclick="location.href='list?helper_num=${helper.helper_num}'">
+		<!-- 스크랩 -->		
+		<img id="output_scrap" data-num="${helper.helper_num}" 
+			src="${pageContext.request.contextPath}/images/de/heart1.png" width="30">
+		<!-- 스크랩 개수 -->
+		스크랩  <span id="output_scount"></span>
+		<span>·</span>
+		<img src="${pageContext.request.contextPath}/images/de/hit.png" width="30">
+		조회수  ${helper.helper_hit}
+		<!-- 댓글 개수 -->	
+		<span id="output_rcount"></span>
 		</c:if>
 		</div>
+		<div class="align-left">
+		<!-- 해결중&해결완료 토글 -->
 		<div>
-		조회수 : ${helper.helper_hit}
+		<c:if test="${user.mem_num == helper.mem_num}">
+		<img id="output_solution" data-num="${helper.helper_num}" class="toggle"
+			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="50">
+		<span id="output_text">[판매 중]</span>
+		</c:if>
+		<br>
 		</div>
-		<div>
+		</div>
+		
+		<div class="align-right">
+		<c:if test="${user.mem_num == helper.mem_num}">
+		<input type="button" value="글수정" onclick="location.href='update?helper_num=${helper.helper_num}'"
+			class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
+		<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'"
+				id="delete_btn" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
+		</c:if>
+		</div>
+		
+		<br><br>
+		<div class="align-center">
 		<c:if test="${empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/images/de/noimg.png"
-			style="width:500px; height:500px;" >
+			style="width:500px; height:500px;">
 		</c:if>
 		<c:if test="${!empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/upload/${helper.helper_filename}"
-			style="width:500px; height:500px;" >
+			style="width:500px; height:500px;" class="radius">
 		</c:if>
 		</div>
+		<br>
 		<div>
 			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${helper.mem_num}"
-						width="40" height="40" class="my-photo">
-		</div>
-			<div>
-			닉네임 : ${helper.mem_nickname}
-			<br>
+						width="40" height="40" class="my-photo radius">
+			${helper.mem_nickname}
+			<div class="align-right">
 			<c:if test="${!empty helper.helper_modify_date}">
 			최근 수정일 : ${helper.helper_modify_date}
 			</c:if>
 			<c:if test="${empty helper.helper_modify_date}">
 			작성일 : ${helper.helper_reg_date}
 			</c:if>
-			조회수 : ${helper.helper_hit}
-	</div>		
-	<div>
-		제목 : ${helper.helper_title}
+			</div>
+			<div class="align-right">
 	</div>
-		
+		</div>
+				
 	<div>
 		내용 : ${helper.helper_content}
 	</div>
@@ -67,21 +92,46 @@
 		주소 : ${helper.helper_address1} ${helper.helper_address2}
 		<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 	</div>
-	
-	<div class="align-right">
-		<c:if test="${!empty user}">
-		<div>
-		<!-- 스크랩 -->		
-		<img id="output_scrap" data-num="${helper.helper_num}" 
-			src="${pageContext.request.contextPath}/images/de/heart1.png" width="40">
-		<!-- 스크랩 개수 -->
-		<span id="output_scount"></span>	
+	<br><br>
+	<!-- 댓글 시작 -->
+	<div id="reply_div">
+		<span class="re_title">댓글</span>
+		<form id="re_form">
+			<input type="hidden" name="helper_num" value="${helper.helper_num}" id="helper_num">
+			<textarea rows="3" cols="50" name="re_content" id="re_content" class="rep-content" 
+			<c:if test="${empty user}">disabled="disabled"</c:if>
+			><c:if test="${empty user}">로그인 후 작성할 수 있습니다.</c:if></textarea>	
+		  <c:if test="${!empty user}">
+		  <div id="re_first">
+		  	<span class="letter-count">300/300</span>
+		  </div>
+		  <div id="re_second" class="align-right">
+		  	<input type="submit" value="전송">
+		  </div>
+		  </c:if>
+		</form>
 	</div>
-									<!-- 채팅 보류 -->
-		<input type="button" value="채팅하기" onclick="location.href=''">
-		</c:if>
-	</div>	
-		
+	<!-- 댓글 목록 출력 시작 -->
+	<div id="output"></div>
+	<div class="paging-button" style="display:none;">
+		<input type="button" value="더보기">
+	</div>
+	<div id="loading" style="display:none;">
+	<img src="${pageContext.request.contextPath}/images/de/loading.gif" width="100" height="100">
+	</div>
+	<!-- 댓글 목록 출력 끝 -->
+	<!-- 댓글 끝 -->
+	<!-- 채팅 시작 -->
+	<div class="align-center">
+	<input type="button" value="채팅하기" onclick="location.href='talkList?helper_num=${helper.helper_num}'"
+		class="w-25 btn btn-light form-control p-3 rounded-pill" >
+	</div>
+	<!-- 채팅 끝 -->
+	<br><br>
+	<div class="align-center">
+	<input type="button" value="목록으로" onclick="location.href='list?helper_num=${helper.helper_num}'" 
+			class="w-25 btn btn-light form-control p-3 rounded-pill">	
+	</div>		
 </div>
 </div>
 </div>

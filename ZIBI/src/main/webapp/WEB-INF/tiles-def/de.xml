@@ -36,8 +36,20 @@
 	</definition>
 	
 	<!-- 재능기부 채팅 페이지 -->
+	<definition name="talkList" extends="menuPage">
+		<put-attribute name="title" value="재능기부 채팅 목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/helper/talkList.jsp"/>
+	</definition>
+	
+	<!-- 재능기부 채팅 페이지 -->
+	<definition name="talkRoomWrite" extends="menuPage">
+		<put-attribute name="title" value="재능기부 채팅방 생성"/>
+		<put-attribute name="body" value="/WEB-INF/views/helper/talkRoomWrite.jsp"/>
+	</definition>
+	
+	<!-- 재능기부 채팅 페이지 -->
 	<definition name="talkDetail" extends="menuPage">
-		<put-attribute name="tabtitle" value="재능기부 채팅"/>
+		<put-attribute name="title" value="재능기부 채팅방"/>
 		<put-attribute name="body" value="/WEB-INF/views/helper/talkDetail.jsp"/>
 	</definition>
 	

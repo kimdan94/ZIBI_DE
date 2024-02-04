@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.helper.vo.HelperReplyVO;
 import kr.spring.helper.vo.HelperScrapVO;
 import kr.spring.helper.vo.HelperVO;
 
@@ -46,6 +47,18 @@ public interface HelperMapper {
 	public void updateSolution0(HelperVO sol);
 	@Update("UPDATE helper SET helper_solution=1 WHERE helper_num=#{helper_num}")
 	public void updateSolution1(HelperVO sol);
+	
+	//댓글
+	public List<HelperReplyVO> selectListReply(Map<String, Object> map); //댓글 목록
+	@Select("SELECT COUNT(*) FROM helper_reply WHERE helper_num=#{helper_num}")
+	public int selectRowCountReply(Map<String,Object> map); //댓글 수
+	public HelperReplyVO selectReply(int re_num); 
+	public void insertReply(HelperReplyVO helperReply); //댓글 등록
+	public void updateReply(HelperReplyVO helperReply); //댓글 수정
+	public void deleteReply(int re_num); // 댓글 삭제
+	//부모글 삭제시 댓글이 존재하면 부모글 삭제 전 댓글 삭제
+	@Delete("DELETE FROM helper_reply WHERE helper_num=#{helper_num}")
+	public void deleteReplyByHelperNum(int helper_num);
 }
 
 

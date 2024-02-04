@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.helper.dao.HelperMapper;
+import kr.spring.helper.vo.HelperReplyVO;
 import kr.spring.helper.vo.HelperScrapVO;
 import kr.spring.helper.vo.HelperVO;
 @Service
@@ -48,8 +49,9 @@ public class HelperServiceImpl implements HelperService{
 
 	@Override
 	public void deleteHelper(int helper_num) {
-		//스크랩이 존재하면 좋아요를 우선 삭제하고 부모글 삭제
+		//스크랩&댓글이 존재하면 스크랩&댓글 우선 삭제하고 부모글 삭제
 		helperMapper.deleteScrapByHelperNum(helper_num);
+		helperMapper.deleteReplyByHelperNum(helper_num);
 		//부모글 삭제
 		helperMapper.deleteHelper(helper_num);
 	}
@@ -94,6 +96,39 @@ public class HelperServiceImpl implements HelperService{
 	@Override
 	public HelperVO selectSolution(HelperVO solution) {
 		return helperMapper.selectSolution(solution);
+	}
+
+	@Override
+	public List<HelperReplyVO> selectListReply(Map<String, Object> map) {
+		return helperMapper.selectListReply(map);
+	}
+
+	@Override
+	public int selectRowCountReply(Map<String, Object> map) {
+		return helperMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public HelperReplyVO selectReply(int re_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertReply(HelperReplyVO helperReply) {
+		helperMapper.insertReply(helperReply);
+		
+	}
+
+	@Override
+	public void updateReply(HelperReplyVO helperReply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteReply(int re_num) {
+		
 	}
 }
 

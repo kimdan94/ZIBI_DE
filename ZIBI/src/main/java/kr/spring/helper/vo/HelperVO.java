@@ -40,7 +40,8 @@ public class HelperVO {
 	private int mem_num;
 	private String mem_nickname;
 	
-	//스크랩
+	//스크랩 & 댓글
 	private int helper_scrap;//좋아요 개수
+	private int helper_reply;//댓글 개수
 	
 }

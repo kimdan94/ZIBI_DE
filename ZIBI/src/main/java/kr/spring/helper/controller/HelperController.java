@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.helper.service.HelperService;
+import kr.spring.helper.vo.HelperReplyVO;
 import kr.spring.helper.vo.HelperVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;

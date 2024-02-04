@@ -1,19 +1,25 @@
 package kr.spring.helper.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.helper.service.HelperService;
+import kr.spring.helper.vo.HelperReplyVO;
 import kr.spring.helper.vo.HelperScrapVO;
 import kr.spring.helper.vo.HelperVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -86,6 +92,7 @@ public class HelperAjaxController {
 	@RequestMapping("/helper/getSol")
 	@ResponseBody
 	public Map<String, Object> getSolution(HelperVO solution,HttpSession session){
+		log.debug("<<helper_num>> :" + solution.getHelper_num());
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -99,10 +106,10 @@ public class HelperAjaxController {
 			//해결여부 읽어오기
 			HelperVO helpersol = helperService.selectSolution(solution);
 			//해결여부 표시
-			if(helpersol!=null) {
-				mapJson.put("status", "noSol");
-			}else {
+			if(helpersol.getHelper_solution()==1) {
 				mapJson.put("status", "yesSol");
+			}else {
+				mapJson.put("status", "noSol");
 			}
 		}
 		return mapJson;
@@ -135,6 +142,73 @@ public class HelperAjaxController {
 				mapJson.put("status", "noSol");
 			}
 		}
+		return mapJson;
+	}
+	
+	
+	/*------------------ 댓글 -------------------*/
+	
+	/*댓글 등록*/
+	@RequestMapping("/helper/writeReply")
+	@ResponseBody
+	public Map<String, Object> writeReply(HelperReplyVO helperReplyVO,
+										  HttpSession session,
+										  HttpServletRequest request){
+		log.debug("<댓글 등록 HelperReplyVO> : " + helperReplyVO);
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+	
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			//회원번호 등록
+			helperReplyVO.setMem_num(user.getMem_num());
+			//ip 등록
+			helperReplyVO.setRe_ip(request.getRemoteAddr());
+			//댓글 등록
+			helperService.insertReply(helperReplyVO);
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
+	
+	/*댓글 목록*/
+	@RequestMapping("/helper/listReply")
+	@ResponseBody				
+	public Map<String, Object> getList(//전달받는 데이터
+			@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+			@RequestParam(value="rowCount",defaultValue="10") int rowCount,
+			@RequestParam int helper_num, HttpSession session){
+		log.debug("<<댓글 목록 board_num>> : " + helper_num);
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("helper_num", helper_num);
+
+		//전체 레코드 수
+		int count = helperService.selectRowCountReply(map);
+		//페이지 처리 - 더보기 형식을 구하기 위한 start와 end를 구하는 형식
+		PageUtil page = new PageUtil(currentPage,count,rowCount);
+		
+		List<HelperReplyVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			list = helperService.selectListReply(map);
+		}else {//페이지 없으면 비어있게 표시
+			list = Collections.emptyList();
+		}
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("count", count);
+		mapJson.put("list", list);
+		
+		//로그인한 회원정보 셋팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user!=null) {
+			mapJson.put("user_num", user.getMem_num());
+		}
+		
 		return mapJson;
 	}
 }

@@ -3,6 +3,7 @@ package kr.spring.helper.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.helper.vo.HelperReplyVO;
 import kr.spring.helper.vo.HelperScrapVO;
 import kr.spring.helper.vo.HelperVO;
 
@@ -26,4 +27,12 @@ public interface HelperService {
 	public HelperVO selectSolution(HelperVO solution);
 	public void updateSolution0(HelperVO sol);
 	public void updateSolution1(HelperVO sol);
+	
+	//댓글
+	public List<HelperReplyVO> selectListReply(Map<String, Object> map);// 댓글 목록
+	public int selectRowCountReply(Map<String, Object> map);// 댓글 수
+	public HelperReplyVO selectReply(int re_num);
+	public void insertReply(HelperReplyVO helperReply);// 댓글 등록
+	public void updateReply(HelperReplyVO helperReply);// 댓글 수정
+	public void deleteReply(int re_num);// 댓글 삭제
 }

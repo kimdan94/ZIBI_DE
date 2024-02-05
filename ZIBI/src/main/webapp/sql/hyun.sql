@@ -59,6 +59,7 @@ create table perform_choice(
  choice_treatment number not null,
  mem_num number not null,
  ticketing_num number not null,
+ constraint chioce_pk primary key(choice_num),
  constraint choice_fk1 foreign key (mem_num) references member (mem_num),
  constraint choice_fk2 foreign key (ticketing_num) references ticketing (ticketing_num)
 );
@@ -76,6 +77,7 @@ create table perform_payment(
  payment_modify_date date,
  mem_num number not null,
  choice_num number not null,
+ constraint payment_pk primary key(payment_num),
  constraint payment_fk1 foreign key (mem_num) references member (mem_num),
  constraint payment_fk2 foreign key (choice_num) references perform_choice (choice_num)
 );

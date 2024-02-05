@@ -68,15 +68,16 @@ create sequence perform_choice_seq;
 -- 결제 정보
 create table perform_payment(
  payment_num number not null,
+ payment_uid varchar2(90) not null, -- 고유 주문 번호
  payment_type varchar2(30) not null,
  payment_price number not null,
  payment_state number not null,
  payment_date date not null,
  payment_modify_date date,
  mem_num number not null,
- seat_num number not null,
+ choice_num number not null,
  constraint payment_fk1 foreign key (mem_num) references member (mem_num),
- constraint payment_fk2 foreign key (choose_num) references choose (choose_num)
+ constraint payment_fk2 foreign key (choice_num) references perform_choice (choice_num)
 );
 
 create sequence perform_payment_seq;

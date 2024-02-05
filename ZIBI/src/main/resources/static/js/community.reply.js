@@ -38,18 +38,19 @@ $(function(){
 					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo radius">';
 					output += '</li>';
 					output += '<li>';
-					output += item.mem_nickname + '<br>';
+					output += '<span class="re_1"> ' + item.mem_nickname + '<br>';
 					
 					if(item.re_mdate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.re_mdate + '</span>'
 					}else {
 						output += '<span class="modify-date"> 등록일 : ' + item.re_date + '</span>'
 					}
-					
+
 					output += '</li>';
 					output += '</ul>';
 					output += '<div class="sub-item">';
-					output += '<p>' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
+					output += '<br>';
+					output += '<p class="re_2">' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
 					
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호와 같으면

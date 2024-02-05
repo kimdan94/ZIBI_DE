@@ -15,11 +15,36 @@
 <HR width="50%" align="center">
 <c:if test="${count == 0}">
 <div class="result-display1">표시할 게시물이 없습니다.</div></c:if>
-<c:if test="${count > 0}">
-<div>
-
-
-</div>
-</c:if>
-<input type="button" value="새로운 매물 체크 시작하기" class="btn  che-btn-green w-50" onclick="location.href='checkwrite'">
+		<c:if test="${count > 0}">
+			<c:forEach var="checklist" items="${list}">
+				<div class="float-left1">
+					<c:if test="${empty checklist.room_filename}">
+						<img src="${pageContext.request.contextPath}/images/yeeun/.png"
+							style="width: 200px; height: 200px; padding: 10px;">
+					</c:if>
+					<c:if test="${!empty checklist.room_filename}">
+						<img
+							src="${pageContext.request.contextPath}/upload/${checklist.room_filename}"
+							style="width: 200px; height: 200px; padding: 10px;"
+							class="radius">
+					</c:if>
+				</div>
+				<div class="float-left2 align-center">
+				<div class="align-center">${checklist.check_date}</div>
+					<div class="align-center font-size1">
+						<a href="detail?check_id=${checklist.check_id}">${checklist.room_title}</a>
+					</div>
+					<br>
+					<div class="align-center">${checklist.room_deposit}</div>
+					<br>
+					<div class="align-center">${checklist.room_description}</div>
+				</div>
+				<br>
+				<hr size="3" noshade="noshade" width="100%">
+			</c:forEach>
+			<div class="align-center">${page}</div>
+		</c:if>
+	<div class="align-center">
+	<input type="button" value="새로운 매물 체크 시작하기" class="btn  che-btn-green_" onclick="location.href='checkwrite'"></div>
+	<br><br><br><br>
 </form>

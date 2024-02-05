@@ -31,11 +31,11 @@
 		<li><img
 			src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${community.mem_num}"
 			width="40" height="40" class="my-photo radius"></li>
-		<li><span class="re">${community.mem_nickname}</span>&nbsp;<input type="button" value="팔로우"><br> <c:if
+		<li><span class="re">&nbsp;${community.mem_nickname}</span>&nbsp;<input type="button" value="팔로우"><br> <c:if
 				test="${!empty community.community_modify_date}">
 			최근 수정일 : ${community.community_modify_date}
 			</c:if> <c:if test="${empty community.community_modify_date}">
-			작성일 : ${community.community_reg_date}&nbsp;
+			&nbsp; 작성일 : ${community.community_reg_date}&nbsp;
 			</c:if>조회 : ${community.community_hit}
 		</li>
 	</ul>
@@ -129,19 +129,19 @@
 	<form id="re_form">
 		<input type="hidden" name="community_num"
 			value="${community.community_num}" id="community_num">
-		<h3>댓글 작성하기</h3>
+		<h3>&nbsp;댓글 작성하기</h3>
 		<div id="re_first">
 				<span class="letter-count">300/300</span>
 			</div>
 		<br>
 		<div id="form-commentInfo">
-		 <textarea rows="3" cols="50" name="re_content"
-			    id="re_content" style="width:60%;" 
+		 <textarea rows="4" cols="30" name="re_content" placeholder="댓글을 남겨주세요."
+			    id="re_content" style="width:54%; margin-left:-60px;" 
 			    <c:if test="${empty user}">disabled="disabled"</c:if>
 			    ><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 		<button id="submit">등록</button>
 		</div>
-		※ 부적절한 댓글은 관리자에 의해 삭제될 수 있습니다
+		&nbsp; ※ 부적절한 댓글은 관리자에 의해 삭제될 수 있습니다.
 	</form>
 	<br>
 	<!-- 댓글 목록 출력 시작 -->
@@ -156,9 +156,9 @@
 	<br><br>
 	<div class="align-center">
 		<c:if test="${!empty user && user.mem_num == community.mem_num}">
-			<input type="button" value="수정" class="default-btn2_"
+			<input type="button" value="수정" class="default-btn_"
 				onclick="location.href='update?community_num=${community.community_num}'">
-			<input type="button" value="삭제" class="default-btn2_" id="delete_btn">
+			<input type="button" value="삭제" class="default-btn_" id="delete_btn">
 			<script type="text/javascript">
 				let delete_btn = document.getElementById('delete_btn');
 				delete_btn.onclick = function() {
@@ -169,7 +169,7 @@
 				};
 			</script>
 		</c:if>
-		<input type="button" value="목록" class="default-btn2_" onclick="location.href='list'">
+		<input type="button" value="목록" class="default-btn_" onclick="location.href='list'">
 	</div>
 	<!-- 댓글 목록 출력 끝 -->
 	<!-- 댓글 끝 -->

@@ -13,7 +13,7 @@
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=4">건강</a></span>|
 	<span style="margin:0 10px 0 10px;"><a href="list?community_category=5">육아</a></span>
 	</span>	
-	<br><br><br><br>
+	<br><br><br><br><br>
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -28,7 +28,7 @@
                         <button type="submit" class="btn che-btn-green w-20">검색</button>
 			</li>
 		</ul>
-		<br><br>
+		<br>
 		<div class="align-right" style="padding-right:120px;">
 			<select id="order" name="order" class="border-color">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>

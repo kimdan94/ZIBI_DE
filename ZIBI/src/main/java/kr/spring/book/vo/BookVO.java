@@ -55,6 +55,7 @@ public class BookVO {
 	private int compareNow;//1 : 모임 일정 지남, 2 : 모임 일정 이전
 	private int rev_status;//1 : 리뷰 작성 전, 2 : 리뷰 작성 후
 	
-	private int rev_cnt;//예약 리뷰 개수
-	private int scrap_cnt;//스크랩 개수
+	private int rev_cnt;
+	private int scrap_cnt;
+	private int rep_cnt;
 }

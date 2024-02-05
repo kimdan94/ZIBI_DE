@@ -5,7 +5,11 @@ public class PageUtil_book {
 	private int endRow;	 // 한 페이지에서 보여줄 게시글의 끝 번호
 	private StringBuffer page;// 페이지 표시 문자열
 
-	
+	public PageUtil_book(int currentPage,int count, int rowCount) {
+		//ajax 작업을 할 때 페이지 번호가 보여지는 것이 아니라 다음글 보기 버튼을 누르면 다음 페이지가 보여지는 형식의 작업을
+		//할 때 목록 데이터를 호출하기 위해 사용(startRow,endRow 를 구하기 위한 용도로만 사용)
+		this(null,null,currentPage,count,rowCount,0,null,null);
+	}
 	public PageUtil_book(String keyfield, String keyword, int currentPage, int count, int rowCount,
 			int pageCount,String pageUrl,String addKey) {
 

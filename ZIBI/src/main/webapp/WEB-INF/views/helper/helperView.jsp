@@ -22,24 +22,8 @@
 		<div class="title">
 		${helper.helper_title}
 		</div>
-		<div class="align-right">
-		<c:if test="${!empty user}">
-		<!-- 스크랩 -->		
-		<img id="output_scrap" data-num="${helper.helper_num}" 
-			src="${pageContext.request.contextPath}/images/de/heart1.png" width="30">
-		<!-- 스크랩 개수 -->
-		스크랩  <span id="output_scount"></span>
-		<span>·</span>
-		<img src="${pageContext.request.contextPath}/images/de/hit.png" width="30">
-		조회수  ${helper.helper_hit}
-		<span>·</span>
-		<!-- 댓글 개수 -->	
-		<img src="${pageContext.request.contextPath}/images/de/reply.png" width="30">
-		<span id="output_rcount"></span>
-		</c:if>
-		</div>
-		<div class="align-left">
 		<!-- 해결중&해결완료 토글 -->
+		<div class="align-left">
 		<div>
 		<c:if test="${user.mem_num == helper.mem_num}">
 		<img id="output_solution" data-num="${helper.helper_num}" class="toggle"
@@ -49,41 +33,40 @@
 		<br>
 		</div>
 		</div>
-		
-		<div class="align-right">
-		<c:if test="${user.mem_num == helper.mem_num}">
-		<input type="button" value="글수정" onclick="location.href='update?helper_num=${helper.helper_num}'"
-			class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
-		<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'"
-				id="delete_btn" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
-					<script type="text/javascript">
-					let delete_btn = document.getElementById('delete_btn');
-					//이벤트 연결
-					delete_btn.onclick=function(){
-						let choice = confirm('삭제하시겠습니까?');
-						if(choice){
-							location.href='delete?helper_num=${helper.helper_num}';
-						}
-					};
-					</script>
-				</c:if>
-		</div>
+			<div class="align-right">
+			<c:if test="${user.mem_num == helper.mem_num}">
+			<input type="button" value="글수정" onclick="location.href='update?helper_num=${helper.helper_num}'"
+				class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
+			<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'"
+					id="delete_btn" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
+						<script type="text/javascript">
+						let delete_btn = document.getElementById('delete_btn');
+						//이벤트 연결
+						delete_btn.onclick=function(){
+							let choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								location.href='delete?helper_num=${helper.helper_num}';
+							}
+						};
+						</script>
+			</c:if>
+			</div>
 		
 		<br><br>
 		<div class="align-center">
 		<c:if test="${empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/images/de/noimg.png"
-			style="width:400px; height:400px;">
+			style="width:300px; height:300px;">
 		</c:if>
 		<c:if test="${!empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/upload/${helper.helper_filename}"
-			style="width:400px; height:400px;" class="radius">
+			style="width:300px; height:300px;" class="radius">
 		</c:if>
 		</div>
 		<br>
 		<div>
 			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${helper.mem_num}"
-						width="50" height="50" class="my-photo radius">
+						width="50" height="50" class="my-photo radius margin-photo">
 			${helper.mem_nickname}
 			<div class="align-right">
 			<c:if test="${!empty helper.helper_modify_date}">
@@ -93,8 +76,6 @@
 			작성일 : ${helper.helper_reg_date}
 			</c:if>
 			</div>
-			<div class="align-right">
-	</div>
 		</div>
 	<hr size="3" noshade="noshade">			
 	
@@ -107,21 +88,37 @@
 	${helper.helper_address1} ${helper.helper_address2}
 	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 	</div>
-	<br><br>
+	<div class="align-right">
+		<c:if test="${!empty user}">
+		<!-- 스크랩수 -->		
+		<img id="output_scrap" data-num="${helper.helper_num}" 
+			src="${pageContext.request.contextPath}/images/de/heart1.png" width="30">
+		스크랩 <span id="output_scount"></span><span>·</span>
+		</c:if>
+		<!-- 조회수 -->		
+		<img src="${pageContext.request.contextPath}/images/de/hit.png" width="30">
+		조회수  ${helper.helper_hit}<span>·</span>
+		<!-- 댓글수 -->	
+		<img src="${pageContext.request.contextPath}/images/de/reply.png" width="30">
+		<span id="output_rcount"></span>
+	</div>
+	<br>
 	<!-- 댓글 시작 -->
 	<div id="reply_div">
 		<span class="re_title"></span>
 		<form id="re_form">
 			<input type="hidden" name="helper_num" value="${helper.helper_num}" id="helper_num">
-			<textarea rows="3" cols="50" name="re_content" id="re_content" class="rep-content" 
+			<div class="float-left">
+			<textarea rows="3" cols="60" name="re_content" id="re_content" class="rep-content" 
 			<c:if test="${empty user}">disabled="disabled"</c:if>
 			><c:if test="${empty user}">로그인 후 작성할 수 있습니다.</c:if></textarea>	
+			</div>
 		  <c:if test="${!empty user}">
+		  <div class="float-left">
+		  	<input type="submit" value="작성하기" class="btn-reply">
+		   </div>	
 		  <div id="re_first">
 		  	<span class="letter-count">300/300</span>
-		  </div>
-		  <div id="re_second" class="align-right">
-		  	<input type="submit" value="작성하기">
 		  </div>
 		  </c:if>
 		</form>
@@ -129,7 +126,7 @@
 	<!-- 댓글 목록 출력 시작 -->
 	<div id="output"></div>
 	<div class="paging-button" style="display:none;">
-		<input type="button" value="더보기">
+		<input type="button" value="더보기" class="d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
 	</div>
 	<div id="loading" style="display:none;">
 	<img src="${pageContext.request.contextPath}/images/de/loading.gif" width="100" height="100">

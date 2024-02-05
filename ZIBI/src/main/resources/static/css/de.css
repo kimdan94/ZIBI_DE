@@ -137,9 +137,13 @@
 /* 댓글
 -------------------------*/
 div#reply_div{
-	padding:5px 10px 40px 10px;
+	padding:5px 80px 20px 10px;
 	margin-top:10px;
-	background-color:#eeeeee;
+	background-color:white;
+	border:2px solid #D8D8D8;
+	border-radius: 10px;
+	float:left;
+	margin-bottom:30px;
 }
 form#re_form{
 	width:650px;
@@ -155,9 +159,11 @@ span.letter-count{
 	color:#999;
 }
 textarea.rep-content{
-	width:90%;
+	width:98%;
 	height:50px;
 	margin:10px 10px;
+	border-color: #D8D8D8;
+	border-radius: 10px;
 }
 div#re_first,div#mre_first{
 	float:left;
@@ -192,12 +198,21 @@ div#output{
 	clear:both;
 }
 form#mre_form{
-	border:none;
-	margin:5px;
+	border:1px solid #D8D8D8;
+	margin:10px;
+	border-radius: 10px;
 }
-
-
-
+.btn-reply{/*작성하기*/
+	border-color: #D8D8D8;
+	border-radius: 10px;
+	background-color:white;
+	box-shadow: none;
+	padding:10px;
+	margin-top:10px;
+}
+.margin-photo{
+	margin-right:10px;
+}
 
 
 

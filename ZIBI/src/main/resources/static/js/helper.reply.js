@@ -36,7 +36,7 @@ $(function(){
 					let output = '<div class="item">';
 					output += '<ul class="detail-info">';
 					output += '<li>';
-					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo radius">';
+					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo radius margin-photo">';
 					output += '</li>';
 					output += '<li>';
 					
@@ -53,12 +53,13 @@ $(function(){
 					output += '</li>';
 					output += '</ul>';
 					output += '<div class="sub-item">';//\r이랑 \n을 발견하면 <br>로 바꾸겠다(줄바꿈 처리)
+					output += '<br>';
 					output += '<p>' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
 					
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호가 같으면
-						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn">';
-						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';
 					}
 					
 					output += '<hr size="3" noshade>';
@@ -151,13 +152,13 @@ $(function(){
 		//댓글 수정폼
 		let modifyUI = '<form id="mre_form">';
 			modifyUI += '<input type="hidden" name="re_num" id="mre_num" value="'+re_num+'">';				  //미리보기
-			modifyUI += '<textarea rows="3" cols="50" name="re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
+			modifyUI += '<textarea rows="3" cols="40" name="re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
 			modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';//글자수 체크
 			modifyUI += '<div id="mre_second" class="align-right">';
-			modifyUI += ' <input type="submit" value="수정">';
-			modifyUI += ' <input type="button" value="취소" class="re-reset">';	
+			modifyUI += ' <input type="submit" value="수정" class="d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';
+			modifyUI += ' <input type="button" value="취소" class="re-reset d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';	
 			modifyUI += '</div>';
-			modifyUI += '<hr size="3" noshade width="96%">';
+			modifyUI += '<hr size="1" noshade width="96%">';
 			modifyUI += '</form>';
 			
 		//이전에 이미 수정하는 댓글이 있을 경우 수정 버튼을 클릭하면 숨김
@@ -182,7 +183,7 @@ $(function(){
 	});//end of click
 	
 	//수정폼에서 취소 버튼 클릭시 수정폼 초기화
-	$(document).on('click','re-reset',function(){
+	$(document).on('click','.re-reset',function(){
 		initModifyForm();
 	});//end of click
 	

@@ -195,7 +195,7 @@ public class HelperController {
 		helperService.updateHelper(helperVO);
 
 		// 전송된 파일이 있을 경우 이전 파일 삭제
-		if (helperVO.getUpload() != null && helperVO.getUpload().isEmpty()) {
+		if(helperVO.getUpload() != null && helperVO.getUpload().isEmpty()) {
 			// 수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_helper.getHelper_filename());
 		}

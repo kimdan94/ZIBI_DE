@@ -161,4 +161,13 @@ public class PolicyController {
 		return "redirect:/admin/policy";
 	}
 		
+	
+	/* ---------- 영화 관리자 페이지 - 메인 ----------*/
+	@RequestMapping("/admin/performanceMain")
+	public String adminPerformance(Model model) {
+		
+		return "adminPerformanceMain";
+	}
+	
+	
 }

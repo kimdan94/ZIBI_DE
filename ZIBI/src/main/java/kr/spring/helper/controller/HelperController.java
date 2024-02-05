@@ -178,7 +178,7 @@ public class HelperController {
 
 		// 유효성 체크 결과 오류가 있을 시 폼 호출
 		if (result.hasErrors()) {
-
+			
 			// 한 건의 데이터 읽어옴
 			HelperVO vo = helperService.selectHelper(helperVO.getHelper_num());
 			helperVO.setHelper_filename(vo.getHelper_filename());
@@ -195,7 +195,7 @@ public class HelperController {
 		helperService.updateHelper(helperVO);
 
 		// 전송된 파일이 있을 경우 이전 파일 삭제
-		if(helperVO.getUpload() != null && helperVO.getUpload().isEmpty()) {
+		if(helperVO.getUpload() != null && !helperVO.getUpload().isEmpty()) {
 			// 수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_helper.getHelper_filename());
 		}

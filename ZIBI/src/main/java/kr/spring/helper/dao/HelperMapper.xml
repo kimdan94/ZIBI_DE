@@ -124,7 +124,7 @@
 	<!-- 글 수정 -->
 	<update id="updateHelper" parameterType="helperVO">
 		UPDATE helper SET
-			<if test="helper_filename !=null">
+			<if test="helper_filename !=null and helper_filename !=''">
 			helper_filename=#{helper_filename},
 			</if>
 			helper_title=#{helper_title},

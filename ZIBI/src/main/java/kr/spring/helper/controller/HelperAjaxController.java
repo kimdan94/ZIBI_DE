@@ -105,9 +105,14 @@ public class HelperAjaxController {
 			
 			//해결여부 읽어오기
 			HelperVO helpersol = helperService.selectSolution(solution);
+			log.debug("<<HelperVO>> : " + helpersol);
 			//해결여부 표시
-			if(helpersol.getHelper_solution()==1) {
-				mapJson.put("status", "yesSol");
+			if(helpersol!=null) {
+				if(helpersol.getHelper_solution()==1) {
+					mapJson.put("status", "yesSol");
+				}else {
+					mapJson.put("status", "noSol");
+				}
 			}else {
 				mapJson.put("status", "noSol");
 			}

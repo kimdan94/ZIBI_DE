@@ -10,9 +10,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.reply.js"></script>
 <!-- 내용 시작 -->
-<div class="container-fluid contact py-6">
-	<div class="d-flex justify-content-center">
-		<div class="rounded login-form col-md-4 col-lg-6">
+<div class="container">
+<div class="row">
+<div class="detail-border col-10">
 		<c:if test="${helper.helper_category ==  1}"><div style="background:#04B486;" class="border_cate">[ 벌레 ]</div></c:if>
 		<c:if test="${helper.helper_category ==  2}"><div style="background:#04B486;" class="border_cate">[ 조립 ]</div></c:if>
 		<c:if test="${helper.helper_category ==  3}"><div style="background:#04B486;" class="border_cate">[ 수리 ]</div></c:if>
@@ -51,8 +51,6 @@
 						</script>
 			</c:if>
 			</div>
-		
-		<br><br>
 		<div class="align-center">
 		<c:if test="${empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/images/de/noimg.png"
@@ -77,7 +75,7 @@
 			</c:if>
 			</div>
 		</div>
-	<hr size="3" noshade="noshade">			
+	<hr size="3" width="99%" noshade="noshade">			
 	
 	<h3>상세설명</h3>
 	<div>
@@ -104,7 +102,7 @@
 	</div>
 	<br>
 	<!-- 댓글 시작 -->
-	<div id="reply_div">
+	<div id="reply_div" class="align-center">
 		<span class="re_title"></span>
 		<form id="re_form">
 			<input type="hidden" name="helper_num" value="${helper.helper_num}" id="helper_num">
@@ -133,17 +131,13 @@
 	</div>
 	<!-- 댓글 목록 출력 끝 -->
 	<!-- 댓글 끝 -->
-	<!-- 채팅 시작 -->
-	<div class="align-center">
-	<input type="button" value="채팅하기" onclick="location.href='talkList?helper_num=${helper.helper_num}'"
-		class="w-25 btn btn-light form-control p-3 rounded-pill" >
-	</div>
-	<!-- 채팅 끝 -->
 	<br><br>
+</div>
+<div class="col-1 detail-border2">
 	<div class="align-center">
 	<input type="button" value="목록으로" onclick="location.href='list?helper_num=${helper.helper_num}'" 
 			class="w-25 btn btn-light form-control p-3 rounded-pill">	
-	</div>		
+	</div>
 </div>
 </div>
 </div>

@@ -13,11 +13,11 @@
 <div class="container-fluid contact py-6">
 	<div class="d-flex justify-content-center">
 		<div class="rounded login-form col-md-4 col-lg-6">
-		<c:if test="${helper.helper_category ==  1}"><div style="background:#04B486;" class="border_cate">벌레</div></c:if>
-		<c:if test="${helper.helper_category ==  2}"><div>[ 조립 ]</div></c:if>
-		<c:if test="${helper.helper_category ==  3}"><div>[ 수리 ]</div></c:if>
-		<c:if test="${helper.helper_category ==  4}"><div>[ 소분 ]</div></c:if>
-		<c:if test="${helper.helper_category ==  5}"><div>[ 기타 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  1}"><div style="background:#04B486;" class="border_cate">[ 벌레 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  2}"><div style="background:#04B486;" class="border_cate">[ 조립 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  3}"><div style="background:#04B486;" class="border_cate">[ 수리 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  4}"><div style="background:#04B486;" class="border_cate">[ 소분 ]</div></c:if>
+		<c:if test="${helper.helper_category ==  5}"><div style="background:#04B486;" class="border_cate">[ 기타 ]</div></c:if>
 		<br>
 		<div class="title">
 		${helper.helper_title}
@@ -32,7 +32,9 @@
 		<span>·</span>
 		<img src="${pageContext.request.contextPath}/images/de/hit.png" width="30">
 		조회수  ${helper.helper_hit}
+		<span>·</span>
 		<!-- 댓글 개수 -->	
+		<img src="${pageContext.request.contextPath}/images/de/reply.png" width="30">
 		<span id="output_rcount"></span>
 		</c:if>
 		</div>
@@ -54,24 +56,34 @@
 			class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
 		<input type="button" value="글삭제" onclick="location.href='delete?helper_num=${helper.helper_num}'"
 				id="delete_btn" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
-		</c:if>
+					<script type="text/javascript">
+					let delete_btn = document.getElementById('delete_btn');
+					//이벤트 연결
+					delete_btn.onclick=function(){
+						let choice = confirm('삭제하시겠습니까?');
+						if(choice){
+							location.href='delete?helper_num=${helper.helper_num}';
+						}
+					};
+					</script>
+				</c:if>
 		</div>
 		
 		<br><br>
 		<div class="align-center">
 		<c:if test="${empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/images/de/noimg.png"
-			style="width:500px; height:500px;">
+			style="width:400px; height:400px;">
 		</c:if>
 		<c:if test="${!empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/upload/${helper.helper_filename}"
-			style="width:500px; height:500px;" class="radius">
+			style="width:400px; height:400px;" class="radius">
 		</c:if>
 		</div>
 		<br>
 		<div>
 			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${helper.mem_num}"
-						width="40" height="40" class="my-photo radius">
+						width="50" height="50" class="my-photo radius">
 			${helper.mem_nickname}
 			<div class="align-right">
 			<c:if test="${!empty helper.helper_modify_date}">
@@ -86,13 +98,14 @@
 		</div>
 	<hr size="3" noshade="noshade">			
 	
-	<div class="title">상세설명</div><br>
+	<h3>상세설명</h3>
 	<div>
 	${helper.helper_content}
-	</div>
+	</div><br>
+	<h3>도움장소</h3>
 	<div>
-		주소 : ${helper.helper_address1} ${helper.helper_address2}
-		<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+	${helper.helper_address1} ${helper.helper_address2}
+	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 	</div>
 	<br><br>
 	<!-- 댓글 시작 -->
@@ -168,16 +181,4 @@
 	    } 
 	});    
 </script>	
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-$(function(){
-	$('#delete_btn').click(function(){
-		let choice = confirm('정말 삭제하시겠습니까?');
-		if(!choice){
-			return false;
-		}
-	});
-});
-</script>
-
 <!-- 내용 끝 -->

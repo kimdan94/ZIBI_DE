@@ -12,12 +12,23 @@ import lombok.ToString;
 public class PolicyVO {
 	
 	private int district_num;
-	@NotBlank
+	
 	private String district_name;
+	
 	@NotBlank
 	private String district_latitude;
+	
 	@NotBlank
 	private String district_lonitude;
 	
 	private String policy_url;
+	
+	private String year; //통계년월
+	
+	private int tot_family; //전체 세대수
+	
+	private int household_cnt; // 1인 세대수
+	
+	private double rate = (double)household_cnt / (double)tot_family * 100.0 ;
+	
 }

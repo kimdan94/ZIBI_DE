@@ -38,11 +38,11 @@ public class MemberController {
 	private MemberService memberService;
 	
 	//카카오 앱키 호출
-	@Value("${YENA-KAKAO-API-KEY.appKey}")
+	@Value("${NA-API-KEY.kakaoAppKey}")
 	private String kakao_apikey;
 	
 	//네이버 앱키 호출
-	@Value("${YENA-NAVER-KEY.appKey}")
+	@Value("${NA-API-KEY.naverAppKey}")
 	private String naver_apikey;
 	
 	//VO 초기화

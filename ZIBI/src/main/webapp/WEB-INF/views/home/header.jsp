@@ -55,7 +55,7 @@
 					<div class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">척척박사</a>
 						<div class="dropdown-menu">
-							<a href="${pageContext.request.contextPath}/policy/main" class="dropdown-item">1인 가구 정보</a> 
+							<a href="${pageContext.request.contextPath}/policy/policyCount" class="dropdown-item">1인 가구 정보</a> 
 							<a href="${pageContext.request.contextPath}/checklist/checkList" class="dropdown-item">집 체크리스트</a>
 						</div>
 					</div>

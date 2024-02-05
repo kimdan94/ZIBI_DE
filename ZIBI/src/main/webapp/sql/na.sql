@@ -38,13 +38,12 @@ create table follow(
 	constraint member_follow_fk2 foreign key (fmem_num) references member (mem_num)
 );
 
-
 --정책 : 지자체 저장
 create table district(
 	district_num number not null, 
 	district_name varchar2(30) not null,
-	district_latitude varchar2(100) not null,
-	district_lonitude varchar2(100) not null,
+	district_latitude varchar2(100),
+	district_lonitude varchar2(100),
 	constraint district_pk primary key (district_num)
 );
 
@@ -53,6 +52,18 @@ create sequence district_seq;
 --정책 : url 저장
 create table policy(
 	district_num number not null, 
-	policy_url varchar2(300) default '-' not null,
+	policy_url varchar2(300),
 	constraint policy_fk foreign key (district_num) references district (district_num)
 );
+
+-- 가구수 오픈 api 저장
+create table stats(
+	district_num number not null, --지자체 번호
+	statsYm varchar2(50) not null, --통계년월 
+	totHhCnt number not null, --전체 세대수
+	hhNmprCnt1 number not null, --1인 세대수
+	constraint stats_fk foreign key (district_num) references district (district_num)
+);
+
+
+

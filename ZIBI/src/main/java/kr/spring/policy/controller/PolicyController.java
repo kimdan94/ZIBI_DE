@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.policy.service.PolicyService;
 import kr.spring.policy.vo.PolicyVO;
@@ -36,8 +37,20 @@ public class PolicyController {
 	}
 	
 	//카카오 앱키 호출
-	@Value("${YENA-KAKAO-API-KEY.appKey}")
+	@Value("${NA-API-KEY.kakaoAppKey}")
 	private String kakao_apikey;
+	
+	/* ---------- 사용자 - 1인 가구 비율 ----------*/
+	@RequestMapping("/policy/policyCount")
+	public String policyCount(Model model) {
+		
+		List<PolicyVO> list = policyService.selectStatsList();
+		
+		model.addAttribute("list",list);
+		model.addAttribute("apikey", kakao_apikey);
+				
+		return "policyCount";
+	}
 	
 	/* ---------- 사용자 - 진입 (1인 가구 메인) ----------*/
 	@RequestMapping("/policy/main")
@@ -58,21 +71,6 @@ public class PolicyController {
 		
 		return "policyMain";
 	}
-		
-	@RequestMapping("/policy/count")
-	public String policyCount(Model model) {
-		
-		
-		
-		return "policyCount";
-	}
-	
-	@RequestMapping("/admin/performanceMain")
-	public String adminCinemaMain(PolicyVO policyVO,Model model) {
-		
-		return "adminPerformanceMain";
-	}
-	
 
 	/* ---------- 관리자 페이지 - 진입 ----------*/
 	@RequestMapping("/admin/policy")
@@ -117,9 +115,6 @@ public class PolicyController {
 		if(result.hasErrors())
 			return "adminPolicyInsert";
 		
-		policyVO.setDistrict_num(policyService.selectDistrictNumber());
-		policyService.insertDistrict(policyVO);
-		
 		if(policyVO.getPolicy_url().equals(""))
 			policyVO.setPolicy_url("-");
 		
@@ -163,7 +158,6 @@ public class PolicyController {
 	public String adminDistrictDelete(@RequestParam int district_num, Model model) {
 		
 		policyService.deletePolicy(district_num);
-		policyService.deleteDistrict(district_num);
 	
 		return "redirect:/admin/policy";
 	}

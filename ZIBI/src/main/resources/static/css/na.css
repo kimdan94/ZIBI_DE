@@ -28,13 +28,14 @@
 	margin-top: 30px;
 }
 
-/* 정책 사용자 메인 */
+/* 정책 사용자 클릭 */
 .policy-map{
 	margin: 40px 0 20px 0;
 }
 #map{
 	margin-bottom: 10px;
 }
+
 
 /*-------------- 메인-------------*/
 /* 추가 정보 입력 유도 */
@@ -323,7 +324,6 @@
 /* 마이페이지 팔로우 */
 .mypage-follow .col-5{
 	height: 100px;
-	width: 300px;
 }
 .mypage-follow .col-5 img{
 	border-radius: 8px;
@@ -335,7 +335,6 @@
 .mypage-follow .col-7{
 	text-align: left;
 	border-bottom: 1px solid #ededed;
-	width: 40%;
 }
 .mypage-follow .row{
 	margin: 8px;

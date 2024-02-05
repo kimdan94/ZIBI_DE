@@ -16,16 +16,6 @@ public class PolicyServiceImpl implements PolicyService {
 	PolicyMapper policyMapper;
 
 	@Override
-	public int selectDistrictNumber() {
-		return policyMapper.selectDistrictNumber();
-	}
-
-	@Override
-	public void insertDistrict(PolicyVO policyVO) {
-		policyMapper.insertDistrict(policyVO);
-	}
-
-	@Override
 	public void insertPolicy(PolicyVO policyVO) {
 		policyMapper.insertPolicy(policyVO);
 	}
@@ -61,8 +51,27 @@ public class PolicyServiceImpl implements PolicyService {
 	}
 
 	@Override
-	public void deleteDistrict(int distirct_num) {
-		policyMapper.deleteDistrict(distirct_num);
+	public PolicyVO selectStats(int district_num) {
+		return policyMapper.selectStats(district_num);
 	}
 
+	@Override
+	public void insertStats(PolicyVO policyVO) {
+		policyMapper.insertStats(policyVO);
+	}
+
+	@Override
+	public void updateStats(PolicyVO policyVO) {
+		policyMapper.updateStats(policyVO);
+	}
+
+	@Override
+	public void insertDistrict(PolicyVO policyVO) {
+		policyMapper.insertDistrict(policyVO);
+	}
+
+	@Override
+	public List<PolicyVO> selectStatsList() {
+		return policyMapper.selectStatsList();
+	}
 }

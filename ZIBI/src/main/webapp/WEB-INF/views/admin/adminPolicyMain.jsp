@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="admin-page policy-main text-center">
-	<div class="text-end">
-		<input type="button" class="btn mem-btn" onclick="location.href='${pageContext.request.contextPath}/admin/policyInsert'" value="행정구역 등록">
-	</div>
 	<c:if test="${count==0}">
 		<div class="justify-content-center no-data">
 			등록한 데이터가 없습니다
@@ -19,7 +16,7 @@
 		<c:forEach var="policyVO" items="${list}">
 			<div class="row text-center">
 				<div class="col-2">
-					<a href="${pageContext.request.contextPath}/admin/policyModify?district_num=${policyVO.district_num}">[수정</a><a href="${pageContext.request.contextPath}/admin/policyDelete?district_num=${policyVO.district_num}" id="delete">/삭제] </a>
+					<a href="${pageContext.request.contextPath}/admin/policyModify?district_num=${policyVO.district_num}">[수정]</a>
 					${policyVO.district_name}
 				</div>
 				<div class="col-2">${policyVO.district_latitude}</div>

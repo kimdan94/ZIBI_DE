@@ -110,8 +110,7 @@ public class HelperServiceImpl implements HelperService{
 
 	@Override
 	public HelperReplyVO selectReply(int re_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return helperMapper.selectReply(re_num);
 	}
 
 	@Override
@@ -122,13 +121,12 @@ public class HelperServiceImpl implements HelperService{
 
 	@Override
 	public void updateReply(HelperReplyVO helperReply) {
-		// TODO Auto-generated method stub
-		
+		helperMapper.updateReply(helperReply);
 	}
 
 	@Override
 	public void deleteReply(int re_num) {
-		
+		helperMapper.deleteReply(re_num);
 	}
 }
 

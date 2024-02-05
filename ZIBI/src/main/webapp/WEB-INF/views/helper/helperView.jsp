@@ -84,9 +84,11 @@
 			<div class="align-right">
 	</div>
 		</div>
-				
+	<hr size="3" noshade="noshade">			
+	
+	<div class="title">상세설명</div><br>
 	<div>
-		내용 : ${helper.helper_content}
+	${helper.helper_content}
 	</div>
 	<div>
 		주소 : ${helper.helper_address1} ${helper.helper_address2}
@@ -95,7 +97,7 @@
 	<br><br>
 	<!-- 댓글 시작 -->
 	<div id="reply_div">
-		<span class="re_title">댓글</span>
+		<span class="re_title"></span>
 		<form id="re_form">
 			<input type="hidden" name="helper_num" value="${helper.helper_num}" id="helper_num">
 			<textarea rows="3" cols="50" name="re_content" id="re_content" class="rep-content" 
@@ -106,7 +108,7 @@
 		  	<span class="letter-count">300/300</span>
 		  </div>
 		  <div id="re_second" class="align-right">
-		  	<input type="submit" value="전송">
+		  	<input type="submit" value="작성하기">
 		  </div>
 		  </c:if>
 		</form>

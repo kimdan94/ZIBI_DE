@@ -52,9 +52,12 @@ public interface HelperMapper {
 	public List<HelperReplyVO> selectListReply(Map<String, Object> map); //댓글 목록
 	@Select("SELECT COUNT(*) FROM helper_reply WHERE helper_num=#{helper_num}")
 	public int selectRowCountReply(Map<String,Object> map); //댓글 수
+	@Select("SELECT * FROM helper_reply WHERE re_num=#{re_num}")
 	public HelperReplyVO selectReply(int re_num); 
 	public void insertReply(HelperReplyVO helperReply); //댓글 등록
+	@Update("UPDATE helper_reply SET re_content=#{re_content},re_ip=#{re_ip},re_mdate=SYSDATE WHERE re_num=#{re_num}")
 	public void updateReply(HelperReplyVO helperReply); //댓글 수정
+	@Delete("DELETE FROM helper_reply WHERE re_num=#{re_num}")
 	public void deleteReply(int re_num); // 댓글 삭제
 	//부모글 삭제시 댓글이 존재하면 부모글 삭제 전 댓글 삭제
 	@Delete("DELETE FROM helper_reply WHERE helper_num=#{helper_num}")

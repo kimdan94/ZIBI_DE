@@ -211,6 +211,55 @@ public class HelperAjaxController {
 		
 		return mapJson;
 	}
+	
+	/*댓글 수정*/
+	@RequestMapping("/helper/updateReply")
+	@ResponseBody
+	public Map<String, String> modifyReply(HelperReplyVO helperReplyVO,
+										   HttpSession session,
+										   HttpServletRequest request){
+		log.debug("<댓글 수정 HelperReplyVO> : " + helperReplyVO);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		HelperReplyVO db_reply = helperService.selectReply(helperReplyVO.getRe_num());
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else if(user != null && user.getMem_num() == db_reply.getMem_num()) {//로그인한 회원번호와 작성자 회원번호 일치할 경우
+			helperReplyVO.setRe_ip(request.getRemoteAddr());
+			//댓글 수정
+			helperService.updateReply(helperReplyVO);
+			mapJson.put("result", "success");
+		}else {
+			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
+	
+	/*댓글 삭제*/
+	@RequestMapping("helper/deleteReply")
+	@ResponseBody
+	public Map<String, String> deleteReply(@RequestParam int re_num,
+											HttpSession session){
+		log.debug("<댓글 삭제 re_num> : " + re_num);
+		
+		Map<String, String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		HelperReplyVO db_reply = helperService.selectReply(re_num);
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else if(user !=null && user.getMem_num()==db_reply.getMem_num()) {//로그인한 회원번호와 작성자 회원번호 일치할 경우
+			helperService.deleteReply(re_num);
+			mapJson.put("result", "success");
+		}else {
+			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
 }
 
 

@@ -10,9 +10,10 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.reply.js"></script>
 <!-- 내용 시작 -->
-<div class="container">
+<div class="container" style="width: 80%">
+<div class="justify-content-center">
 <div class="row">
-<div class="detail-border col-10">
+<div class="col-8 ">
 		<c:if test="${helper.helper_category ==  1}"><div style="background:#04B486;" class="border_cate">[ 벌레 ]</div></c:if>
 		<c:if test="${helper.helper_category ==  2}"><div style="background:#04B486;" class="border_cate">[ 조립 ]</div></c:if>
 		<c:if test="${helper.helper_category ==  3}"><div style="background:#04B486;" class="border_cate">[ 수리 ]</div></c:if>
@@ -133,11 +134,12 @@
 	<!-- 댓글 끝 -->
 	<br><br>
 </div>
-<div class="col-1 detail-border2">
+<div class="col-4">
 	<div class="align-center">
 	<input type="button" value="목록으로" onclick="location.href='list?helper_num=${helper.helper_num}'" 
 			class="w-25 btn btn-light form-control p-3 rounded-pill">	
 	</div>
+</div>
 </div>
 </div>
 </div>

@@ -27,6 +27,7 @@ import kr.spring.community.vo.CommunityVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.PageUtil_ye;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -97,7 +98,7 @@ public class CommunityController {
 		int count = communityService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
-		PageUtil page = new PageUtil (keyfield,keyword,currentPage,
+		PageUtil_ye page = new PageUtil_ye (keyfield,keyword,currentPage,
 				                     count,20,10,"list","&community_category="+community_category+"&order="+order);
 		
 		List<CommunityVO> list = null;

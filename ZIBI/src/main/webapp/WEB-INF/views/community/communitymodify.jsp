@@ -9,6 +9,7 @@
 	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>	
 <script type="text/javascript">
 	window.onload = function() {
 		let community_maxcount = document.getElementById('community_maxcount');
@@ -77,9 +78,9 @@
 					<br><br>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
-				<input type="submit" value="수정" class="w-25 btn btn-light form-control p-3 rounded-pill active">
-				<input type="button" class="w-25 btn btn-light form-control p-3 rounded-pill active" 
-					onclick="location.href='list'" value="글 상세">
+				<input type="submit" value="수정" class="comm-btn-green w-25">
+				<input type="button" class="check-btn w-25" 
+					onclick="location.href='list'" value="목록">
 				</div>
 			</form:form>
 		</div>

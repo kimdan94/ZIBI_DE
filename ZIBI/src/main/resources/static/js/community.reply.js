@@ -35,7 +35,7 @@ $(function(){
 					let output = '<div class="item">';
 					output += '<ul class="detail-info">';
 					output += '<li>';
-					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo">';
+					output += '<img src="../member/viewProfile?mem_num='+item.mem_num+'" width="40" height="40" class="my-photo radius">';
 					output += '</li>';
 					output += '<li>';
 					output += item.mem_nickname + '<br>';
@@ -43,7 +43,7 @@ $(function(){
 					if(item.re_mdate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.re_mdate + '</span>'
 					}else {
-						output += '<span class="modify-date">등록일 : ' + item.re_date + '</span>'
+						output += '<span class="modify-date"> 등록일 : ' + item.re_date + '</span>'
 					}
 					
 					output += '</li>';
@@ -53,11 +53,11 @@ $(function(){
 					
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호와 같으면
-						output +=' <input type="button" data-num="'+item.re_num+'"value="수정" class="modify-btn">'
-						output +=' <input type="button" data-num="'+item.re_num+'"value="삭제" class="delete-btn">'
+						output +=' <input type="button" data-num="'+item.re_num+'"value="수정" class="default-btn2__">'
+						output +=' <input type="button" data-num="'+item.re_num+'"value="삭제" class="default-btn2__">'
 					}
 					
-					output += '<hr size="1" noshade>';
+					output += '<hr size="3" noshade>';
 					output += '</div>';
 					output += '</div>';
 					

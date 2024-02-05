@@ -17,29 +17,27 @@
 	<form action="list" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield" id="keyfield">
+				<select name="keyfield" id="keyfield" class="border-color">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
 					<option value="2" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					<option value="3" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" id="keyword" 
-				                                  value="${param.keyword}" class="w-50 p-2" autocomplete="off">
-			</li>
-			<li>
-				<input type="submit" value="찾기">
+				<input type=text size=45 height=45 class="input-sm" id="keyword" name="keyword" placeholder="검색어를 입력해주세요.">
+                        <button type="submit" class="btn che-btn-green w-20">검색</button>
 			</li>
 		</ul>
+		<br><br>
 		<div class="align-right" style="padding-right:120px;">
-			<select id="order" name="order">
+			<select id="order" name="order" class="border-color">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
 				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
 				<option value="4" <c:if test="${param.order == 4}">selected</c:if>>댓글수</option>
 			</select>
 			<c:if test="${!empty user}">
-			<input type="button" value="글쓰기" onclick="location.href='communitywrite'">
+			<input type="button" value="글쓰기" class="btn che-btn-green w-20" onclick="location.href='communitywrite'">
 			</c:if>
 		</div>
 	</form>
@@ -99,7 +97,7 @@ $(function(){
 	//정렬 선택
 	$('#order').change(function(){
 		if(${!empty param.community_category}){
-			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val()+'&community_category=${param.community_category}');
+			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val()+'&community_category=${param.community_category}';
 		}else{
 			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
 		}

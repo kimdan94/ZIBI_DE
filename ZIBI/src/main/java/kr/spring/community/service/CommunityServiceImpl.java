@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.community.dao.CommunityMapper;
 import kr.spring.community.vo.CommunityFavVO;
+import kr.spring.community.vo.CommunityFollowVO;
 import kr.spring.community.vo.CommunityReplyVO;
 import kr.spring.community.vo.CommunityVO;
 
@@ -64,8 +65,8 @@ public class CommunityServiceImpl implements CommunityService{
 	}
 
 	@Override
-	public CommunityFavVO selectFav(CommunityFavVO fav) {
-		return communityMapper.selectFav(fav);
+	public CommunityFavVO selectCommuFav(CommunityFavVO fav) {
+		return communityMapper.selectCommuFav(fav);
 	}
 
 	@Override
@@ -113,5 +114,30 @@ public class CommunityServiceImpl implements CommunityService{
 		communityMapper.deleteReply(re_num);
 		
 	}
+
+	@Override
+	public CommunityFollowVO selectFollow(CommunityFollowVO follow) {
+		
+		return null;
+	}
+
+	@Override
+	public int selectFollowCount(int mem_num) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void insertFollow(CommunityFollowVO follow) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteFollow(CommunityFollowVO communityFollow) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 	}

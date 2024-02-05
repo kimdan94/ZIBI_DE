@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.community.service.CommunityService;
 import kr.spring.community.vo.CommunityFavVO;
+import kr.spring.community.vo.CommunityFollowVO;
 import kr.spring.community.vo.CommunityReplyVO;
 import kr.spring.community.vo.CommunityVO;
 import kr.spring.member.vo.MemberVO;
@@ -70,7 +71,7 @@ public class CommunityAjaxController {
 			//로그인된 회원번호 셋팅
 			fav.setMem_num(user.getMem_num());
 			
-			CommunityFavVO communityFav = communityService.selectFav(fav);
+			CommunityFavVO communityFav = communityService.selectCommuFav(fav);
 			if(communityFav!=null) {
 				mapJson.put("status", "yesFav");
 			}else {
@@ -100,7 +101,7 @@ public class CommunityAjaxController {
 			fav.setMem_num(user.getMem_num());
 			
 			//이전에 좋아요를 등록했는지 여부 확인
-			CommunityFavVO communityFavVO = communityService.selectFav(fav);
+			CommunityFavVO communityFavVO = communityService.selectCommuFav(fav);
 			if(communityFavVO!=null) {//좋아요를 이미 등록
 				communityService.deleteFav(fav);//좋아요 삭제
 				mapJson.put("status", "noFav");
@@ -234,6 +235,67 @@ public class CommunityAjaxController {
 		}else {
 			//로그인한 회원번호와 작성자 회원번호가 불일치
 			mapJson.put("result", "wrongAccess");
+		}
+		return mapJson;
+	}
+	
+	/*=======================
+	 * 부모글 팔로우 읽기
+	 *=======================*/
+	@RequestMapping("/community/getFollow")
+	@ResponseBody
+	public Map<String,Object> getFollow(CommunityFollowVO follow, HttpSession session){
+		log.debug("<<커뮤니티 팔로우 CommunityFollowVO>> : " + follow);
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("status", "noFollow");
+		}else {
+			//로그인된 회원번호 셋팅
+			follow.setMem_num(user.getMem_num());
+			
+			CommunityFollowVO communityFollow = communityService.selectFollow(follow);
+			if(communityFollow!=null) {
+				mapJson.put("status", "yesFollow");
+			}else {
+				mapJson.put("status", "noFollow");
+			}
+		}
+		//좋아요수
+		mapJson.put("count", communityService.selectFollowCount(
+				follow.getMem_num()));
+		return mapJson;
+	}
+	/*=======================
+	 * 부모글 좋아요 등록/삭제
+	 *=======================*/
+	@RequestMapping("/community/writeFollow")
+	@ResponseBody
+	public Map<String,Object> writeFollow(CommunityFollowVO follow, HttpSession session){
+		log.debug("<<부모글 팔로우 등록/삭제 CommunityFollowVO>> : " + follow);
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			//로그인된 회원번호 셋팅
+			follow.setMem_num(user.getMem_num());
+			
+			//이전에 좋아요를 등록했는지 여부 확인
+			CommunityFollowVO communityFollowVO = communityService.selectFollow(follow);
+			if(communityFollowVO!=null) {//좋아요를 이미 등록
+				communityService.deleteFollow(follow);//좋아요 삭제
+				mapJson.put("status", "noFav");
+			}else {//좋아요 미등록
+				communityService.insertFollow(follow);//좋아요 등록
+				mapJson.put("status", "yesFollow");
+			}
+			mapJson.put("result", "success");
+			mapJson.put("count", communityService.selectFollowCount(
+					follow.getMem_num()));
 		}
 		return mapJson;
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.community.vo.CommunityFavVO;
+import kr.spring.community.vo.CommunityFollowVO;
 import kr.spring.community.vo.CommunityReplyVO;
 import kr.spring.community.vo.CommunityVO;
 
@@ -18,7 +19,7 @@ public interface CommunityService {
 	public void deleteCommunity(int community_num);
 	public void deleteFile(int community_num);
 	//좋아요
-	public CommunityFavVO selectFav(CommunityFavVO fav);
+	public CommunityFavVO selectCommuFav(CommunityFavVO fav);
 	public int selectFavCount(int community_num);
 	public void insertFav(CommunityFavVO fav);
 	public void deleteFav(CommunityFavVO communityFav);
@@ -29,6 +30,11 @@ public interface CommunityService {
 	public void insertReply(CommunityReplyVO communityReply);
 	public void updateReply(CommunityReplyVO communityReply);
 	public void deleteReply(int re_num);
+	//팔로우
+	public CommunityFollowVO selectFollow(CommunityFollowVO follow);
+	public int selectFollowCount(int mem_num);
+	public void insertFollow(CommunityFollowVO follow);
+	public void deleteFollow(CommunityFollowVO communityFollow);
 
 }
 

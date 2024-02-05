@@ -153,6 +153,7 @@
 		  	        mem_nickname
 		  	    FROM community_reply
 		  	    JOIN member USING(mem_num)
+		  	    WHERE community_num=#{community_num}
 		  	    ORDER BY re_num DESC)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}

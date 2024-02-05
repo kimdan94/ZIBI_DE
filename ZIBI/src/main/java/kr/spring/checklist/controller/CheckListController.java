@@ -45,7 +45,7 @@ public class CheckListController {
 	}
 	
 	//등록 폼 호출
-	@GetMapping("/checklist/checkWrite")
+	@GetMapping("/checklist/checkwrite")
 	public String form() {
 		return "checkWrite";
 	}
@@ -81,7 +81,7 @@ public class CheckListController {
 	/*=================================
 	 * 체크리스트 글 목록
 	 *=================================*/
-	@RequestMapping("/CheckList/checkList")
+	@RequestMapping("/checklist/checkList")
 	public ModelAndView process(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
 			                   String keyfield,String keyword) {
 		
@@ -104,7 +104,7 @@ public class CheckListController {
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("CheckList");
+		mav.setViewName("checkList");
 		mav.addObject("count", count);
 		mav.addObject("list", list);
 		mav.addObject("page", page.getPage());

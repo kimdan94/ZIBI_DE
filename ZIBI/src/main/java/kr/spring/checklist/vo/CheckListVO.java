@@ -35,4 +35,5 @@ public class CheckListVO {
 	private int room_check4;
 	private int room_check5;
 	private int room_check6;
+	private Date check_date;
 }

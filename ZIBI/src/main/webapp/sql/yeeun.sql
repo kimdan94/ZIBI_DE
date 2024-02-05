@@ -70,6 +70,9 @@ create table checklist(
  room_check4 number(1) not null,
  room_check5 number(1) not null,
  room_check6 number(1) not null,
- constraint checklist_pk primary key (check_id)
+ mem_num number not null,
+ check_date date default sysdate not null, 
+ constraint checklist_pk primary key (check_id),
+ constraint checklist-fk foreign key (mem_num) references member (mem_num)
 );
 create sequence checklist_seq;

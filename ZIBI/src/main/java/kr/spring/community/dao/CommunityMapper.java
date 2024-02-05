@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.community.vo.CommunityFavVO;
+import kr.spring.community.vo.CommunityFollowVO;
 import kr.spring.community.vo.CommunityReplyVO;
 import kr.spring.community.vo.CommunityVO;
 import kr.spring.community.vo.CommunityFavVO;
@@ -32,7 +33,7 @@ public interface CommunityMapper {
 	 
 	 //좋아요
 	 @Select("SELECT * FROM community_fav WHERE community_num=#{community_num} AND mem_num=#{mem_num}")
-	 public CommunityFavVO selectFav(CommunityFavVO fav);
+	 public CommunityFavVO selectCommuFav(CommunityFavVO fav);
 	 @Select("SELECT COUNT(*) from community_fav WHERE community_num=#{community_num}")
 	 public int selectFavCount(int board_num);
 	 @Insert("INSERT INTO community_fav (community_num,mem_num) VALUES (#{community_num},#{mem_num})")
@@ -58,4 +59,15 @@ public interface CommunityMapper {
 	 @Delete("DELETE FROM community_reply WHERE community_num=#{community_num")
 	 public void deleteReplyByCommunityNum(int community_num);
 	 
+	 //팔로우
+	 @Select("SELECT * FROM follow WHERE community_num=#{community_num} AND mem_num=#{mem_num}")
+	 public CommunityFollowVO selectFav(CommunityFollowVO follow);
+	 @Select("SELECT COUNT(*) from follow WHERE community_num=#{community_num}")
+	 public int selectFollowCount(int community_num);
+	 @Insert("INSERT INTO follow (mem_num,fmem_num) VALUES (#{mem_num},#{fmem_num})")
+	 public void insertFollow(CommunityFollowVO follow);
+	 @Delete("DELETE FROM follow WHERE community_num=#{community_num} AND mem_num=#{mem_num}")
+	 public void deleteFollow(CommunityFollowVO communityFollow);
+	 @Delete("DELETE FROM follow WHERE community_num=#{community_num}")
+	 public void deleteFollowByMemNum(int mem_num);
 }

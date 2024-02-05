@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="admin-page policy-main text-center">
+	<div class="text-end">
+		<input class="btn mem-btn" type="button" value="1인 가구 통계 가져오기" onclick="location.href='${pageContext.request.contextPath}/stats/getData'">
+	</div>
 	<c:if test="${count==0}">
 		<div class="justify-content-center no-data">
 			등록한 데이터가 없습니다

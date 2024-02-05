@@ -47,8 +47,6 @@ create table district(
 	constraint district_pk primary key (district_num)
 );
 
-create sequence district_seq;
-
 --정책 : url 저장
 create table policy(
 	district_num number not null, 
@@ -60,8 +58,8 @@ create table policy(
 create table stats(
 	district_num number not null, --지자체 번호
 	statsYm varchar2(50) not null, --통계년월 
-	totHhCnt number not null, --전체 세대수
-	hhNmprCnt1 number not null, --1인 세대수
+	tot_family number not null, --전체 세대수
+	household_cnt number not null, --1인 세대수
 	constraint stats_fk foreign key (district_num) references district (district_num)
 );
 

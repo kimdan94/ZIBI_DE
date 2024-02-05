@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container text-center">
-	<div class="policy-map text-center">
-		<h3>대한민국의 1인 가구 세대수와 비율을 알아보세요 📊</h3>
-		<span>지도의 지자체를 클릭하시면 해당 지자체의 비율이 보입니다</span>
-	</div>
-	<div class="row">
-		<div class="col-6" id="map" style="height:600px;"></div>
-		<div class="col-6" id="piechart" style="height: 600px;"></div>
-	</div>
+	<c:if test="${empty list}">
+		<div class="policy-map text-center">
+			데이터가 존재하지 않습니다
+		</div>
+	</c:if>
+	<c:if test="${!empty list}">
+		<div class="policy-map text-center">
+			<h3>대한민국의 1인 가구 세대수와 비율을 알아보세요 📊</h3>
+		</div>
+		<div class="row">
+			<div class="col-6" id="map" style="height:600px;"></div>
+			<div class="col-6 align-self-center" id="piechart" style="height: 600px;">지도의 지자체를 클릭하면 1인 가구 비율이 나타납니다</div>
+		</div>
+	</c:if>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

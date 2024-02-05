@@ -10,6 +10,7 @@ import lombok.ToString;
 public class LastestContentVO {
 	
 	private int num;
+	private int mem_num;
 	private String category;
 	private String title;
 	private String photo;

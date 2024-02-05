@@ -1,8 +1,8 @@
 let keyword;
 
 $(document).keypress(function(e) { //엔터키 사용을 막음
-	if (e.keyCode == 13) 
-		e.preventDefault(); 
+	if (e.keyCode == 13)
+		$('#search_btn').trigger('click');
 });
 
 $('#search_btn').click(function(){

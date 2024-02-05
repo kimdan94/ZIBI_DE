@@ -15,6 +15,13 @@
 	margin: 0 auto;
 	overflow: hidden;
 }
+.admin-page a{
+	color: black !important;
+}
+.admin-page a:hover{
+	color: #32a77b !important;
+	transition: .3s !important;
+}
 
 /* 정책 관리자 수정 */
 .policy-main,
@@ -38,6 +45,20 @@
 
 
 /*-------------- 메인-------------*/
+#userInfoModal a,
+.carousel-item a,
+.service-content-icon a,
+.team-item a{
+	color: black !important;
+}
+#userInfoModal a:hover,
+.carousel-item a:hover,
+.service-content-icon a:hover,
+.team-item a:hover{
+	color: #32a77b !important;
+	transition: .3s !important;
+}
+
 /* 추가 정보 입력 유도 */
 #userInfoModal{
 	text-align: center;
@@ -107,7 +128,6 @@
     position: relative;
     height: 100%;
     border-radius: 8px;
-    /*box-shadow: 0 0 45px rgba(0, 0, 0, .08);*/
 }
 .service-content::after {
     position: absolute;
@@ -170,7 +190,6 @@
 }
 .register-info a{
 	color: black;
-	text-decoration-line: none;
 }
 
 /*--------------회원가입--------------*/
@@ -219,7 +238,6 @@
 .modal_box a{
 	font-weight: 600;
 	color: #DB3954;
-	text-decoration-line: none;
 	cursor: pointer;
 }
 .modal_box p{
@@ -248,7 +266,6 @@
 .mypageMain a{
 	font-weight: 700;
 	font-size: 1.2em;
-	text-decoration-line: none;
 	color: black;
 }
 .mypageMain .my-photo{
@@ -351,8 +368,14 @@
 	margin-top: 40px !important;
 }
 
-
 /* 오픈 프로필 */
+.openProfile a{
+	color: black !important;
+}
+.openProfile a:hover{
+	color: #32a77b !important;
+	transition: .3s !important;
+}
 .openProfile .col-5{
 	height: 150px;
 	width: 300px;
@@ -467,14 +490,10 @@ input[type=file]::file-selector-button{
 }
 
 a{
-	color: black;
 	text-decoration-line: none;
 }
 a:hover{
 	text-decoration: none;
-	color: #32a77b;
-	font-weight: 600;
-	transition: .3s;
 }
 
 /*--------------기타--------------*/

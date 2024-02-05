@@ -156,6 +156,11 @@
 											</a>
 										</c:if>
 									</h6>
+									<p>
+										<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto text-center">
+											${content.mem_nickname}
+										</a>
+									</p>
 									<p class="mb-0">
 										<c:if test="${content.category==1}">👥 소모임 예약</c:if>
 										<c:if test="${content.category==2}">🙋 재능 기부</c:if>

@@ -11,6 +11,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import kr.spring.interceptor.AdminCheckInterceptor;
 import kr.spring.interceptor.LoginCheckInterceptor;
 import kr.spring.websocket.SocketHandler;
 
@@ -18,11 +19,17 @@ import kr.spring.websocket.SocketHandler;
 @EnableWebSocket
 public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 	
-	/*---------------------------로그인 interceptor----------------------------*/
-	private LoginCheckInterceptor loginCheck;
+	private AdminCheckInterceptor adminCheck;
+	private LoginCheckInterceptor loginCheck; //로그인 인터셉터
 	
 	@Bean
-	public LoginCheckInterceptor interceptor() { //인터셉터 객체 생성
+	public AdminCheckInterceptor interceptor1() { //인터셉터 객체 생성
+		adminCheck = new AdminCheckInterceptor();
+		return adminCheck; 
+	}
+	
+	@Bean
+	public LoginCheckInterceptor interceptor2() { //인터셉터 객체 생성
 		loginCheck = new LoginCheckInterceptor();
 		return loginCheck; 
 	}
@@ -30,6 +37,13 @@ public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) { //인터셉터 등록
 		
+		//관리자 체크 인터셉터
+		registry.addInterceptor(adminCheck)
+			.addPathPatterns("/stats/getData")
+			.addPathPatterns("/admin/policy")
+			.addPathPatterns("/admin/policyModify");
+		
+		//로그인 체크 인터셉터
 		registry.addInterceptor(loginCheck)
 			.addPathPatterns("/member/mypageMain")
 			.addPathPatterns("/member/mypageUpdate")

@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container page-width text-center">
-	<div class="policy-map text-center">
-		<h3>지자체에서 시행 중인 1인 가구 정책을 찾아보세요 🔍</h3>
-		<span>지도의 지자체를 클릭하시면 해당 지자체의 1인 가구 정책 사이트로 연결됩니다</span>
-		<span>(없는 지자체는 표시되지 않습니다)</span>
-	</div>
-	<div id="map" style="width:100%; height:600px;"></div>
-	<p>연결된 사이트가 유효하지 않은 URL일 경우 관리자에게 문의해주세요</p>
+	<c:if test="${empty list}">
+		<div class="policy-map text-center">
+			데이터가 존재하지 않습니다
+		</div>
+	</c:if>
+	<c:if test="${!empty list}">
+		<div class="policy-map text-center">
+			<h3>지자체에서 시행 중인 1인 가구 정책을 찾아보세요 🔍</h3>
+			<span>지도의 지자체를 클릭하시면 해당 지자체의 1인 가구 정책 사이트로 연결됩니다</span>
+			<span>(없는 지자체는 표시되지 않습니다)</span>
+		</div>
+		<div id="map" style="width:100%; height:600px;"></div>
+		<p>연결된 사이트가 유효하지 않은 URL일 경우 관리자에게 문의해주세요</p>
+	</c:if>
 </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}"></script>
 <script>

@@ -93,7 +93,7 @@ public class StatsController {
 				
 		updateDB(year, array1, array2); //DB 업데이트
 		
-		return "redirect:/main/home";
+		return "redirect:/admin/policy";
 	}
 	
 	/*------------------json 데이터 업데이트-------------------*/
@@ -114,7 +114,7 @@ public class StatsController {
 			int househod_cnt = Integer.parseInt((String)jsonFinalData2.get("household_cnt"));//1인 가구수
 			
 			policyVO.setDistrict_num(district_num); //행정구역 번호 
-			policyVO.setDistrict_name((String)jsonFinalData1.get("adm_nm")); //행정구역명
+			policyVO.setDistrict_name(district_name); //행정구역명
 			policyVO.setTot_family(tot_family); //전체 가구수
 			policyVO.setYear(year); //년도
 			policyVO.setHousehold_cnt(househod_cnt); //1인 가구수

@@ -67,7 +67,6 @@ public class MemberController {
 		Map<String,Integer> map = new HashMap<String, Integer>();
 		
 		if(count>0) { //회원이 글을 쓴 경우
-			
 			map.put("mem_num", mem_num);
 			map.put("start",page.getStartRow());
 			map.put("end",page.getEndRow());

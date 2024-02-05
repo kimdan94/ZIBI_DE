@@ -1,5 +1,6 @@
 package kr.spring.main.controller;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.spring.main.service.MainService;
 import kr.spring.main.vo.LastestContentVO;
 import kr.spring.performance.vo.PerformanceVO;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@Slf4j
 public class MainController {
 	
 	@Autowired

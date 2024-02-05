@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.policy.service.PolicyService;
 import kr.spring.policy.vo.PolicyVO;
@@ -81,7 +80,7 @@ public class PolicyController {
 		List<PolicyVO> list = null;
 		int count = policyService.selectPolicyCount();
 		
-		PageUtil_na page = new PageUtil_na(currentPage,count, 10, 10, "policy");
+		PageUtil_na page = new PageUtil_na(currentPage,count, 20, 10, "policy");
 		
 		if(count>0) {
 			map.put("start",page.getStartRow());

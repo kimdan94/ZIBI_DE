@@ -15,7 +15,9 @@ function displayFollow(param){ //팔로우 표시
 		followBtn('팔로우','btn mem-btn-green');
 	} else if(param.status == 'disabledFollow'){ //나 자신인 경우
 		$('#follow_btn').hide();
-	} else {
+	} else if(param.status == 'logout'){ //로그인하지 않은 경우
+		$('#follow_btn').hide();
+	} else { //오류일 경우
 		alert('팔로우 표시 오류');
 	}
 	$('#follower').text(param.count);

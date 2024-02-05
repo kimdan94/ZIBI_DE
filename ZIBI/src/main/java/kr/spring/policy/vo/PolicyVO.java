@@ -29,6 +29,4 @@ public class PolicyVO {
 	
 	private int household_cnt; // 1인 세대수
 	
-	private double rate = (double)household_cnt / (double)tot_family * 100.0 ;
-	
 }

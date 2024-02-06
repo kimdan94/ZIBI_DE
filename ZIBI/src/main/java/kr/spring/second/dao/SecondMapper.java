@@ -25,6 +25,8 @@ public interface SecondMapper {
 	public void updateSecond(SecondVO second);
 	@Delete("DELETE FROM second WHERE sc_num=#{sc_num}")
 	public void deleteSecond(int sc_num); 					//글 삭제
+	//파일 처리
+	@Update("UPDATE second SET sc_filename='' WHERE sc_num=#{sc_num}")
 	public void deleteFile(int sc_num);
 	
 	

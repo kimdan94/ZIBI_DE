@@ -176,7 +176,7 @@ public class SecondController {
 	@GetMapping("/secondhand/update")		//데이터 전달받기 위해 Model 필요
 	public String scformUpdate(@RequestParam int sc_num,Model model) {
 		SecondVO secondVO = secondService.selectSecond(sc_num);
-		
+		log.debug("글 수정 폼 호출 secondVO>> : " +secondVO);
 		model.addAttribute("secondVO",secondVO);
 		
 		return "secondModify";
@@ -200,7 +200,7 @@ public class SecondController {
 		}
 		//DB에 저장된 파일 정보 구하기
 		SecondVO db_second = secondService.selectSecond(secondVO.getSc_num());
-		
+		log.debug("<<DB에 저장된 파일 정보 db_second>> : " + db_second);
 		//파일명 셋팅		파일이 업로드되면 가공해서 세팅해줌	
 		secondVO.setSc_filename(FileUtil.createFile(request, secondVO.getUpload()));
 		//ip 셋팅
@@ -208,14 +208,14 @@ public class SecondController {
 		
 		//글 수정
 		secondService.updateSecond(secondVO);
-		
+		log.debug("<<중고거래 글 수정 완료 secondVO>> : " + secondVO);
 		//전송된 파일이 있을 경우 이전 파일 삭제
 		if(secondVO.getUpload() != null && !secondVO.getUpload().isEmpty()) {
 			//수정전 파일 삭제 처리
 			FileUtil.removeFile(request, db_second.getSc_filename());//이전 파일 삭제처리
 		}
 
-		return "redirect:/secondhand/secondDetail?sc_num="+secondVO.getSc_num();
+		return "redirect:/secondhand/detail?sc_num="+secondVO.getSc_num();
 	}
 	
 	/*================================

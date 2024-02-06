@@ -2,11 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>	
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
-<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.scrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
@@ -19,12 +15,13 @@
 		<c:if test="${helper.helper_select ==  2}"><div style="background:#04B486;" class="border_cate">[ 헬프유  ]</div></c:if>
 		<!-- 해결중&해결완료 토글 -->
 		<div class="align-right">
-		<div>
+		<div id="output_solution" data-num="${helper.helper_num}">
 		<span id="output_text" style="font-size:20px; font-weight:bold; margin-left:10px;"></span>
 		<c:if test="${user.mem_num == helper.mem_num}">
-		<img id="output_solution" data-num="${helper.helper_num}" class="toggle"
+		<img id="output_image" class="toggle"
 			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="60">
 		</c:if>
+		</div>
 		<br>
 		</div>
 		</div>
@@ -69,7 +66,7 @@
 	${helper.helper_content}
 	</div><br>
 	<h3>도움장소</h3>
-	<div>
+	<div><img src="${pageContext.request.contextPath}/images/de/map.png" width="30">
 	${helper.helper_address1} ${helper.helper_address2}
 	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 	</div>

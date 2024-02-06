@@ -21,7 +21,7 @@
 	<definition name="helperWrite" extends="menuPage">
 		<put-attribute name="title" value="재능기부 글등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/helper/helperWrite.jsp"/>
-	</definition>
+	</definition> 
 	
 	<!-- 재능기부 글 상세 페이지 -->
 	<definition name="helperView" extends="menuPage">

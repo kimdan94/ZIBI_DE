@@ -71,8 +71,9 @@ ol, ul {
     padding-left: 2rem;
 }
 ul.search{
-	width:650px;
+	width:800px;
 	margin:0 auto;
+	margin-left:400px;
 }
 ul.search li{
 	display:inline;
@@ -548,7 +549,7 @@ a:active {
 	margin-right:5px;
 }
 .order1{
-	margin-left:800px;
+	margin-left:1310px;
 }
 .float-left{
 	float:left;

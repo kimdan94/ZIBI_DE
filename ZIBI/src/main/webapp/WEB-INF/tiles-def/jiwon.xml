@@ -23,12 +23,14 @@
 	<!-- 상세 글 -->
 	<definition name="secondDetail" extends="secondMain">
 		<put-attribute name="tabtitle" value="중고거래 상품 상세"/>
+		<put-attribute name="title" value="중고거래 상품 상세"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondDetail.jsp"/>
 	</definition>	
 	
 	<!-- 수정 폼 -->
 	<definition name="secondModify" extends="secondMain">
 		<put-attribute name="tabtitle" value="중고거래 상품 수정"/>
+		<put-attribute name="title" value="중고거래 상품 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondModify.jsp"/> 
 		<put-attribute name="css" value="/WEB-INF/views/secondhand/secondCSS.jsp"/>
 	</definition>
@@ -45,6 +47,7 @@
 	<!-- 내 상점 - 구매 내역 -->
 	<definition name="secondbuyList" extends="secondsellList">
 		<put-attribute name="tabtitle" value="내 상점 - 구매 내역"/>
+		<put-attribute name="title" value="구매 내역"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondbuyList.jsp"/>
 	</definition>
 	<!-- 내 상점 - 찜 페이지 -->
@@ -59,9 +62,35 @@
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondreviewList.jsp"/>
 	</definition>
 	
+	
+	<!-- 거래 후기 작성 폼 -->
+	<definition name="secondReviewWrite" extends="secondMain">
+		<put-attribute name="tabtitle" value="중고거래 후기 작성 | ZIBI"/>
+		<put-attribute name="title" value="중고거래 후기 작성"/>
+		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondReviewWrite.jsp"/> 
+	</definition>	
+	
+	<!-- ==================== 중고거래 채팅  ======================== -->
+	
 	<!-- 채팅 페이지 -->
 	<definition name="chatDetail" extends="secondMain">
 		<put-attribute name="tabtitle" value="중고거래 채팅"/>
+		<put-attribute name="title" value="중고거래 채팅"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondchat/chatDetail.jsp"/>
+	</definition>
+	
+	<!-- 채팅 - [판매자] 구매자 채팅 목록 -->
+	<definition name="chatListForSeller" extends="secondMain">
+		<put-attribute name="tabtitle" value="구매자 목록"/>
+		<put-attribute name="title" value="구매자 목록"/>
+		<put-attribute name="body" value="/WEB-INF/views/secondchat/chatListForSeller.jsp"/>
+	</definition>
+	
+	
+	<!-- [판매자] 거래자 선택 목록 페이지(채팅 목록)   -->
+	<definition name="chatSelectBuyerList" extends="secondMain">
+		<put-attribute name="tabtitle" value="거래자 선택"/>
+		<put-attribute name="title" value="거래자 선택"/>
+		<put-attribute name="body" value="/WEB-INF/views/secondchat/chatSelectBuyerList.jsp"/>
 	</definition>
 </tiles-definitions>

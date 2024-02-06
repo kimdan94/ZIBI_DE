@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.second.service.SecondService;
 import kr.spring.second.vo.SecondFavVO;
+import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,7 +53,6 @@ public class SecondAjaxController {
 		
 		return mapJson;
 	}
-	
 	/*============================
 	 * 부모글 찜 등록/삭제  (토글 형태)
 	 *============================*/
@@ -107,7 +107,7 @@ public class SecondAjaxController {
 			//map.put("mem_num", secondvo.getMem_num());//map에 mem_num넣기(로그인한)
 			map.put("mem_num", mem_num); 
 			//전체 레코드 수    로그인한 사람의 판매 게시물만 
-			int count = secondService.selectMyscRowCount(map);
+			int count = secondService.selectMyscCount(map);
 			log.debug("<<판매내역 - 전체 레코드 수 count>> : " + count);
 			
 			List<SecondVO> sellAllList = null;
@@ -124,4 +124,291 @@ public class SecondAjaxController {
 		
 		return mapJson;
 	}
+	/*============================
+	 * 중고거래 판매내역 - 판매중
+	 *============================*/
+	@RequestMapping("/secondhand/sc_forSale")
+	@ResponseBody		
+	public Map<String,Object> sc_forSale(@RequestParam int mem_num, HttpSession session){
+		log.debug("<<중고거래 판매내역 - 판매중 mem_num>> : " + mem_num);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			map.put("mem_num", mem_num); 
+			//판매중인 전체 레코드 수    - 로그인 한 사람의 게시물만
+			int count = secondService.selectForSaleCount(map);
+			log.debug("<<판매내역 - 판매중 레코드 수 count>> : " + count);
+			List<SecondVO> forSaleList = null;
+			if(count > 0) {
+				forSaleList = secondService.selectForSaleList(map);
+				mapJson.put("result", "success");
+			}else {
+				forSaleList = Collections.emptyList();
+			}
+			mapJson.put("count", count);
+			mapJson.put("forSaleList", forSaleList);
+		}
+		return mapJson;
+	}
+	/*============================
+	 * 중고거래 판매내역 - 예약대기
+	 *============================*/
+	@RequestMapping("/secondhand/sc_waitReserve")
+	@ResponseBody
+	public Map<String,Object> sc_waitReserve(@RequestParam int mem_num, HttpSession session){
+		log.debug("<<중고거래 판매내역 - 예약대기 mem_num>> : " + mem_num);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			map.put("mem_num", mem_num); 
+			//예약대기 전체 레코드 수    - 로그인 한 사람의 게시물만
+			int count = secondService.selectWaitReserveCount(map);
+			log.debug("<<판매내역 - 예약대기 레코드 수 count>> : " + count);
+			List<SecondVO> waitReserveList = null;
+			if(count > 0) {
+				waitReserveList = secondService.selectWaitReserveList(map);
+				log.debug("<<판매내역 - 예약대기 waitReserveList>> : " + waitReserveList);
+				mapJson.put("result", "success");
+			}else {
+				waitReserveList = Collections.emptyList();
+			}
+			mapJson.put("count", count);
+			mapJson.put("waitReserveList", waitReserveList);
+		}
+		return mapJson;
+	}
+	/*============================
+	 * 중고거래 판매내역 - 예약대기 페이지 - 예약 확정 버튼 클릭 시 
+	 *============================*/
+	@RequestMapping("/secondhand/updateOrderReserve")
+	@ResponseBody
+	public Map<String,Object> updateOrderReserve(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<예약대기 페이지 - 예약 확정 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else {
+			//second테이블 sc_sellstatus=2로 update
+			secondService.updateReserve(sc_num);
+			//second_order테이블 sc_order_statis=2로 update
+			secondService.updateOrderReserve(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+		
+	}
+	
+	/*============================
+	 * 중고거래 판매내역 - 예약중
+	 *============================*/
+	@RequestMapping("/secondhand/sc_reserve")
+	@ResponseBody
+	public Map<String,Object> sc_reserve(@RequestParam int mem_num, HttpSession session){
+		log.debug("<<중고거래 판매내역 - 예약중 mem_num>> : " + mem_num);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			map.put("mem_num", mem_num); 
+			//예약중인 전체 레코드 수    - 로그인 한 사람의 게시물만
+			int count = secondService.selectReserveCount(map);
+			log.debug("<<판매내역 - 예약중 레코드 수 count>> : " + count);
+			List<SecondVO> reserveList = null;
+			if(count > 0) {
+				reserveList = secondService.selectReserveList(map);
+				log.debug("<<예약중 reserveList>> : " + reserveList);
+				mapJson.put("result", "success");
+			}else {
+				reserveList = Collections.emptyList();
+			}
+			mapJson.put("count", count);
+			mapJson.put("reserveList", reserveList);
+		}
+		return mapJson;
+	}
+	/*============================
+	 * 중고거래 판매내역 - 거래완료
+	 *============================*/
+	@RequestMapping("/secondhand/sc_sellFin")
+	@ResponseBody
+	public Map<String,Object> sc_sellFin(@RequestParam int mem_num, HttpSession session){
+		log.debug("<<중고거래 판매내역 - 거래완료 mem_num>> : " + mem_num);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			map.put("mem_num", mem_num); 
+			//거래완료인 전체 레코드 수    - 로그인 한 사람의 게시물만
+			int count = secondService.selectSellFinCount(map);
+			log.debug("<<판매내역 - 거래완료 레코드 수 count>> : " + count);
+			List<SecondVO> sellFinList = null;
+			if(count > 0) {
+				sellFinList = secondService.selectSellFinList(map);
+				mapJson.put("result", "success");
+			}else {
+				sellFinList = Collections.emptyList();
+			}
+			mapJson.put("count", count);
+			mapJson.put("sellFinList", sellFinList);
+		}
+		return mapJson;
+	}
+	/*================================
+	 * 중고거래 상태변경(detail) 모달창- 판매중
+	 *================================*/
+	@RequestMapping("/secondhand/updateForSale")
+	@ResponseBody
+	public Map<String,Object> updateForSale(@RequestParam int sc_num, HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//판매중으로 update  (sc_sellstatus=0)
+			secondService.updateForSale(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
+	/*================================
+	 * 중고거래 상태변경(detail) 모달창- 예약대기
+	 *================================*/
+	@RequestMapping("/secondhand/updateWaitReserve")
+	@ResponseBody
+	public Map<String,Object> updateWaitReserve(@RequestParam int sc_num, HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//예약대기로 update  (sc_sellstatus=1)
+			secondService.updateWaitReserve(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
+	/*================================
+	 * 중고거래 상태변경(detail) 모달창- 예약중
+	 *================================*/
+	@RequestMapping("/secondhand/updateReserve")
+	@ResponseBody
+	public Map<String,Object> updateReserve(@RequestParam int sc_num, HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//예약중으로 update  (sc_sellstatus=2)
+			secondService.updateReserve(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
+	/*================================
+	 * 중고거래 상태변경(detail) 모달창- 거래완료
+	 *================================*/
+	/*삭제하기!!!!!!!!!!!!!!!!!!!
+	@RequestMapping("/secondhand/updateSellFin")
+	@ResponseBody
+	public Map<String,Object> updateSellFin(@RequestParam int sc_num, HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//거래완료로 update  (sc_sellstatus=3)
+			secondService.updateSellFin(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
+	*/
+	/*================================
+	 * 중고거래 바로 예약(detail) 클릭 시 - 예약 대기로 변경, second_order 테이블에 insert
+	 *================================*/
+	@RequestMapping("/secondhand/insertScOrder")
+	@ResponseBody
+	public Map<String,Object> insertScOrder(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<바로 예약 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//second 테이블 sc_sellstatus 1(예약대기)로 변경
+			secondService.updateWaitReserve(sc_num);
+			SecondOrderVO secondOrderVO = new SecondOrderVO();
+			secondOrderVO.setSc_buyer_num(user.getMem_num());
+			secondOrderVO.setSc_num(sc_num);
+			log.debug("<<바로 예약 secondOrderVO>> : " + secondOrderVO);
+			secondService.insertSecondOrder(secondOrderVO);
+			
+			map.put("result", "success");
+			map.put("secondOrderVO", secondOrderVO);
+		}
+		return map;
+	}
+	/*============================
+	 * 중고거래 판매내역 - 끌어올리기
+	 *============================*/
+	@RequestMapping("/secondhand/updateSysdate")
+	@ResponseBody
+	public Map<String,Object> updateSysdate(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<끌어올리기 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//sc_modify_date SYSDATE로 update
+			secondService.updateSysdate(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

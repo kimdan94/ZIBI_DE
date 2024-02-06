@@ -3,7 +3,11 @@ package kr.spring.second.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.second.vo.SecondFavVO;
+import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondVO;
 
 public interface SecondService {
@@ -13,9 +17,28 @@ public interface SecondService {
 	public void insertSecond(SecondVO second);
 	public SecondVO selectSecond(int sc_num);
 	public void updateHit(int sc_num);
-	public void updateSecond(SecondVO second);
+	public void updateSecond(SecondVO second);		//글 수정
 	public void deleteSecond(int sc_num);
 	public void deleteFile(int sc_num);
+	
+	//판매 상태 변경
+	public void updateForSale(int sc_num);//판매중으로 변경
+	public void updateWaitReserve(int sc_num);//예약대기로 변경
+	public void updateReserve(int sc_num);//예약중으로 변경
+	public void updateSellFin(int sc_num);//거래완료로 변경
+	
+	//거래
+	public void insertSecondOrder(SecondOrderVO secondOrderVO);
+	//거래 상태 변경
+	public void updateOrderReserve(int sc_num);//예약중으로 변경
+	
+	//거래 상태 변경 second_order테이블 판매완료로 변경
+	public void updateOrderSellFin(int sc_num);//판매 완료로 변경
+	
+	//구매자 선택시 sc_num 존재 여부 (select)
+	public SecondOrderVO selectOrderCheck(Map<String,Object> map);
+	//구매자 선택시 sc_num 관련 행이 없다면 판매완료 행 insert  sc_order_status를 3으로 insert
+	public void insertOrderSellFin(SecondOrderVO secondOrderVO);
 	
 	//찜
 	public SecondFavVO selectFav(SecondFavVO fav);//한건의 데이터 읽어옴
@@ -26,7 +49,32 @@ public interface SecondService {
 	//=========  중고거래 마이페이지   ==================
 		//판매내역 - 전체 
 	public List<SecondVO> selectMyscList(Map<String,Object> map);
-	public int selectMyscRowCount(Map<String,Object> map);//로그인한 사람의 판매글 전체 레코드 수 
+	public int selectMyscCount(Map<String,Object> map);//로그인한 사람의 판매글 전체 레코드 수 
 	
-	//=========  중고거래 채팅   ==================
+		//판매내역 - 판매중
+	public List<SecondVO> selectForSaleList(Map<String,Object> map);
+	public int selectForSaleCount(Map<String,Object> map);//로그인한 사람의 판매중 글 전체 레코드 수 
+	
+		//판매내역 - 예약대기
+	public List<SecondVO> selectWaitReserveList(Map<String,Object> map);
+	public int selectWaitReserveCount(Map<String,Object> map);
+		//판매내역 - 예약중
+	public List<SecondVO> selectReserveList(Map<String,Object> map);
+	public int selectReserveCount(Map<String,Object> map);
+		//판매내역 - 거래완료
+	public List<SecondVO> selectSellFinList(Map<String,Object> map);
+	public int selectSellFinCount(Map<String,Object> map);
+	
+	//판매내역 - 끌어올리기
+	public void updateSysdate(int sc_num);
+	
+	//구매내역
+	public List<SecondOrderVO> selectBuyList(Map<String,Object> map);
+	public int selectBuyCount(Map<String,Object> map);
+	
+	//찜 상품
+	public List<SecondVO> selectScFavList(Map<String,Object> map);
+	public int selectScFavCount(int mem_num);
+	
+	
 }

@@ -37,8 +37,12 @@ public class SecondVO {
 	private int sc_show;		//게시글 표시 여부(default 2: 표시, 1:미표시(숨김 처리))
 	private int mem_num;		//회원번호
 	
+	//읽어올 정보
 	private String mem_email;   //회원 ID
 	private String mem_nickname;//사이트 내 활동명(닉네임)
+	private String sc_buyer_nickname;
+	private int sc_buyer_num;
+	private Date sc_order_reg_date;
 	
 	//DB에 없음
 	private int sc_favcnt;      //판매글 관심수(찜)

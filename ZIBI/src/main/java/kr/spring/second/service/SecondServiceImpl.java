@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.second.dao.SecondMapper;
 import kr.spring.second.vo.SecondFavVO;
+import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondVO;
 
 @Service
@@ -45,19 +46,67 @@ public class SecondServiceImpl implements SecondService{
 
 	@Override
 	public void updateSecond(SecondVO second) {
-		// TODO Auto-generated method stub
-		
+		secondMapper.updateSecond(second);
 	}
 
 	@Override
 	public void deleteSecond(int sc_num) {
-		// TODO Auto-generated method stub
-		
+		secondMapper.deleteSecond(sc_num);
 	}
 
 	@Override
 	public void deleteFile(int sc_num) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	//================판매 상태 변경===============
+	//판매중으로 변경
+	@Override
+	public void updateForSale(int sc_num) {
+		secondMapper.updateForSale(sc_num);
+	}
+	//예약대기로 변경
+	@Override
+	public void updateWaitReserve(int sc_num) {
+		secondMapper.updateWaitReserve(sc_num);
+	}
+	//예약중으로 변경
+	@Override
+	public void updateReserve(int sc_num) {
+		secondMapper.updateReserve(sc_num);
+	}
+	//거래완료로 변경
+	@Override
+	public void updateSellFin(int sc_num) {
+		secondMapper.updateSellFin(sc_num);
+	}
+	
+	//=========   거래   ==================
+	@Override
+	public void insertSecondOrder(SecondOrderVO secondOrderVO) {
+		secondMapper.insertSecondOrder(secondOrderVO);
+	}
+	//거래 상태 변경
+	@Override
+	public void updateOrderReserve(int sc_num) {
+		secondMapper.updateOrderReserve(sc_num);
+	}
+	//판매완료로 변경
+	@Override
+	public void updateOrderSellFin(int sc_num) {
+		secondMapper.updateOrderSellFin(sc_num);
+	}
+	
+	//구매자 선택시 sc_num 존재 여부 (select)
+	@Override
+	public SecondOrderVO selectOrderCheck(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return secondMapper.selectOrderCheck(map);
+	}
+	@Override
+	public void insertOrderSellFin(SecondOrderVO secondOrderVO) {
+		secondMapper.insertOrderSellFin(secondOrderVO);
 		
 	}
 	
@@ -85,16 +134,76 @@ public class SecondServiceImpl implements SecondService{
 	
 	
 	//=========  중고거래 마이페이지   ==================
-	//
+	//판매내역 - 전체
 	@Override
 	public List<SecondVO> selectMyscList(Map<String, Object> map) {
 		return secondMapper.selectMyscList(map);
 	}
 	@Override
-	public int selectMyscRowCount(Map<String, Object> map) {
-		return secondMapper.selectMyscRowCount(map);
+	public int selectMyscCount(Map<String, Object> map) {
+		return secondMapper.selectMyscCount(map);
 	}
 	
-	//=========  중고거래 채팅   ==================
+	//판매내역 - 판매중
+	@Override
+	public List<SecondVO> selectForSaleList(Map<String, Object> map) {
+		return secondMapper.selectForSaleList(map);
+	}
+	//로그인한 사람의 판매중 글 전체 레코드 수
+	@Override
+	public int selectForSaleCount(Map<String, Object> map) {
+		return secondMapper.selectForSaleCount(map);
+	}
+	//판매내역 - 예약대기
+	@Override
+	public List<SecondVO> selectWaitReserveList(Map<String, Object> map) {
+		return secondMapper.selectWaitReserveList(map);
+	}
+	@Override
+	public int selectWaitReserveCount(Map<String, Object> map) {
+		return secondMapper.selectWaitReserveCount(map);
+	}
+	//판매내역 - 예약중
+	@Override
+	public List<SecondVO> selectReserveList(Map<String, Object> map) {
+		return secondMapper.selectReserveList(map);
+	}
+	@Override
+	public int selectReserveCount(Map<String, Object> map) {
+		return secondMapper.selectReserveCount(map);
+	}
+	//판매내역 - 거래완료
+	@Override
+	public List<SecondVO> selectSellFinList(Map<String, Object> map) {
+		return secondMapper.selectSellFinList(map);
+	}
+	@Override
+	public int selectSellFinCount(Map<String, Object> map) {
+		return secondMapper.selectSellFinCount(map);
+	}
+	//판매내역 - 끌어올리기
+	@Override
+	public void updateSysdate(int sc_num) {
+		secondMapper.updateSysdate(sc_num);
+	}
 	
+	//구매내역
+	@Override
+	public List<SecondOrderVO> selectBuyList(Map<String, Object> map) {
+		return secondMapper.selectBuyList(map);
+	}
+	@Override
+	public int selectBuyCount(Map<String,Object> map) {
+		return secondMapper.selectBuyCount(map);
+	}
+	
+	//찜 상품
+	@Override
+	public List<SecondVO> selectScFavList(Map<String, Object> map) {
+		return secondMapper.selectScFavList(map);
+	}
+	@Override
+	public int selectScFavCount(int mem_num) {
+		return secondMapper.selectScFavCount(mem_num);
+	}
 }

@@ -11,15 +11,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-window.onload = function(){
-	//참여 인원 기본값 0 초기화
-	let book_maxcount = document.getElementById('book_maxcount');
-	if(book_maxcount.value == 0){
-		book_maxcount.value = '';
-	}
-};
-</script>
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6">
@@ -76,6 +67,7 @@ window.onload = function(){
 					    },
 					    timePicker: true,
 					    showDropdowns: true,
+						minDate:moment().startOf('day'),
 					    autoApply: true,
 					    timePicker24Hour: true,
 					    singleDatePicker: true
@@ -219,3 +211,12 @@ window.onload = function(){
     }
 </script>
 <!-- Daum 지도 API 끝 -->
+<script type="text/javascript">
+window.onload = function(){
+	//참여 인원 기본값 0 초기화
+	let book_maxcount = document.getElementById('book_maxcount');
+	if(book_maxcount.value == 0){
+		book_maxcount.value = '';
+	}
+};
+</script>

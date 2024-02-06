@@ -70,6 +70,7 @@
 					    },
 					    timePicker: true,
 					    showDropdowns: true,
+						minDate:moment().startOf('day'),
 					    autoApply: true,
 					    timePicker24Hour: true,
 					    singleDatePicker: true

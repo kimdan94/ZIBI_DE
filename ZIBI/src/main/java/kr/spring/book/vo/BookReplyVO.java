@@ -16,6 +16,7 @@ public class BookReplyVO {
 	private int ref_level;
 	private int book_num;
 	private int mem_num;
+	private int book_deleted;
 	
 	private String mem_nickname;
 }

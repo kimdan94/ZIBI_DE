@@ -34,7 +34,7 @@ $(function(){
 			$('#emailValid').text('');
 		}
 		
-		if($('#mem_phone').val().trim()=='' || !$('#mem_phone').val().match(/^010-([0-9]{3,4})-([0-9]{4})$/)){
+		if($('#mem_phone').val().trim()=='' || !$('#mem_phone').val().match(/^010-([0-9]{4})-([0-9]{4})$/)){
 			$('#phoneValid').text('연락처를 입력해 주세요. 예)010-1234-5678');
 			$('#apply_btn').show();
 			$('#apply_loading').hide();
@@ -207,7 +207,7 @@ $(function(){
 	
 	/*-------- 모집 마감(모임 참여 일괄 거절하기) --------*/
 	$('#complete_btn').click(function(){
-		if(confirm('모집 마감 시 참여 신청이 일괄 거절됩니다. 마감하시겠습니까?')==false){
+		if(confirm('마감 시 대기 중인 참여 신청은 일괄 거절됩니다. 마감하시겠습니까?')==false){
 			return;
 		}
 		

@@ -32,7 +32,7 @@ create table book_matching(
  book_matchDate date default sysdate not null,
  apply_gatheringDate varchar2(100) not null,
  apply_title varchar2(120) not null,
- apply_address1 varchar(100) not null,
+ apply_address1 varchar2(100) not null,
  constraint book_matching_fk1 foreign key (book_num) references book (book_num),
  constraint book_matching_fk2 foreign key (apply_num) references member (mem_num)
 );
@@ -60,3 +60,21 @@ create table book_scrap(
  constraint book_scrap_fk1 foreign key (book_num) references book (book_num),
  constraint book_scrap_fk2 foreign key (mem_num) references member (mem_num)
 );
+
+-- 소모임 댓글
+create table book_reply(
+ rep_num number not null,
+ book_rep varchar(900) not null, -- max : 300
+ book_repDate date default sysdate not null,
+ book_repIp varchar(40) not null,
+ ref_rep_num number default 0 not null,
+ ref_level number(2) default 1 not null,
+ book_num number not null,
+ mem_num number not null,
+ book_deleted number(1) default 0 not null, -- 0:공개, 1:삭제 처리
+ constraint book_reply_pk primary key (rep_num),
+ constraint book_reply_fk1 foreign key (book_num) references book (book_num),
+ constraint book_reply_fk2 foreign key (mem_num) references member (mem_num)
+);
+
+create sequence book_rep_seq;

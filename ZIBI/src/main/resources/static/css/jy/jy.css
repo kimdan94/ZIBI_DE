@@ -449,6 +449,19 @@ li.book-li{
 	font-size:13px;
 	color:white;
 }
+.btn-guide3{
+	background:#dd5c5e;
+	border:1px solid #dd5c5e;
+	width:205px;
+	font-size:13px;
+	color:white;
+}
+.btn-guide4{
+	border:1px solid #dd5c5e;
+	width:205px;
+	font-size:13px;
+	color:#dd5c5e;
+}
 .rev-complete{
 	font-size:13px;
 }
@@ -460,6 +473,10 @@ li.book-li{
 	object-fit:cover;
 	border-radius:7px;
 	margin:20px;
+}
+
+#book_detail a{
+	text-decoration:none;
 }
 #book_detail .btn-light.active{
     background: #32a77b;
@@ -572,6 +589,11 @@ p.mb-1{
 	margin:3px 0 30px 940px;
 }
 /*댓글*/
+#reply_count{
+	font-size:24px;
+	text-align:left;
+	color:gray;
+}
 div.item{
 	padding-bottom:15px;
 }
@@ -580,11 +602,22 @@ div.re-item{
 	background:#c8d2d4;
 	margin-top:10px;
 }
+div.re-item2{
+	width:1000px;
+	background:#c8d2d4;
+	margin:10px 0 0 13px;
+}
 span.re-span{
 	font-size:20px;
 	color:gray;
 	float:left;
 	margin:0 10px 0 5px;
+}
+span.re-span2{
+	font-size:20px;
+	color:gray;
+	float:left;
+	margin:0 10px 0 15px;
 }
 ul.detail-info{
 	list-style:none;
@@ -599,6 +632,18 @@ ul.detail-info li{
 }
 div.rep-info{
 	margin-left:-15px;
+}
+div.rerep-info{
+	background-color:white;
+	text-align:left;
+	margin:0 0 -90px 27px;
+	width:95%;
+	height:150px;
+	padding:15px 0 0 17px;
+}
+.nick-open,.nick-open:hover,
+.nick-open:visited,.nick-open:active{
+	color:black;
 }
 div.sub-item{
 	margin-left:-15px;
@@ -618,8 +663,10 @@ form#re_form{
 	border:none;
 }
 form#rere_form{
-	width:100%;
+	width:97%;
 	border:none;
+	margin-top:15px;
+	margin-left:18px;
 }
 .letter-rpcount{
 	font-size:13px;
@@ -663,6 +710,11 @@ textarea.rep-content{
 	width:95%;
 	border:none;
 }
+textarea.rerep-content{
+	resize:none;
+	width:90%;
+	border:none;
+}
 div#re_first{
 	width:100%;
 	text-align:right;
@@ -671,8 +723,8 @@ div#re_first{
 div#rere_first{
 	text-align:right;
 	background:white;
-	width:1026px;
-	margin:-9px 0 0 27px;
+	width:995px;
+	margin:-2px 0 0 27px;
 	height:40px;
 }
 div#loading{
@@ -728,6 +780,11 @@ div#output{
 	border-radius:50%;
 	width:30px;
 	margin:0 5px 5px 0;
+}
+div.deleted-div{
+	height:50px;
+	color:gray;
+	padding-top:10px;
 }
 /*----------- 모임 신청폼 (모달) -----------*/
 #bookApplyModal{

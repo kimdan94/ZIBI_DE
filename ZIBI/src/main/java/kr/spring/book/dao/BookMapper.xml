@@ -53,7 +53,7 @@
 	<!-- 정렬 -->
 	<sql id="bookOrder">
 		<if test="order == 1">
-			ORDER BY CASE WHEN book_onoff = '2' THEN 1 ELSE 0 END, book_regDate DESC
+			ORDER BY CASE WHEN book_onoff = '2' OR gdate <![CDATA[<=]]> sysdate THEN 1 ELSE 0 END, book_regDate DESC
 		</if>
 		<if test="order == 2">
 			ORDER BY CASE WHEN book_onoff = '2' THEN 1 ELSE 0 END, rev_cnt DESC NULLS LAST
@@ -62,7 +62,7 @@
 			ORDER BY CASE WHEN book_onoff = '2' THEN 1 ELSE 0 END, scrap_cnt DESC NULLS LAST
 		</if>
 		<if test="order == 4">
-			ORDER BY CASE WHEN book_onoff = '2' THEN 1 ELSE 0 END, gdate ASC
+			ORDER BY CASE WHEN book_onoff = '2' OR gdate <![CDATA[<=]]> sysdate THEN 1 ELSE 0 END, gdate ASC
 		</if>
 	</sql>
 	
@@ -100,12 +100,14 @@
 					book_headcount,
 					book_expense,
 					mem_nickname,
+					rep_cnt,
 					rev_cnt,
 					scrap_cnt
 				FROM book
 				LEFT OUTER JOIN member USING(mem_num)
 				LEFT OUTER JOIN (SELECT COUNT(*) scrap_cnt, book_num FROM book_scrap GROUP BY book_num) USING(book_num)
 				LEFT OUTER JOIN (SELECT COUNT(*) rev_cnt, book_num FROM book_review GROUP BY book_num) USING(book_num)
+				LEFT OUTER JOIN (SELECT COUNT(*) rep_cnt, book_num FROM book_reply GROUP BY book_num) USING(book_num) 
 				<include refid="bookSearch"></include> 
 				<include refid="bookOrder"></include>)a)
 		<![CDATA[
@@ -208,7 +210,7 @@
 		WHERE book_num=${book_num}
 	</update>
 	
-	<!-- 소모임 댓글 등록 -->
+	<!-- 소모임 후기 등록 -->
 	<insert id="insertRev" parameterType="bookReviewVO">
 		INSERT INTO book_review(
 			rev_num,
@@ -228,7 +230,7 @@
 			#{apply_gatheringDate})
 	</insert>
 	
-	<!-- 소모임 댓글 목록 개수 -->
+	<!-- 소모임 후기 목록 개수 -->
 	<select id="selectRevCount" parameterType="integer" resultType="integer">
 		SELECT
 			COUNT(*)
@@ -236,7 +238,7 @@
 		WHERE book_num=#{book_num}
 	</select>
 	
-	<!-- 소모임 댓글 목록 -->
+	<!-- 소모임 후기 목록 -->
 	<select id="selectListRev" parameterType="integer" resultType="bookReviewVO">
 		SELECT
 			book_num,
@@ -252,4 +254,68 @@
 		LEFT OUTER JOIN member USING(mem_num)
 		WHERE book_num = #{book_num}
 	</select>
+	
+	<!-- 소모임 댓글 등록 -->
+	<insert id="insertReply" parameterType="bookReplyVO">
+		INSERT INTO book_reply(
+			rep_num,
+			book_rep,
+			book_repIp,
+			book_num,
+			mem_num)
+		VALUES(
+			book_rep_seq.nextval,
+			#{book_rep},
+			#{book_repIp},
+			#{book_num},
+			#{mem_num})
+	</insert>
+	
+	<!-- 소모임 댓글 목록 -->
+	<select id="selectListReply" parameterType="map" resultType="bookReplyVO">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT
+					rep_num,
+					<![CDATA[
+					REPLACE(REPLACE(book_rep,'<','&lt;'),'>','&gt;') book_rep,
+					]]>
+					TO_CHAR(book_repdate,'YYYY-MM-DD HH24:mm') book_repdate,
+					ref_level,
+					ref_rep_num,
+					book_num,
+					mem_num,
+					mem_nickname,
+					book_deleted
+			FROM book_reply
+			JOIN member USING(mem_num)
+			WHERE book_num=#{book_num}
+			ORDER BY rep_num ASC)a)
+		<![CDATA[
+		WHERE rnum >= #{rpstart} AND rnum <= #{rpend}
+		]]>	
+	</select>
+	
+	<!-- 소모임 대댓글 등록 -->
+	<insert id="insertReplies" parameterType="bookReplyVO">
+		INSERT INTO book_reply(
+			rep_num,
+			book_rep,
+			book_repIp,
+			book_num,
+			mem_num,
+			ref_rep_num,
+			ref_level)
+		VALUES(
+			book_rep_seq.nextval,
+			#{book_rep},
+			#{book_repIp},
+			#{book_num},
+			#{mem_num},
+			#{ref_rep_num},
+			2)
+	</insert>
 </mapper>

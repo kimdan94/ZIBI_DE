@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.book.dao.BookMapper;
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReplyVO;
 import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
@@ -94,6 +95,8 @@ public class BookServiceImpl implements BookService{
 	public void denyAllMatch(int book_num) {
 		//게시글 모집 마감 처리
 		bookMapper.updateOnoff3(book_num);
+		//거절 인원수 게시글에 반영
+		bookMapper.denyHeadcount(book_num);
 		//대기 중인 나머지 참여 신청 일괄 거절
 		bookMapper.denyAllMatch(book_num);
 	}
@@ -163,4 +166,35 @@ public class BookServiceImpl implements BookService{
 	public int selectRevByrev_num(int book_num, int apply_num, String apply_gatheringDate) {
 		return bookMapper.selectRevByrev_num(book_num, apply_num, apply_gatheringDate);
 	}
+
+	@Override
+	public List<BookReplyVO> selectListReply(Map<String, Object> map) {
+		return bookMapper.selectListReply(map);
+	}
+
+	@Override
+	public int selectRepCount(Map<String, Object> map) {
+		return bookMapper.selectRepCount(map);
+	}
+
+	@Override
+	public BookReplyVO selectReply(int rep_num) {
+		return bookMapper.selectReply(rep_num);
+	}
+
+	@Override
+	public void insertReply(BookReplyVO bookReply) {
+		bookMapper.insertReply(bookReply);
+	}
+
+	@Override
+	public void insertReplies(BookReplyVO bookReply) {
+		bookMapper.insertReplies(bookReply);
+	}
+
+	@Override
+	public void deleteReply(int rep_num) {
+		bookMapper.deleteReply(rep_num);
+	}
+
 }

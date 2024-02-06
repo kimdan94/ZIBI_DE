@@ -33,10 +33,11 @@ public class StatsController {
 	
 	private String accessToken;
 	
+	/*------------------url 문자열 생성, json 데이터 생성-------------------*/
 	@RequestMapping("/stats/getData")
 	public String getStats() throws Exception {
 		
-		/*------------------서비스 ID, 보안 키로 액세스 토큰 받아오기-------------------*/
+		//서비스 ID, 보안 키로 액세스 토큰 받아오기
 		String apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json"; //액세스 토큰을 받아올 주소
 		
 		StringBuilder urlBuilder = new StringBuilder(apiUrl);
@@ -45,8 +46,6 @@ public class StatsController {
 		
 		String jsonData = statusUrl(urlBuilder);
 		
-		log.debug("<<액세스 토큰 응답 결과>>" + jsonData);
-		
 		JSONParser jsonParser = new JSONParser(); //문자열을 Json 형식에 맞게 Object로 파싱할 수 있는 Parser
 		Object obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
 		JSONObject jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
@@ -54,7 +53,7 @@ public class StatsController {
 		accessToken = (String)jsonToken.get("accessToken"); //액세스 토큰 추출
 		
 		
-		/*------------------총 가구수-------------------*/
+		//총 가구수
 		apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/stats/population.json";
 		String year = "2022"; 
 		String low_search = "1";
@@ -66,14 +65,12 @@ public class StatsController {
 		
 		jsonData = statusUrl(urlBuilder);
 		
-		log.debug("<<총 가구수 응답 결과>>" + jsonData);
-		
 		obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
 		jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
 		
 		JSONArray array1 = (JSONArray)jsonObj.get("result"); //json 데이터 내 총 가구수가 든 json 추출 (배열 형태로 존재하므로 array 사용)
 				
-		/*------------------1인 가구 수-------------------*/
+		//1인 가구 수
 		apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/stats/household.json";
 		String household_type = "A0"; //조회 종료년월
 
@@ -83,8 +80,6 @@ public class StatsController {
 		urlBuilder.append("&" + URLEncoder.encode("household_type","UTF-8") + "=" + URLEncoder.encode(household_type, "UTF-8"));
 		
 		jsonData = statusUrl(urlBuilder);
-		
-		log.debug("<<1인 가구수 JSON : >>" + jsonData);
 		
 		obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
 		jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
@@ -96,15 +91,12 @@ public class StatsController {
 		return "redirect:/admin/policy";
 	}
 	
-	/*------------------json 데이터 업데이트-------------------*/
+	/*------------------json 데이터 DB 업데이트-------------------*/
 	private void updateDB(String year, JSONArray array1, JSONArray array2) {
 		
 		for(int i=0; i<array1.size(); i++){
 			JSONObject jsonFinalData1 = (JSONObject)array1.get(i); //배열에 들어있는 json 데이터를 꺼냄
 			JSONObject jsonFinalData2 = (JSONObject)array2.get(i); //배열에 들어있는 json 데이터를 꺼냄
-			
-			log.debug("<<for문 진입 1>> : " + jsonFinalData1);
-			log.debug("<<for문 진입 2>> : " + jsonFinalData2);
 			
 			PolicyVO policyVO = new PolicyVO();
 			
@@ -138,8 +130,8 @@ public class StatsController {
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		
 		conn.setRequestMethod("GET"); //get 방식으로 전송
-		conn.setRequestProperty("Content-type", "application/json");
-		conn.setRequestProperty("Accept", "application/json");
+		conn.setRequestProperty("Content-type", "application/json"); //json으로 전송
+		conn.setRequestProperty("Accept", "application/json"); //json으로 응답받음
 
 		log.debug("<<응답 코드>>" + conn.getResponseCode()); //응답 코드 확인
 

@@ -59,4 +59,19 @@ public class MainServiceImpl implements MainService {
 	public List<LastestContentVO> selectLastestHouse() {
 		return mainMapper.selectLastestHouse();
 	}
+
+	@Override
+	public LastestContentVO selectMostFollowMember() {
+		return mainMapper.selectMostFollowMember();
+	}
+
+	@Override
+	public LastestContentVO selectMostFollowerMember() {
+		return mainMapper.selectMostFollowerMember();
+	}
+
+	@Override
+	public LastestContentVO selectMostContentMember() {
+		return mainMapper.selectMostContentMember();
+	}
 }

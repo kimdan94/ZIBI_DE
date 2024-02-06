@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.spring.main.service.MainService;
 import kr.spring.main.vo.LastestContentVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.vo.PerformanceVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,6 +55,11 @@ public class MainController {
 		//집 체크리스트 최신 - 작성 필요
 		
 		
+		//가장 핫한 회원
+		LastestContentVO member_follower = mainService.selectMostFollowerMember(); //가장 팔로우가 많은
+		LastestContentVO member_follow = mainService.selectMostFollowMember(); //가장 팔로우를 많이 한
+		LastestContentVO member_content = mainService.selectMostContentMember(); //가장 글을 많이 쓴
+		
 		model.addAttribute("perf",perf);
 		
 		model.addAttribute("list_second", list_second);
@@ -61,6 +67,10 @@ public class MainController {
 		model.addAttribute("list_movie", list_movie);
 		model.addAttribute("list_book", list_book);
 		model.addAttribute("list_community", list_community);
+		
+		model.addAttribute("member_content",member_content);
+		model.addAttribute("member_follower",member_follower);
+		model.addAttribute("member_follow",member_follow);
 		
 		return "home"; //타일스 설정명
 	}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 메인 바디 시작 -->
+<!-- 캐러셀 시작 -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-indicators">
 		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -41,7 +42,9 @@
 		<span class="visually-hidden">Next</span>
 	</button>
 </div>
+<!-- 캐러셀 끝 -->
 <div class="container">
+	<!-- 메뉴 설명 시작 -->
 	<div class="main-content">
 		<h4 style="margin-bottom: 20px;">ZIBI의 다양한 메뉴를 만나보세요</h4>
 		<div class="owl-carousel">
@@ -117,6 +120,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- 메뉴 설명 끝 -->
+	<!-- 최신글 시작 -->
 	<div class="main-content">
 		<div class="row">
 			<h4>최신글을 구경하세요</h4>
@@ -308,6 +313,51 @@
 			</div>
 		</div>
 	</div>
+	<!-- 최신글 끝 -->
+	<div class="main-content">
+		<div class="row main-hot">
+			<h4 style="margin-bottom: 20px;">ZIBI의 명당</h4>
+			<!-- 게시글 많은 회원 시작 -->
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_content.mem_num}">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_content.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 활발한 지비러 ‍🔊</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_content.mem_num}">${member_content.mem_nickname}</a>님이 작성한 글 ${member_content.count}건
+				</div>
+			</div>
+			<!-- 게시글 많은 회원 끝 -->
+			<!-- 팔로워 많은 회원 게시 시작 -->
+			<div class="col-4 ">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_follower.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_follower.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 인기 많은 지비러 ✨</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_follower.mem_num}" class="my-auto">${member_follower.mem_nickname}</a>님을 팔로우한 지비러 ${member_follower.count}명
+				</div>
+			</div>
+			<!-- 팔로워 많은 회원 게시 끝 -->
+			<!-- 팔로우 많이 한 회원 시작 -->
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_follow.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_follow.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 사람을 좋아하는 지비러 💘</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_follow.mem_num}" class="my-auto">${member_follow.mem_nickname}</a>님이 팔로우한 지비러 ${member_follow.count}명
+				</div>
+			</div>
+			<!-- 팔로우 많이 한 회원 끝 -->
+		</div>
+	</div>	
 </div>
 <c:if test="${!empty message}">
 	<div class="wrap" id="mainModal">

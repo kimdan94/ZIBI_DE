@@ -8,9 +8,13 @@
 	<meta content="" name="keywords">
 	<meta content="" name="description">
 	<meta name="google-signin-client_id" content="476509144939-btrm06kr4s6cfaqc76n3m01g5seb8582.apps.googleusercontent.com">
+	
 	<title><tiles:getAsString name="title"/></title>
 	<style>@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');</style>
+	
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	
@@ -54,7 +58,6 @@
 		<img src="${pageContext.request.contextPath}/images/na/up_menu.png" width="15px">
 	</a> 
 </body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/lib/wow/wow.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/sample/lib/easing/easing.min.js"></script>

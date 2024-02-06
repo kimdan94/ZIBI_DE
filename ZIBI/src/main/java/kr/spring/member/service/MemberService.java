@@ -3,7 +3,6 @@ package kr.spring.member.service;
 import java.util.List;
 import java.util.Map;
 
-import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.vo.ActListVO;
 import kr.spring.member.vo.DealListVO;
@@ -27,6 +26,7 @@ public interface MemberService {
 	public MemberVO checkPhone(String mem_phone);
 	
 	/*---------회원 정보 수정----------*/
+	public void updateMember(MemberVO memberVO);
 	public void updateMemberDetail(MemberVO memberVO);
 	public void updateProfileImages(MemberVO memberVO);
 	public void updatePassword(MemberVO memberVO);
@@ -34,10 +34,11 @@ public interface MemberService {
 	/*---------회원 탈퇴----------*/
 	//조건 - 소모임 예약 compareNow==2, book_state=<1인 경우 탈퇴 불가, 그 탈퇴 가능
 	public List<BookVO> selectBookList(int mem_num);
-	//조건 - 소모임 예약 book_state=<1인 경우 탈퇴 불가, 그 탈퇴 가능
-	public List<BookMatchingVO> selectBookMatchingList(int mem_num);
+	//소모임 - 부모글에 딸린 외래키 조건 삭제
 	//조건 - 중고 거래
-	public SecondVO selectSecond(int mem_num);
+	public List<SecondVO> selectSecond(int mem_num);
+	//조건 - 영화 예매
+	public int selectMovie(int mem_num);
 	//회원 탈퇴
 	public void quitMember(int mem_num);
 	

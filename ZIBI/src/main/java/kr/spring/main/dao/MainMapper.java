@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import kr.spring.main.vo.LastestContentVO;
+import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.vo.PerformanceVO;
 
 @Mapper
@@ -39,4 +40,13 @@ public interface MainMapper {
 	//집 체크리스트 최신 - 작성 필요
 	public List<LastestContentVO> selectLastestHouse();
 	
+	
+	//팔로우 많이 한 회원
+	public LastestContentVO selectMostFollowMember();
+	
+	//팔로워 많은 회원
+	public LastestContentVO selectMostFollowerMember();
+	
+	//작성글 많은 회원
+	public LastestContentVO selectMostContentMember();
 }

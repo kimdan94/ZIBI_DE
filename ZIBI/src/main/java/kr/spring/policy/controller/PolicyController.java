@@ -39,19 +39,20 @@ public class PolicyController {
 	@Value("${NA-API-KEY.kakaoAppKey}")
 	private String kakao_apikey;
 	
-	/* ---------- 사용자 - 1인 가구 비율 ----------*/
+	/* ---------- 사용자 ----------*/
+	//1인 가구 비율 페이지
 	@RequestMapping("/policy/policyCount")
 	public String policyCount(Model model) {
 		
-		List<PolicyVO> list = policyService.selectStatsList();
+		List<PolicyVO> list = policyService.selectStatsList(); //1인 가구 비율 목록
 		
 		model.addAttribute("list",list);
-		model.addAttribute("apikey", kakao_apikey);
+		model.addAttribute("kakao_apikey", kakao_apikey);
 				
 		return "policyCount";
 	}
 	
-	/* ---------- 사용자 - 진입 (1인 가구 메인) ----------*/
+	//정책 url 페이지
 	@RequestMapping("/policy/main")
 	public String policyMain(Model model) {
 		
@@ -66,12 +67,13 @@ public class PolicyController {
 		
 		model.addAttribute("list",list);
 		model.addAttribute("count", count);
-		model.addAttribute("apikey", kakao_apikey);
+		model.addAttribute("kakao_apikey", kakao_apikey);
 		
 		return "policyMain";
 	}
 
-	/* ---------- 관리자 페이지 - 진입 ----------*/
+	/* ---------- 관리자 정책 url 페이지 ----------*/
+	//진입
 	@RequestMapping("/admin/policy")
 	public String adminMain(Model model, @RequestParam(value = "pageNum",defaultValue = "1") int currentPage) {
 		
@@ -96,49 +98,21 @@ public class PolicyController {
 		return "adminPage";
 	}
 	
-	/* ---------- 관리자 페이지 - 등록폼  ----------*/
-	@GetMapping("/admin/policyInsert")
-	public String adminPolicyInsertForm(Model model) {
-		
-		model.addAttribute("apikey", kakao_apikey);
-		
-		return "adminPolicyInsert";
-	}
-	
-	/* ---------- 관리자 페이지 - 등록 submit  ----------*/
-	@PostMapping("/admin/policyInsert")
-	public String adminPolicyInsert(@Valid PolicyVO policyVO, BindingResult result) {
-		
-		log.debug("<<등록>> " + policyVO);
-		
-		if(result.hasErrors())
-			return "adminPolicyInsert";
-		
-		if(policyVO.getPolicy_url().equals(""))
-			policyVO.setPolicy_url("-");
-		
-		policyService.insertPolicy(policyVO);
-		
-		return "redirect:/admin/policy";
-	}
-	
-	/* ---------- 관리자 페이지 - 수정  ----------*/
+	//url 수정폼
 	@RequestMapping("/admin/policyModify")
 	public String adminPolicyModifyForm(@RequestParam int district_num, Model model) {
 		
 		PolicyVO policyVO = policyService.selectPolicy(district_num);
 		
 		model.addAttribute("policyVO", policyVO);
-		model.addAttribute("apikey", kakao_apikey);
+		model.addAttribute("kakao_apikey", kakao_apikey);
 		
 		return "adminPolicyModify";
 	}
 	
-	/* ---------- 관리자 페이지 - 수정 submit  ----------*/
+	//url 수정
 	@RequestMapping("/admin/policyModifySubmit")
 	public String adminPolicyModify(@Valid PolicyVO policyVO, BindingResult result) {
-		
-		log.debug("<<수정>> " + policyVO);
 		
 		if(result.hasErrors()) {
 			return "adminPolicyModify";
@@ -152,7 +126,32 @@ public class PolicyController {
 		return "redirect:/admin/policy";
 	}
 	
-	/* ---------- 관리자 페이지 - 삭제  ----------*/
+	/* ---------- 관리자 미사용 페이지 ----------*/
+	//url 등록폼
+	@GetMapping("/admin/policyInsert")
+	public String adminPolicyInsertForm(Model model) {
+		
+		model.addAttribute("kakao_apikey", kakao_apikey);
+		
+		return "adminPolicyInsert";
+	}
+	
+	//url 등록
+	@PostMapping("/admin/policyInsert")
+	public String adminPolicyInsert(@Valid PolicyVO policyVO, BindingResult result) {
+		
+		if(result.hasErrors())
+			return "adminPolicyInsert";
+		
+		if(policyVO.getPolicy_url().equals(""))
+			policyVO.setPolicy_url("-");
+		
+		policyService.insertPolicy(policyVO);
+		
+		return "redirect:/admin/policy";
+	}
+	
+	//url 삭제
 	@RequestMapping("/admin/policyDelete")
 	public String adminDistrictDelete(@RequestParam int district_num, Model model) {
 		
@@ -160,14 +159,4 @@ public class PolicyController {
 	
 		return "redirect:/admin/policy";
 	}
-		
-	
-	/* ---------- 영화 관리자 페이지 - 메인 ----------*/
-	@RequestMapping("/admin/performanceMain")
-	public String adminPerformance(Model model) {
-		
-		return "adminPerformanceMain";
-	}
-	
-	
 }

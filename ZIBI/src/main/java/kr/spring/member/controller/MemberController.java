@@ -23,7 +23,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
-import kr.spring.util.PageUtil_mem_num;
+import kr.spring.util.PageUtil_naMyPageOpenProfile;
 import kr.spring.util.PasswordCheckException;
 import kr.spring.util.socialMemberCheckException;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +60,7 @@ public class MemberController {
 		int count = memberService.selectOpenCount(mem_num);
 		String nickname = memberService.selectMember(mem_num).getMem_nickname();
 		
-		PageUtil_mem_num page = new PageUtil_mem_num(Integer.toString(mem_num),null, currentPage, count, 8,10,"mypageOpen"); //총 글 갯수?
+		PageUtil_naMyPageOpenProfile page = new PageUtil_naMyPageOpenProfile(Integer.toString(mem_num),null, currentPage, count, 8,10,"mypageOpen"); //총 글 갯수?
 
 		List<FollowListVO> list = null;
 		Map<String,Integer> map = new HashMap<String, Integer>();
@@ -103,10 +103,11 @@ public class MemberController {
 		if(result.hasFieldErrors("mem_email") || result.hasFieldErrors("mem_password") || result.hasFieldErrors("mem_nickname")) {//유효성 체크
 			return "registerForm";
 		}
+		
 		memberVO.setMem_num(memberService.createMemNum());
 		memberService.registerMember(memberVO);//회원가입
 		
-		return "home"; //타일즈
+		return "redirect:/main/home"; //타일즈
 	}
 	
 	/*------------------------------로그인/로그아웃----------------------------------*/
@@ -114,20 +115,20 @@ public class MemberController {
 	@GetMapping("/member/login")
 	public String loginForm(Model model) {
 		
-		String apikey = kakao_apikey;
-		model.addAttribute("apikey",apikey);
+		model.addAttribute("kakao_apikey",kakao_apikey);
+		model.addAttribute("naver_apikey",naver_apikey);
 		
 		return "loginForm"; //타일즈
 	}
 	
 	//로그인 처리
 	@RequestMapping("/member/login")
-	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session) {
+	public String loginSubmit(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
 		
-		log.debug("<<로그인>>" + memberVO);
-		
-		//로그인 체크
 		MemberVO db_member = null;
+		
+		model.addAttribute("kakao_apikey",kakao_apikey);
+		model.addAttribute("naver_apikey",naver_apikey);
 		
 		try {
 			db_member = memberService.checkEmail(memberVO.getMem_email());
@@ -135,7 +136,7 @@ public class MemberController {
 			
 			log.debug("<<로그인 check>>" + db_member);
 			
-			if(db_member!=null && db_member.getMem_social()!=0) { //소셜로 회원가입된 회원인 경우
+			if(db_member!=null && db_member.getMem_social()!=memberVO.getMem_social()) { //소셜로 회원가입된 회원인 경우, 소셜 체크 진행
 				throw new socialMemberCheckException();
 			} else if(db_member != null) {
 				check = db_member.checkPassword(memberVO.getMem_password()); //비밀번호 일치여부 확인
@@ -168,20 +169,20 @@ public class MemberController {
 	@RequestMapping("/member/loginNaver")
 	public String loginNaver(Model model) {
 		
-		String apikey = naver_apikey;
-		model.addAttribute("apikey",apikey);
+		model.addAttribute("naver_apikey",naver_apikey);
+		log.debug("<<네이버 로그인 진잉ㅂ>>");
 		
-		return "member/naverLogin";
+		return "member/naverLogin"; //jsp 호출
 	}
 	
 	//카카오 로그아웃 처리
 	@RequestMapping("/member/logoutKakao")
 	public String logoutKakao(Model model, HttpSession session) {
 		
-		model.addAttribute("apikey",kakao_apikey);
+		model.addAttribute("kakao_apikey",kakao_apikey);
 		session.invalidate();
 		
-		return "/member/logout";
+		return "member/logout"; //jsp 호출
 	}
 	
 	/*------------------------------프로필 사진----------------------------------*/

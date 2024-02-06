@@ -16,7 +16,7 @@
 		<p>연결된 사이트가 유효하지 않은 URL일 경우 관리자에게 문의해주세요</p>
 	</c:if>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakao_apikey}"></script>
 <script>
 	$('#policy_btn').toggleClass("mem-btn");
 	$('#policy_btn').toggleClass("mem-btn-green");

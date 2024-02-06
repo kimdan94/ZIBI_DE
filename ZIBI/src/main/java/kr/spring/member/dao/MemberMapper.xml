@@ -2,35 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.member.dao.MemberMapper">
 	
-	<!-- 소모임 나의 예약 내역 -->
+	<!-- 소모임 탈퇴 조건 체크 -->
 	<select id="selectBookList" parameterType="int" resultType="bookVO">
-		SELECT
-			mem_num,
-			<![CDATA[
-			CASE WHEN SYSDATE >= TO_DATE(apply_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
-			WHEN SYSDATE < TO_DATE(apply_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '2'
-			]]>
-			END compareNow
-		FROM book_matching
-		JOIN book USING (book_num)
-		WHERE mem_num=#{mem_num}
-	</select>
-	<select id="selectBookMatchingList" parameterType="int" resultType="bookMatchingVO">
-		SELECT
-			book_state
-		FROM book_matching
-		JOIN book USING (book_num)
-		<![CDATA[
-		WHERE apply_num=#{mem_num} AND book_state<=1
-		]]>
-	</select>
+	    <![CDATA[
+	    WITH CompareNowCTE AS (
+	        SELECT 
+	            apply_num,
+	            book_state,
+	            TO_DATE(apply_gatheringDate, 'YYYY-MM-DD HH24:MI') AS gathering_date,
+	            CASE 
+	                WHEN SYSDATE >= TO_DATE(apply_gatheringDate, 'YYYY-MM-DD HH24:MI') THEN '1'
+	                WHEN SYSDATE < TO_DATE(apply_gatheringDate, 'YYYY-MM-DD HH24:MI') THEN '2'
+	            END AS compareNow
+	        FROM book_matching
+	    )
+	    SELECT 
+	        apply_num,
+	        book_state,
+	        compareNow
+	    FROM CompareNowCTE
+	    WHERE compareNow = '2' AND book_state <= 1 AND apply_num = ${mem_num}
+	    ]]>
+    </select>
 	
+	<!-- 중고 거래 탈퇴 조건 체크 -->
 	<select id="selectSecond" parameterType="int" resultType="secondVO">
-		SELECT mem_num, sc_sellstatus, sc_buyer_num, sc_order_status 
+		SELECT *
 		FROM second LEFT OUTER JOIN second_order USING (sc_num)
 		WHERE (mem_num=#{mem_num} or sc_buyer_num=#{mem_num}) AND (sc_sellstatus!=3 OR sc_order_status!=3)
 	</select>
 	
+	<!-- 영화 예매 탈퇴 조건 체크 -->
+	<select id="selectMovie" parameterType="int" resultType="int">
+		SELECT COUNT(*) 
+		FROM perform_choice choice 
+		JOIN ticketing t USING (ticketing_num) 
+		WHERE choice.mem_num=#{mem_num} AND ticketing_date > SYSDATE
+	</select>
+
 	<!-- 회원 필수 정보 insert -->
 	<insert id="insertMember" parameterType="memberVO">
 		INSERT 
@@ -69,7 +78,7 @@
 	<update id="updateMemberDetail" parameterType="memberVO">
 		UPDATE member_detail
 		SET 
-			mem_nickname=#{mem_nickname},mem_name=#{mem_name},mem_phone=#{mem_phone},mem_zipcode=#{mem_zipcode},mem_address1=#{mem_address1},mem_address2=#{mem_address2},mem_modidate=SYSDATE 
+			mem_name=#{mem_name},mem_phone=#{mem_phone},mem_zipcode=#{mem_zipcode},mem_address1=#{mem_address1},mem_address2=#{mem_address2},mem_modidate=SYSDATE 
 		WHERE mem_num=#{mem_num}
 	</update>
 	
@@ -82,7 +91,12 @@
 			<if test="category==3">
 				category=3
 			</if>
-			<!-- 영화 티켓팅(4) where 절 등록 피룡 -->
+			<if test="category==4">
+				category=4
+			</if>
+			<if test="category==5">
+				category=5
+			</if>
 		</where>
 	</sql>
 	
@@ -92,7 +106,12 @@
 		FROM <![CDATA[
 				(SELECT book_num num, REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') title, book_regdate reg_date, 2 category FROM book WHERE mem_num=#{mem_num}
 					UNION
-					SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, helper_reg_date reg_date, 3 category FROM helper WHERE mem_num=#{mem_num})
+					SELECT book_num num, REPLACE(REPLACE(apply_title,'<','&lt;'),'>','&gt;') title, book_matchdate reg_date, 3 category FROM book_matching WHERE apply_num=#{mem_num}
+					UNION
+					SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, helper_reg_date reg_date, 4 category FROM helper WHERE mem_num=#{mem_num}
+					UNION
+					SELECT performance_num num, REPLACE(REPLACE(performance_title,'<','&lt;'),'>','&gt;') title, payment_date reg_date, 5 category FROM perform_payment a JOIN perform_choice USING (choice_num) JOIN ticketing USING (ticketing_num) JOIN performance USING (performance_num) WHERE a.mem_num=#{mem_num}
+					)
 				]]>
 		<include refid="dealCategory"/>
 	</select>
@@ -101,10 +120,16 @@
 	<select id="selectDealList" parameterType="map" resultType="dealListVO">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum
-				FROM ( SELECT *
-						FROM (SELECT book_num num, <![CDATA[REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;')]]> title, book_regdate reg_date, 2 category FROM book WHERE mem_num=#{mem_num}
+				FROM ( SELECT * <![CDATA[
+						FROM ((SELECT book_num num, REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') title, book_regdate reg_date, 2 category FROM book WHERE mem_num=#{mem_num}
 								UNION
-								SELECT helper_num num, <![CDATA[REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;')]]> title, helper_reg_date reg_date, 3 category FROM helper WHERE mem_num=#{mem_num})
+								SELECT book_num num, REPLACE(REPLACE(apply_title,'<','&lt;'),'>','&gt;') title, book_matchdate reg_date, 3 category FROM book_matching WHERE apply_num=#{mem_num}
+								UNION
+								SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, helper_reg_date reg_date, 4 category FROM helper WHERE mem_num=#{mem_num})
+								UNION ALL
+								SELECT performance_num num, REPLACE(REPLACE(performance_title,'<','&lt;'),'>','&gt;') title, payment_date reg_date, 5 category FROM perform_payment a JOIN perform_choice USING (choice_num) JOIN ticketing USING (ticketing_num) JOIN performance USING (performance_num) WHERE a.mem_num=#{mem_num}
+								)
+								]]>
 						<include refid="dealCategory"/>)a)
 		<![CDATA[
 		WHERE rnum>=#{start} AND rnum<=#{end}
@@ -125,6 +150,9 @@
 			<if test="category==4">
 				category=4
 			</if>
+			<if test="category==5">
+				category=5
+			</if>
 		</where>
 	</sql>
 	
@@ -132,16 +160,23 @@
 	<select id="selectActCount" parameterType="map" resultType="int">
 		SELECT COUNT(*)
 		FROM <![CDATA[
-			(SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, community_reg_date reg_date, 2 category, 0 subCategory FROM community WHERE mem_num=#{mem_num}
+			(SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, 2 category, 0 subCategory FROM community WHERE mem_num=#{mem_num}
 				UNION
-				SELECT community_num num, REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') title, re_date reg_date, 3 category, 0 subCategory FROM community_reply WHERE mem_num=#{mem_num}
+				SELECT community_num num, REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') title, 3 category, 1 subCategory FROM community_reply WHERE mem_num=#{mem_num}
 				UNION
-				SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, SYSDATE reg_date, 4 category, 1 subCategory FROM community_fav t JOIN community f USING(community_num) WHERE t.mem_num=#{mem_num}
+				SELECT book_num num, REPLACE(REPLACE(book_rep,'<','&lt;'),'>','&gt;') title, 3 category, 2 subCategory FROM book_reply WHERE mem_num=#{mem_num}
 				UNION
-				SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, SYSDATE reg_date, 4 category, 2 subCategory FROM helper_scrap t JOIN helper f USING(helper_num) WHERE t.mem_num=#{mem_num}
+				SELECT helper_num num, REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') title, 3 category, 3 subCategory FROM helper_reply WHERE mem_num=#{mem_num}
 				UNION
-				SELECT book_num num, REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') title, SYSDATE reg_date, 4 category, 3 subCategory FROM book_scrap t JOIN book f USING(book_num) WHERE t.mem_num=#{mem_num})
-				]]>
+				SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, 4 category, 1 subCategory FROM community_fav t JOIN community f USING(community_num) WHERE t.mem_num=#{mem_num}
+				UNION
+				SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, 4 category, 2 subCategory FROM helper_scrap t JOIN helper f USING(helper_num) WHERE t.mem_num=#{mem_num}
+				UNION
+				SELECT book_num num, REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') title, 4 category, 3 subCategory FROM book_scrap t JOIN book f USING(book_num) WHERE t.mem_num=#{mem_num}
+				UNION
+				SELECT book_num num, REPLACE(REPLACE(book_rev,'<','&lt;'),'>','&gt;') title, 5 category, 0 subCategory FROM book_review WHERE mem_num=#{mem_num}
+			)
+			]]>
 		<include refid="actCategory"/>
 	</select>
 	
@@ -149,22 +184,29 @@
 	<select id="selectActList" parameterType="map" resultType="actListVO">
 		SELECT *
 		FROM (SELECT a.*, rownum rnum
-				FROM ( SELECT * <![CDATA[
-						FROM (SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, community_reg_date reg_date, 2 category, 0 subCategory FROM community WHERE mem_num=#{mem_num}
+				FROM ( SELECT * 
+						FROM ( <![CDATA[
+								SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, 2 category, 0 subCategory FROM community WHERE mem_num=#{mem_num}
 								UNION
-								SELECT community_num num, REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') title, re_date reg_date, 3 category, 0 subCategory FROM community_reply WHERE mem_num=#{mem_num}
+								SELECT community_num num, REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') title, 3 category, 1 subCategory FROM community_reply WHERE mem_num=#{mem_num}
 								UNION
-								SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, SYSDATE reg_date, 4 category, 1 subCategory FROM community_fav t JOIN community f USING(community_num) WHERE t.mem_num=#{mem_num}
+								SELECT book_num num, REPLACE(REPLACE(book_rep,'<','&lt;'),'>','&gt;') title, 3 category, 2 subCategory FROM book_reply WHERE mem_num=#{mem_num}
 								UNION
-								SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, SYSDATE reg_date, 4 category, 2 subCategory FROM helper_scrap t JOIN helper f USING(helper_num) WHERE t.mem_num=#{mem_num}
+								SELECT helper_num num, REPLACE(REPLACE(re_content,'<','&lt;'),'>','&gt;') title, 3 category, 3 subCategory FROM helper_reply WHERE mem_num=#{mem_num}
 								UNION
-								SELECT book_num num, REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') title, SYSDATE reg_date, 4 category, 3 subCategory FROM book_scrap t JOIN book f USING(book_num) WHERE t.mem_num=#{mem_num})
-						]]> 
-					<include refid="actCategory"/>)a)
+								SELECT community_num num, REPLACE(REPLACE(community_title,'<','&lt;'),'>','&gt;') title, 4 category, 1 subCategory FROM community_fav t JOIN community f USING(community_num) WHERE t.mem_num=#{mem_num}
+								UNION
+								SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, 4 category, 2 subCategory FROM helper_scrap t JOIN helper f USING(helper_num) WHERE t.mem_num=#{mem_num}
+								UNION
+								SELECT book_num num, REPLACE(REPLACE(book_title,'<','&lt;'),'>','&gt;') title, 4 category, 3 subCategory FROM book_scrap t JOIN book f USING(book_num) WHERE t.mem_num=#{mem_num}
+								UNION
+								SELECT book_num num, REPLACE(REPLACE(book_rev,'<','&lt;'),'>','&gt;') title, 5 category, 0 subCategory FROM book_review WHERE mem_num=#{mem_num}
+							) ]]> 
+					<include refid="actCategory"/>
+					)a)
 		<![CDATA[
 		WHERE rnum>=#{start} AND rnum<=#{end}
 		]]>
-		ORDER BY reg_date DESC
 	</select>
 	
 	<!-- 팔로우 수 -->
@@ -200,11 +242,12 @@
 								SELECT mem_num, sc_num num, REPLACE(REPLACE(sc_title,'<','&lt;'),'>','&gt;') title, sc_filename photo,sc_reg_date reg_date, 4 category FROM second)
 							]]>
 						JOIN member USING (mem_num)
-						WHERE mem_num IN (SELECT mem_num FROM follow WHERE fmem_num=#{fmem_num}))a)
+						WHERE mem_num IN (SELECT mem_num FROM follow WHERE fmem_num=#{fmem_num})
+						ORDER BY reg_date DESC
+						)a)
 		<![CDATA[
 		WHERE rnum>=#{start} AND rnum<=#{end}
 		]]>
-		ORDER BY reg_date DESC
 	</select>
 	
 	<!-- 오픈프로필 글 개수 -->

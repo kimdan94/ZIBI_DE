@@ -31,9 +31,9 @@
 		<li><img
 			src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${community.mem_num}"
 			width="40" height="40" class="my-photo radius"></li>
-		<li><span class="re">&nbsp;${community.mem_nickname}</span>&nbsp;<input type="button" value="팔로우"><br> <c:if
+		<li><span class="re">&nbsp;${community.mem_nickname}</span><br> <c:if
 				test="${!empty community.community_modify_date}">
-			최근 수정일 : ${community.community_modify_date}
+			&nbsp;최근 수정일 : ${community.community_modify_date}
 			</c:if> <c:if test="${empty community.community_modify_date}">
 			&nbsp; 작성일 : ${community.community_reg_date}&nbsp;
 			</c:if>조회 : ${community.community_hit}
@@ -131,7 +131,7 @@
 			value="${community.community_num}" id="community_num">
 		<h3>&nbsp;댓글 작성하기</h3>
 		<div id="re_first">
-				<span class="letter-count">300/300</span>
+				<span class="letter-count">300/300 </span>
 			</div>
 		<br>
 		<div id="form-commentInfo">
@@ -141,7 +141,6 @@
 			    ><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 		<button id="submit">등록</button>
 		</div>
-		&nbsp; ※ 부적절한 댓글은 관리자에 의해 삭제될 수 있습니다.
 	</form>
 	<br>
 	<!-- 댓글 목록 출력 시작 -->

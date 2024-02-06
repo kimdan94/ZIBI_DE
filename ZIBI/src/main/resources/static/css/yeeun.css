@@ -257,7 +257,7 @@ form#mre_form{
 }
 /*----------- 댓글 등록 버튼 -----------*/
 #form-commentInfo{
-    width: 162%;
+    width: 155%;
 }
 #comment-input{
     width: 88%;
@@ -548,7 +548,7 @@ a:active {
 	margin-right:5px;
 }
 .order1{
-	margin-left:1150px;
+	margin-left:800px;
 }
 .float-left{
 	float:left;

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <!-- 내용 시작 -->
 <c:if test="${book.book_onoff == 2}">
 	<script type="text/javascript">
@@ -376,7 +377,6 @@
 	});    
 </script>
 <%-- Daum 지도 API 끝 --%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.scrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.reply.js"></script>

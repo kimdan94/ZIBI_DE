@@ -114,7 +114,7 @@ public class HelperAjaxController {
 					mapJson.put("status", "noSol");
 				}
 			}else {
-				mapJson.put("status", "noSol");
+				mapJson.put("status", "noSol");//에러방지 
 			}
 		}
 		return mapJson;

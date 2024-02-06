@@ -102,6 +102,11 @@
 	padding:15px;
 	
 }
+.border-color2{
+	border-color: #D8D8D8;
+	border-radius: 20px;
+	padding:10px;
+}
 .hr-line{
 	height: 1px;
 	background: #bbb;
@@ -119,18 +124,25 @@
 .radius{
 	border-radius: 30px;
 }
+.radius2{
+	border-radius: 80px;
+}
 
 /*상세글 카테고리*/
 .border_cate{
 	font-size:20px;
 	color:white;
 	border-radius:3px;
-	width:85px;
+	width:105px;
 	margin-top:10px;
 	padding:10px;
 	border-radius: 10px;
 }
-
+.font-color{
+	color:#424242;
+	font-size: 20px;
+	font-weight: bold;
+}
 
 
 
@@ -142,16 +154,19 @@
 -------------------------*/
 div#reply_div{
 	padding:5px 80px 20px 10px;
-	margin-top:10px;
 	background-color:white;
 	border:2px solid #D8D8D8;
 	border-radius: 10px;
 	float:left;
+	margin-top:10px;
 	margin-bottom:30px;
+	margin-left:20px;
 }
 form#re_form{
 	width:650px;
+	height:100px;
 	border:none;
+	background-color: white;
 }
 span.re-title{
 	color:#000;
@@ -162,6 +177,9 @@ span.letter-count{
 	font-size:10pt;
 	color:#999;
 }
+.margin-span{
+	margin-left:480px;
+}
 textarea.rep-content{
 	width:98%;
 	height:50px;
@@ -169,17 +187,16 @@ textarea.rep-content{
 	border-color: #D8D8D8;
 	border-radius: 10px;
 }
-div#re_first,div#mre_first{
-	float:left;
-	width:70%;
-	padding-left:15px;
-	margin-bottom:10px;
+textarea.rep-content2{
+	width:80%;
+	height:50px;
+	margin-top:20px ;
+	margin-left:15px;
+	border-color: #D8D8D8;
+	border-radius: 10px;
+	resize: none;
 }
-div#re_second, div#mre_second{
-	float:left;
-	width:19%;
-	margin-bottom:10px;
-}
+
 div#loading{
 	width:100px;
 	height:50px;
@@ -203,8 +220,10 @@ div#output{
 }
 form#mre_form{
 	border:1px solid #D8D8D8;
-	margin:10px;
+	width:700px;
+	height:120px;
 	border-radius: 10px;
+	margin-left:60px;
 }
 .btn-reply{/*작성하기*/
 	border-color: #D8D8D8;
@@ -216,8 +235,30 @@ form#mre_form{
 }
 .margin-photo{
 	margin-right:10px;
+	margin-left:10px;
 }
-
+.margin-date{
+	margin-right:30px;
+}
+.margin-content{
+	margin-left:10px;
+}
+.margin-address{
+	margin-left:10px;
+	margin-bottom:10px;;
+}
+.margin-top{
+	margin-top:15px;
+}
+.margin-bottom{
+	margin-bottom:15px;
+}
+.margin-left{
+	margin-left:10px;
+}
+.margin-keyword{
+	margin-left:100px;
+}
 
 /*상세글 박스*/
 .detail-border{
@@ -235,9 +276,48 @@ form#mre_form{
 	width:200px;
 }
 
+.btn-detail{/*작성하기*/
+	font-size: 15px;
+	border: 1px solid #ededed !important;
+	box-shadow: none;
+	height:50px;
+	border-radius:7px;
+}
 
+.border-width{
+	width:150px;
+}
+.border-width2{
+	width:100px;
+	height:50px;
+}
+.border-keyword{
+	height: 50px;
+}
 
-
-
-
-
+/*버튼*/
+.mem-btn, .mem-btn:focus{
+	font-size: .9em;
+	border: 1px solid #ededed !important;
+	box-shadow: none;
+}
+.mem-btn-green,
+.mem-btn-green:focus{
+	background: #32a77b;
+    color: white;
+    box-shadow: none;
+}
+.mem-btn:hover,active,visited,
+.mem-btn-green:hover,active,visited{
+    background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+}
+.delete-btn2{
+	font-size: .9em;
+	border: 1px solid #ededed !important;
+	box-shadow: none;
+	width:80px;
+	border-radius: 20px;
+}

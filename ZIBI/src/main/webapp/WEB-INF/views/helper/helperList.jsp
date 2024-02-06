@@ -1,25 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
-<!-- Icon Font Stylesheet -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-<!-- Template Stylesheet -->
-<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<!-- ³»¿ë ½ÃÀÛ -->
+<!-- ë‚´ìš© ì‹œì‘ -->
 <div class="text-center">
 	<ul class="nav nav-pills d-inline-flex justify-content-center mb-2">
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=1'"> <span class="text-dark" style="width: 150px;">ÇïÇÁ¹Ì</span></a>
+		<a class="btn mem-btn-green radius border-width" 
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=1'"> <span class="text-dark" style="width: 150px;">í—¬í”„ë¯¸</span></a>
 		</li>
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=2'"> <span class="text-dark" style="width: 150px;">ÇïÇÁÀ¯</span></a>
+		<a class="btn mem-btn-green radius border-width"
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=2'"> <span class="text-dark" style="width: 150px;">í—¬í”„ìœ </span></a>
 		</li>
 	</ul>
 </div>
@@ -31,78 +24,78 @@
 	<ul class="nav nav-pills d-inline-flex justify-content-center mb-3">
 		<li class="nav-item p-2">
 		<a class="d-flex py-2 mx-2 border border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}'"> <span class="text-dark" style="width: 70px;">ÀüÃ¼</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}'"> <span class="text-dark" style="width: 70px;">ì „ì²´</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=1'"> <span class="text-dark" style="width: 70px;">¹ú·¹</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=1'"> <span class="text-dark" style="width: 70px;">ë²Œë ˆ</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=2'"> <span class="text-dark" style="width: 70px;">Á¶¸³</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=2'"> <span class="text-dark" style="width: 70px;">ì¡°ë¦½</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=3'"> <span class="text-dark" style="width: 70px;">¼ö¸®</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=3'"> <span class="text-dark" style="width: 70px;">ìˆ˜ë¦¬</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=4'"> <span class="text-dark" style="width: 70px;">¼ÒºĞ</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=4'"> <span class="text-dark" style="width: 70px;">ì†Œë¶„</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a class="d-flex py-2 mx-2 border bg-white rounded-pill active"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=5'"> <span class="text-dark" style="width: 70px;">±âÅ¸</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=5'"> <span class="text-dark" style="width: 70px;">ê¸°íƒ€</span></a>
 		</li>
 	</ul>
 </div>
 	<form action="list" id="search_form" method="get">
-			<div>
-				<select name="keyfield" id="keyfield" class="float-left border-color">
-					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>Á¦¸ñ</option>
-					<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>³»¿ë</option>
-					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>ÁÖ¼Ò</option>
-					<option value="4" <c:if test="${param.keyfield==4}">selected</c:if>>Á¦¸ñ+³»¿ë</option>
+			<div class="margin-keyword">
+				<select name="keyfield" id="keyfield" class="float-left border-color2">
+					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>ì œëª©</option>
+					<option value="2" <c:if test="${param.keyfield==2}">selected</c:if>>ë‚´ìš©</option>
+					<option value="3" <c:if test="${param.keyfield==3}">selected</c:if>>ì£¼ì†Œ</option>
+					<option value="4" <c:if test="${param.keyfield==4}">selected</c:if>>ì œëª©+ë‚´ìš©</option>
 				</select>
 			</div>
 			<div class="align-center">
 				<input type="search" name="keyword" id="keyword"
-				class="form-control bg-transparent p-2 helper-btn-size float-left margin" value="${param.keyword}">
+				class="w-50 form-control p-3 float-left margin border-keyword" value="${param.keyword}">
 				<div class="float-right"><input type="image" src="../images/de/search.png" class="input-group-text p-3 search-size"></div>
 			</div>
 			<br>
 			<div class="align-right">
 			<c:if test="${!empty user}">
-			<input type="button" value="±Û¾²±â" onclick="location.href='write'"
-			 	class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-4 py-1 mb-1 float-rigth margin1">
+			<input type="button" value="ê¸€ì“°ê¸°" onclick="location.href='write'"
+			 	class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-1 float-rigth margin1">
 			</c:if>
-			<input type="button" value="¸ñ·ÏÀ¸·Î" onclick="location.href='list'"
-				class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-4 py-1 mb-1 float-rigth margin">
+			<input type="button" value="ëª©ë¡ìœ¼ë¡œ" onclick="location.href='list'"
+				class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-1 float-rigth margin">
 			</div>	
 			<br><br>
 	<div class="float-rigth">
-		<select id="order" name="order" class="align-right">
-			<option value="1" <c:if test="${param.order==1}">selected</c:if>>ÃÖ½Å¼ø</option>
-			<option value="2" <c:if test="${param.order==2}">selected</c:if>>Á¶È¸¼ö</option>
-			<option value="3" <c:if test="${param.order==3}">selected</c:if>>½ºÅ©·¦</option>
+		<select id="order" name="order">
+			<option value="1" <c:if test="${param.order==1}">selected</c:if>>ìµœì‹ ìˆœ</option>
+			<option value="2" <c:if test="${param.order==2}">selected</c:if>>ì¡°íšŒìˆ˜</option>
+			<option value="3" <c:if test="${param.order==3}">selected</c:if>>ìŠ¤í¬ë©</option>
 		</select>
 	</div>
 	</form>
 	<br><br>
 	<c:if test="${count == 0}">
-		<div class="result-display">Ç¥½ÃÇÒ °Ô½Ã¹°ÀÌ ¾ø½À´Ï´Ù.</div>
+		<div class="result-display">í‘œì‹œí•  ê²Œì‹œë¬¼ì´ ì—†ìŠµë‹ˆë‹¤.</div>
 	</c:if>
 	<hr size="8" width="100%" class="hr-line">
 	<c:if test="${count > 0}">
 	<c:forEach var="helper" items="${list}">
 			<div class="float-left" style="font-size:20px;"> 
-			<c:if test="${helper.helper_select == 1}"><div>ÇïÇÁ¹Ì</div></c:if>
-			<c:if test="${helper.helper_select == 2}"><div>ÇïÇÁÀ¯</div></c:if>
+			<c:if test="${helper.helper_select == 1}"><div>í—¬í”„ë¯¸</div></c:if>
+			<c:if test="${helper.helper_select == 2}"><div>í—¬í”„ìœ </div></c:if>
 			<hr size="3" noshade="noshade" width="100%">
-			<c:if test="${helper.helper_category ==  1}"><div>¹ú·¹</div></c:if>
-			<c:if test="${helper.helper_category ==  2}"><div>Á¶¸³</div></c:if>
-			<c:if test="${helper.helper_category ==  3}"><div>¼ö¸®</div></c:if>
-			<c:if test="${helper.helper_category ==  4}"><div>¼ÒºĞ</div></c:if>
-			<c:if test="${helper.helper_category ==  5}"><div>±âÅ¸</div></c:if>
+			<c:if test="${helper.helper_category ==  1}"><div>ë²Œë ˆ</div></c:if>
+			<c:if test="${helper.helper_category ==  2}"><div>ì¡°ë¦½</div></c:if>
+			<c:if test="${helper.helper_category ==  3}"><div>ìˆ˜ë¦¬</div></c:if>
+			<c:if test="${helper.helper_category ==  4}"><div>ì†Œë¶„</div></c:if>
+			<c:if test="${helper.helper_category ==  5}"><div>ê¸°íƒ€</div></c:if>
 			</div>        
 			<div class="float-left1">
 			<c:if test="${empty helper.helper_filename}">
@@ -115,7 +108,7 @@
 			</c:if>
 			</div>
 			<div class="float-left2 align-center">
-			<div class="align-center" id="output_text">[ÇØ°á Áß]</div>
+			<div class="align-center" id="output_text">[í•´ê²° ì¤‘]</div>
             <div class="align-center font-size1"><a href="detail?helper_num=${helper.helper_num}">${helper.helper_title}</a></div><br>
 			<div class="align-center">${helper.helper_address1}</div><br>
 			<div class="align-center">${helper.mem_nickname}</div><div class="align-center">
@@ -133,17 +126,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	//°Ë»ö À¯È¿¼º Ã¼Å©
+	//ê²€ìƒ‰ ìœ íš¨ì„± ì²´í¬
 	$('#search_form').submit(function(){
 		if($('#keyword').val().trim()==''){
-			alert('°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä!');
+			alert('ê²€ìƒ‰ì–´ë¥¼ ì…ë ¥í•˜ì„¸ìš”!');
 			$('#keyword').val('').focus();
 			return false;
 		}
 	});//end of submit
 	
-	//Á¤·Ä ¼±ÅÃ
-	$('#order').change(function(){					//¿©·¯°³ ¿¬°áÇÒ ¶© &·Î ¿¬°á
+	//ì •ë ¬ ì„ íƒ
+	$('#order').change(function(){					//ì—¬ëŸ¬ê°œ ì—°ê²°í•  ë• &ë¡œ ì—°ê²°
 		if(${!empty param.helper_category}){
 			location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val()+'&helper_select=${param.helper_select}&helper_category=${param.helper_category}';
 		}else{
@@ -153,4 +146,4 @@ $(function(){
 	
 });//end of function
 </script>
-<!-- ³»¿ë ³¡ -->
+<!-- ë‚´ìš© ë -->

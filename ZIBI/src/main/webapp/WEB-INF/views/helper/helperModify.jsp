@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<link href="${pageContext.request.contextPath}/common/css" rel="stylesheet">
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
+<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-<!-- ³»¿ë ½ÃÀÛ -->
+<!-- ë‚´ìš© ì‹œì‘ -->
 <div class="container-fluid contact py-6">
    <div class="d-flex justify-content-center">
 	<div class="rounded login-form col-md-4 col-lg-6">
@@ -16,34 +17,35 @@
 		enctype="multipart/form-data">
 		<form:hidden path="helper_num"/>
 		<form:errors element="div" />
-		<h2>±Û¾²±â</h2>
+		<h2>ê¸€ìˆ˜ì •</h2>
 		<hr size="3" noshade="noshade" width="100%">
 		<div>
-			<form:radiobutton path="helper_select" id="helper_select1" value="1"/><label for="helper_select1">ÇïÇÁ¹Ì</label>
-			<form:radiobutton path="helper_select" id="helper_select2" value="2"/><label for="helper_select1">ÇïÇÁÀ¯</label>
-			<form:errors path="helper_select"/>
+			<form:label path="helper_select">ê²Œì‹œíŒ</form:label>
+			<form:radiobutton path="helper_select" id="helper_select1" value="1" class="margin-content"/><label for="helper_select1">í—¬í”„ë¯¸</label>
+			<form:radiobutton path="helper_select" id="helper_select2" value="2"/><label for="helper_select1">í—¬í”„ìœ </label>
+			<form:errors path="helper_select" cssClass="error-color"/>
 		</div>
         <br>
 		<div>
-            <form:label path="helper_category">Ä«Å×°í¸®</form:label>
-            <form:select path="helper_category" id="helper_category"><!-- class ³Ö¾î¾ßÇÔ -->
-            	<form:option value="0" disabled="disabled" label="Ä«Å×°í¸®"/>
-       			<form:option value="1" label="¹ú·¹" />
-				<form:option value="2" label="Á¶¸³" />
-				<form:option value="3" label="¼ö¸®" />
-				<form:option value="4" label="¼ÒºĞ" />
-				<form:option value="5" label="±âÅ¸" />
+            <form:label path="helper_category">ì¹´í…Œê³ ë¦¬</form:label>
+            <form:select path="helper_category" id="helper_category"><!-- class ë„£ì–´ì•¼í•¨ -->
+            	<form:option value="0" disabled="disabled" label="ì¹´í…Œê³ ë¦¬"/>
+       			<form:option value="1" label="ë²Œë ˆ" />
+				<form:option value="2" label="ì¡°ë¦½" />
+				<form:option value="3" label="ìˆ˜ë¦¬" />
+				<form:option value="4" label="ì†Œë¶„" />
+				<form:option value="5" label="ê¸°íƒ€" />
 			</form:select>
         </div>
         <br>
-        
         <div>
-       		<form:label path="helper_title">Á¦¸ñ</form:label> 
-			<form:input path="helper_title" class="w-100 form-control p-3" /> 
+       		<form:label path="helper_title">ì œëª©</form:label> 
+			<form:input path="helper_title" class="w-100 form-control p-3 margin-top" /> 
 			<form:errors path="helper_title" cssClass="error-color"/>
         </div>
+        <br>
         <div>
-        	<b>³»¿ë</b>
+        	<div class="margin-bottom">ë‚´ìš©</div>
         	<form:textarea path="helper_content"/> 
 			<form:errors path="helper_content" cssClass="error-color"/> 
 			<script type="text/javascript">
@@ -67,18 +69,18 @@
         </div>
         <br>
         <div>  
-        	<form:label path="upload">½æ³×ÀÏ</form:label>
+        	<form:label path="upload">ì¸ë„¤ì¼</form:label>
 			<input type="file" name="upload" id="upload"
 					accept="image/gif,image/png,image/jpeg,image/jpg">
 			<form:errors path="upload"/>
 			<c:if test="${!empty helperVO.helper_filename}">
-			<div id="file_detail">(${helperVO.helper_filename})»çÁøÀÌ µî·ÏµÇ¾î ÀÖ½À´Ï´Ù.
-				<input type="button" value="ÆÄÀÏ»èÁ¦" id="file_del">
+			<div id="file_detail">(${helperVO.helper_filename})ì‚¬ì§„ì´ ë“±ë¡ë˜ì–´ ìˆìŠµë‹ˆë‹¤.
+				<input type="button" value="íŒŒì¼ì‚­ì œ" id="file_del" class="delete-btn2">
 			</div>
 			<script type="text/javascript">
 			$(function(){
 				$('#file_del').click(function(){
-					let choice = confirm('»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?');
+					let choice = confirm('ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
 					if(choice){
 						$.ajax({
 							url:'deleteFile',
@@ -87,15 +89,15 @@
 							dataType:'json',
 							success:function(param){
 								if(param.result == 'logout'){
-									alert('·Î±×ÀÎ ÈÄ »ç¿ëÇÏ¼¼¿ä');
+									alert('ë¡œê·¸ì¸ í›„ ì‚¬ìš©í•˜ì„¸ìš”');
 								}else if(param.result == 'success'){
 									$('#file_detail').hide();
 								}else{
-									alert('ÆÄÀÏ »èÁ¦ ¿À·ù ¹ß»ı');
+									alert('íŒŒì¼ ì‚­ì œ ì˜¤ë¥˜ ë°œìƒ');
 								}
 							},
 							error:function(){
-								alert('³×Æ®¿öÅ© ¿À·ù ¹ß»ı');
+								alert('ë„¤íŠ¸ì›Œí¬ ì˜¤ë¥˜ ë°œìƒ');
 							}
 						});
 					}
@@ -106,17 +108,18 @@
         </div>
         <br>
         <div>
-        	<form:label path="helper_address1">ÁÖ¼Ò</form:label>
+        	<form:label path="helper_address1">ì£¼ì†Œ</form:label>
+        	<input type="button" onclick="sample5_execDaumPostcode()" value="ì£¼ì†Œ ê²€ìƒ‰"
+        		class="default-btn margin-address">
 			<form:input path="helper_address1" class="w-100 form-control p-3"
-				placeholder="ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä" id="sample5_address"/>
+				placeholder="ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”" id="sample5_address"/>
 			<form:errors path="helper_address1" cssClass="error-color"/>
         </div>
-        <input type="button" onclick="sample5_execDaumPostcode()" value="ÁÖ¼Ò °Ë»ö"
-        		class="default-btn">
-        <br><br>
+        <br>
 		<div>
-			<form:label path="helper_address2">»ó¼¼ÁÖ¼Ò</form:label>
-			<form:input path="helper_address2" class="w-100 form-control p-3"/>
+			<form:label path="helper_address2">ìƒì„¸ì£¼ì†Œ</form:label>
+			<form:input path="helper_address2" class="w-100 form-control p-3 margin-top"
+				placeholder="ìƒì„¸ì£¼ì†ŒëŠ” ì„ íƒì‚¬í•­ì…ë‹ˆë‹¤."/>
 			<form:errors path="helper_address2" cssClass="error-color"/>
 		</div>
         <div>
@@ -124,29 +127,29 @@
         </div>
 		<br>
 		<div class="align-center">
-			<form:button class="default-btn">¼öÁ¤</form:button>
-			<input type="button" value="¸ñ·Ï" class="default-btn"
+			<form:button class="btn mem-btn-green w-25">ìˆ˜ì •</form:button>
+			<input type="button" value="ëª©ë¡ìœ¼ë¡œ" class="btn mem-btn w-25"
 				onclick="location.href='list'">
 		</div>
 	</form:form>
 </div>
 </div>
 </div>
-<!-- Daum Áöµµ API -->
+<!-- Daum ì§€ë„ API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=397d490d4a8bb2a2dc0a8a1612615084&libraries=services"></script>
 <script>
-    var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div
+    var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div
         mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // ÁöµµÀÇ Áß½ÉÁÂÇ¥
-            level: 5 // ÁöµµÀÇ È®´ë ·¹º§
+            center: new daum.maps.LatLng(37.537187, 127.005476), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ
+            level: 5 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
         };
 
-    //Áöµµ¸¦ ¹Ì¸® »ı¼º
+    //ì§€ë„ë¥¼ ë¯¸ë¦¬ ìƒì„±
     var map = new daum.maps.Map(mapContainer, mapOption);
-    //ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼º
+    //ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±
     var geocoder = new daum.maps.services.Geocoder();
-    //¸¶Ä¿¸¦ ¹Ì¸® »ı¼º
+    //ë§ˆì»¤ë¥¼ ë¯¸ë¦¬ ìƒì„±
     var marker = new daum.maps.Marker({
         position: new daum.maps.LatLng(37.537187, 127.005476),
         map: map
@@ -155,25 +158,25 @@
     function sample5_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                var addr = data.address; // ÃÖÁ¾ ÁÖ¼Ò º¯¼ö
+                var addr = data.address; // ìµœì¢… ì£¼ì†Œ ë³€ìˆ˜
 
-                // ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                // ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
                 document.getElementById("sample5_address").value = addr;
-                // ÁÖ¼Ò·Î »ó¼¼ Á¤º¸¸¦ °Ë»ö
+                // ì£¼ì†Œë¡œ ìƒì„¸ ì •ë³´ë¥¼ ê²€ìƒ‰
                 geocoder.addressSearch(data.address, function(results, status) {
-                    // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é
+                    // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´
                     if (status === daum.maps.services.Status.OK) {
 
-                        var result = results[0]; //Ã¹¹øÂ° °á°úÀÇ °ªÀ» È°¿ë
+                        var result = results[0]; //ì²«ë²ˆì§¸ ê²°ê³¼ì˜ ê°’ì„ í™œìš©
 
-                        // ÇØ´ç ÁÖ¼Ò¿¡ ´ëÇÑ ÁÂÇ¥¸¦ ¹Ş¾Æ¼­
+                        // í•´ë‹¹ ì£¼ì†Œì— ëŒ€í•œ ì¢Œí‘œë¥¼ ë°›ì•„ì„œ
                         var coords = new daum.maps.LatLng(result.y, result.x);
-                        // Áöµµ¸¦ º¸¿©ÁØ´Ù.
+                        // ì§€ë„ë¥¼ ë³´ì—¬ì¤€ë‹¤.
                         mapContainer.style.display = "block";
                         map.relayout();
-                        // Áöµµ Áß½ÉÀ» º¯°æÇÑ´Ù.
+                        // ì§€ë„ ì¤‘ì‹¬ì„ ë³€ê²½í•œë‹¤.
                         map.setCenter(coords);
-                        // ¸¶Ä¿¸¦ °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡·Î ¿Å±ä´Ù.
+                        // ë§ˆì»¤ë¥¼ ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¡œ ì˜®ê¸´ë‹¤.
                         marker.setPosition(coords)
                     }
                 });
@@ -181,4 +184,4 @@
         }).open();
     }
 </script>
-<!-- ³»¿ë ³¡ -->
+<!-- ë‚´ìš© ë -->

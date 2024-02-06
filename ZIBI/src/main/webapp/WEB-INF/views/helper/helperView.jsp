@@ -1,57 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/na.css" rel="stylesheet">
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-<link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.scrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.reply.js"></script>
-<!-- ³»¿ë ½ÃÀÛ -->
-<div class="container" style="width: 80%">
-<div class="justify-content-center">
+<!-- ë‚´ìš© ì‹œì‘ -->
+<div class="container">
 <div class="row">
-<div class="col-8 ">
-		<c:if test="${helper.helper_category ==  1}"><div style="background:#04B486;" class="border_cate">[ ¹ú·¹ ]</div></c:if>
-		<c:if test="${helper.helper_category ==  2}"><div style="background:#04B486;" class="border_cate">[ Á¶¸³ ]</div></c:if>
-		<c:if test="${helper.helper_category ==  3}"><div style="background:#04B486;" class="border_cate">[ ¼ö¸® ]</div></c:if>
-		<c:if test="${helper.helper_category ==  4}"><div style="background:#04B486;" class="border_cate">[ ¼ÒºĞ ]</div></c:if>
-		<c:if test="${helper.helper_category ==  5}"><div style="background:#04B486;" class="border_cate">[ ±âÅ¸ ]</div></c:if>
-		<br>
-		<div class="title">
-		${helper.helper_title}
-		</div>
-		<!-- ÇØ°áÁß&ÇØ°á¿Ï·á Åä±Û -->
-		<div class="align-left">
+<div class="detail-border col-10">
+		<c:if test="${helper.helper_select ==  1}"><div style="background:#04B486;" class="border_cate">[ í—¬í”„ë¯¸  ]</div></c:if>
+		<c:if test="${helper.helper_select ==  2}"><div style="background:#04B486;" class="border_cate">[ í—¬í”„ìœ   ]</div></c:if>
+		<!-- í•´ê²°ì¤‘&í•´ê²°ì™„ë£Œ í† ê¸€ -->
+		<div class="align-right">
 		<div>
 		<c:if test="${user.mem_num == helper.mem_num}">
 		<img id="output_solution" data-num="${helper.helper_num}" class="toggle"
-			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="50">
-		<span id="output_text">[ÆÇ¸Å Áß]</span>
+			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="60">
+		<span id="output_text" style="font-size:20px;">[íŒë§¤ ì¤‘]</span>
 		</c:if>
 		<br>
 		</div>
 		</div>
-			<div class="align-right">
-			<c:if test="${user.mem_num == helper.mem_num}">
-			<input type="button" value="±Û¼öÁ¤" onclick="location.href='update?helper_num=${helper.helper_num}'"
-				class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
-			<input type="button" value="±Û»èÁ¦" onclick="location.href='delete?helper_num=${helper.helper_num}'"
-					id="delete_btn" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
-						<script type="text/javascript">
-						let delete_btn = document.getElementById('delete_btn');
-						//ÀÌº¥Æ® ¿¬°á
-						delete_btn.onclick=function(){
-							let choice = confirm('»èÁ¦ÇÏ½Ã°Ú½À´Ï±î?');
-							if(choice){
-								location.href='delete?helper_num=${helper.helper_num}';
-							}
-						};
-						</script>
-			</c:if>
-			</div>
+		<br>
+		<div class="title">
+		ã…£${helper.helper_title}ã…£
+		</div><br>
 		<div class="align-center">
 		<c:if test="${empty helper.helper_filename}">
 		<img src="${pageContext.request.contextPath}/images/de/noimg.png"
@@ -67,42 +46,49 @@
 			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${helper.mem_num}"
 						width="50" height="50" class="my-photo radius margin-photo">
 			${helper.mem_nickname}
-			<div class="align-right">
+			<div class="align-right margin-date">
 			<c:if test="${!empty helper.helper_modify_date}">
-			ÃÖ±Ù ¼öÁ¤ÀÏ : ${helper.helper_modify_date}
+			ìµœê·¼ ìˆ˜ì •ì¼ : ${helper.helper_modify_date}
 			</c:if>
 			<c:if test="${empty helper.helper_modify_date}">
-			ÀÛ¼ºÀÏ : ${helper.helper_reg_date}
+			ì‘ì„±ì¼ : ${helper.helper_reg_date}
 			</c:if>
 			</div>
 		</div>
 	<hr size="3" width="99%" noshade="noshade">			
-	
-	<h3>»ó¼¼¼³¸í</h3>
+	<c:if test="${helper.helper_category ==  1}"><div class="font-color">ğŸ› ë²Œë ˆ ğŸ›</div></c:if>
+	<c:if test="${helper.helper_category ==  2}"><div class="font-color">âš™ï¸ ì¡°ë¦½ âš™ï¸</div></c:if>
+	<c:if test="${helper.helper_category ==  3}"><div class="font-color">ğŸ› ï¸ ìˆ˜ë¦¬ ğŸ› ï¸</div></c:if>
+	<c:if test="${helper.helper_category ==  4}"><div class="font-color">ğŸ›’ ì†Œë¶„ ğŸ›’</div></c:if>
+	<c:if test="${helper.helper_category ==  5}"><div class="font-color">ğŸƒâ€â™€ï¸ ê¸°íƒ€ ğŸƒâ€â™€ï¸</div></c:if>
+	<hr size="3" width="12%" noshade="noshade" style="text-align: left; margin-left:5px;"><br>	
+	<div style="margin-left:30px; margin-right:20px;">
+	<h3>ìƒì„¸ì„¤ëª…</h3>
 	<div>
 	${helper.helper_content}
 	</div><br>
-	<h3>µµ¿òÀå¼Ò</h3>
+	<h3>ë„ì›€ì¥ì†Œ</h3>
 	<div>
 	${helper.helper_address1} ${helper.helper_address2}
 	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
 	</div>
+	</div>
 	<div class="align-right">
 		<c:if test="${!empty user}">
-		<!-- ½ºÅ©·¦¼ö -->		
+		<!-- ìŠ¤í¬ë©ìˆ˜ -->		
 		<img id="output_scrap" data-num="${helper.helper_num}" 
 			src="${pageContext.request.contextPath}/images/de/heart1.png" width="30">
-		½ºÅ©·¦ <span id="output_scount"></span><span>¡¤</span>
+		ìŠ¤í¬ë© <span id="output_scount"></span><span>Â·</span>
 		</c:if>
-		<!-- Á¶È¸¼ö -->		
+		<!-- ì¡°íšŒìˆ˜ -->		
 		<img src="${pageContext.request.contextPath}/images/de/hit.png" width="30">
-		Á¶È¸¼ö  ${helper.helper_hit}<span>¡¤</span>
-		<!-- ´ñ±Û¼ö -->	
+		ì¡°íšŒìˆ˜  ${helper.helper_hit}<span>Â·</span>
+		<!-- ëŒ“ê¸€ìˆ˜ -->	
 		<img src="${pageContext.request.contextPath}/images/de/reply.png" width="30">
 		<span id="output_rcount"></span>
 	</div>
-	<br>
-	<!-- ´ñ±Û ½ÃÀÛ -->
+	<hr size="3" width="99%" noshade="noshade">	
+	<!-- ëŒ“ê¸€ ì‹œì‘ -->
 	<div id="reply_div" class="align-center">
 		<span class="re_title"></span>
 		<form id="re_form">
@@ -110,11 +96,11 @@
 			<div class="float-left">
 			<textarea rows="3" cols="60" name="re_content" id="re_content" class="rep-content" 
 			<c:if test="${empty user}">disabled="disabled"</c:if>
-			><c:if test="${empty user}">·Î±×ÀÎ ÈÄ ÀÛ¼ºÇÒ ¼ö ÀÖ½À´Ï´Ù.</c:if></textarea>	
+			><c:if test="${empty user}">ë¡œê·¸ì¸ í›„ ì‘ì„±í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</c:if></textarea>	
 			</div>
 		  <c:if test="${!empty user}">
 		  <div class="float-left">
-		  	<input type="submit" value="ÀÛ¼ºÇÏ±â" class="btn-reply">
+		  	<input type="submit" value="ì‘ì„±í•˜ê¸°" class="btn-reply">
 		   </div>	
 		  <div id="re_first">
 		  	<span class="letter-count">300/300</span>
@@ -122,56 +108,81 @@
 		  </c:if>
 		</form>
 	</div>
-	<!-- ´ñ±Û ¸ñ·Ï Ãâ·Â ½ÃÀÛ -->
+	<!-- ëŒ“ê¸€ ëª©ë¡ ì¶œë ¥ ì‹œì‘ -->
 	<div id="output"></div>
 	<div class="paging-button" style="display:none;">
-		<input type="button" value="´õº¸±â" class="d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
+		<input type="button" value="ë”ë³´ê¸°" class="d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">
 	</div>
 	<div id="loading" style="display:none;">
 	<img src="${pageContext.request.contextPath}/images/de/loading.gif" width="100" height="100">
 	</div>
-	<!-- ´ñ±Û ¸ñ·Ï Ãâ·Â ³¡ -->
-	<!-- ´ñ±Û ³¡ -->
+	<!-- ëŒ“ê¸€ ëª©ë¡ ì¶œë ¥ ë -->
+	<!-- ëŒ“ê¸€ ë -->
 	<br><br>
 </div>
-<div class="col-4">
+<div class="col-1 detail-border2">
 	<div class="align-center">
-	<input type="button" value="¸ñ·ÏÀ¸·Î" onclick="location.href='list?helper_num=${helper.helper_num}'" 
-			class="w-25 btn btn-light form-control p-3 rounded-pill">	
+	<br><br><br>
+	<c:if test="${!empty user}">
+	<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${user.mem_num}" width="120" height="120" class="my-photo radius2">
+	</c:if>	
+	<c:if test="${empty user}">
+	<img src="${pageContext.request.contextPath}/images/de/basic.png" width="120" height="120" class="my-photo radius2">
+	</c:if>								
+	<br><br><br>
+			<c:if test="${user.mem_num == helper.mem_num}">
+			<input type="button" value="ê¸€ìˆ˜ì •" onclick="location.href='update?helper_num=${helper.helper_num}'"
+				class="btn mem-btn w-100"><br><br>
+			<input type="button" value="ê¸€ì‚­ì œ" onclick="location.href='delete?helper_num=${helper.helper_num}'"
+					id="delete_btn" class="btn mem-btn w-100"><br><br>
+						<script type="text/javascript">
+						let delete_btn = document.getElementById('delete_btn');
+						//ì´ë²¤íŠ¸ ì—°ê²°
+						delete_btn.onclick=function(){
+							let choice = confirm('ì‚­ì œí•˜ì‹œê² ìŠµë‹ˆê¹Œ?');
+							if(choice){
+								location.href='delete?helper_num=${helper.helper_num}';
+							}
+						};
+						</script>
+			</c:if>
+	<input type="button" value="ì±„íŒ…" onclick="location.href='talkList?helper_num=${helper.helper_num}'" 
+			class="btn mem-btn-green w-100"><br><br>	
+	<input type="button" value="ëª©ë¡ìœ¼ë¡œ" onclick="location.href='list?helper_num=${helper.helper_num}'" 
+			class="btn mem-btn-green w-100">	
 	</div>
-</div>
 </div>
 </div>
 </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=397d490d4a8bb2a2dc0a8a1612615084&libraries=services"></script>
 	<script>
-	var mapContainer = document.getElementById('map'), // Áöµµ¸¦ Ç¥½ÃÇÒ div 
+	var mapContainer = document.getElementById('map'), // ì§€ë„ë¥¼ í‘œì‹œí•  div 
     mapOption = {
-        center: new daum.maps.LatLng(33.450701, 126.570667), // ÁöµµÀÇ Áß½ÉÁÂÇ¥(ÃÊ±â °ªÀ¸·Î ÁÖ¼Ò¸¦ ÁÂÇ¥·Î ¹Ù²ã¼­ Á¦°øÇÏ¸é Áß½É ÁÂÇ¥°¡ ¹Ù²ñ)
-        level: 3 // ÁöµµÀÇ È®´ë ·¹º§
+        center: new daum.maps.LatLng(33.450701, 126.570667), // ì§€ë„ì˜ ì¤‘ì‹¬ì¢Œí‘œ(ì´ˆê¸° ê°’ìœ¼ë¡œ ì£¼ì†Œë¥¼ ì¢Œí‘œë¡œ ë°”ê¿”ì„œ ì œê³µí•˜ë©´ ì¤‘ì‹¬ ì¢Œí‘œê°€ ë°”ë€œ)
+        level: 3 // ì§€ë„ì˜ í™•ëŒ€ ë ˆë²¨
     };  
 
-	// Áöµµ¸¦ »ı¼ºÇÕ´Ï´Ù    
+	// ì§€ë„ë¥¼ ìƒì„±í•©ë‹ˆë‹¤    
 	var map = new daum.maps.Map(mapContainer, mapOption); 
-	// ÁÖ¼Ò-ÁÂÇ¥ º¯È¯ °´Ã¼¸¦ »ı¼ºÇÕ´Ï´Ù
+	// ì£¼ì†Œ-ì¢Œí‘œ ë³€í™˜ ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤
 	var geocoder = new daum.maps.services.Geocoder();
-	// ÁÖ¼Ò·Î ÁÂÇ¥¸¦ °Ë»öÇÕ´Ï´Ù
+	// ì£¼ì†Œë¡œ ì¢Œí‘œë¥¼ ê²€ìƒ‰í•©ë‹ˆë‹¤
 	geocoder.addressSearch('${helper.helper_address1}', function(result, status) {
-	    // Á¤»óÀûÀ¸·Î °Ë»öÀÌ ¿Ï·áµÆÀ¸¸é 
+	    // ì •ìƒì ìœ¼ë¡œ ê²€ìƒ‰ì´ ì™„ë£Œëìœ¼ë©´ 
 	     if (status === daum.maps.services.Status.OK) {
 	    	 console.log('lat : ' + result[0].y);
 	    	 console.log('lng : ' + result[0].x);
 	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-	        // °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡¸¦ ¸¶Ä¿·Î Ç¥½ÃÇÕ´Ï´Ù
+	        // ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¥¼ ë§ˆì»¤ë¡œ í‘œì‹œí•©ë‹ˆë‹¤
 	        var marker = new daum.maps.Marker({
 	            map: map,
 	            position: coords
 	        });
 	        
-	        // ÁöµµÀÇ Áß½ÉÀ» °á°ú°ªÀ¸·Î ¹ŞÀº À§Ä¡·Î ÀÌµ¿½ÃÅµ´Ï´Ù
+	        // ì§€ë„ì˜ ì¤‘ì‹¬ì„ ê²°ê³¼ê°’ìœ¼ë¡œ ë°›ì€ ìœ„ì¹˜ë¡œ ì´ë™ì‹œí‚µë‹ˆë‹¤
 	        map.setCenter(coords);
 	    } 
 	});    
 </script>	
-<!-- ³»¿ë ³¡ -->
+<!-- ë‚´ìš© ë -->

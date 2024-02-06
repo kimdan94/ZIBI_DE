@@ -54,12 +54,12 @@ $(function(){
 					output += '</ul>';
 					output += '<div class="sub-item">';//\r이랑 \n을 발견하면 <br>로 바꾸겠다(줄바꿈 처리)
 					output += '<br>';
-					output += '<p>' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
+					output += '<p class="margin-content">' + item.re_content.replace(/\r\n/g,'<br>') + '</p>';
 					
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호가 같으면
-						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';
-						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="수정" class="modify-btn d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1" style="margin-left:5px;">';
+						output += ' <input type="button" data-num="'+item.re_num+'" value="삭제" class="delete-btn d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1">';
 					}
 					
 					output += '<hr size="3" noshade>';
@@ -152,11 +152,11 @@ $(function(){
 		//댓글 수정폼
 		let modifyUI = '<form id="mre_form">';
 			modifyUI += '<input type="hidden" name="re_num" id="mre_num" value="'+re_num+'">';				  //미리보기
-			modifyUI += '<textarea rows="3" cols="40" name="re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
-			modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';//글자수 체크
+			modifyUI += '<textarea rows="3" cols="60" name="re_content" id="mre_content" class="rep-content2">'+content+'</textarea><br>';
+			modifyUI += '<div id="mre_first" class="margin-span"><span class="letter-count">300/300</span></div>';//글자수 체크
 			modifyUI += '<div id="mre_second" class="align-right">';
-			modifyUI += ' <input type="submit" value="수정" class="d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';
-			modifyUI += ' <input type="button" value="취소" class="re-reset d-inline-block text-dark text-uppercase bg-light border border-color rounded-pill px-2 py-1 mb-1">';	
+			modifyUI += ' <input type="submit" value="수정" class="d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1">';
+			modifyUI += ' <input type="button" value="취소" class="re-reset d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1" style="margin-right:40px;">';	
 			modifyUI += '</div>';
 			modifyUI += '<hr size="1" noshade width="96%">';
 			modifyUI += '</form>';

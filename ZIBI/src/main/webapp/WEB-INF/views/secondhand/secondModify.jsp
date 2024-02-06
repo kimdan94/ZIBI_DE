@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
@@ -13,7 +14,7 @@
 </script>
 
 
-<div>
+<div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded sc-writeform col-md-4 col-lg-6">
 			<form:form action="update" id="sc_updateform" modelAttribute="secondVO" enctype="multipart/form-data">
@@ -39,14 +40,46 @@
 				
 				<div>
 					<form:label path="sc_price">가격</form:label>
-					<input type="number" id="sc_price" class="w-100 form-control p-3" placeholder="판매가격">
-					<%-- <form:input path="sc_price" class="w-100 form-control p-3" placeholder="판매가격"/> --%>
+					<!-- <input type="number" id="sc_price" class="w-100 form-control p-3" placeholder="판매가격"> -->
+					<form:input path="sc_price" class="w-100 form-control p-3" placeholder="판매가격"/> 
 					<form:errors path="sc_price" cssClass="error-color"/>
 				</div>
 				<div>
 					<form:label path="upload">썸네일 이미지</form:label>
 					<br>
 					<input type="file" name="upload" id="upload">
+					<c:if test="${!empty secondVO.sc_filename}">
+					<div id="sc_file_detail">(${secondVO.sc_filename})파일이 등록되어 있습니다.
+						<input type="button" value="파일삭제" id="sc_file_del"> 
+					</div>
+					<script type="text/javascript">
+						$(function(){
+							$('#sc_file_del').click(function(){
+								let choice = confirm('삭제하시겠습니까?');
+								if(choice){
+									$.ajax({
+										url:'deleteFile',
+										data:{sc_num:${secondVO.sc_num}},
+										type:'post',
+										dataType:'json',
+										success:function(param){
+											if(param.result == 'logout'){
+												alert('로그인 후 사용하세요');
+											}else if(param.result == 'success'){
+												$('#sc_file_detail').hide();
+											}else{
+												alert('파일 삭제 오류 발생');
+											}
+										},
+										error:function(){
+											alert('네트워크 오류 발생');
+										}
+									});
+								}
+							});
+						});
+					</script>
+					</c:if>
 				</div>
 				<div>
 					<form:label path="sc_content">내용을 입력하세요</form:label>
@@ -197,7 +230,7 @@
 				<!-- 입력한 주소 지도 표시 끝 -->
 				<form:hidden path="sc_latitude"/>    
 				<form:hidden path="sc_longitude"/>
-				<form:button class="w-100 btn btn-light form-control p-3 rounded-pill">상품 등록</form:button>
+				<form:button class="w-100 btn btn-light form-control p-3 rounded-pill">상품 수정</form:button>
 			</form:form>
 
 		</div>

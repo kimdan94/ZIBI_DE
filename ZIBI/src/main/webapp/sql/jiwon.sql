@@ -4,7 +4,7 @@ create table second(
  sc_title varchar2(150) not null,
  sc_content clob not null,
  sc_category number(1) not null,
- sc_price number(6) not null,
+ sc_price number(9) not null,
  sc_status number(1) not null,
  sc_sellstatus number(1) default 0 not null, --판매 상태
  sc_way number(1) not null,

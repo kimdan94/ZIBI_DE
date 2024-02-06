@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import kr.spring.second.service.SecondService;
 import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondVO;
+import kr.spring.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -25,6 +27,33 @@ import lombok.extern.slf4j.Slf4j;
 public class SecondAjaxController {
 	@Autowired
 	private SecondService secondService;
+	/*============================
+	 * 부모글 업로드 파일 삭제
+	 *============================*/
+	@RequestMapping("/secondhand/deleteFile")
+	@ResponseBody
+	public Map<String,String> processFile(int sc_num,
+						HttpSession session,HttpServletRequest request){
+		Map<String,String> mapJson = new HashMap<String,String>();
+		
+		//로그인이 되어 있어야함
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {//로그인이 안된 경우
+			mapJson.put("result", "logout");
+		}else {//로그인 된 경우
+			//삭제 전에 파일명 추출해야함
+			SecondVO vo = secondService.selectSecond(sc_num);
+			//먼저 DB에서 지워줌 
+			secondService.deleteFile(sc_num);
+			//업로드 경로에서 파일 지워줌
+			FileUtil.removeFile(request, vo.getSc_filename());
+			//그럼 이제 정상적으로 삭제 된 거임
+			
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
+	
 	/*============================
 	 * 부모글 찜 읽기
 	 *============================*/

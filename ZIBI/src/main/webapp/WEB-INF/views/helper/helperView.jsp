@@ -15,13 +15,13 @@
 		<c:if test="${helper.helper_select ==  2}"><div style="background:#04B486;" class="border_cate">[ 헬프유  ]</div></c:if>
 		<!-- 해결중&해결완료 토글 -->
 		<div class="align-right">
-		<div id="output_solution" data-num="${helper.helper_num}">
-		<span id="output_text" style="font-size:20px; font-weight:bold; margin-left:10px;"></span>
+		<div>
+		<div id="output_solution" data-num="${helper.helper_num}"></div>
+		<span id="output_text" data-num="${helper.helper_num}" style="font-size:20px; font-weight:bold; margin-left:10px;"></span>
 		<c:if test="${user.mem_num == helper.mem_num}">
-		<img id="output_image" class="toggle"
+		<img id="output_solution" class="toggle"
 			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="60">
 		</c:if>
-		</div>
 		<br>
 		</div>
 		</div>

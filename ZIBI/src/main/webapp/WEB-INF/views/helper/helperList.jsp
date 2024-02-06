@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
 <!-- 내용 시작 -->
 <div class="text-center">
 	<ul class="nav nav-pills d-inline-flex justify-content-center mb-2">
@@ -24,27 +23,27 @@
 	<div class="text-center">
 	<ul class="nav nav-pills justify-content-center mb-3">
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill"
+		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
 			href="#" onclick="location.href='list?helper_select=${param.helper_select}'"> <span class="text-dark" style="width: 70px;">전체</span></a>
 		</li>
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill"
+		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
 			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=1'"> <span class="text-dark" style="width: 70px;">벌레</span></a>
 		</li>
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill"
+		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
 			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=2'"> <span class="text-dark" style="width: 70px;">조립</span></a>
 		</li>
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill"
+		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
 			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=3'"> <span class="text-dark" style="width: 70px;">수리</span></a>
 		</li>
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill"
+		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
 			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=4'"> <span class="text-dark" style="width: 70px;">소분</span></a>
 		</li>
 		<li class="nav-item p-2">
-		<a class="d-flex py-2 mx-2 border bg-white rounded-pill"
+		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
 			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=5'"> <span class="text-dark" style="width: 70px;">기타</span></a>
 		</li>
 	</ul>
@@ -63,14 +62,15 @@
 				class="w-50 form-control p-3 float-left margin border-keyword" value="${param.keyword}">
 				<div class="float-right"><input type="image" src="../images/de/search.png" class="input-group-text p-3 search-size"></div>
 			</div>
+			</form>
 			<br>
 			<div class="align-right">
 			<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" onclick="location.href='write'"
-			 	class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-1 float-rigth margin1">
+			 	class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-1 float-rigth margin">
 			</c:if>
 			<input type="button" value="목록으로" onclick="location.href='list'"
-				class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-1 float-rigth margin">
+				class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-1 float-rigth">
 			</div>	
 			<br><br>
 	<div class="float-rigth">
@@ -80,7 +80,6 @@
 			<option value="3" <c:if test="${param.order==3}">selected</c:if>>스크랩</option>
 		</select>
 	</div>
-	</form>
 	<br><br>
 	<c:if test="${count == 0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
@@ -109,6 +108,10 @@
 			</c:if>
 			</div>
 			<div class="float-left2 align-center">
+			<div class="align-center">
+			<c:if test="${helper.helper_solution == 0}">[ 해결중 ]</c:if>
+			<c:if test="${helper.helper_solution == 1}">[ 해결완료 ]</c:if>
+			</div>
             <div class="align-center font-size1 margin-top2"><a href="detail?helper_num=${helper.helper_num}">${helper.helper_title}</a></div><br>
 			<div class="align-center">${helper.helper_address1}</div><br>
 			<div class="align-center">${helper.mem_nickname}</div><div class="align-center">

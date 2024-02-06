@@ -73,10 +73,7 @@
 	text-align: center;
 }
 .margin{
-	margin-left: 20px;
-}
-.margin1{
-	margin-left: 10px;
+	margin-left: 5px;
 }
 /* 목록 페이지
 -------------------------*/
@@ -260,7 +257,7 @@ form#mre_form{
 	margin-left:10px;
 }
 .margin-keyword{
-	margin-left:100px;
+	margin-left:150px;
 }
 
 /*상세글 박스*/
@@ -297,7 +294,13 @@ form#mre_form{
 .border-keyword{
 	height: 50px;
 }
+#hp_bord{
+	border:1px solid #32a77b;
+}
 
+#hp_size{
+	border:900px;
+}
 /*버튼*/
 .mem-btn, .mem-btn:focus{
 	font-size: .9em;
@@ -327,4 +330,42 @@ form#mre_form{
 
 
 /*radio 버튼*/
+label[for="helper_select1"],
+label[for="helper_select2"]{
+	margin-bottom:-5px !important;
+	margin-top:-13px !important;
+}
+.helper_select input[type="radio"]{
+	display:none;
+}
+.helper_select input[type="radio"]+label{
+	display:inline-block;
+    cursor:pointer;
+    height:30px;
+    width:90px;
+    border: 1px solid #32a77b;
+    line-height:30px;
+    text-align:center;
+    vertical-align:middle;
+    font-weight:bold;
+    font-size:13px;
+    background-color:#fff;
+    color:#333;
+}
+.helper_select input[type="radio"]:checked+label{
+	background-color:#32a77b;
+	color:white;
+}
 
+/*카테고리 입력란*/
+select:focus,
+select:hover {
+	outline:2px solid #32a77b;
+	box-shadow: none;
+}
+
+/*썸네일 안내*/
+.thum{
+	font-size: 13px;
+	color: #848484;
+}

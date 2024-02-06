@@ -49,7 +49,7 @@ $(function(){
 							
 							output += '<li>';
 							output += '<div class="sub-item" id="sub_item'+item.rep_num+'">';
-							output += '<p>'+item.book_rep.replace(/\r\n/g,'<br>')+'<br></p>';
+							output += '<p>'+item.book_rep.replace(/\r\n/g,'<br>')+'</p>';
 							output += '<span class="rep-date">'+item.book_repDate+'</span>';
 							
 						
@@ -237,7 +237,7 @@ $(function(){
 	});
 	
 	//댓글 삭제
-	$(document).on('click','.rep-delete',function(){
+	$(document).on('click','.rep-delete, .rerep-delete',function(){
 		if(confirm('댓글을 삭제하시겠습니까?')==false){
 			return;
 		}

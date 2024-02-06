@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import kr.spring.checklist.vo.CheckListVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil;
+import kr.spring.util.PageUtil_ye;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,7 +53,7 @@ public class CheckListController {
 	}
 	
 	//전송된 데이터 처리
-	@PostMapping("/checklist/checkWrite")
+	@PostMapping("/checklist/checkwrite")
 	public String submit(@Valid CheckListVO checkListVO, BindingResult result,
 			             HttpServletRequest request,HttpSession session,
 			             Model model) 
@@ -60,14 +62,17 @@ public class CheckListController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
+			for(FieldError error : result.getFieldErrors()) {
+				log.debug("<<에러 필드>> : " + error.getField());
+			}
 			return form();
 		}
 		
 		//회원 번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		checkListVO.setCheck_id(vo.getMem_num());
+		checkListVO.setMem_num(vo.getMem_num());
 		//파일 업로드
-		checkListVO.setRoom_filname(FileUtil.createFile(request, checkListVO.getUpload()));
+		checkListVO.setRoom_filename(FileUtil.createFile(request, checkListVO.getUpload()));
 		//글 등록
 		checkListService.insertCheckList(checkListVO);
 		
@@ -93,7 +98,7 @@ public class CheckListController {
 		int count = checkListService.selectRowCount(map);
 		log.debug("<<count>> : " + count);
 		
-		PageUtil page = new PageUtil (keyfield,keyword,currentPage,count,20,10,"list");
+		PageUtil_ye page = new PageUtil_ye (keyfield,keyword,currentPage,count,20,10,"list");
 		
 		List<CheckListVO> list = null;
 		if(count > 0) {
@@ -136,11 +141,11 @@ public class CheckListController {
 		//파일을 절대경로에서 읽어들여 byte[]로 변환
 		byte[] downloadFile = FileUtil.getBytes(
 				 request.getServletContext().getRealPath("/upload")
-				                            +"/"+checklist.getRoom_filname());
+				                            +"/"+checklist.getRoom_filename());
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("downloadView");
 		mav.addObject("downloadFile", downloadFile);
-		mav.addObject("filename", checklist.getRoom_filname());
+		mav.addObject("filename", checklist.getRoom_filename());
 	
 		return mav;
 	}

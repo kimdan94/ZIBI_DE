@@ -24,12 +24,13 @@
 				</select>
 			</li>
 			<li>
-				<input type=text size=45 height=45 class="input-sm" id="keyword" name="keyword" placeholder="검색어를 입력해주세요.">
+				<input type=text size=20 height=45 class="input-sm" id="keyword" name="keyword" placeholder="검색어를 입력해주세요.">
                         <button type="submit" class="btn che-btn-green w-20">검색</button>
 			</li>
 		</ul>
+		</form>
 		<br>
-		<div class="align-right" style="padding-right:120px;">
+		<div class="order1">
 			<select id="order" name="order" class="border-color">
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
@@ -40,7 +41,7 @@
 			<input type="button" value="글쓰기" class="btn che-btn-green w-20" onclick="location.href='communitywrite'">
 			</c:if>
 		</div>
-	</form>
+
 	<c:if test="${count == 0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>

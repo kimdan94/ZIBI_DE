@@ -50,7 +50,7 @@
 	<definition name="checkWrite" extends="menuPage">
 		<put-attribute name="title" value="매물 등록" />
 		<put-attribute name="css"
-			value="/WEB-INF/views/community/checklistCSS.jsp" />
+			value="/WEB-INF/views/checklist/checklistCSS.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/checklist/checkWrite.jsp" />
 	</definition>

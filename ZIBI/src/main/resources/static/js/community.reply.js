@@ -54,8 +54,8 @@ $(function(){
 					
 					if(param.user_num==item.mem_num){
 						//로그인한 회원번호와 댓글 작성자 회원번호와 같으면
-						output +=' <input type="button" data-num="'+item.re_num+'"value="수정" class="default-btn2__">'
-						output +=' <input type="button" data-num="'+item.re_num+'"value="삭제" class="default-btn2__">'
+						output +=' <input type="button" data-num="'+item.re_num+'"value="수정" class="modify-btn2__">'
+						output +=' <input type="button" data-num="'+item.re_num+'"value="삭제" class="delete-btn2__">'
 					}
 					
 					output += '<hr size="3" noshade>';
@@ -133,7 +133,7 @@ $(function(){
 	* 댓글 수정
 	*-------------------------------*/
 	//댓글 수정 버튼 클릭시 수정폼 노출
-	$(document).on('click','.modify-btn',function(){
+	$(document).on('click','.modify-btn2__',function(){
 		//댓글 번호
 		let re_num = $(this).attr('data-num');
 		//댓글 내용
@@ -143,10 +143,10 @@ $(function(){
 		let modifyUI = '<form id = "mre_form">';
 			modifyUI += '<input type="hidden" name="re_num" id="mre_num" value="'+re_num+'">';
 			modifyUI += '<textarea rows="3" cols="50" name="re_content" id="mre_content" class="rep-content">'+content+'</textarea>';
-			modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span>';
+			modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 			modifyUI += '<div id="mre_second" class="align-right">';
-			modifyUI += ' <input type="submit" value="수정">';
-			modifyUI += ' <input type="button" value="취소" class="re_reset">';
+			modifyUI += ' <input type="submit" value="등록" class="modify-btn22__">';
+			modifyUI += ' <input type="button" value="취소" class="cancel-btn2__">';
 			modifyUI += '</div>';
 			modifyUI += '<hr size="1" noshade width="96%">';
 			modifyUI += '</form>';
@@ -170,7 +170,7 @@ $(function(){
 			$('#mre_first .letter-count').text(remain);
 	});
 	//수정폼에서 취소 버튼 클릭시 수정폼 초기화
-	$(document).on('click','.re_reset',function(){
+	$(document).on('click','.cancel-btn2__',function(){
 		initModifyForm();
 	});
 	//댓글 수정폼 초기화
@@ -244,7 +244,7 @@ $(function(){
 	/*------------------------------
 	* 댓글 삭제
 	*-------------------------------*/
-	$(document).on('click','.delete-btn',function(){
+	$(document).on('click','.delete-btn2__',function(){
 		//댓글 번호
 		let re_num = $(this).attr('data-num');
 		

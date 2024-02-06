@@ -13,31 +13,32 @@
 		   room_size,
 		   room_star,
 		   room_description,
-		   room_filname,
+		   room_filename,
 		   room_check1,
 		   room_check2,
 		   room_check3,
 		   room_check4,
 		   room_check5,
-		   room_check6)
+		   room_check6,
+		   mem_num)
 		VALUES (
 		   CheckList_seq.nextval,
-		   #{check_id},
 		   #{room_name},
 		   #{room_address1},
 		   #{room_address2},
 		   #{room_deposit},
 		   #{room_expense},
 		   #{room_size},
-		   #{room_star},
+		   #{room_star,jdbcType=INTEGER},
 		   #{room_description},
-		   #{room_filname},
+		   #{room_filename},
 		   #{room_check1},
 		   #{room_check2},
 		   #{room_check3},
 		   #{room_check4},
 		   #{room_check5},
-		   #{room_check6})
+		   #{room_check6},
+		   #{mem_num})
 	</insert>
 	
 	<!-- 체크리스트 글의 총개수/검색 개수 -->
@@ -61,7 +62,8 @@
 		               ]]>
 		               room_deposit,
 		               room_star,
-		               room_description
+		               room_description,
+		               room_filename
 		               from checklist
 		               LEFT OUTER JOIN member USING(mem_num)
 		               ORDER BY check_date DESC)a)

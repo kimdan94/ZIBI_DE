@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <link href="${pageContext.request.contextPath}/css/yeeun.css" rel="stylesheet">   
+<link href="${pageContext.request.contextPath}/css/common.css" rel="stylesheet">
 <!-- 내용 시작 -->
 <form>
 <div class="align-center">
@@ -18,21 +19,17 @@
 		<c:if test="${count > 0}">
 			<c:forEach var="checklist" items="${list}">
 				<div class="float-left1">
-					<c:if test="${empty checklist.room_filename}">
-						<img src="${pageContext.request.contextPath}/images/yeeun/.png"
-							style="width: 200px; height: 200px; padding: 10px;">
-					</c:if>
 					<c:if test="${!empty checklist.room_filename}">
 						<img
 							src="${pageContext.request.contextPath}/upload/${checklist.room_filename}"
-							style="width: 200px; height: 200px; padding: 10px;"
+							style="width: 200px; height: 200px; margin-right:20px; "
 							class="radius">
 					</c:if>
 				</div>
 				<div class="float-left2 align-center">
 				<div class="align-center">${checklist.check_date}</div>
 					<div class="align-center font-size1">
-						<a href="detail?check_id=${checklist.check_id}">${checklist.room_title}</a>
+						<a href="detail?check_id=${checklist.check_id}">${checklist.room_name}</a>
 					</div>
 					<br>
 					<div class="align-center">${checklist.room_deposit}</div>

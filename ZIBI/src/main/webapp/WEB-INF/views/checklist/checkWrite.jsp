@@ -22,7 +22,7 @@ window.onload = function(){
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6">
-			<form:form action="write" id="checklist_write" 
+			<form:form action="checkwrite" id="checklist_write" 
 					modelAttribute="checkListVO" enctype="multipart/form-data">
 				<h2>등록하기</h2>
 				<div class="align-right">
@@ -70,29 +70,19 @@ window.onload = function(){
 					<form:errors path="room_size" cssClass="error-phrase"/>
 				</div>
 				<br>
-				<form class="mb-3" name="myform" id="myform" method="post">
 					<fieldset>
 						<span class="text-bold">평가</span><br>
-						<input type="radio"
-							name="reviewStar" value="5" id="rate1"><label for="rate1">★</label>
-						<input type="radio" name="reviewStar" value="4" id="rate2"><label
-							for="rate2">★</label> <input type="radio" name="reviewStar"
-							value="3" id="rate3"><label for="rate3">★</label> <input
-							type="radio" name="reviewStar" value="2" id="rate4"><label
-							for="rate4">★</label> <input type="radio" name="reviewStar"
-							value="1" id="rate5"><label for="rate5">★</label>
 					</fieldset>
 					<div>
-						<textarea class="col-auto form-control" type="text"
-							id="reviewContents"
-							placeholder="집의 상태, 주변환경, 가격 등을 고려해서 전반적인 평가를 입력해주세요."></textarea>
-					</div>
-				</form>				
+						<form:textarea class="col-auto form-control"
+							path="room_description"
+							placeholder="집의 상태, 주변환경, 가격 등을 고려해서 전반적인 평가를 입력해주세요."/>
+					</div>			
 				<br>
 				<div class="filebox">
-					<form:label path="room_filname">파일</form:label>
+					<form:label path="room_filename">파일</form:label>
 					<br>
-					<input type="file" id="room_filname" name="upload"
+					<input type="file" id="room_filename" name="upload"
 						accept="image/gif,image/png,image/jpeg">
 					<br>
 				</div>
@@ -103,28 +93,34 @@ window.onload = function(){
 				<h4>[ 체크리스트 ]</h4>
 				<br>
 				<div>
-				집의 전반적인 채광량은 어떤가요? &nbsp; <input type="radio" name="room_check1" value="room_check1"> 별로에요
-				<input type="radio" name="radiobutton" value="radiobutton"> 좋아요 
+				집의 전반적인 채광량은 어떤가요? &nbsp; 
+				<form:radiobutton path="room_check1" value="1"/> 별로에요
+				<form:radiobutton path="room_check1" value="2"/> 좋아요 
 				<br><br>
-				집의 방음 상태는 어떤가요? &nbsp;<input type="radio" name="room_check2" value="room_check2"> 별로에요
-				<input type="radio" name="radiobutton" value="radiobutton"> 좋아요
+				집의 방음 상태는 어떤가요? &nbsp;
+				<input type="radio" name="room_check2" value="1"/> 별로에요
+				<form:radiobutton path="room_check2" value="2"/> 좋아요
 				<br><br>
-				싱크대 배수 상태는 어떤가요? &nbsp; <input type="radio" name="room_check3" value="room_check3"> 별로에요
-				<input type="radio" name="radiobutton" value="radiobutton"> 좋아요
+				싱크대 배수 상태는 어떤가요? &nbsp; 
+				<form:radiobutton path="room_check3" value="1"/> 별로에요
+				<form:radiobutton path="room_check3" value="2"/> 좋아요
 				<br><br>
-				지하철역 접근성은 어떤가요? &nbsp; <input type="radio" name="room_check4" value="room_check4"> 별로에요
-				<input type="radio" name="radiobutton" value="radiobutton"> 좋아요
+				지하철역 접근성은 어떤가요? &nbsp; 
+				<form:radiobutton path="room_check4" value="1"/> 별로에요
+				<form:radiobutton path="room_check4" value="2"/> 좋아요
 				<br><br>
-				대형마트 접근성은 어떤가요? &nbsp; <input type="radio" name="room_check5" value="room_check5"> 별로에요
-				<input type="radio" name="radiobutton" value="radiobutton"> 좋아요
+				대형마트 접근성은 어떤가요? &nbsp; 
+				<form:radiobutton path="room_check5" value="1"/> 별로에요
+				<form:radiobutton path="room_check5" value="2"/> 좋아요
 				<br><br>
-				발코니 상태는 어떤가요? &nbsp; <input type="radio" name="room_check6" value="room_check6"> 별로에요
-				<input type="radio" name="radiobutton" value="radiobutton"> 좋아요
+				발코니 상태는 어떤가요? &nbsp; 
+				<form:radiobutton path="room_check6" value="1"/> 별로에요
+				<form:radiobutton path="room_check6" value="2"/> 좋아요
 				</div>
+				<br><br> 
 				<div class="align-center" style="margin-top:20px;">
-				<input type="submit" value="저장" class="w-25 btn btn-light form-control p-3 rounded-pill active"
-				onclick="location.href='checkList'">
-				</div>	
+				<input type="submit" value="저장" class="btn  che-btn-green_">
+				</div>
 			</form:form>
 		</div>
 	</div>
@@ -156,7 +152,7 @@ window.onload = function(){
                 var addr = data.address; // 최종 주소 변수
 
                 // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("book_address1").value = addr;
+                document.getElementById("room_address1").value = addr;
                 // 주소로 상세 정보를 검색
                 geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면

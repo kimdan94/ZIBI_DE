@@ -131,6 +131,21 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.choosingTicketing(map);
 	}
 
+	@Override
+	public void insertChoice(Map<String, Object> map) {
+		performanceMapper.insertChoice(map);
+	}
+
+	@Override
+	public void updateChoice(int cinema_num, int num) {
+		performanceMapper.updateChoice(cinema_num, num);
+	}
+
+	@Override
+	public void insertPayment(Map<String, Object> map) {
+		performanceMapper.insertPayment(map);
+	}
+
 	
 
 

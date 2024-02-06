@@ -37,6 +37,11 @@ public interface PerformanceService {
 	public TicketingVO choosingTicketing(Map<String, Object> map);
 	
 	
+	// 결제 페이지
+	public void insertChoice(Map<String, Object> map);
+	public void updateChoice(int cinema_num, int num); // 여석 수 업데이트
+	public void insertPayment(Map<String, Object> map);
+	
 	
 	public List<ChoiceVO> selectChoice(Map<String, Object> map);
 	

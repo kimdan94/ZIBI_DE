@@ -194,12 +194,14 @@ public class PerformanceAjaxController {
 		
 		// 이미 예약된 좌석 선택
 		choosenSeat = performanceService.selectChoice(map);
+
 		
 		log.debug("===================<<Ajax>>======================");
 		log.debug("<<pickCinema>> : " + pickCinema);
 		log.debug("<<pickPerformance>> : " + pickPerformance);
 		log.debug("<<pickTicketing>> : " + pickTicketing);
 		log.debug("<<choosenSeat>> : " + choosenSeat);
+
 		log.debug("===================<<Ajax>>======================");
 		
 		// ajax
@@ -209,6 +211,103 @@ public class PerformanceAjaxController {
 		mapJson.put("choosenSeat", choosenSeat);
 		return mapJson;
 	}
+	
+	
+	
+	
+	/*=================================
+	 * 결제 - 성공
+	 *=================================*/
+	@RequestMapping("/performance/initPayment")
+	@ResponseBody // 지역2 str으로 해당 상영관의 번호 알아내기
+	public Map<String, Object> initPayment(@RequestParam(value="imp_uid") String imp_uid, 
+			                               @RequestParam(value="merchant_uid") String merchant_uid, 
+			                               @RequestParam(value="pay_method") String pay_method, 
+			                               @RequestParam(value="total_price") int total_price, 
+			                               @RequestParam(value="ticketing_num") int ticketing_num, 
+			                               @RequestParam(value="cinema_num") String cinema_num, 
+			                               @RequestParam(value="choice_seat") String choice_seat, 
+			                               @RequestParam(value="choice_adult") int choice_adult, 
+			                               @RequestParam(value="choice_teenage") int choice_teenage, 
+			                               @RequestParam(value="choice_treatment") int choice_treatment, 
+			                               HttpSession session, HttpServletRequest request){
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		log.debug("<<Mem_num>> : " + user.getMem_num());
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		log.debug("====== << 결제 >> =======");
+		// 포트원 결제모듈에서 결제건별로 고유하게 채번하는 ID
+//		log.debug("<< imp_uid >> : " + imp_uid); // 결제창을 띄우는 순간 imp_uid 자동 생성됨
+		log.debug("<< merchant_uid >> : " + merchant_uid); // uid
+		log.debug("<< pay_method >> : " + pay_method); // type
+		log.debug("<< total_price >> : " + total_price); // price
+		log.debug("<< ticketing_num >> : " + ticketing_num); // choice_num
+		log.debug("<< cinema_num >> : " + cinema_num);
+		log.debug("<< choice_seat >> : " + choice_seat); // choice_num
+		log.debug("<< choice_adult >> : " + choice_adult); // 명 // choice_num
+		log.debug("<< choice_teenage >> : " + choice_teenage); // 명 // choice_num
+		log.debug("<< choice_treatment >> : " + choice_treatment); // 명 // choice_num
+		
+		String[] str = choice_seat.split(" ");
+		String match = "[^0-9_]";
+		for(int i=0; i<str.length; i++) {
+			String seat = str[i].replaceAll(match, "");
+			String[] seats = seat.split("_");
+			// seats[0] : 행 seats[1] : 열
+			log.debug("<<Seat>> : " + seats[0] + " " + seats[1]);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("payment_uid", merchant_uid);
+			map.put("payment_type", pay_method);
+			map.put("payment_price", total_price);
+			map.put("payment_state", 1);
+			map.put("mem_num", user.getMem_num());
+			map.put("choice_row", Integer.parseInt(seats[0])); // 행
+			map.put("choice_col", Integer.parseInt(seats[1])); // 열
+			map.put("choice_adult", choice_adult);
+			map.put("choice_teenage", choice_teenage);
+			map.put("choice_treatment", choice_treatment);
+			map.put("ticketing_num", ticketing_num);
+			
+//			payment : uid, type, price, state, date, modify_date, mem_num, choice_num
+			performanceService.insertPayment(map);
+			
+		}
+		
+
+		mapJson.put("result", "success");
+		log.debug("====== << 결제창 이동 >> =======");
+		return mapJson;
+	}
+	
+	
+	/*=================================
+	 * 결제 - 실패
+	 *=================================*/
+	@RequestMapping("/performance/errorPayment")
+	@ResponseBody // 지역2 str으로 해당 상영관의 번호 알아내기
+	public Map<String, Object> errorPayment(HttpSession session, HttpServletRequest request){
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Map<String, Object> mapJson = new HashMap<String, Object>();
+		log.debug("====== << ERROR >> =======");
+		// 롤백
+		
+		
+		
+		
+		
+		log.debug("====== << ERROR >> =======");
+		
+		
+		return mapJson;
+	}
+
+	
+	
 	
 	
 	

@@ -3,22 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 관리자 button -->
-<%-- <c:if test="${count == 0}"> --%>
-<input type="button" value="영화 form" onclick="location.href='write'"><!-- /performance/formPage -->
+<!-- <input type="button" value="영화 form" onclick="location.href='write'">/performance/formPage
 <input type="button" value="상영관 form" onclick="location.href='writeCinema'">
-<input type="button" value="날짜 form" onclick="location.href='writePerformanceDate'">
-<input type="button" value="예매하기" onclick="location.href='ticketing'" class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">
-<%-- </c:if> --%>
+<input type="button" value="날짜 form" onclick="location.href='writePerformanceDate'"> -->
 
-<form action="performanceList" method="get">
+<%-- <form action="performanceList" method="get">
 	<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 	<input type="submit" value="검색">
 	<input type="button" value="목록" onclick="location.href='performanceList'">
-</form>
+</form> --%>
 
 	<!-- -----------------------------부트스트랩------------------------------- -->
 	<div class="container-fluid event py-6">
 		<div class="container">
+			<!-- 빠른 예매 버튼 시작 -->
+			<input type="button" value="빠른 예매하기" onclick="location.href='ticketing'" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill" style="width:180px;height:60px;">
+			<!-- 빠른 예매 버튼 끝 -->
+			
 			<div class="text-center wow" data-wow-delay="0.1s">
 				<small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Latest Events</small>
 				<h1 class="display-5 mb-5">Our Social Professional Events Gallery</h1>

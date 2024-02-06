@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
@@ -44,6 +45,12 @@ public interface PerformanceMapper {
 
 	
 	// 결제 페이지
+	public void insertChoice(Map<String, Object> map); // 좌석+영화+상영관+회원에 대한 정보
+	@Update("UPDATE cinema SET cinema_total=cinema_total-#{num} WHERE cinema_num=#{cinema_num}")
+	public void updateChoice(int cinema_num, int num); // 여석 수 업데이트
+	public void insertPayment(Map<String, Object> map);
+	
+	// 결제 내역
 	
 	
 	
@@ -55,7 +62,6 @@ public interface PerformanceMapper {
 	// 관리자
 	public void insertPerformance(PerformanceVO performance); // 영화 정보 저장
 	public void insertCinema(CinemaVO cinema); // 상영관 정보 저장
-//	@Select("SELECT * FROM cinema WHERE cinema_location1=#{loc1}")
 	@Select("SELECT DISTINCT cinema_location1, cinema_location2 FROM cinema WHERE cinema_location1=#{loc1}")
 	public List<CinemaVO> selectLocation2(String loc1); // 지역1에 따른 지역2 출력
 

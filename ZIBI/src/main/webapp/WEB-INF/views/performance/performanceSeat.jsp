@@ -62,7 +62,7 @@
 	<div class="container">
 		<h2>좌석 선택</h2>
 		<div id="seat">
-			<!-- <div style="display:inline-block;width:50px;height:50px;border:1px solid black;"></div> -->
+			<!-- ajax 좌석 그리기 -->
 			
 		</div>
 	</div>
@@ -72,7 +72,7 @@
 
 
 
-<br><br><br><br><br><br><br><br>
+<br><br><br>
 
 
 <!-- 총 금액 Start -->
@@ -89,8 +89,10 @@
 <!-- 총 금액 End -->
 
 
+<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
 <form action="submitSeat" method="get">
 	<!-- mem_num -->
+	<input type="hidden" id="cinema_num" name="cinema_num" value="${tmpCinema.cinema_num}"/>
 	<!-- ticketing_num -->
 	<input type="hidden" id="ticketing_num" name="ticketing_num" value="${tmpTicket.ticketing_num}"/>
 	<!-- 선택한 좌석 정보 -->
@@ -104,3 +106,12 @@
 	
 	<input type="submit" value="결제하기">
 </form>
+<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
+
+
+
+
+
+
+
+

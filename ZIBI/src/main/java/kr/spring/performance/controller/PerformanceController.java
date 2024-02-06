@@ -2,15 +2,14 @@ package kr.spring.performance.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -28,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.service.PerformanceService;
+import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
@@ -302,30 +302,118 @@ public class PerformanceController {
 		pickCinema = performanceService.pickCinema(map);
 		pickPerformance = performanceService.pickPerformance(map);
 		pickTicketing = performanceService.pickTicketing(map);
-		
+
+		log.debug("===================<<Controller>>======================");
 		TicketingVO tmpTicket = performanceService.choosingTicketing(map);
+		CinemaVO tmpCinema = performanceService.choosingCinema(map);
 		log.debug("<<pickCinema>> : " + pickCinema);
 		log.debug("<<pickPerformance>> : " + pickPerformance);
 		log.debug("<<pickTicketing>> : " + pickTicketing);
+		
+		CinemaVO choiceCinema = null;
+		PerformanceVO choicePerformance = null;
+		TicketingVO choiceTicketing = null;
+		
+		// ticketing_num에 대한 값 1행
+		choiceCinema = performanceService.choosingCinema(map);
+		choicePerformance = performanceService.choosingPerformance(map);
+		choiceTicketing = performanceService.choosingTicketing(map);
+		log.debug("<<choiceCinema>> : " + choiceCinema);
+		log.debug("<<choicePerformance>> : " + choicePerformance);
+		log.debug("<<choiceTicketing>> : " + choiceTicketing);
+		log.debug("===================<<Controller>>======================");
+		
 		
 		mav.setViewName("performanceSeat"); // tiles 설정 name과 동일해야 함
 		mav.addObject("pickCinema", pickCinema);
 		mav.addObject("pickPerformance", pickPerformance);
 		mav.addObject("pickTicketing", pickTicketing);
 		mav.addObject("tmpTicket", tmpTicket);
+		mav.addObject("tmpCinema", tmpCinema);
+
+		mav.addObject("choiceCinema", choiceCinema);
+		mav.addObject("choicePerformance", choicePerformance);
+		mav.addObject("choiceTicketing", choiceTicketing);
 		
 		return mav; 
 	}
 	
 	
-	
+	///////////////////////////////////////////////////////////////////////////////////////
 	// 좌석 정보 저장 -> 결제창으로 이동
+//	@GetMapping("/performance/submitSeat2")
+//	public ModelAndView submitSeat2(String seat_info, int ticketing_num,
+//			@RequestParam(value="adult_money",defaultValue="0") int adult_money, 
+//			@RequestParam(value="teenage_money",defaultValue="0") int teenage_money, 
+//			@RequestParam(value="treatement_money",defaultValue="0") int treatement_money) {
+//		log.debug("<<결제창으로 이동>>");
+//		ModelAndView mav = new ModelAndView();
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("ticketing_num", ticketing_num);
+//		
+//		log.debug("<<좌석 정보>>" + seat_info); // 공백으로 split하기
+//		log.debug("<<일반>> : " + adult_money); // 명
+//		log.debug("<<청소년>> : " + teenage_money); // 명
+//		log.debug("<<우대>> : " + treatement_money); // 명
+//		
+//		String[] seatNum = seat_info.split(" ");
+//		List<String> seatList = new ArrayList<>();
+//		
+//		for(int i=0; i<seatNum.length; i++) {
+//			log.debug(i + "번째 : " + seatNum[i]);
+//			seatList.add(seatNum[i]);
+//		}
+//		
+//		
+//		// -------------------------------------------------------------------
+//		CinemaVO payCinema = null;
+//		PerformanceVO payPerformance = null;
+//		TicketingVO payTicketing = null;
+//		
+//		payCinema = performanceService.choosingCinema(map);
+//		payPerformance = performanceService.choosingPerformance(map);
+//		payTicketing = performanceService.choosingTicketing(map);
+//		
+//		
+//		log.debug("<<seatList>> : " + seatList);
+//		log.debug("================================================");
+//		log.debug("<<payCinema>> : " + payCinema);
+//		log.debug("<<payPerformance>> : " + payPerformance);
+//		log.debug("<<payTicketing>> : " + payTicketing);
+//		log.debug("================================================");
+//		// -------------------------------------------------------------------
+//		
+//		
+//		
+//		
+//		mav.setViewName("performancePayment"); // tiles 설정 name과 동일해야 함
+//		// ticketing_num에 대한 값 넣어주기
+//		mav.addObject("payCinema", payCinema);
+//		mav.addObject("payPerformance", payPerformance);
+//		mav.addObject("payTicketing", payTicketing);
+//		
+//		
+//		//가격 -- 나중에 넣어주기
+//		mav.addObject("adult_money", adult_money); // 명
+//		mav.addObject("teenage_money", teenage_money); // 명
+//		mav.addObject("treatement_money", treatement_money); // 명
+//		// 좌석 정보
+//		mav.addObject("seatList", seatList);
+//		
+//		return mav; 
+//	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////
+	// 좌석 정보 insert ChoiceVO - 행/열/인원/회원번호/ticketing_num -> 결제창으로 이동
 	@GetMapping("/performance/submitSeat")
-	public ModelAndView submitSeat(String seat_info, int ticketing_num,
+	public ModelAndView submitSeat(String seat_info, int ticketing_num, int cinema_num,
 			@RequestParam(value="adult_money",defaultValue="0") int adult_money, 
 			@RequestParam(value="teenage_money",defaultValue="0") int teenage_money, 
-			@RequestParam(value="treatement_money",defaultValue="0") int treatement_money) {
+			@RequestParam(value="treatement_money",defaultValue="0") int treatement_money,
+			HttpServletRequest request, HttpSession session) {
 		log.debug("<<결제창으로 이동>>");
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("ticketing_num", ticketing_num);
@@ -336,10 +424,33 @@ public class PerformanceController {
 		log.debug("<<우대>> : " + treatement_money); // 명
 		
 		String[] seatNum = seat_info.split(" ");
+		List<String> seatList = new ArrayList<>();
 		
+		
+		// 좌석 정보 insert - ChoiceVO
 		for(int i=0; i<seatNum.length; i++) {
+			Map<String, Object> mapChoice = new HashMap<String, Object>();
 			log.debug(i + "번째 : " + seatNum[i]);
+			String[] rowAndCol = seatNum[i].split("_"); // 행열 나누기 
+			log.debug("<<행>> "  + Integer.parseInt(rowAndCol[0]));
+			log.debug("<<열>> "  + Integer.parseInt(rowAndCol[1]));
+			mapChoice.put("choice_row", Integer.parseInt(rowAndCol[0]));
+			mapChoice.put("choice_col", Integer.parseInt(rowAndCol[1]));
+			mapChoice.put("choice_adult", adult_money);
+			mapChoice.put("choice_teenage", teenage_money);
+			mapChoice.put("choice_treatment", treatement_money);
+			mapChoice.put("mem_num", memberVO.getMem_num());
+			mapChoice.put("ticketing_num", ticketing_num);
+			
+			
+			performanceService.insertChoice(mapChoice);
+			
+			seatList.add(seatNum[i]);
 		}
+		
+		// 여석 UPDATE - CinemaVO
+		log.debug("<<결제 인원 수>> : "  + (adult_money+teenage_money+treatement_money));
+		performanceService.updateChoice(cinema_num, (adult_money+teenage_money+treatement_money));
 		
 		
 		// -------------------------------------------------------------------
@@ -351,6 +462,8 @@ public class PerformanceController {
 		payPerformance = performanceService.choosingPerformance(map);
 		payTicketing = performanceService.choosingTicketing(map);
 		
+		
+		log.debug("<<seatList>> : " + seatList);
 		log.debug("================================================");
 		log.debug("<<payCinema>> : " + payCinema);
 		log.debug("<<payPerformance>> : " + payPerformance);
@@ -359,21 +472,99 @@ public class PerformanceController {
 		// -------------------------------------------------------------------
 		
 		
-		
-		
 		mav.setViewName("performancePayment"); // tiles 설정 name과 동일해야 함
 		// ticketing_num에 대한 값 넣어주기
 		mav.addObject("payCinema", payCinema);
 		mav.addObject("payPerformance", payPerformance);
 		mav.addObject("payTicketing", payTicketing);
 		
+		
 		//가격 -- 나중에 넣어주기
+		mav.addObject("adult_money", adult_money); // 명
+		mav.addObject("teenage_money", teenage_money); // 명
+		mav.addObject("treatement_money", treatement_money); // 명
+		// 좌석 정보
+		mav.addObject("seatList", seatList);
+				
+		return mav; 
+	}
+		
+	
+	
+	
+	
+	/*=================================`
+	 * 결제
+	 *=================================*/
+	@PostMapping("/performance/choiceSeat")
+	public ModelAndView choiceSeat(@RequestParam String choice_seat,
+			                         @RequestParam int choice_adult,
+			                         @RequestParam int choice_teenage,
+			                         @RequestParam int choice_treatment,
+			                         @RequestParam int ticketing_num,
+			                         @RequestParam int cinema_num,
+			                         HttpServletRequest request, HttpSession session) {
+		log.debug("<<결제끝>>");
+
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		ModelAndView mav = new ModelAndView();
+
+		log.debug("<<ticketing_num>> "  + ticketing_num);
+		log.debug("<<cinema_num>> "  + cinema_num);
+		log.debug("<<choice_seat>> "  + choice_seat);
 		
 		
+		log.debug("<<choice_adult>> "  + choice_adult);
+		log.debug("<<choice_teenage>> "  + choice_teenage);
+		log.debug("<<choice_treatment>> "  + choice_treatment);
+		log.debug("<<ticketing_num>> "  + ticketing_num);
+		
+		
+		
+		
+		
+		mav.setViewName("performanceList"); // tiles 설정 name과 동일해야 함
+
 		return mav; 
 	}
 	
 	
+	/*=================================`
+	 * 결제 완료 = 결제 정보 + 티켓
+	 *=================================*/
+	@RequestMapping("/performance/showTicket")
+	public ModelAndView ticket(HttpServletRequest request, HttpSession session) {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		ModelAndView mav = new ModelAndView();
+		
+		
+		
+		mav.setViewName("performanceShowTicket"); // tiles 설정 name과 동일해야 함
+		
+		return mav; 
+		
+	}
+	
+	/*=================================`
+	 * 결제 완료 = 결제 정보 + 티켓
+	 *=================================*/
+	@RequestMapping("/performance/history")
+	public ModelAndView history(HttpServletRequest request, HttpSession session) {
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("user");
+		ModelAndView mav = new ModelAndView();
+		
+		Integer user = memberVO.getMem_num();
+		
+		
+		
+		
+		mav.setViewName("performanceHistory"); // tiles 설정 name과 동일해야 함
+		
+		return mav; 
+		
+	}
 	
 	
 	

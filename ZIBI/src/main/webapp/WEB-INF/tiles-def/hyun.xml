@@ -48,13 +48,26 @@
 	
 	<!-- 좌석 선택창 -->
 	<definition name="performanceSeat" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
+		<put-attribute name="title" value="좌석 선택"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/performanceSeat.jsp"/>
 	</definition>
 	
 	<!-- 결제창 -->
 	<definition name="performancePayment" extends="performancePage">
+		<put-attribute name="title" value="결제하기"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/performancePayment.jsp"/>
 	</definition>
 	
+	<!-- [결제] 티켓 번호 -->
+	<definition name="performanceShowTicket" extends="performancePage">
+		<put-attribute name="title" value="티켓"/>
+    	<put-attribute name="body" value="/WEB-INF/views/performance/performanceShowTicket.jsp"/>
+	</definition>
+	
+	<!-- 결제 내역 목록 -->
+	<definition name="performanceHistory" extends="performancePage">
+		<put-attribute name="title" value="결제 내역"/>
+    	<put-attribute name="body" value="/WEB-INF/views/performance/performanceHistory.jsp"/>
+	</definition>
 	
 </tiles-definitions>

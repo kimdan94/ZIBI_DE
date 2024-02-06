@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -135,6 +133,7 @@
 </div>
 </div>
 </div>
+<!-- 내용 끝 -->
 <!-- Daum 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=397d490d4a8bb2a2dc0a8a1612615084&libraries=services"></script>
@@ -184,4 +183,3 @@
         }).open();
     }
 </script>
-<!-- 내용 끝 -->

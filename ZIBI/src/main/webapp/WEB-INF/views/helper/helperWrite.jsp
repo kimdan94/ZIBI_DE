@@ -9,10 +9,10 @@
 <!-- 내용 시작 -->
 <div class="container-fluid contact py-6">
    <div class="d-flex justify-content-center">
-	<div class="rounded login-form col-md-4 col-lg-6">
+	<div class="rounded login-form col-md-4 col-lg-7">
 	<form:form action="write" modelAttribute="helperVO" id="register_form"
 		enctype="multipart/form-data">
-		<form:errors element="div" />
+		<form:errors element="div"/>
 		<h2>글쓰기</h2>
 		<hr size="3" noshade="noshade" width="100%">
 		<div>
@@ -92,11 +92,8 @@
         <div>
         	<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
         </div>
-        
 		<br>
-		<!-- 지도 넣어야함 -->
 	<div>
-
 	</div>
 		<div class="align-center">
 			<form:button class="btn mem-btn-green w-25">글 등록</form:button>
@@ -107,7 +104,6 @@
 </div>
 </div>
 </div>
-
 <!-- 내용 끝 -->
 <!-- Daum 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -56,10 +56,12 @@ $(function(){
 		let outputText;
 		if(param.status == 'yesSol'){
 			output = '../images/de/toggle2.png';
-			outputText = '[해결 완료]';
+			outputText = '😀 해결 완료 😀';
+			$('#output_text').css('color', 'gray');
 		}else if(param.status == 'noSol'){
 			output = '../images/de/toggle1.png';
-			outputText = '[해결 중]';
+			outputText = '🙁 해결 중 🙁';
+			$('#output_text').css('color', '#0080FF');
 		}else{
 			alert('해결여부 표시 오류');
 		}

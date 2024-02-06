@@ -250,6 +250,9 @@ form#mre_form{
 .margin-top{
 	margin-top:15px;
 }
+.margin-top2{
+	margin-top:30px;
+}
 .margin-bottom{
 	margin-bottom:15px;
 }
@@ -321,3 +324,7 @@ form#mre_form{
 	width:80px;
 	border-radius: 20px;
 }
+
+
+/*radio ¹öÆ°*/
+

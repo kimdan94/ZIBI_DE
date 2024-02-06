@@ -7,7 +7,6 @@
 			<div class="row align-self-center">
 				<div class="col-12 text-center">
 					<h6>* 비밀번호는 영문 대소문자, 숫자 4자리에서 12자리 가능합니다</h6>
-					
 				</div>
 				<div class="col-6">
 					<form:label path="mem_password">비밀번호</form:label>

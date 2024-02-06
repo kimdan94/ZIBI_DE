@@ -54,7 +54,7 @@
 			</div>
 		</div>
 		<tiles:insertAttribute name="body"/>
-	</div>	
+	</div>
 	<tiles:insertAttribute name="footer"/>
 	<a href="#" class="btn btn-light btn-md-square rounded-circle back-to-top">
 		<img src="${pageContext.request.contextPath}/images/na/up_menu.png" width="15px">

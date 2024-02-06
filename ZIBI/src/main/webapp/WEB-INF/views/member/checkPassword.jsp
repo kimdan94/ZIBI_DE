@@ -5,7 +5,8 @@
 		<form:form action="quitMember" id="check_password" modelAttribute="memberVO">
 			<div>
 				<form:label path="mem_password">비밀번호</form:label>
-				<form:password path="mem_password" class="w-100 form-control" />
+				<form:password path="mem_password" class="w-100 form-control"/>
+				<form:errors element="span"/>
 			</div>
 			<div id="quit-check">
 				<span id="password_area"></span>

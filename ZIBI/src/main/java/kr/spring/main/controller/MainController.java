@@ -32,20 +32,35 @@ public class MainController {
 	@RequestMapping("/main/home")
 	public String main(Model model) {
 		
-		//게시판 전체 최신글
-		int count = mainService.selectLastestContentCount();
-		List<LastestContentVO> list = null;
-		
-		if(count>0) {
-			list = mainService.selectLastestContent();
-		}
-		
-		//최신 영화
+		//최신 영화 1개
 		PerformanceVO perf = mainService.selectLastestPerformance();
 		
-		model.addAttribute("list",list);
-		model.addAttribute("count", count);
+		
+		//중고 최신글
+		List<LastestContentVO> list_second = mainService.selectLastestSecond();
+		
+		//재능기부 최신글
+		List<LastestContentVO> list_helper = mainService.selectLastestHelper();
+		
+		//영화 최신
+		List<LastestContentVO> list_movie = mainService.selectLastestMovie();
+		
+		//소모임 최신
+		List<LastestContentVO> list_book = mainService.selectLastestBook();
+		
+		//커뮤니티 최신
+		List<LastestContentVO> list_community = mainService.selectLastestCommunity();
+		
+		//집 체크리스트 최신 - 작성 필요
+		
+		
 		model.addAttribute("perf",perf);
+		
+		model.addAttribute("list_second", list_second);
+		model.addAttribute("list_helper", list_helper);
+		model.addAttribute("list_movie", list_movie);
+		model.addAttribute("list_book", list_book);
+		model.addAttribute("list_community", list_community);
 		
 		return "home"; //타일스 설정명
 	}

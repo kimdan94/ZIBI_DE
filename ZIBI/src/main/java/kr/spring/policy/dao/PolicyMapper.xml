@@ -5,7 +5,7 @@
 	<update id="updateStats" parameterType="policyVO">
 		UPDATE stats 
 		SET year=#{year},tot_family=#{tot_family},household_cnt=#{household_cnt} 
-		WHERE district_name=#{district_name}
+		WHERE district_num=#{district_num}
 	</update>
 	
 	<select id="selectPolicyList" parameterType="map" resultType="policyVO">

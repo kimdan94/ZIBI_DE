@@ -9,6 +9,10 @@ header{
 	background-color: #fcfcfc;
 	box-shadow: 0 8px 8px 0 #ededed;
 }
+header a{
+	cursor: pointer;
+}
+
 /* 회원 메뉴 */
 #member_menu a{
 	font-size: 0.8em;
@@ -21,10 +25,16 @@ header{
 	transition: .4s;
 }
 
+/* 문의하기 팝업창 */
+#question_popup{
+	font-size: .8em;
+	margin: 2px 0 2px 0;
+	padding: 2px 0 2px 0;
+}
+
 /* 전체 메뉴, 로고 */
 .navbar-collapse{
 	margin-left: 20px;
-	font-size: .9em;
 }
 .main-header .navbar .navbar-nav .nav-link {
     transition: .4s;
@@ -58,7 +68,7 @@ header{
     transition: .4s;
 }
 .dropdown-item{
-	font-size: .8em;
+	font-size: .9em;
 }
 
 /* 페이지 메뉴명 */
@@ -91,14 +101,14 @@ footer ul li{
 }
 footer ul>li:first-child{
 	font-size: .9em;
-	font-weight: 580;
+	font-weight: 600;
 	padding-bottom: 6px;
 }
 footer ul li:not(:first-of-type) {
 	font-size: .8em;
 }
 footer .footer-logo{
-	margin-left:100px;
+	margin-left:70px;
 }
 footer .info{
 	border-top: 1px solid lightgray;

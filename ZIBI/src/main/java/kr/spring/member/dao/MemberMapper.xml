@@ -2,6 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.member.dao.MemberMapper">
 	
+	<!-- 소모임 나의 예약 내역 -->
+	<select id="selectBookList" parameterType="int" resultType="bookVO">
+		SELECT
+			mem_num,
+			<![CDATA[
+			CASE WHEN SYSDATE >= TO_DATE(apply_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '1'
+			WHEN SYSDATE < TO_DATE(apply_gatheringDate,'YYYY-MM-DD HH24:MI') THEN '2'
+			]]>
+			END compareNow
+		FROM book_matching
+		JOIN book USING (book_num)
+		WHERE mem_num=#{mem_num}
+	</select>
+	<select id="selectBookMatchingList" parameterType="int" resultType="bookMatchingVO">
+		SELECT
+			book_state
+		FROM book_matching
+		JOIN book USING (book_num)
+		<![CDATA[
+		WHERE apply_num=#{mem_num} AND book_state<=1
+		]]>
+	</select>
+	
+	<select id="selectSecond" parameterType="int" resultType="secondVO">
+		SELECT mem_num, sc_sellstatus, sc_buyer_num, sc_order_status 
+		FROM second LEFT OUTER JOIN second_order USING (sc_num)
+		WHERE (mem_num=#{mem_num} or sc_buyer_num=#{mem_num}) AND (sc_sellstatus!=3 OR sc_order_status!=3)
+	</select>
+	
 	<!-- 회원 필수 정보 insert -->
 	<insert id="insertMember" parameterType="memberVO">
 		INSERT 

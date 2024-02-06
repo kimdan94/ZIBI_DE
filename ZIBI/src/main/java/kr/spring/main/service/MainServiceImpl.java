@@ -29,4 +29,34 @@ public class MainServiceImpl implements MainService {
 	public PerformanceVO selectLastestPerformance() {
 		return mainMapper.selectLastestPerformance();
 	}
+
+	@Override
+	public List<LastestContentVO> selectLastestSecond() {
+		return mainMapper.selectLastestSecond();
+	}
+
+	@Override
+	public List<LastestContentVO> selectLastestHelper() {
+		return mainMapper.selectLastestHelper();
+	}
+
+	@Override
+	public List<LastestContentVO> selectLastestMovie() {
+		return mainMapper.selectLastestMovie();
+	}
+
+	@Override
+	public List<LastestContentVO> selectLastestBook() {
+		return mainMapper.selectLastestBook();
+	}
+
+	@Override
+	public List<LastestContentVO> selectLastestCommunity() {
+		return mainMapper.selectLastestCommunity();
+	}
+
+	@Override
+	public List<LastestContentVO> selectLastestHouse() {
+		return mainMapper.selectLastestHouse();
+	}
 }

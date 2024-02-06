@@ -3,7 +3,7 @@
 <div class="member-page">
 	<div class="mypage-follow">
 		<c:if test="${count==0}">
-			<div class="justify-content-center no-data">
+			<div class="no-data">
 				팔로우한 회원이 없습니다 😟
 			</div>
 		</c:if>

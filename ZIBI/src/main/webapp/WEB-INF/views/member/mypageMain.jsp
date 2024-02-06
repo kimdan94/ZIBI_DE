@@ -8,11 +8,11 @@
 					<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView">
 					<div class="event-overlay">
 						<a data-lightbox="event-1" id="photo_btn">
-							<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="50px">
+							<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="40px">
 						</a>
 					</div>
 				</div>
-				<div id="photo_choice" style="display: none; margin-top:3px;">
+				<div id="photo_choice" style="display: none;">
 					<input type="file" id="upload" accept="image/gif,image/png,image/jpeg">
 					<input type="button" value="변경" class="btn mem-btn" id="photo_submit"> 
 					<input type="button" value="취소" class="btn mem-btn" id="photo_reset">
@@ -21,6 +21,14 @@
 			</div>
 		</div>
 		<div class="col-6 align-self-center">
+			<h6>
+				회원 가입일
+				<c:if test="${!empty memberVO.mem_modidate}"> / 정보 수정일</c:if>
+			</h6>
+			<p>
+				${memberVO.mem_regdate}
+				<c:if test="${!empty memberVO.mem_modidate}"> / ${memberVO.mem_modidate}</c:if>
+			</p>
 			<h6>이메일</h6>
 			<p>${memberVO.mem_email}</p>
 			<h6>닉네임</h6>
@@ -47,6 +55,7 @@
 				<input type="button" class="btn mem-btn" value="회원 탈퇴" onclick="location.href='${pageContext.request.contextPath}/member/checkPassword'">
 			</c:if>
 			<c:if test="${user.mem_social!=0}">
+				<input type="hidden" id="apikey" value="${apikey}"/>
 				<input type="button" class="btn mem-btn" id="quitSocial" value="연동 해제 및 회원 탈퇴">
 				<div class="wrap" id="passwordModal" style="display: none">
 					<div class="modal_box">
@@ -56,12 +65,14 @@
 						</p>
 						<span id="quit"></span>
 						<div>
-							<input type="button" class="btn mem-btn-green" value="회원 탈퇴" <c:if test="${user.mem_social==1}">onclick="javascript:unlinkApp()"</c:if><c:if test="${user.mem_social==2}">onclick="javascript:naverQuit()"</c:if>>
+							<input type="button" class="btn mem-btn-green" value="회원 탈퇴" <c:if test="${user.mem_social==1}">onclick="javascript:logoutKakao()"</c:if><c:if test="${user.mem_social==2}">onclick="javascript:naverQuit()"</c:if>>
 							<button class="btn mem-btn" id="cancel-btn">취소하기</button>
 						</div>
 					</div>
 					<div class="modal_bg"></div>
 				</div>
+				<script src="https://developers.kakao.com/sdk/js/kakao.js?appkey=${kakao_apikey}"></script>
+				<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/kakao.js"></script>
 				<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/quitSocialMember.js"></script><!-- 네이버 탈퇴 -->
 			</c:if>
 		</div>

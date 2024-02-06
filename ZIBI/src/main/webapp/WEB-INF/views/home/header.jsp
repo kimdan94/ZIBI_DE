@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="col-md-12 my-auto text-end" id="member_menu">
 			<c:if test="${!empty user}">
-				<a class="nickname-area">
+				<a class="nickname-area" href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${user.mem_num}">
 					<img src="${pageContext.request.contextPath}/images/na/header_member.png" width="15px"> ${user.mem_nickname}님
 				</a>
 				<c:if test="${user.mem_social!=1}">
@@ -29,7 +29,11 @@
 			<c:if test="${!empty user && user.mem_auth==9}">
 				<a href="${pageContext.request.contextPath}/admin/policy">관리자 페이지</a>
 			</c:if>
-			<a href="${pageContext.request.contextPath}/notice/list">고객센터</a>
+			<a id="questionPopup_btn">문의하기</a>
+		</div>
+		<div class="text-end" id="question_popup" style="display: none;">
+			229rkawk@google.com으로 이메일 문의해주세요!😉 (운영 시간 월~금, 9시~18시)
+			<input type="button" class="btn mem-btn" value="닫기" id="close_questionPopup_btn">
 		</div>
 		<nav class="navbar navbar-expand-lg">
 			<a href="${pageContext.request.contextPath}/main/home" class="navbar-brand">
@@ -66,3 +70,11 @@
 	</div>
 </header>
 <!-- 헤더 끝 -->
+<script>
+	$('#questionPopup_btn').click(function(){
+		$('#question_popup').show();
+	});
+	$('#close_questionPopup_btn').click(function(){
+		$('#question_popup').hide();
+	});
+</script>

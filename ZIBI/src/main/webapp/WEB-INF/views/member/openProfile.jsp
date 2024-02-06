@@ -23,7 +23,7 @@
 					<div class="card">
 						<div class="card-img">
 							<c:if test="${!empty content.photo}">
-								<img src="${pageContext.request.contextPath}/upload/${content.photo}" >
+								<img class="card-image" src="${pageContext.request.contextPath}/upload/${content.photo}" >
 							</c:if>
 							<c:if test="${empty content.photo}">
 								<img class="card-img-top" src="${pageContext.request.contextPath}/images/na/no-image.png">

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,11 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.ActListVO;
 import kr.spring.member.vo.DealListVO;
 import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.second.vo.SecondVO;
 import kr.spring.util.PageUtil_na;
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +36,11 @@ public class MypageController {
 	
 	/*---------------------의존 관계 주입-----------------------*/
 	@Autowired
-	private MemberService memberService;	
+	private MemberService memberService;
+	
+	//카카오 앱키 호출
+	@Value("${NA-API-KEY.kakaoAppKey}")
+	private String kakao_apikey;
 	
 	//VO 초기화
 	@ModelAttribute
@@ -43,7 +51,10 @@ public class MypageController {
 	
 	//메인
 	@RequestMapping("/member/mypageMain")
-	public String mypageMain() {
+	public String mypageMain(Model model) {
+		
+		model.addAttribute("apikey",kakao_apikey);
+		
 		return "mypageMain"; //타일즈
 	}
 	
@@ -69,7 +80,6 @@ public class MypageController {
 			map.put("category", category);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			log.debug("<<리스트 읽어오기 시작>> : " + map);
 			list = memberService.selectDealList(map);
 		}
 		
@@ -101,7 +111,6 @@ public class MypageController {
 			map.put("category", category);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			log.debug("<<리스트 읽어오기 시작>> : "+map);
 			list = memberService.selectActList(map);
 		}
 		
@@ -202,14 +211,37 @@ public class MypageController {
 	
 	//회원 탈퇴
 	@RequestMapping("/member/quitMember")
-	public String quitMember(HttpSession session, RedirectAttributes attr) {
+	public String quitMember(@Valid MemberVO memberVO, BindingResult result, HttpSession session, RedirectAttributes attr) {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		log.debug("<<회원 탈퇴>> : " +  user );
+		//소모임 조건 체크
+		List<BookVO> list = memberService.selectBookList(user.getMem_num());
+		
+		for(int i=0 ; i<list.size() ; i++ ) {
+			BookVO db_book = list.get(i);
+			if(db_book.getCompareNow()==2) {
+				result.reject("bookError");
+				return "checkPassword";
+			}
+		}
+		
+		List<BookMatchingVO> mList = memberService.selectBookMatchingList(user.getMem_num());
+		
+		if(mList.size()>0) {
+			result.reject("bookError");
+			return "checkPassword";
+		}
+		
+		//중고 거래 조건 체크
+		SecondVO db_second = memberService.selectSecond(user.getMem_num());
+		if(db_second != null) {
+			result.reject("secondError");
+			return "checkPassword";
+		}
 		
 		session.invalidate(); //로그아웃
-		memberService.quitMember(user.getMem_num()); //탈퇴
+		//memberService.quitMember(user.getMem_num()); //탈퇴
 		
 		if(user.getMem_social()==2) attr.addFlashAttribute("message","quitNaver");
 		else attr.addFlashAttribute("message","quit");

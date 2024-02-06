@@ -22,13 +22,11 @@
 					<form:errors element="span"/>
 				</div>
 				<form:button class="btn mem-btn-green w-100" style="margin:10px 0 10px 0;">로그인</form:button>
-				<div >
-					<div class="text-center">
-						<a id="kakao-login-btn" href="javascript:loginWithKakao()"><img src="${pageContext.request.contextPath}/images/na/login_kakao.png" height="40" alt="카카오 로그인 버튼" /></a>
-						<span id="naver_id_login"></span>
-					</div>
-					<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/findPassword'">
-				</div>
+				<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+					<img src="${pageContext.request.contextPath}/images/na/login_kakao.png" height="39" alt="카카오 로그인 버튼" />
+				</a>
+				<span id="naver_id_login"></span>
+				<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/findPassword'">
 			</form:form>
 		</div>
 	</div>

@@ -9,10 +9,11 @@
 	<c:if test="${!empty list}">
 		<div class="policy-map text-center">
 			<h3>대한민국의 1인 가구 세대수와 비율을 알아보세요 📊</h3>
+			<p>지도의 지자체를 클릭하면 1인 가구 비율이 나타납니다</p>
 		</div>
 		<div class="row">
-			<div class="col-6" id="map" style="height:600px;"></div>
-			<div class="col-6 align-self-center" id="piechart" style="height: 600px;">지도의 지자체를 클릭하면 1인 가구 비율이 나타납니다</div>
+			<div class="col-6" id="map" style="height:700px;"></div>
+			<div class="col-6" id="piechart" style="height: 700px;"></div>
 		</div>
 	</c:if>
 </div>
@@ -21,15 +22,6 @@
 <script>
 	$('#count_btn').toggleClass("mem-btn");
 	$('#count_btn').toggleClass("mem-btn-green");
-	
-	
-	var options = {
-			  width: 400,
-			  height: 240,
-			  title: 'Toppings I Like On My Pizza',
-			  colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
-			};
-	
 	
 	google.charts.load('current', {
 		'packages' : [ 'corechart' ]
@@ -48,7 +40,11 @@
 			]);
 
 		var options = {
-			title : content +'의 1인 가구 비율'
+			title : content +'의 1인 가구 비율',
+			'width':800,
+			colors: ['#DB3954', '#696969'],
+			slices: { 1: {offset: 0.2} },
+			is3D: true
 		};
 
 		var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -90,7 +86,7 @@
 	
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 		mapOption = {
-			center : new kakao.maps.LatLng(35.724906989225346,128.0894168414805), // 지도의 중심좌표
+			center : new kakao.maps.LatLng(36.01416226711497,128.84116019551462), // 지도의 중심좌표
 			level : 13 // 지도의 확대 레벨
 		};
 	

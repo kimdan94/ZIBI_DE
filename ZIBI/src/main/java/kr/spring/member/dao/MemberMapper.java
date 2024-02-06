@@ -9,11 +9,14 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookVO;
 import kr.spring.member.vo.ActListVO;
 import kr.spring.member.vo.DealListVO;
 import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.FollowVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.second.vo.SecondVO;
 
 @Mapper
 public interface MemberMapper {
@@ -37,10 +40,10 @@ public interface MemberMapper {
 	@Select("SELECT * FROM member JOIN member_detail USING (mem_num) WHERE mem_email=#{mem_email}")
 	public MemberVO checkEmail(String mem_email);
 	//닉네임 체크
-	@Select("SELECT * FROM member_detail JOIN member USING (mem_num) WHERE mem_nickname=#{mem_nickname}")
+	@Select("SELECT * FROM member WHERE mem_nickname=#{mem_nickname}")
 	public MemberVO checkNickname(String mem_nickname);
 	//핸드폰 번호 체크
-	@Select("SELECT * FROM member_detail JOIN member USING (mem_num) WHERE mem_phone=#{mem_phone}")
+	@Select("SELECT * FROM member_detail WHERE mem_phone=#{mem_phone}")
 	public MemberVO checkPhone(String mem_phone);
 	
 	/*---------회원 정보 수정----------*/
@@ -54,8 +57,54 @@ public interface MemberMapper {
 	public void updatePassword(MemberVO memberVO);
 	
 	/*---------회원 탈퇴----------*/
-	//이메일만 삭제하도록 업데이트??????????????????????????????????????
-	@Delete("DELETE FROM member where mem_num=#{mem_num}")
+	//조건 - 소모임 예약 compareNow==2, book_state=<1인 경우 탈퇴 불가, 그 탈퇴 가능
+	public List<BookVO> selectBookList(int mem_num);
+	//조건 - 소모임 예약 book_state=<1인 경우 탈퇴 불가, 그 탈퇴 가능
+	public List<BookMatchingVO> selectBookMatchingList(int mem_num);
+	//조건 - 중고 거래
+	public SecondVO selectSecond(int mem_num);
+	
+	//소모임 - 스크랩 삭제
+	@Delete("DELETE book_scrap WHERE mem_num=#{mem_num}")
+	public void deleteBookScrap(int mem_num);
+	//소모임 - 리뷰 삭제
+	@Delete("DELETE book_review WHERE mem_num=#{mem_num}")
+	public void deleteBookReview(int mem_num);
+	//소모임 - 댓글 삭제
+	@Delete("DELETE book_reply WHERE mem_num=#{mem_num}")
+	public void deleteBookReply(int mem_num);
+	//소모임 - 예약 매칭 삭제
+	@Delete("DELETE book_matching WHERE apply_num=#{mem_num}")
+	public void deleteBookMatch(int mem_num);
+	//소모임 - 예약 삭제
+	@Delete("DELETE book WHERE mem_num=#{mem_num}")
+	public void deleteBook(int mem_num);
+	
+	//커뮤니티 - 스크랩 삭제
+	@Delete("DELETE community_scrap WHERE mem_num=#{mem_num}")
+	public void deleteCommunityScrap(int mem_num);
+	//커뮤니티 - 댓글 삭제
+	@Delete("DELETE community_reply WHERE mem_num=#{mem_num}")
+	public void deleteCommunityReply(int mem_num);
+	//커뮤니티 - 좋아요 삭제
+	@Delete("DELETE community_fav WHERE mem_num=#{mem_num}")
+	public void deleteCommunityFav(int mem_num);
+	//커뮤니티 - 부모글 삭제
+	@Delete("DELETE community WHERE mem_num=#{mem_num}")
+	public void deleteCommunity(int mem_num);
+	
+	//재능기부 - 스크랩 삭제
+	@Delete("DELETE helper_scrap WHERE mem_num=#{mem_num}")
+	public void deleteHelperScrap(int mem_num);
+	//재능기부 - 댓글 삭제
+	@Delete("DELETE helper_reply WHERE mem_num=#{mem_num}")
+	public void deleteHelperReply(int mem_num);
+	//재능기부 - 부모글 삭제
+	@Delete("DELETE helper WHERE mem_num=#{mem_num}")
+	public void deleteHelper(int mem_num);
+	
+	//member 테이블 업데이트
+	@Update("UPDATE member SET mem_email='-',mem_auth=0 where mem_num=#{mem_num}")
 	public void quitMember(int mem_num);
 	//회원 부가 정보 삭제
 	@Delete("DELETE FROM member_detail where mem_num=#{mem_num}")

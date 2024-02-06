@@ -57,6 +57,10 @@
 	color: #32a77b !important;
 	transition: .3s !important;
 }
+.main-content h4{
+	font-weight: 600;
+	margin-top: 30px;
+}
 
 /* 추가 정보 입력 유도 */
 #userInfoModal{
@@ -116,9 +120,10 @@
 .service-title-content{
 	padding-bottom:50px;
 }
-.service-content-icon h4{
+.service-content-icon h5{
 	font-size: 1em;
 	font-weight: bold;
+	margin: 0 0 10px 0 !important;
 }
 .service-content-icon p{
 	font-size: 0.9em;
@@ -170,14 +175,21 @@
 }
 .main-content .team-item .team-img{
 	height: 180px;
+}
+.main-content .team-img .img-fluid{
+	border-radius: 8px;
 	width: 100%;
-	overflow: hidden;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
 }
-.main-content .team-img img{
-	object-fit:cover;
-}
-.main-content .team-item h6{
+.main-content h6{
+	font-size: 1.1em;
 	font-weight: 600;
+	margin-top: 15px;
+}
+.main-content h6.text-primary{
+	font-size: .9em;
 }
 .main-content .team-item p{
 	font-size: .8em;
@@ -246,7 +258,7 @@
 /*--------------마이페이지--------------*/
 /* 메인 */
 .mypageMain .profile-detail{
-	height: 500px;
+	height: 600px;
 }
 .mypageMain .photo-area {
 	height: 400px;
@@ -274,8 +286,8 @@
 /* 프로필 사진 변경 */
 .mypageMain .my-photo {
 	object-fit: cover;
-	height: 350px;
-	width: 350px;
+	height: 400px;
+	width: 400px;
 }
 .mypageMain .site-content {
 	margin-top: 20px;
@@ -295,8 +307,8 @@
 }
 .mypageMain .event .event-img .event-overlay {
     position: absolute;
-    top: 80%;
-    left: 80%;
+    top: 85%;
+    left: 85%;
     transition: 0.4s;
     opacity: 0;
     z-index: 1;
@@ -305,6 +317,9 @@
 .mypageMain .event .event-img:hover .event-overlay {
     opacity: 1;
     cursor: pointer;
+}
+#photo_choice{
+	margin-top: 15px;
 }
 
 /* 회원 정보 수정 */
@@ -338,7 +353,7 @@
 }
 
 /* 마이페이지 팔로우 */
-.mypage-follow .col-5{
+.mypage-follow .col-5{ 
 	height: 100px;
 }
 .mypage-follow .col-5 img{
@@ -376,11 +391,12 @@
 	transition: .3s !important;
 }
 .openProfile .col-5{
-	height: 150px;
+	height: 300px;
 	width: 300px;
 }
+
 .openProfile .col-5 img{
-	border-radius: 8px;
+	border-radius: 50%;
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -395,11 +411,13 @@
 }
 .openProfile .card-img{
 	height: 250px;
-	width: 100%;
-	overflow: hidden;
 }
-.openProfile .card img{
-	object-fit:cover;
+.openProfile .card-img .card-image{
+	border-radius: 5px;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
 }
 .openProfile .card-title{
 	font-size: .9em;

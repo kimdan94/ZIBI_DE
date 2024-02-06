@@ -24,7 +24,6 @@ import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil_mem_num;
-import kr.spring.util.PageUtil_na;
 import kr.spring.util.PasswordCheckException;
 import kr.spring.util.socialMemberCheckException;
 import lombok.extern.slf4j.Slf4j;
@@ -141,12 +140,8 @@ public class MemberController {
 			} else if(db_member != null) {
 				check = db_member.checkPassword(memberVO.getMem_password()); //비밀번호 일치여부 확인
 			}
-				
 			
 			if(check) { //비밀번호 일치할 경우
-				
-				/*자동 로그인 처리 필요*/
-				
 				session.setAttribute("user",db_member); //로그인 처리
 				return "redirect:/main/home";
 			}

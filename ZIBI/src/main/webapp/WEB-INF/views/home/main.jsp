@@ -28,7 +28,7 @@
 					<a href="${pageContext.request.contextPath}/performance/detail?performance_num=${perf.performance_num}">${perf.performance_title}</a>
 				</h1>
 				<h5>${perf.performance_content}</h5>
-				<small>${perf.performance_start_date}</small>
+				<small>⌛ ${perf.performance_start_date}</small>
 			</div>
 		</div>
 	</div>
@@ -43,24 +43,24 @@
 </div>
 <div class="container">
 	<div class="main-content">
-		<h5>ZIBI의 다양한 메뉴를 만나보세요!</h5>
+		<h4 style="margin-bottom: 20px;">ZIBI의 다양한 메뉴를 만나보세요</h4>
 		<div class="owl-carousel">
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/book/list">👥 모임 참여</a>
-						</h4>
-						<p class="mb-1">모임을 만들어 지비러들끼리 소통을 활성화하세요</p>
+						</h5>
+						<p class="mb-1">무료한 하루, ZIBI 소모임에서 지비러들과 만나요!</p>
 					</div>
 				</div>
 			</div>
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/performance/list">🎬 영화 감상</a>
-						</h4>
+						</h5>
 						<p class="mb-1">지비러를 위한 영화를 특별한 가격으로 감상하세요</p>
 					</div>
 				</div>
@@ -68,9 +68,9 @@
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/checklist/list">🏠 집 체크리스트</a>
-						</h4>
+						</h5>
 						<p class="mb-1">집을 이사할 때 ZIBI의 체크리스트를 활용해보세요</p>
 					</div>
 				</div>
@@ -78,9 +78,9 @@
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/secondhand/list">🤝 중고거래</a>
-						</h4>
+						</h5>
 						<p class="mb-1">더이상 사용하지 않는 물품을 거래하세요</p>
 					</div>
 				</div>
@@ -88,9 +88,9 @@
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex  justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/helper/list">🙋 재능 기부</a>
-						</h4>
+						</h5>
 						<p class="mb-1">나의 사소한 재능을 기부하세요</p>
 					</div>
 				</div>
@@ -98,9 +98,9 @@
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/policy/main">ℹ️ 1인 가구 정보</a>
-						</h4>
+						</h5>
 						<p class="mb-1">1인 가구 정보를 열람하세요</p>
 					</div>
 				</div>
@@ -108,73 +108,206 @@
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
-						<h4 class="mb-3">
+						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/community/list">✍️ 커뮤니티</a>
-						</h4>
+						</h5>
 						<p class="mb-1">지비러들끼리 간편하게 소통하세요</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<c:if test="${count>0}">
-		<div class="main-content">
-			<h5>최근 소식을 감상하세요!</h5>
-			<div class="container-fluid team py-6">
-				<div class="row g-4">
-					<c:forEach var="content" items="${list}">
-						<div class="col-lg-3 col-md-6">
-							<div class="team-item rounded">
-								<div class="team-img">
-									<c:if test="${!empty content.photo}">
-										<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
-									</c:if>
-									<c:if test="${empty content.photo}">
-										<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
-									</c:if>
-								</div>
-								<div class="team-content text-center py-3 rounded-bottom">
-									<h6 class="text-primary">
-										<c:if test="${content.category==1}">
-											<a href="${pageContext.request.contextPath}/book/detail?book_num=${content.num}" class="my-auto text-center">
+	<div class="main-content">
+		<div class="row">
+			<h4>최신글을 구경하세요</h4>
+			<div class="col-6">
+				<h6>🤝 중고 거래</h6>
+				<div class="container-fluid team py-6">
+					<div class="row g-1">
+						<c:forEach var="content" items="${list_second}">
+							<div class="col-lg-4 col-md-2">
+								<div class="team-item rounded">
+									<div class="team-img">
+										<c:if test="${!empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
+										</c:if>
+										<c:if test="${empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
+										</c:if>
+									</div>
+									<div class="team-content text-center py-3 rounded-bottom text-center">
+										<h6 class="text-primary">
+											<a href="${pageContext.request.contextPath}/secondhand/detail?sc_num=${content.num}" class="my-auto">
 												${content.title}
 											</a>
+										</h6>
+										<p>
+											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
+												${content.mem_nickname}
+											</a>
+										</p>
+										<p class="mb-0">
+											${content.reg_date}
+										</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<h6>🙋 재능 기부</h6>
+				<div class="container-fluid team py-6">
+					<div class="row g-1">
+						<c:forEach var="content" items="${list_helper}">
+							<div class="col-lg-4 col-md-2">
+								<div class="team-item rounded">
+									<div class="team-img">
+										<c:if test="${!empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
 										</c:if>
-										<c:if test="${content.category==2}">
+										<c:if test="${empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
+										</c:if>
+									</div>
+									<div class="team-content text-center py-3 rounded-bottom text-center">
+										<h6 class="text-primary">
 											<a href="${pageContext.request.contextPath}/helper/detail?helper_num=${content.num}" class="my-auto text-center">
 												${content.title}
 											</a>
-										</c:if>
-										<c:if test="${content.category==3}">
-											<a href="${pageContext.request.contextPath}/community/detail?community_num=${content.num}" class="my-auto text-center">
-												${content.title}
+										</h6>
+										<p>
+											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
+												${content.mem_nickname}
 											</a>
-										</c:if>
-										<c:if test="${content.category==4}">
-											<a href="${pageContext.request.contextPath}/secondhand/detail?sc_num=${content.num}" class="my-auto text-center">
-												${content.title}
-											</a>
-										</c:if>
-									</h6>
-									<p>
-										<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto text-center">
-											${content.mem_nickname}
-										</a>
-									</p>
-									<p class="mb-0">
-										<c:if test="${content.category==1}">👥 소모임 예약</c:if>
-										<c:if test="${content.category==2}">🙋 재능 기부</c:if>
-										<c:if test="${content.category==3}">✍️ 커뮤니티</c:if>
-										<c:if test="${content.category==4}">🤝 중고 거래</c:if>
-									</p>
+										</p>
+										<p class="mb-0">
+											${content.reg_date}
+										</p>
+									</div>
 								</div>
 							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
 		</div>
-	</c:if>
+		<div class="row">
+			<div class="col-6">
+				<h6>🎬 최신 영화</h6>
+				<div class="container-fluid team py-6">
+					<div class="row g-1">
+						<c:forEach var="content" items="${list_movie}">
+							<div class="col-lg-4 col-md-2">
+								<div class="team-item rounded">
+									<div class="team-img">
+										<c:if test="${!empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
+										</c:if>
+										<c:if test="${empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
+										</c:if>
+									</div>
+									<div class="team-content text-center py-3 rounded-bottom text-center">
+										<h6 class="text-primary">
+											<a href="${pageContext.request.contextPath}/performance/detail?performance_num=${content.num}" class="my-auto text-center">
+												${content.title}
+											</a>
+										</h6>
+										<p>
+											개봉일
+										</p>
+										<p class="mb-0">
+											${content.reg_date}
+										</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<h6>👥 소모임 예약</h6>
+				<div class="container-fluid team py-6">
+					<div class="row g-1">
+						<c:forEach var="content" items="${list_book}">
+							<div class="col-lg-4 col-md-2">
+								<div class="team-item rounded">
+									<div class="team-img">
+										<c:if test="${!empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
+										</c:if>
+										<c:if test="${empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
+										</c:if>
+									</div>
+									<div class="team-content text-center py-3 rounded-bottom text-center">
+										<h6 class="text-primary">
+											<a href="${pageContext.request.contextPath}/book/detail?book_num=${content.num}" class="my-auto text-center">
+												${content.title}
+											</a>
+										</h6>
+										<p>
+											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
+												${content.mem_nickname}
+											</a>
+										</p>
+										<p class="mb-0">
+											${content.reg_date}
+										</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<h6>✍️ 커뮤니티</h6>
+				<div class="container-fluid team py-6">
+					<div class="row g-1">
+						<c:forEach var="content" items="${list_community}">
+							<div class="col-lg-4 col-md-2">
+								<div class="team-item rounded">
+									<div class="team-img">
+										<c:if test="${!empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
+										</c:if>
+										<c:if test="${empty content.photo}">
+											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
+										</c:if>
+									</div>
+									<div class="team-content text-center py-3 rounded-bottom text-center">
+										<h6 class="text-primary">
+											<a href="${pageContext.request.contextPath}/community/detail?community_num=${content.num}" class="my-auto text-center">
+												${content.title}
+											</a>
+										</h6>
+										<p>
+											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
+												${content.mem_nickname}
+											</a>
+										</p>
+										<p class="mb-0">
+											${content.reg_date}
+										</p>
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<h6>🏠 집 체크리스트</h6>
+				추가 필요
+			</div>
+		</div>
+	</div>
 </div>
 <c:if test="${!empty message}">
 	<div class="wrap" id="mainModal">

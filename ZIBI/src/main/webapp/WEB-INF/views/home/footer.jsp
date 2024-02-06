@@ -20,17 +20,14 @@
 				</div>
 				<div class="align-self-center col-lg-3 col-md-10">
 					<ul>
-						<li>
-							<a href="${pageContext.request.contextPath}/notice/list">
-							고객센터 >
-							</a>
-						</li>
-						<li>직접 문의 운영 시간</li>
-						<li>월요일 - 금요일, 9:00 - 18:00</li>
+						<li>이메일 문의</li>
+						<li>운영 시간 : 월요일 ~ 금요일, 9시 ~ 18시</li>
+						<li>이메일 : 229rkawk@google.com</li>
+						
 					</ul>
 				</div>
 				<div class="col-lg-2 col-md-10 footer-logo">
-					<img src="${pageContext.request.contextPath}/images/logo_rec.png" width="100px">
+					<img src="${pageContext.request.contextPath}/images/logo_rec.png" width="120px">
 				</div>
 			</div>
 			<div class="info">

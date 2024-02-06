@@ -18,7 +18,7 @@
 <div class="result-display1">표시할 게시물이 없습니다.</div></c:if>
 		<c:if test="${count > 0}">
 			<c:forEach var="checklist" items="${list}">
-				<div class="float-left1">
+				<div class="check_result">
 					<c:if test="${!empty checklist.room_filename}">
 						<img
 							src="${pageContext.request.contextPath}/upload/${checklist.room_filename}"
@@ -37,7 +37,7 @@
 					<div class="align-center">${checklist.room_description}</div>
 				</div>
 				<br>
-				<hr size="3" noshade="noshade" width="100%">
+				<HR width="50%" align="center">
 			</c:forEach>
 			<div class="align-center">${page}</div>
 		</c:if>

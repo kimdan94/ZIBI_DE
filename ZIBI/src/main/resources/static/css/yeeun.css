@@ -73,7 +73,7 @@ ol, ul {
 ul.search{
 	width:800px;
 	margin:0 auto;
-	margin-left:400px;
+	margin-left:295px;
 }
 ul.search li{
 	display:inline;
@@ -495,8 +495,8 @@ form#mre_form{
     font-weight:bold;
 }
 .page-main-1{
-	padding-left:160px;
-	padding-top:25px;
+	padding-left:270px;
+	padding-right:138px;
 }
 .com-page{
 	clear:both;
@@ -509,7 +509,7 @@ hr {
     margin-right: auto;
 }
 .check_btn{
-	margin-left:420px;
+	margin-left:470px;
 	width: 560px;
     height: 48px;
 }
@@ -551,7 +551,7 @@ a:active {
 	margin-right:5px;
 }
 .order1{
-	margin-left:1335px;
+	margin-left:1100px;
 }
 .float-left{
 	float:left;
@@ -611,6 +611,9 @@ a:active {
     border-radius: 5px;
     font-size: 16px;
     resize: none;
+}
+.check_result{
+	margin-left:470px;
 }
 .link-icon { position: relative; display: inline-block; width: auto; font-size: 14px; font-weight: 500; color: #333; margin-right: 10px; padding-top: 50px; }
 .link-icon.twitter { background-image: url(./images/icon-twitter.png); background-repeat: no-repeat; }

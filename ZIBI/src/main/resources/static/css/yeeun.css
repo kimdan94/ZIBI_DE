@@ -164,8 +164,10 @@ div#reply-div{
 }
 form#re_form{
 	width:985px;
-	height:170px;
+	height:200px;
 	border:none;
+	padding-top:15px;
+	padding-left:3px;
 	background-color:#eeeeee;
 }
 span.re-title{
@@ -549,7 +551,7 @@ a:active {
 	margin-right:5px;
 }
 .order1{
-	margin-left:1310px;
+	margin-left:1335px;
 }
 .float-left{
 	float:left;

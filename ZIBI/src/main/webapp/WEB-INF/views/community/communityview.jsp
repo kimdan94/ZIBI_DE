@@ -129,7 +129,7 @@
 	<form id="re_form">
 		<input type="hidden" name="community_num"
 			value="${community.community_num}" id="community_num">
-		<h3>&nbsp;댓글 작성하기</h3>
+		<h3>&nbsp;&nbsp;&nbsp;&nbsp;댓글 작성하기</h3>
 		<div id="re_first">
 				<span class="letter-count">300/300 </span>
 			</div>
@@ -141,6 +141,7 @@
 			    ><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea>
 		<button id="submit">등록</button>
 		</div>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ※ 부적절한 댓글은 관리자에 의해 삭제될 수 있습니다.
 	</form>
 	<br>
 	<!-- 댓글 목록 출력 시작 -->

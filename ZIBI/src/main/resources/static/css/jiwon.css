@@ -622,21 +622,23 @@ ul.search li:last-child {
 
 /* secondReviewWrite.jsp 거래후기 작성 폼*/
 .review-title{
-	font-size:25px;
+	font-size:30px;
 	margin:2px 0 20px 0;
 }
 .review-txt1{
-	font-size:17px;
+	font-size:21px;
 	color:#32a77b;
 	margin-bottom:1px;
 }
 .review-txt2{
-	font-size:15px;
+	font-size:17px;
 	color:gray;
 }
 /* 별점 */
 .rate { 
-	display: inline-block;border: 0;margin-right: 15px;
+	display: inline-block;
+	border: 0;
+	margin-right: 15px;
 }
 .rate > input {
 	display: none;
@@ -646,21 +648,50 @@ ul.search li:last-child {
 	color: #ddd
 }
 .rate > label:before {
-	display: inline-block;font-size: 1rem;padding: .3rem .2rem;margin: 0;cursor: pointer;font-family: FontAwesome;content: "\f005 ";
+	display: inline-block;
+	font-size: 1.5rem;
+	padding: .3rem .2rem;
+	margin: 0;cursor: 
+	pointer;font-family: 
+	FontAwesome;content: "\f005 ";
 }
 .rate .half:before {
-	content: "\f089 "; position: absolute;padding-right: 0;
+	content: "\f089 "; 
+	position: absolute;
+	padding-right: 0;
 }
 .rate input:checked ~ label, 
 .rate label:hover,.rate label:hover ~ label {
-	color: #f73c32 !important;  
+	color: #32a77b !important;  
 } 
 .rate input:checked + .rate label:hover,
 .rate input input:checked ~ label:hover,
 .rate input:checked ~ .rate label:hover ~ label,  
 .rate label:hover ~ input:checked ~ label { 
-	color: #f73c32 !important;  
+	color: #32a77b !important;  
 } 
+
+
+
+
+
+
+
+/*후기 textarea*/
+#sc_rev_content {
+    resize: none;
+    width: 100%;
+    border-radius:7px;
+    border: 2px solid #32a77b;
+    margin-top:10px;
+}
+#sc_rev_content:focus{
+	outline-color:#32a77b;	
+}
+
+#sc_rev_content:hover {
+    border: 1px solid #32a77b; /* 녹색 테두리 */
+}
 
 /* 채팅 chatDetail.jsp
 ------------------------------*/
@@ -731,3 +762,46 @@ ul.search li:last-child {
 	width:578px;
 }
 
+/*거래 후기 페이지 secondreviewList.jsp
+-------------------------------------*/
+.testimonial-item {
+    /* border: 1px solid var(--bs-primary); */
+    padding: 20px 20px;
+}
+
+.testimonial-carousel .owl-item img {
+    width: 100px;
+    height: 100px;
+}
+
+.testimonial-carousel.owl-rtl .testimonial-item {
+    direction: ltr !important;
+}
+.sc_reviewtitle{
+	text-align:center;
+}
+.review-bg{
+	background:rgba(240,249,242,0.6);
+}
+/* 후기 별점 표시 */
+.rate2{
+	background: url(../images/jiwon/sc_star_bg2.png) no-repeat;
+	width: 121px;
+	height: 20px;
+	position: relative;
+	
+}
+.rate2 span{
+	position: absolute;
+	background: url(../images/jiwon/sc_star2.png);
+	width: auto;
+	height: 20px;
+	
+}
+	
+	
+	
+	
+	
+	
+	

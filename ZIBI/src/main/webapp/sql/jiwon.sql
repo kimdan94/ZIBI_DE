@@ -52,6 +52,8 @@ create table second_review(
  sc_rev_content varchar2(500),       
  sc_num number not null,
  reviewer_num number not null,
+ sc_rev_regdate date default sysdate not null,
+ sc_rev_ip varchar2(40) not null,
  constraint second_review_pk primary key (sc_rev_num),
  constraint second_review_fk1 foreign key (sc_num) references second (sc_num),
  constraint second_review_fk2 foreign key (reviewer_num) references member (mem_num)

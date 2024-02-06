@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.second.dao.SecondMapper;
 import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
+import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
 
 @Service
@@ -56,8 +57,7 @@ public class SecondServiceImpl implements SecondService{
 
 	@Override
 	public void deleteFile(int sc_num) {
-		// TODO Auto-generated method stub
-		
+		secondMapper.deleteFile(sc_num);
 	}
 	
 	//================판매 상태 변경===============
@@ -205,5 +205,18 @@ public class SecondServiceImpl implements SecondService{
 	@Override
 	public int selectScFavCount(int mem_num) {
 		return secondMapper.selectScFavCount(mem_num);
+	}
+	//=============== 후기 =================
+	@Override
+	public void insertScReview(SecondReviewVO review) {
+		secondMapper.insertScReview(review);
+	}
+	@Override
+	public List<SecondReviewVO> selectReviewList(Map<String, Object> map) {
+		return secondMapper.selectReviewList(map);
+	}
+	@Override
+	public int selectReviewCount(int mem_num) {
+		return secondMapper.selectReviewCount(mem_num);
 	}
 }

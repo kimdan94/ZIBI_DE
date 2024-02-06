@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
+import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
 
 public interface SecondService {
@@ -73,5 +74,10 @@ public interface SecondService {
 	public List<SecondVO> selectScFavList(Map<String,Object> map);
 	public int selectScFavCount(int mem_num);
 	
-	
+	//후기
+	public void insertScReview(SecondReviewVO review);
+	//후기 목록 가져오기  - 후기 작성자 닉네임, 로그인 한 사람(판매자) mem_num 가져오기
+	public List<SecondReviewVO> selectReviewList(Map<String,Object> map);
+	//후기 목록 행 개수 가져오기
+	public int selectReviewCount(int mem_num);
 }

@@ -5,8 +5,8 @@ spring:
     protocol: smtp
     host: smtp.gmail.com
     port: 587
-    username: 229rkawk@gmail.com
-    password: zczy gswv eyuu zduo
+    username: 
+    password: 
     properties:
       smtp.auth : true
       mail:
@@ -70,8 +70,8 @@ server:
     max-http-form-post-size: 200MB #톰캣이 허용하는 파일 업로드 사이즈      
       
 NA-API-KEY:
-  kakaoAppKey: 0f8ec7b176d3f7229af3666b33d6e9b8
-  naverAppKey: hEu4RnYlQwLi9cdJr92M
-  statsConsumerkey: cda0c0447a61458f88ab
-  statsConsumerSecret: 8efcc2a7321241bd9ebb
+  kakaoAppKey: 
+  naverAppKey: 
+  statsConsumerkey: 
+  statsConsumerSecret: 
       

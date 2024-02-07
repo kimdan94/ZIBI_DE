@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 메인 바디 시작 -->
+<!-- 캐러셀 시작 -->
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 	<div class="carousel-indicators">
 		<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -8,17 +9,17 @@
 	</div>
 	<div class="carousel-inner">
 		<div class="carousel-item active " style="background: #f4faff;">
-			<div class="cmain-content">
-				<h2>1인 가구 정보를 여기서!</h2>
+			<div class="cmain-content text-end">
+				<h5>낯설기만 한 ‘방’이 포근한 ‘집’이 되는 기적을 만드는</h5>
 				<h1>ZIBI</h1>
-				<h5>가장 핫한 플랫폼</h5>
+				<p>1인 가구에게 필요한 정보를 한 데 모은 플랫폼🔥</p>
 				<small id="img_site">Image by jcomp on Freepik</small>
 			</div>
 			<div class="cmain-photo">
 				<img src="${pageContext.request.contextPath}/images/na/main-photo2.jpg" height="500">
 			</div>
 		</div>
-		<div class="carousel-item" style="background: #ededed;">
+		<div class="carousel-item" style="background: #fafafa;">
 			<div class="cmain-photo">
 				<img src="${pageContext.request.contextPath}/upload/${perf.performance_poster}" height="700">
 			</div>
@@ -41,9 +42,11 @@
 		<span class="visually-hidden">Next</span>
 	</button>
 </div>
+<!-- 캐러셀 끝 -->
 <div class="container">
+	<!-- 메뉴 설명 시작 -->
 	<div class="main-content">
-		<h4 style="margin-bottom: 20px;">ZIBI의 다양한 메뉴를 만나보세요</h4>
+		<h5 style="margin-bottom: 20px;">ZIBI의 다양한 메뉴를 만나보세요</h5>
 		<div class="owl-carousel">
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
@@ -117,9 +120,82 @@
 			</div>
 		</div>
 	</div>
+	<!-- 메뉴 설명 끝 -->
+	<div class="main-content">
+		<div class="row main-hot">
+			<h5 style="margin-bottom: 20px;">ZIBI의 명당</h5>
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_content.mem_num}">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_content.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 말 많은 지비러 ‍😁</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_content.mem_num}">${member_content.mem_nickname}</a>님이 작성한 커뮤니티 글 ${member_content.count}건
+				</div>
+			</div>
+			<div class="col-4 ">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_follower.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_follower.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 인기 많은 지비러 😎</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_follower.mem_num}" class="my-auto">${member_follower.mem_nickname}</a>님을 팔로우한 지비러 ${member_follower.count}명
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_book.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_book.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 사람을 좋아하는 지비러 🥰</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_book.mem_num}" class="my-auto">${member_book.mem_nickname}</a>님이 참여한 모임 ${member_book.count}건
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_movie.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_movie.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 문화 생활을 즐기는 지비러 🧐</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_movie.mem_num}" class="my-auto">${member_movie.mem_nickname}</a>님이 예매한 영화 ${member_movie.count}건
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_helper.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_helper.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 천사같은 지비러 🤗</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_helper.mem_num}" class="my-auto">${member_helper.mem_nickname}</a>님이 헬프유한 재능 기부 ${member_helper.count}건
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="photo-area">
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_second.mem_num}" class="my-auto">
+						<img class="profile-img" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${member_second.mem_num}">
+					</a>
+				</div>
+				<div>
+					<h6>가장 알뜰한 지비러 🤑</h6>
+					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_second.mem_num}" class="my-auto">${member_second.mem_nickname}</a>님이 중고 거래한 횟수 ${member_second.count}건
+				</div>
+			</div>
+		</div>
+	</div>	
+	<!-- 최신글 시작 -->
 	<div class="main-content">
 		<div class="row">
-			<h4>최신글을 구경하세요</h4>
+			<h5>최신글을 구경하세요</h5>
 			<div class="col-6">
 				<h6>🤝 중고 거래</h6>
 				<div class="container-fluid team py-6">
@@ -308,6 +384,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- 최신글 끝 -->
+
 </div>
 <c:if test="${!empty message}">
 	<div class="wrap" id="mainModal">

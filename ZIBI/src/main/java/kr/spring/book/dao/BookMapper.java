@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReplyVO;
 import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
@@ -60,6 +61,8 @@ public interface BookMapper {
 	//모집 마감하기(참여 신청 일괄 거절하기)
 	@Update("UPDATE book_matching SET book_state = 2 WHERE book_num=#{book_num} AND book_state = 0")
 	public void denyAllMatch(int book_num);
+	@Update("UPDATE book SET book_headcount = book_headcount - (SELECT COUNT(*) FROM book_matching WHERE book_num = #{book_num} AND book_state = 0) WHERE book_num=#{book_num}")
+	public void denyHeadcount(int book_num);
 	@Update("UPDATE book SET book_onoff = 3 WHERE book_num=#{book_num}")
 	public void updateOnoff3(int book_num);
 	
@@ -93,4 +96,14 @@ public interface BookMapper {
 	@Delete("DELETE FROM book_scrap WHERE book_num=#{book_num} AND mem_num=#{mem_num}")
 	public void deleteScrap(BookScrapVO scrapVO);
 	
+	/*------- 댓글 -------*/
+	public List<BookReplyVO> selectListReply(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM book_reply WHERE book_num=#{book_num} AND book_deleted = 0")
+	public int selectRepCount(Map<String,Object> map);
+	@Select("SELECT * FROM book_reply WHERE rep_num=#{rep_num}")
+	public BookReplyVO selectReply(int rep_num);
+	public void insertReply(BookReplyVO bookReply);
+	public void insertReplies(BookReplyVO bookReply);
+	@Update("UPDATE book_reply SET book_deleted = 1 WHERE rep_num=#{rep_num}")
+	public void deleteReply(int rep_num);
 }

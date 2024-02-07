@@ -46,7 +46,7 @@
 		</div>
 	</form:form>
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apikey}&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakao_apikey}&libraries=services"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/adminKakaoMap.js"></script>
 <script type="text/javascript">
 	$('#policy_btn').toggleClass("mem-btn");

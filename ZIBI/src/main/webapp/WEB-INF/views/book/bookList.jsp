@@ -26,7 +26,7 @@
 		</td>
 		<td>
 			<%-- 참여자 --%>
-			<c:if test="${user.mem_num == mbook.apply_num && mbook.compareNow == 2}">
+			<c:if test="${user.mem_num == mbook.apply_num && mbook.book_onoff != 2}">
 				<c:if test="${mbook.book_state == 0}">
 					<input type="button" value="참여 대기" disabled="disabled" class="btn-guide2">
 				</c:if>
@@ -34,33 +34,33 @@
 					<input type="button" value="참여 확정" disabled="disabled" class="btn-guide2">
 				</c:if>
 				<c:if test="${mbook.book_state == 2}">
-					<input type="button" value="참여 거절" disabled="disabled" class="btn-guide2">
+					<input type="button" value="참여 거절" disabled="disabled" class="btn-guide3">
 				</c:if>
 			</c:if>
 			<%-- 주최자 --%>
-			<c:if test="${user.mem_num != mbook.apply_num && mbook.book_onoff == 0 && mbook.compareNow == 2}">
+			<c:if test="${user.mem_num != mbook.apply_num && mbook.book_onoff != 2}">
 				<c:if test="${mbook.book_state == 0}">
 					<input type="button" value="승인 필요" disabled="disabled" class="btn-guide2">
 				</c:if>
-				<c:if test="${mbook.book_onoff == 0 && mbook.book_state == 1}">
+				<c:if test="${mbook.book_state == 1}">
 					<input type="button" value="승인 완료" disabled="disabled" class="btn-guide2">
 				</c:if>
-				<c:if test="${mbook.book_onoff == 0 && mbook.book_state == 2}">
-					<input type="button" value="거절 완료" disabled="disabled" class="btn-guide2">
+				<c:if test="${mbook.book_state == 2}">
+					<input type="button" value="거절 완료" disabled="disabled" class="btn-guide3">
 				</c:if>
 			</c:if>
 			<%-- 공통 --%>
-			<c:if test="${mbook.book_onoff == 0 && mbook.compareNow == 2}">
+			<c:if test="${mbook.book_onoff == 0 && mbook.compareNow == 2 && mbook.book_state != 2 && mbook.book_headcount < mbook.book_maxcount}">
 				<input type="button" value="모집 중" disabled="disabled" class="btn-guide">
 			</c:if>
 			<c:if test="${mbook.book_onoff != 2 && mbook.compareNow == 1 && mbook.book_state != 2}">
 				<input type="button" value="모임 확정" disabled="disabled" class="btn-guide">
 			</c:if>
 			<c:if test="${mbook.book_onoff == 2}">
-				<input type="button" value="모임 취소" disabled="disabled" class="btn-guide">
+				<input type="button" value="모임 취소" disabled="disabled" class="btn-guide4">
 			</c:if>
-			<c:if test="${mbook.book_onoff == 3 && mbook.compareNow == 2}">
-				<input type="button" value="모집 완료" disabled="disabled">
+			<c:if test="${mbook.book_onoff == 3 && mbook.compareNow == 2 && mbook.book_state != 2 || mbook.book_headcount == mbook.book_maxcount}">
+				<input type="button" value="모집 완료" disabled="disabled" class="btn-guide">
 			</c:if>
 		</td>
 		<td>
@@ -98,7 +98,9 @@
 				-
 			</c:if>
 			<c:if test="${user.mem_num != mbook.apply_num}">
-				${mbook.mem_nickname}
+				<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${mbook.apply_num}">
+					${mbook.mem_nickname}
+				</a>
 			</c:if>
 		</td>
 		<td>
@@ -114,10 +116,6 @@
 					<input type="button" value="모임 취소하기" class="default-btn3 book-cancel"
 						onclick="location.href='cancel?book_num=${mbook.book_num}'">
 				</c:if>
-			</c:if>
-			<c:if test="${user.mem_num == mbook.mem_num && mbook.book_state == 0 && mbook.compareNow == 1 && mbook.book_onoff != 2}">
-				<input type="button" value="모임 완료하기" class="default-btn3 book-complete"
-					data-num="${mbook.book_num}">
 			</c:if>
 			<%-- 참여자 --%>
 			<c:if test="${user.mem_num == mbook.apply_num && mbook.book_state != 2}">
@@ -242,7 +240,6 @@
 </c:if>
 <div style="clear:both;"></div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -257,6 +254,7 @@ $(function(){
 	$('#order').change(function(){
 		location.href='list?keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
 	});
+
 });	
 </script>
 <!-- 내용 끝 -->

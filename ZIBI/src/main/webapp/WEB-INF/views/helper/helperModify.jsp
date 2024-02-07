@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
-<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -17,19 +15,19 @@
 		enctype="multipart/form-data">
 		<form:hidden path="helper_num"/>
 		<form:errors element="div" />
-		<h2>글수정</h2>
+		<h2>글 수정</h2>
 		<hr size="3" noshade="noshade" width="100%">
-		<div>
-			<form:label path="helper_select">게시판</form:label>
-			<form:radiobutton path="helper_select" id="helper_select1" value="1" class="margin-content"/><label for="helper_select1">헬프미</label>
-			<form:radiobutton path="helper_select" id="helper_select2" value="2"/><label for="helper_select1">헬프유</label>
+		<div class="helper_select">
+			<form:label path="helper_select" class="margin-bottom">게시판</form:label><br>
+			<form:radiobutton path="helper_select" id="helper_select1" value="1"/><label for="helper_select1">헬프미</label>
+			<form:radiobutton path="helper_select" id="helper_select2" value="2"/><label for="helper_select2">헬프유</label>
 			<form:errors path="helper_select" cssClass="error-color"/>
 		</div>
         <br>
 		<div>
-            <form:label path="helper_category">카테고리</form:label>
+            <form:label path="helper_category" class="margin-bottom">카테고리</form:label><br>
             <form:select path="helper_category" id="helper_category"><!-- class 넣어야함 -->
-            	<form:option value="0" disabled="disabled" label="카테고리"/>
+            	<form:option value="0" disabled="disabled" label="카테고리 선택"/>
        			<form:option value="1" label="벌레" />
 				<form:option value="2" label="조립" />
 				<form:option value="3" label="수리" />
@@ -112,7 +110,7 @@
         	<input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"
         		class="default-btn margin-address">
 			<form:input path="helper_address1" class="w-100 form-control p-3"
-				placeholder="주소를 입력하세요" id="sample5_address"/>
+				placeholder="도움장소를 입력하세요." id="sample5_address"/>
 			<form:errors path="helper_address1" cssClass="error-color"/>
         </div>
         <br>
@@ -135,6 +133,7 @@
 </div>
 </div>
 </div>
+<!-- 내용 끝 -->
 <!-- Daum 지도 API -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=397d490d4a8bb2a2dc0a8a1612615084&libraries=services"></script>
@@ -184,4 +183,3 @@
         }).open();
     }
 </script>
-<!-- 내용 끝 -->

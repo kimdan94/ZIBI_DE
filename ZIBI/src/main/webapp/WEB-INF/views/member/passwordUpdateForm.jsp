@@ -26,14 +26,15 @@
 		</form:form>
 	</div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function(){
+	$(document).ready(function() {
 
 		let password_checked = 0; //비밀번호 일치 체크 
 		
 		//비밀번호 일치 여부
 		$('#c_password').keyup(function(){
+			
+			$('#memberVO\\.errors').text('');
 			$('#cpassword_area').text('');
 			password_checked = 0;
 			

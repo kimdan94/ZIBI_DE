@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.ActListVO;
@@ -59,6 +58,10 @@ public class MemberServiceImpl implements MemberService {
 	
 	/*---------회원 정보 수정----------*/
 	@Override
+	public void updateMember(MemberVO memberVO) {
+		memberMapper.updateMember(memberVO);
+	}
+	@Override
 	public void updateMemberDetail(MemberVO memberVO) {
 		memberMapper.updateMemberDetail(memberVO);
 	}
@@ -80,35 +83,48 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<BookMatchingVO> selectBookMatchingList(int mem_num) {
-		return memberMapper.selectBookMatchingList(mem_num);
-	}
-
-	@Override
-	public SecondVO selectSecond(int mem_num) {
+	public List<SecondVO> selectSecond(int mem_num) {
 		return memberMapper.selectSecond(mem_num);
+	}
+	
+	@Override
+	public int selectMovie(int mem_num) {
+		return memberMapper.selectMovie(mem_num);
 	}
 	
 	@Override
 	public void quitMember(int mem_num) {
 		
-		//소모임 예약 예약, 매칭, 댓글, 리뷰, 스크랩 삭제
-		memberMapper.deleteBookScrap(mem_num);
-		memberMapper.deleteBookReply(mem_num);
-		memberMapper.deleteBookReview(mem_num);
-		memberMapper.deleteBookMatch(mem_num);
-		memberMapper.deleteBook(mem_num);
-		
 		//커뮤니티 좋아요, 댓글, 부모글 삭제
 		memberMapper.deleteCommunityFav(mem_num);
 		memberMapper.deleteCommunityReply(mem_num);
-		memberMapper.deleteCommunityScrap(mem_num);
+		//부모글 하위 데이터 삭제
+		memberMapper.deleteCommunityFavByCNumm(mem_num);
+		memberMapper.deleteCommunityReByCNumm(mem_num);
+		//부모글 삭제
 		memberMapper.deleteCommunity(mem_num);
 		
 		//재능기부 글, 댓글, 스크랩 전부 삭제
 		memberMapper.deleteHelperReply(mem_num);
 		memberMapper.deleteHelperScrap(mem_num);
+		//부모글 하위 데이터 삭제
+		memberMapper.deleeHelperScrapByHnum(mem_num);
+		memberMapper.deleteHelperReplyByHnum(mem_num);
+		//부모글 삭제
 		memberMapper.deleteHelper(mem_num);
+		
+		//소모임 예약, 매칭, 댓글, 리뷰, 스크랩 삭제
+		memberMapper.deleteBookScrap(mem_num);
+		memberMapper.deleteBookReply(mem_num);
+		memberMapper.deleteBookReview(mem_num);
+		memberMapper.deleteBookMatch(mem_num);
+		//부모글 하위 데이터 삭제
+		memberMapper.deleteBookReplyByBookNum(mem_num);
+		memberMapper.deleteBookMatchByBookNum(mem_num);
+		memberMapper.deleteBookScrapByBookNum(mem_num);
+		memberMapper.deleteBookReviewByBookNum(mem_num);
+		//부모글 삭제
+		memberMapper.deleteBook(mem_num);
 		
 		//팔로우, 팔로잉 삭제
 		memberMapper.deleteFollowByFmem_num(mem_num);
@@ -192,7 +208,6 @@ public class MemberServiceImpl implements MemberService {
 	public List<FollowListVO> selectOpenList(Map<String, Integer> map) {
 		return memberMapper.selectOpenList(map);
 	}
-
 
 	
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<div class="member-page">
-	<div class="mypage-follow">
+<div class="justify-content-center">
+	<div class="mypage-follow" style="width: 60% !important; margin: 0 auto">
 		<c:if test="${count==0}">
 			<div class="no-data">
 				팔로우한 회원이 없습니다 😟
@@ -50,7 +50,6 @@
 		</c:if>
 	</div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/mypageProfileImage.js"></script><!-- 프로필 사진 변경 -->
 <script>
 	$('#follow_btn').toggleClass("mem-btn");

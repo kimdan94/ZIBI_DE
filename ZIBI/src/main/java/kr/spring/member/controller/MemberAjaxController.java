@@ -31,7 +31,7 @@ public class MemberAjaxController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	JavaMailSenderImpl mailSender;
+	private JavaMailSenderImpl mailSender;
 	
 	@Value("${spring.mail.username}")
 	private String email;
@@ -41,8 +41,6 @@ public class MemberAjaxController {
 	@RequestMapping("/member/getFollow")
 	@ResponseBody
 	public Map<String,Object> followProcess(HttpSession session, FollowVO followVO) {
-		
-		log.debug("<<팔로우/언팔로우>> : " + followVO);
 		
 		Map<String,Object> mapJson = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user"); //로그인한 회원
@@ -71,8 +69,6 @@ public class MemberAjaxController {
 	@RequestMapping("/member/writeFollow")
 	@ResponseBody
 	public Map<String,Object> writeFollow(FollowVO followVO, HttpSession session){
-		
-		log.debug("<<팔로우 : >>" + followVO);
 		
 		Map<String,Object> mapJson = new HashMap<String, Object>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -108,8 +104,6 @@ public class MemberAjaxController {
 	@ResponseBody
 	public Map<String,String> checkPassword(@RequestParam String input_password, HttpSession session) {
 		
-		log.debug("<<탈퇴 비밀번호 확인>> : " + input_password);
-		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		Map<String,String> mapJson = new HashMap<String, String>();
 		
@@ -127,11 +121,12 @@ public class MemberAjaxController {
 	@PostMapping("/member/emailAuth")
 	@ResponseBody
 	public Map<String, Integer> emailAuth(@RequestParam String mem_email) {
+		
 		log.info("<<이메일 인증 - 사용자 입력 이메일>> : " + mem_email);
 		
 		Map<String, Integer> mapJson = new HashMap<String, Integer>();
 		Random random = new Random();
-		int checkNum = random.nextInt(888888)+111111; 
+		int checkNum = random.nextInt(888888)+111111; //랜덤 코드 생성
 		
 		String title = "ZIBI 회원가입 인증 이메일 입니다."; //이메일 제목
 		String content = "<div style=\'text-align: border: 1px solid black; margin: 10px;\'>" //이메일 내용
@@ -141,8 +136,8 @@ public class MemberAjaxController {
 						+ checkNum
 						+ "</h5>";
 		
-		sendEmail(mem_email, title, content);
-		mapJson.put("code", checkNum);
+		sendEmail(mem_email, title, content); //이메일 전송
+		mapJson.put("code", checkNum); //코드 확인을 위해 클라이언트단으로 전송
 		
 		return mapJson;
 	}
@@ -152,6 +147,7 @@ public class MemberAjaxController {
 	@PostMapping("/member/findPassword")
 	@ResponseBody
 	public Map<String,String> findPassword(@RequestParam String mem_email){
+		
 		log.info("<<비밀번호 찾기 - 사용자 입력 이메일>> : " + mem_email);
 		
 		Map<String,String> mapJson = new HashMap<String, String>();
@@ -172,10 +168,10 @@ public class MemberAjaxController {
 							+ password
 							+ "</h5>";
 			
-			sendEmail(mem_email, title, content);
+			sendEmail(mem_email, title, content); //이메일 전송
 			
-			db_member.setMem_password(password);
-			memberService.updateMemberDetail(db_member); //비밀번호 변경
+			db_member.setMem_password(password); //임시 비밀번호 세팅
+			memberService.updateMemberDetail(db_member); //비밀번호를 임시 비밀번호로 변경
 			
 			mapJson.put("result", "success");
 		} else {
@@ -192,7 +188,7 @@ public class MemberAjaxController {
 		
 		SecureRandom rm = new SecureRandom(); //난수 생성기
 		/* Random은 암호학적으로 안전하지 않기에 SecureRandom 클래스를 사용, Random 클래스는 난수에 패턴이 있으므로 사용 주의 */
-		StringBuffer sb = new StringBuffer(); //임시 비밀번호 저장
+		StringBuffer sb = new StringBuffer(); //임시 비밀번호 저장용 가변 길이 문자열 객체 생성
 		
 		for(int i=0 ; i<6 ; i++) { //6자리의 임시 비밀번호 생성
 			int index = rm.nextInt(chars.length()); //문자열의 인덱스 무작위 반환
@@ -239,26 +235,26 @@ public class MemberAjaxController {
 			memberVO.setMem_email(mem_email);
 			
 			if(mem_social==1) { //카카오
-				memberVO.setMem_social(1); 
-				memberVO.setMem_nickname("카카오"+mem_num);
-			} else if(mem_social==2) {
-				memberVO.setMem_social(2); 
-				memberVO.setMem_nickname("네이버"+mem_num);
+				memberVO.setMem_social(1); //소셜 회원 번호 생성
+				memberVO.setMem_nickname("카카오"+mem_num); //닉네임 생성
+			} else if(mem_social==2) { //네이버
+				memberVO.setMem_social(2); //소셜 회원 번호 생성
+				memberVO.setMem_nickname("네이버"+mem_num); //닉네임 생성
 			}
 			
 			memberService.registerMember(memberVO); //회원가입
 			session.setAttribute("user", memberVO); //로그인 처리
 			
-			mapJson.put("result","success");
+			mapJson.put("result","success");//로그인 성공 전달
 			
 			log.debug("<<소셜 회원가입>>"+memberVO);
 		} else { //회원가입 되어있음 > 로그인
 			
 			if( db_member.getMem_social() != mem_social ) { //다른 방법으로 가입된 이메일인 경우
-				mapJson.put("result","socialNotMatch");
+				mapJson.put("result","socialNotMatch"); //로그인 거절 전달
 			} else {
 				session.setAttribute("user",db_member); //로그인
-				mapJson.put("result","success");
+				mapJson.put("result","success");//로그인 성공 전달
 			}
 		}
 		return mapJson;
@@ -283,7 +279,7 @@ public class MemberAjaxController {
 	}
 	
 	/*-----------------------중복 체크-----------------------------*/
-	//이메일 중복 체크 - 회원가입
+	//이메일 중복 체크 : 회원가입
 	@RequestMapping("/member/checkEmail")
 	@ResponseBody
 	public Map<String,String> checkEmail(@RequestParam String mem_email, HttpSession session){
@@ -348,7 +344,7 @@ public class MemberAjaxController {
 		return map;
 	}
 	
-	//연락처 중복 체크
+	//연락처 중복 체크 : 마이페이지
 	@RequestMapping("/member/checkPhone")
 	@ResponseBody
 	public Map<String,String> checkPhone(@RequestParam String mem_phone, HttpSession session){

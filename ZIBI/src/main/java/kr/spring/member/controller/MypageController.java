@@ -3,6 +3,7 @@ package kr.spring.member.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.ActListVO;
@@ -28,13 +28,13 @@ import kr.spring.member.vo.FollowListVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.second.vo.SecondVO;
 import kr.spring.util.PageUtil_na;
+import kr.spring.util.PageUtil_naCategory;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
 public class MypageController {
 	
-	/*---------------------의존 관계 주입-----------------------*/
 	@Autowired
 	private MemberService memberService;
 	
@@ -45,20 +45,20 @@ public class MypageController {
 	//VO 초기화
 	@ModelAttribute
 	public MemberVO initCommand(HttpSession session) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO user = (MemberVO)session.getAttribute("user"); //현재 로그인한 유저의 정보로 초기화
 		return memberService.selectMember(user.getMem_num());
 	}
 	
+	/*---------------------------페이지 호출-----------------------------*/
 	//메인
 	@RequestMapping("/member/mypageMain")
 	public String mypageMain(Model model) {
 		
-		model.addAttribute("apikey",kakao_apikey);
+		model.addAttribute("kakao_apikey",kakao_apikey);
 		
 		return "mypageMain"; //타일즈
 	}
 	
-	/*---------------------페이지 호출-----------------------*/
 	//거래내역 목록
 	@RequestMapping("/member/mypageDeal")
 	public String mypageDeal(@RequestParam(value="pageNum",defaultValue="1") int currentPage, @RequestParam(value="category",defaultValue="1") String category, HttpSession session, Model model) {
@@ -72,7 +72,7 @@ public class MypageController {
 		log.debug("<<카운트 읽어오기 시작>>");
 		int count = memberService.selectDealCount(map);
 		
-		PageUtil_na page = new PageUtil_na(category, null, currentPage, count, 10, 10,"mypageDeal");
+		PageUtil_naCategory page = new PageUtil_naCategory(category, null, currentPage, count, 10, 10,"mypageDeal");
 		
 		List<DealListVO> list = null;
 		
@@ -81,6 +81,7 @@ public class MypageController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			list = memberService.selectDealList(map);
+			log.debug("<<리스 트>>" + list);
 		}
 		
 		model.addAttribute("list",list);
@@ -103,7 +104,7 @@ public class MypageController {
 		log.debug("<<카운트 읽어오기 시작>> : " + map);
 		int count = memberService.selectActCount(map);
 		
-		PageUtil_na page = new PageUtil_na(category, null, currentPage, count, 10,10,"mypageAct");
+		PageUtil_naCategory page = new PageUtil_naCategory(category, null, currentPage, count, 10,10,"mypageAct");
 		
 		List<ActListVO> list = null;
 		
@@ -149,7 +150,7 @@ public class MypageController {
 		return "mypageFollow"; //타일즈
 	}
 	
-	/*---------------------회원 정보 수정-----------------------*/
+	/*---------------------------회원 정보 수정-----------------------------*/
 	//회원 정보 수정폼
 	@GetMapping("/member/mypageUpdate")
 	public String mypageUpdateForm() {
@@ -169,10 +170,10 @@ public class MypageController {
 		memberService.updateMemberDetail(memberVO);//update 진행
 		session.setAttribute("user",memberVO);
 		
-		return "redirect:/member/mypageMain";
+		return "redirect:/member/mypageMain"; //url 리다이렉트
 	}
 	
-	/*---------------------비밀번호 변경-----------------------*/
+	/*---------------------------비밀번호 변경-----------------------------*/
 	//비밀번호 변경 폼
 	@GetMapping("/member/passwordUpdate")
 	public String updatePasswordForm() {
@@ -182,6 +183,12 @@ public class MypageController {
 	//비밀번호 변경 submit
 	@PostMapping("/member/passwordUpdate")
 	public String updatePassword(@Valid MemberVO memberVO, BindingResult result, HttpSession session, Model model) {
+		
+		//양식에 맞지 않게 입력 시
+		if(!Pattern.matches("^[A-Za-z0-9]{4,12}$", memberVO.getMem_password())) {
+			result.reject("passwordNotMatchUpdate");
+			return "passwordUpdateForm";
+		}
 		
 		//공란 입력 시
 		if(result.hasFieldErrors("mem_password")) {
@@ -199,10 +206,10 @@ public class MypageController {
 		
 		memberService.updatePassword(memberVO);
 				
-		return "redirect:/member/mypageMain";
+		return "redirect:/member/mypageMain"; //url 리다이렉트
 	}
 	
-	/*---------------------회원 탈퇴-----------------------*/
+	/*---------------------------회원 탈퇴-----------------------------*/
 	//회원 탈퇴 비밀번호 확인폼
 	@RequestMapping("/member/checkPassword")
 	public String passwordForm() {
@@ -215,37 +222,37 @@ public class MypageController {
 		
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		//소모임 조건 체크
-		List<BookVO> list = memberService.selectBookList(user.getMem_num());
-		
-		for(int i=0 ; i<list.size() ; i++ ) {
-			BookVO db_book = list.get(i);
-			if(db_book.getCompareNow()==2) {
-				result.reject("bookError");
-				return "checkPassword";
-			}
-		}
-		
-		List<BookMatchingVO> mList = memberService.selectBookMatchingList(user.getMem_num());
+		//소모임 조건 체크		
+		List<BookVO> mList = memberService.selectBookList(user.getMem_num());
 		
 		if(mList.size()>0) {
 			result.reject("bookError");
-			return "checkPassword";
+			return "checkPassword"; //타일즈
 		}
 		
 		//중고 거래 조건 체크
-		SecondVO db_second = memberService.selectSecond(user.getMem_num());
-		if(db_second != null) {
+		List<SecondVO> sList  = memberService.selectSecond(user.getMem_num());
+		if(sList.size() > 0) {
 			result.reject("secondError");
-			return "checkPassword";
+			return "checkPassword"; //타일즈
+		}
+		
+		//영화 예매 조건 체크
+		int movie_count = memberService.selectMovie(user.getMem_num());
+		
+		if(movie_count>0) {
+			result.reject("movieError");
+			return "checkPassword"; //타일즈
 		}
 		
 		session.invalidate(); //로그아웃
-		//memberService.quitMember(user.getMem_num()); //탈퇴
+		memberService.quitMember(user.getMem_num()); //탈퇴
 		
-		if(user.getMem_social()==2) attr.addFlashAttribute("message","quitNaver");
-		else attr.addFlashAttribute("message","quit");
+		if(user.getMem_social()==2) //네이버 회원인 경우
+			attr.addFlashAttribute("message","quitNaver"); //모달창을 띄워 네이버 서비스로 이동
+		else  //그 외 회원인 경우
+			attr.addFlashAttribute("message","quit"); //모달창으로 감사 인사
 		
-		return "redirect:/main/home";
+		return "redirect:/main/home"; //url 리다이렉트
 	}
 }

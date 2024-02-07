@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReplyVO;
 import kr.spring.book.vo.BookReviewVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
@@ -44,4 +45,12 @@ public interface BookService {
 	public int selectScrapCount(int book_num);
 	public void insertScrap(BookScrapVO scrap);
 	public void deleteScrap(BookScrapVO scrapVO);
+	
+	/*------- 댓글 -------*/
+	public List<BookReplyVO> selectListReply(Map<String,Object> map);
+	public int selectRepCount(Map<String,Object> map);
+	public BookReplyVO selectReply(int rep_num);
+	public void insertReply(BookReplyVO bookReply);
+	public void insertReplies(BookReplyVO bookReply);
+	public void deleteReply(int rep_num);
 }

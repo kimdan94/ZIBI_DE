@@ -3,7 +3,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!-- 내용 시작 -->
 <%-- daterangepicker --%>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -11,15 +10,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-window.onload = function(){
-	//참여 인원 기본값 0 초기화
-	let book_maxcount = document.getElementById('book_maxcount');
-	if(book_maxcount.value == 0){
-		book_maxcount.value = '';
-	}
-};
-</script>
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6">
@@ -76,6 +66,7 @@ window.onload = function(){
 					    },
 					    timePicker: true,
 					    showDropdowns: true,
+						minDate:moment().startOf('day'),
 					    autoApply: true,
 					    timePicker24Hour: true,
 					    singleDatePicker: true
@@ -219,3 +210,12 @@ window.onload = function(){
     }
 </script>
 <!-- Daum 지도 API 끝 -->
+<script type="text/javascript">
+window.onload = function(){
+	//참여 인원 기본값 0 초기화
+	let book_maxcount = document.getElementById('book_maxcount');
+	if(book_maxcount.value == 0){
+		book_maxcount.value = '';
+	}
+};
+</script>

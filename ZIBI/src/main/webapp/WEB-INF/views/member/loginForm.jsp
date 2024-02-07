@@ -2,7 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <!-- Contact Start -->
-<input type="hidden" id="apikey" value="${apikey}"/>
+<input type="hidden" id="kakao_apikey" value="${kakao_apikey}"/>
+<input type="hidden" id="naver_apikey" value="${naver_apikey}"/>
 <div class="container page-width">
 	<div class="member-form row justify-content-center">
 		<div class="col-7 align-self-center register-info">
@@ -22,19 +23,18 @@
 					<form:errors element="span"/>
 				</div>
 				<form:button class="btn mem-btn-green w-100" style="margin:10px 0 10px 0;">로그인</form:button>
-				<a id="kakao-login-btn" href="javascript:loginWithKakao()">
-					<img src="${pageContext.request.contextPath}/images/na/login_kakao.png" height="39" alt="카카오 로그인 버튼" />
-				</a>
-				<span id="naver_id_login"></span>
+				<div class="text-center">
+					<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+						<img src="${pageContext.request.contextPath}/images/na/login_kakao.png" height="39" alt="카카오 로그인 버튼" />
+					</a>
+					<span id="naver_id_login"></span>
+				</div>
 				<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/findPassword'">
 			</form:form>
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js?appkey=${kakao_apikey}"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/kakao.js"></script><!-- 소셜 로그인/회원가입 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/naver.js"></script><!-- 소셜 로그인/회원가입 -->
-<!-- 유효성 체크-->
-<!-- 바디 끝 -->

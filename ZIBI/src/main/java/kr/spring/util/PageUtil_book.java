@@ -43,7 +43,7 @@ public class PageUtil_book {
 				}
 				
 				if (currentPage > pageCount) {
-					page.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
+					page.append("<a style='text-decoration:none;color:black;' href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
 					page.append("[이전]");
 					page.append("</a>");
 				}
@@ -67,7 +67,7 @@ public class PageUtil_book {
 				}
 				// 다음 block 페이지
 				if (totalPage - startPage >= pageCount) {
-					page.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
+					page.append("<a style='text-decoration:none;color:black;' href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
 					page.append("[다음]");
 					page.append("</a>");
 				}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<input type="hidden" value="${kakao_apikey}" id="kakao_apikey">
 <div class="member-page mypageMain">
 	<div class="row profile-detail">
 		<div class="col-6 event text-center align-self-center">
@@ -65,7 +66,9 @@
 						</p>
 						<span id="quit"></span>
 						<div>
-							<input type="button" class="btn mem-btn-green" value="회원 탈퇴" <c:if test="${user.mem_social==1}">onclick="javascript:logoutKakao()"</c:if><c:if test="${user.mem_social==2}">onclick="javascript:naverQuit()"</c:if>>
+							<input type="button" class="btn mem-btn-green" value="회원 탈퇴" <c:if test="${user.mem_social==1}">onclick="javascript:quitKakao()"</c:if><c:if test="${user.mem_social==2}">onclick="javascript:naverQuit()"</c:if>>
+							<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+							<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/kakao.js"></script>
 							<button class="btn mem-btn" id="cancel-btn">취소하기</button>
 						</div>
 					</div>
@@ -78,8 +81,7 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/mypageProfileImage.js"></script><!-- 프로필 사진 변경 -->
+
 <script>
 	$('#main_btn').toggleClass("mem-btn");
 	$('#main_btn').toggleClass("mem-btn-green");

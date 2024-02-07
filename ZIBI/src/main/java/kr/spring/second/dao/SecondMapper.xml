@@ -248,7 +248,41 @@
 					(SELECT * FROM second JOIN member USING(mem_num) 
 					JOIN second_fav f USING(sc_num) WHERE f.mem_num=#{mem_num}
 					ORDER BY sc_num DESC))
-	
 	</select>
+	
+	<!-- 후기 작성 -->
+	<insert id="insertScReview" parameterType="secondReviewVO">
+		INSERT INTO second_review(
+			sc_rev_num,
+			sc_rev_star,
+			sc_rev_content,
+			sc_num,
+			reviewer_num,
+			sc_rev_ip) 
+		VALUES(
+			second_review_seq.nextval,
+			#{sc_rev_star},
+			#{sc_rev_content},
+			#{sc_num},
+			#{reviewer_num},
+			#{sc_rev_ip})
+	</insert>
+	
+	<!-- 후기 목록 행 개수 -->	
+	<select id="selectReviewCount" parameterType="integer" resultType="integer">
+		SELECT COUNT(*)
+		FROM second_review sr
+		JOIN second s ON sr.sc_num = s.sc_num
+		JOIN member m ON sr.reviewer_num = m.mem_num WHERE s.mem_num = #{mem_num}
+	</select>
+	<!-- 후기 목록 가져오기  -->
+		<!-- 후기 작성자 닉네임, 로그인 한 사람(판매자) mem_num 가져오기 -->
+	<select id="selectReviewList" parameterType="map" resultType="secondReviewVO">
+		SELECT sr.*, m.mem_nickname reviewer_nickname,s.mem_num seller_num
+		FROM second_review sr
+		JOIN second s ON sr.sc_num = s.sc_num
+		JOIN member m ON sr.reviewer_num = m.mem_num WHERE s.mem_num = #{mem_num}
+	</select>
+
 	
 </mapper>

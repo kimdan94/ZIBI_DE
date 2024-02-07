@@ -53,6 +53,5 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.review.js"></script>
 <!-- 내용 끝 -->

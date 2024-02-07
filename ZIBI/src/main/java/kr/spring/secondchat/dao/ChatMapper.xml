@@ -15,6 +15,7 @@
     		cr.chatroom_num,
     		cr.sc_num,
     		sec.sc_title,
+    		sec.sc_filename,sec.sc_sellstatus,sec.sc_price,
     		cr.seller_num,
     		md_seller.mem_nickname AS seller,
     		cr.buyer_num,

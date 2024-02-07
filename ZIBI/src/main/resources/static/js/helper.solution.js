@@ -20,9 +20,10 @@ $(function(){
 	
 	
 	/*------------------
-	 * 해결여부 변경
+	 * 해결여부 변경 - 동적 태그로 document.on절로 사용해야함
 	 *------------------*/
-	$('#output_solution').click(function(){
+	
+	$(document).on('click','#output_solution',function(){
 		$.ajax({
 			url:'updateSol',
 			type:'post',
@@ -32,7 +33,8 @@ $(function(){
 				if(param.status == 'logout'){
 					alert('로그인 후 사용해주세요');
 				}else if(param.status == 'yesSol'){
-					alert('해결 완료로 변경되었습니다.')
+					alert('해결 완료되신건가요?');
+					alert('🎉해결 완료로 변경되었습니다! 🎉');
 					displaySol(param);
 				}else if(param.status == 'noSol'){
 					alert('해결 중으로 변경되었습니다.');
@@ -56,10 +58,12 @@ $(function(){
 		let outputText;
 		if(param.status == 'yesSol'){
 			output = '../images/de/toggle2.png';
-			outputText = '[해결 완료]';
+			outputText = '😀 해결 완료 😀';
+			$('#output_text').css('color', 'gray');
 		}else if(param.status == 'noSol'){
 			output = '../images/de/toggle1.png';
-			outputText = '[해결 중]';
+			outputText = '🙁 해결 중 🙁';
+			$('#output_text').css('color', '#0080FF');
 		}else{
 			alert('해결여부 표시 오류');
 		}

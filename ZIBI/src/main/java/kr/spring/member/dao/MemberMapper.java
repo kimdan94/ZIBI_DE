@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import kr.spring.book.vo.BookMatchingVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.vo.ActListVO;
 import kr.spring.member.vo.DealListVO;
@@ -47,6 +46,9 @@ public interface MemberMapper {
 	public MemberVO checkPhone(String mem_phone);
 	
 	/*---------회원 정보 수정----------*/
+	//닉네임 업데이트
+	@Update("UPDATE member SET mem_nickname=#{mem_nickname} WHERE mem_num=#{mem_num}")
+	public void updateMember(MemberVO memberVO);
 	//회원 부가정보 수정
 	public void updateMemberDetail(MemberVO memberVO);
 	//프로필 사진 수정
@@ -59,10 +61,10 @@ public interface MemberMapper {
 	/*---------회원 탈퇴----------*/
 	//조건 - 소모임 예약 compareNow==2, book_state=<1인 경우 탈퇴 불가, 그 탈퇴 가능
 	public List<BookVO> selectBookList(int mem_num);
-	//조건 - 소모임 예약 book_state=<1인 경우 탈퇴 불가, 그 탈퇴 가능
-	public List<BookMatchingVO> selectBookMatchingList(int mem_num);
 	//조건 - 중고 거래
-	public SecondVO selectSecond(int mem_num);
+	public List<SecondVO> selectSecond(int mem_num);
+	//조건 - 영화 예매
+	public int selectMovie(int mem_num);
 	
 	//소모임 - 스크랩 삭제
 	@Delete("DELETE book_scrap WHERE mem_num=#{mem_num}")
@@ -76,19 +78,30 @@ public interface MemberMapper {
 	//소모임 - 예약 매칭 삭제
 	@Delete("DELETE book_matching WHERE apply_num=#{mem_num}")
 	public void deleteBookMatch(int mem_num);
+	//소모임 - 부모글에 딸린 외래키 조건 삭제
+	@Delete("DELETE FROM book_review WHERE book_num IN (SELECT book_num FROM book WHERE mem_num=#{mem_num})")
+	public void deleteBookReviewByBookNum(int mem_num);
+	@Delete("DELETE FROM book_reply WHERE book_num IN (SELECT book_num FROM book WHERE mem_num=#{mem_num})")
+	public void deleteBookReplyByBookNum(int mem_num);
+	@Delete("DELETE FROM book_scrap WHERE book_num IN (SELECT book_num FROM book WHERE mem_num=#{mem_num})")
+	public void deleteBookScrapByBookNum(int mem_num);
+	@Delete("DELETE FROM book_scrap WHERE book_num IN (SELECT book_num FROM book WHERE mem_num=#{mem_num})")
+	public void deleteBookMatchByBookNum(int mem_num);
 	//소모임 - 예약 삭제
 	@Delete("DELETE book WHERE mem_num=#{mem_num}")
 	public void deleteBook(int mem_num);
 	
-	//커뮤니티 - 스크랩 삭제
-	@Delete("DELETE community_scrap WHERE mem_num=#{mem_num}")
-	public void deleteCommunityScrap(int mem_num);
 	//커뮤니티 - 댓글 삭제
 	@Delete("DELETE community_reply WHERE mem_num=#{mem_num}")
 	public void deleteCommunityReply(int mem_num);
 	//커뮤니티 - 좋아요 삭제
 	@Delete("DELETE community_fav WHERE mem_num=#{mem_num}")
 	public void deleteCommunityFav(int mem_num);
+	//커뮤니티 - 부모글에 딸린 외래키 조건 삭제
+	@Delete("DELETE FROM community_fav WHERE community_num IN (SELECT community_num FROM community WHERE mem_num=#{mem_num})")
+	public void deleteCommunityFavByCNumm(int mem_num);
+	@Delete("DELETE FROM community_reply WHERE community_num IN (SELECT community_num FROM community WHERE mem_num=#{mem_num})")
+	public void deleteCommunityReByCNumm(int mem_num);
 	//커뮤니티 - 부모글 삭제
 	@Delete("DELETE community WHERE mem_num=#{mem_num}")
 	public void deleteCommunity(int mem_num);
@@ -99,12 +112,24 @@ public interface MemberMapper {
 	//재능기부 - 댓글 삭제
 	@Delete("DELETE helper_reply WHERE mem_num=#{mem_num}")
 	public void deleteHelperReply(int mem_num);
+	//재능기부 - 부모글에 딸린 외래키 조건 삭제
+	@Delete("DELETE FROM helper_scrap WHERE helper_num IN (SELECT helper_num FROM helper WHERE mem_num=#{mem_num})")
+	public void deleeHelperScrapByHnum(int mem_num);
+	@Delete("DELETE FROM helper_reply WHERE helper_num IN (SELECT helper_num FROM helper WHERE mem_num=#{mem_num})")
+	public void deleteHelperReplyByHnum(int mem_num);
 	//재능기부 - 부모글 삭제
 	@Delete("DELETE helper WHERE mem_num=#{mem_num}")
 	public void deleteHelper(int mem_num);
 	
+	//내가 팔로우한 사람 삭제 - 회원 탈퇴 시 이용
+	@Delete("DELETE FROM follow WHERE fmem_num=#{fmem_num}") 
+	public void deleteFollowByFmem_num(int fmem_num);
+	//나를 팔로우한 사람 삭제 - 회원 탈퇴 시 이용
+	@Delete("DELETE FROM follow WHERE mem_num=#{mem_num}") 
+	public void deleteFollowByMem_num(int mem_num);
+	
 	//member 테이블 업데이트
-	@Update("UPDATE member SET mem_email='-',mem_auth=0 where mem_num=#{mem_num}")
+	@Update("UPDATE member SET mem_email='-',mem_auth=0,mem_nickname='탈퇴한 회원' where mem_num=#{mem_num}")
 	public void quitMember(int mem_num);
 	//회원 부가 정보 삭제
 	@Delete("DELETE FROM member_detail where mem_num=#{mem_num}")
@@ -129,12 +154,6 @@ public interface MemberMapper {
 	//언팔로우
 	@Delete("DELETE FROM follow WHERE mem_num=#{mem_num} AND fmem_num=#{fmem_num}") 
 	public void unfollowMember(FollowVO followVO);
-	//내가 팔로우한 사람 삭제 - 회원 탈퇴 시 이용
-	@Delete("DELETE FROM follow WHERE fmem_num=#{fmem_num}") 
-	public void deleteFollowByFmem_num(int fmem_num);
-	//나를 팔로우한 사람 삭제 - 회원 탈퇴 시 이용
-	@Delete("DELETE FROM follow WHERE mem_num=#{mem_num}") 
-	public void deleteFollowByMem_num(int mem_num);
 	
 	/*---------마이페이지 목록----------*/
 	//거래 내역

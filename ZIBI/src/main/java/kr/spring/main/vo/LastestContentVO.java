@@ -13,10 +13,12 @@ public class LastestContentVO {
 	
 	private int num;
 	private int mem_num;
+	private String mem_nickname;
+	
 	private String category;
 	private String title;
 	private String photo;
-	private String mem_nickname;
 	private Date reg_date;
 	
+	private int count;
 }

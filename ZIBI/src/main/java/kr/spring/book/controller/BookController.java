@@ -2,7 +2,6 @@ package kr.spring.book.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +41,14 @@ public class BookController {
 	private BookService bookService;
 	@Autowired
 	private MemberService memberService;
+	
+	//카카오 앱키 호출
+	@Value("${YOUNG-API-KEY.kakaoAppKey}")
+	private String kakao_apikey;
+	
+	//ngrok 주소 호출
+	@Value("${YOUNG-API-KEY.ngrokKey}")
+	private String ngrokkey;
 
 	/*-- 예약 게시글 등록 --*/
 	// VO 초기화
@@ -184,6 +192,9 @@ public class BookController {
 		mav.addObject("book", book);
 		mav.addObject("rcount", rcount);
 		mav.addObject("rlist", rlist);
+		//보안키
+		mav.addObject("kakao_apikey", kakao_apikey);
+		mav.addObject("ngrokkey", ngrokkey);
 
 		return mav;
 	}

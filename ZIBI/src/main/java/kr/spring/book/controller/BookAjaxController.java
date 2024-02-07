@@ -1,6 +1,8 @@
 package kr.spring.book.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -19,11 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.book.service.BookService;
 import kr.spring.book.vo.BookMatchingVO;
+import kr.spring.book.vo.BookReplyVO;
 import kr.spring.book.vo.BookScrapVO;
 import kr.spring.book.vo.BookVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil_book;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -36,9 +40,10 @@ public class BookAjaxController {
 	@Autowired
 	JavaMailSenderImpl mailSender;
 	
+	//발송 이메일 호출
 	@Value("${spring.mail.username")
 	private String fromemail;
-	
+
 	/*-- 부모글 수정 시 썸네일 삭제 --*/
 	@RequestMapping("/book/deleteFile")
 	@ResponseBody
@@ -297,4 +302,118 @@ public class BookAjaxController {
 		}
 		return mapJson;
 	}
+	
+	/*-- 댓글 등록 --*/
+	@RequestMapping("/book/insertReply")
+	@ResponseBody
+	public Map<String,String> insertReply(BookReplyVO bookReplyVO,
+										HttpSession session,
+										HttpServletRequest request){
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			bookReplyVO.setMem_num(user.getMem_num());
+			bookReplyVO.setBook_repIp(request.getRemoteAddr());
+			//댓글 등록
+			bookService.insertReply(bookReplyVO);
+			
+			mapJson.put("result", "success");
+		}
+		return mapJson;
+	}
+	
+	/*-- 댓글 목록 --*/
+	@RequestMapping("/book/listReply")
+	@ResponseBody
+	public Map<String,Object> getRep(
+			@RequestParam(value="pageNum",defaultValue = "1") int currentPage,
+			@RequestParam(value="rowCount",defaultValue = "50") int rowCount,
+			@RequestParam int book_num, HttpSession session){
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("book_num", book_num);
+		
+		//전체 레코드 수
+		int rpcount = bookService.selectRepCount(map);
+		//페이지 처리
+		PageUtil_book rppage = new PageUtil_book(currentPage, rpcount, rowCount);
+		
+		List<BookReplyVO> rplist = null;
+		if(rpcount > 0) {
+			map.put("rpstart", rppage.getStartRow());
+			map.put("rpend", rppage.getEndRow());
+			rplist = bookService.selectListReply(map);
+		}else {
+			rplist = Collections.emptyList();
+		}
+		
+		Map<String,Object> mapJson = new HashMap<String, Object>();
+		mapJson.put("rpcount", rpcount);
+		mapJson.put("rplist", rplist);
+		
+		//로그인한 회원정보 세팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user!=null) {
+			mapJson.put("user_num", user.getMem_num());
+			mapJson.put("mem_nick", user.getMem_nickname());
+		}
+		
+		return mapJson;
+	}
+	
+	/*-- 대댓글 등록 --*/
+	@RequestMapping("/book/insertReReply")
+	@ResponseBody
+	public Map<String,String> insertReReply(@RequestParam int book_num,
+										@RequestParam String book_rerep,
+										@RequestParam int ref_rep_num,
+										HttpSession session,
+										HttpServletRequest request){
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			BookReplyVO bookReplyVO = new BookReplyVO();
+			bookReplyVO.setMem_num(user.getMem_num());
+			bookReplyVO.setBook_repIp(request.getRemoteAddr());
+			bookReplyVO.setRef_rep_num(ref_rep_num);
+			bookReplyVO.setBook_num(book_num);
+			bookReplyVO.setBook_rep(book_rerep);
+			
+			//대댓글 등록
+			bookService.insertReplies(bookReplyVO);
+			
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
+	
+	/*-- 댓글 삭제 --*/
+	@RequestMapping("/book/deleteReply")
+	@ResponseBody
+	public Map<String,String> deleteReply(@RequestParam int rep_num,
+										HttpSession session){
+		
+		Map<String,String> mapJson = new HashMap<String, String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		BookReplyVO db_reply = bookService.selectReply(rep_num);
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else if(user!=null && user.getMem_num()==db_reply.getMem_num()) {
+			bookService.deleteReply(rep_num);
+			mapJson.put("result", "success");
+		}else {
+			mapJson.put("result", "wrongAccess");
+		}
+		
+		return mapJson;
+	}
+	
 }

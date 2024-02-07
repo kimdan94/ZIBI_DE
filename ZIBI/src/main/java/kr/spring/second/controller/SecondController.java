@@ -26,6 +26,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.second.service.SecondService;
 import kr.spring.second.vo.SecondOrderVO;
+import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil_second;
@@ -304,10 +305,35 @@ public class SecondController {
 		
 		return "secondfavList"; //타일즈
 	}
-	
-	//거래 후기 페이지
+	/*================================
+	 * 거래 후기 페이지
+	 *================================*/
 	@RequestMapping("/secondhand/secondreviewList")
-	public String managereviewList() {
+	public String managereviewList(HttpSession session,Model model) {
+		//회원번호 셋팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		int count = secondService.selectReviewCount(user.getMem_num());
+		log.debug("<<거래 후기 count >> : " + count);
+		
+		List<SecondReviewVO> list = null;
+		String seller_nickname = null;
+		if(count > 0) {
+			//로그인한 회원번호(판매자)
+			map.put("mem_num",user.getMem_num());
+			//로그인한 닉네임(판매자 닉네임)
+			MemberVO member = memberService.selectMember(user.getMem_num());
+			seller_nickname = member.getMem_nickname();
+			//별점, 닉네임, 거래후기 등록일, 거래내용 가져와야함.
+			list = secondService.selectReviewList(map);
+			log.debug("<<거래 후기 페이지 list>> : " + list);
+			
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		model.addAttribute("seller_nickname",seller_nickname);
 		return "secondreviewList"; //타일즈
 	}
 
@@ -327,7 +353,37 @@ public class SecondController {
 		return mav;
 	}
 	//전송된 데이터 처리 
-	
+	@PostMapping("/secondhand/secondReviewWrite")
+	public String submitScReview(@Valid SecondReviewVO secondReviewVO,HttpSession session,
+					HttpServletRequest request, Model model) {
+		log.debug("<<중고거래 후기 작성 폼 전송 후 데이터 secondReviewVO>> : " + secondReviewVO);
+		//회원 번호 세팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		secondReviewVO.setReviewer_num(user.getMem_num());
+		//후기 작성자 ip 세팅
+		secondReviewVO.setSc_rev_ip(request.getRemoteAddr());
+		//후기 남기기
+		secondService.insertScReview(secondReviewVO);
+		
+		model.addAttribute("message", "후기 작성이 완료되었습니다.");
+		model.addAttribute("url", "list");
+		
+		return "common/resultAlert";
+	}
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

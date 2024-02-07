@@ -50,7 +50,7 @@
 				</c:if>
 			</c:if>
 			<%-- 공통 --%>
-			<c:if test="${mbook.book_onoff == 0 && mbook.compareNow == 2 && mbook.book_state != 2}">
+			<c:if test="${mbook.book_onoff == 0 && mbook.compareNow == 2 && mbook.book_state != 2 && mbook.book_headcount < mbook.book_maxcount}">
 				<input type="button" value="모집 중" disabled="disabled" class="btn-guide">
 			</c:if>
 			<c:if test="${mbook.book_onoff != 2 && mbook.compareNow == 1 && mbook.book_state != 2}">
@@ -59,7 +59,7 @@
 			<c:if test="${mbook.book_onoff == 2}">
 				<input type="button" value="모임 취소" disabled="disabled" class="btn-guide4">
 			</c:if>
-			<c:if test="${mbook.book_onoff == 3 && mbook.compareNow == 2 && mbook.book_state != 2}">
+			<c:if test="${mbook.book_onoff == 3 && mbook.compareNow == 2 && mbook.book_state != 2 || mbook.book_headcount == mbook.book_maxcount}">
 				<input type="button" value="모집 완료" disabled="disabled" class="btn-guide">
 			</c:if>
 		</td>
@@ -240,7 +240,6 @@
 </c:if>
 <div style="clear:both;"></div>
 </div>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jy/book.apply.js"></script>
 <script type="text/javascript">
 $(function(){

@@ -13,6 +13,15 @@
 	height:24px;
 	padding:3px;
 }
+/* 작은 사이즈 초록색 버튼 */
+.default-btn3{
+	background:#32a77b;
+	border:1px solid #32a77b;
+	border-radius:3px;
+	width:100px;
+	font-size:13px;
+	color:white;
+}
 
 .sc-btn-search{
 	background-position:0px 0px;
@@ -363,6 +372,18 @@ a{
 	border-radius:7px;
 	font-size: 15px;
 }
+.dinfo-box1{
+	border-top:2px solid #eeeeee;
+	border-bottom:2px solid #eeeeee;
+}
+.box1-first,
+.box1-second{
+	border-right:2px solid #eeeeee;
+}
+/* 상점정보 div */
+.sc-storeinfo{
+	border-left: 1px solid #ededed;
+}
 /* 바로예약 모달 - detail*/
 .order-modal-box{
 	border-radius: 8px;
@@ -697,22 +718,65 @@ ul.search li:last-child {
 ------------------------------*/
 .contact-form {
     box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-    width:800px;
-    justify-content:center;
+    
+} 
+.seller-title{
+	text-align:center;
+	border-bottom: 1px solid lightgray ; 
 }
-
 
 .chat-iteminfo{
-	background-color:pink;
+	border-bottom: 1px solid lightgray ;
+	
 }
+.sc-photo{
+	margin-left:10px;
+}
+.separator3::before {
+	content: " | ";
+	margin-left: 5px; 
+	margin-right: 1px;
+	color:#adb5bd;
+}
+#chatdetail_form{
+	display: flex; /* 부모 요소를 Flex 컨테이너로 설정 */
+    align-items: center;/* 수직 가운데 정렬 */
+}
+.chat-message{
+	flex: 1;
+	margin-right: 8px; 
+	padding-left:10px;
+	margin-left:5px;
+	resize:none;
+	height:50px;
+	background:rgba(240,249,242,0.6);
+	border-radius:30px;
+	border:1px solid #ededed;
+}
+.chat-message:focus,
+.chat-message:hover{
+	outline:1px solid #32a77b;
+}
+.chat-send-btn {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+.chat-send-btn img{
+	width:35px;
+}
+
 /*채팅메시지 목록 박스*/
 #chatting_message{
-	border:1px solid black;
-	width:660px;
-	height:300px;
+	width:98%;
+	height:390px;
 	margin:0 auto;
 	padding:10px;
 	overflow:auto; /* 위에 높이를 지정했기 때문에 흘러넘치게 되면 스크롤됨 */
+}
+#chatting_message::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge 등의 웹킷 기반 브라우저에서 스크롤바를 숨김 */
 }
 .date-position{
 	text-align: center;
@@ -730,7 +794,7 @@ ul.search li:last-child {
 	margin:10px 0 10px 330px;
 }
 .from-position .item{
-	background-color:yellow;
+	background:rgba(193,221,197,0.6);
 	padding:10px;
 	min-height:50px;
 	border-radius:20px;
@@ -741,7 +805,7 @@ ul.search li:last-child {
 	margin:10px 0 10px 0;
 }
 .to-position .item{
-	background-color:pink;
+	background-color:#f2efef;
 	padding:10px;
 	min-height:50px;
 	border-radius:20px;
@@ -760,6 +824,73 @@ ul.search li:last-child {
 }
 #chat_message{
 	width:578px;
+}
+
+
+
+/* 채팅 거래자 목록  chatListForSeller.jsp 
+-------------------------------------*/
+table.basic-table{
+	border:1px solid rgba(0,0,0,.1);
+}
+table.basic-table td{
+	padding:.7em .5em;  /* 0.7em인데 앞의 0 생략 가능 */
+	vertical-align:middle;
+	border-bottom:1px solid rgba(0,0,0,.1);
+}
+.chat-btn3{
+	background:#32a77b;
+	border:1px solid #32a77b;
+	border-radius:3px;
+	width:100px;
+	font-size:13px;
+	color:white;
+}
+/* 채팅 거래자 선택  chatSelectBuyerList.jsp 
+-------------------------------------*/
+table.basic-table2{
+	border:1px solid rgba(0,0,0,.1);
+}
+table.basic-table2 td{
+	padding:.7em .5em;  /* 0.7em인데 앞의 0 생략 가능 */
+	vertical-align:middle;
+	border-bottom:1px solid rgba(0,0,0,.1);
+}
+.selbuyer-btn1{
+	background: #32a77b;
+    color: white;
+    box-shadow: none;
+    border:none;
+    font-size: 15px;
+    height:40px;
+    border-radius:7px;
+    width:40%;
+}
+.selbuyer-btn2{
+	font-size: 15px;
+	border: 1px solid #ededed !important;
+	box-shadow: none;
+	height:40px;
+	border-radius:7px;
+	width:40%;
+}
+.selbuyer-btn1:hover,active,visited{
+    background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	height:40px;
+	border-radius:7px;
+	font-size: 15px;
+}
+.selbuyer-btn2:hover,active,visited{
+    background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	height:40px;
+	border-radius:7px;
+	font-size: 15px;
 }
 
 /*거래 후기 페이지 secondreviewList.jsp

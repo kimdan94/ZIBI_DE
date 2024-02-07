@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta property="og:title" content="ZIBI">
-	<meta property="og:url" content="https://1b5a-58-76-175-14.ngrok-free.app/book/list">
+	<meta property="og:url" content="https://aca7-1-221-18-2.ngrok-free.app/book/list">
 	<meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/zibi-jy.appspot.com/o/logo(typo)_1x1_240112.png?alt=media&token=8afc4e06-80df-4f7d-8f15-f8548e603a72">
 	<meta property="og:description" content="ZIBI 가입하고 소모임 함께 해요!">
 	
@@ -24,6 +24,7 @@
 	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <body style="overflow-x:hidden;">
 	<tiles:insertAttribute name="header"/>
 	<div class="container-fluid nav-bar menu-title">

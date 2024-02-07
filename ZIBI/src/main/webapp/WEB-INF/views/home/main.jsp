@@ -64,7 +64,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/performance/list">🎬 영화 감상</a>
 						</h5>
-						<p class="mb-1">지비러를 위한 영화를 특별한 가격으로 감상하세요</p>
+						<p class="mb-1">지비러를 위한 영화를<br>특별한 가격으로 감상하세요</p>
 					</div>
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/checklist/list">🏠 집 체크리스트</a>
 						</h5>
-						<p class="mb-1">집을 이사할 때 ZIBI의 체크리스트를 활용해보세요</p>
+						<p class="mb-1">집을 이사할 때 ZIBI의<br>체크리스트를 활용해보세요</p>
 					</div>
 				</div>
 			</div>
@@ -84,7 +84,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/secondhand/list">🤝 중고거래</a>
 						</h5>
-						<p class="mb-1">더이상 사용하지 않는 물품을 거래하세요</p>
+						<p class="mb-1">더이상 사용하지 않는<br>물품을 거래하세요</p>
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/helper/list">🙋 재능 기부</a>
 						</h5>
-						<p class="mb-1">나의 사소한 재능을 기부하세요</p>
+						<p class="mb-1">나의 사소한 재능을<br>기부하세요</p>
 					</div>
 				</div>
 			</div>
@@ -104,7 +104,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/policy/main">ℹ️ 1인 가구 정보</a>
 						</h5>
-						<p class="mb-1">1인 가구 정보를 열람하세요</p>
+						<p class="mb-1">1인 가구 정보를<br>열람하세요</p>
 					</div>
 				</div>
 			</div>
@@ -114,7 +114,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/community/list">✍️ 커뮤니티</a>
 						</h5>
-						<p class="mb-1">지비러들끼리 간편하게 소통하세요</p>
+						<p class="mb-1">지비러들끼리 간편하게<br>소통하세요</p>
 					</div>
 				</div>
 			</div>

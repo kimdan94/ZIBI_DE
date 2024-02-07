@@ -24,6 +24,7 @@
 	<link rel="icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 	<link rel="apple-touch-icon" href="${pageContext.request.contextPath}/images/logo_tab.png"/>
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <body style="overflow-x:hidden;">
 	<tiles:insertAttribute name="header"/>
 	<div class="container-fluid nav-bar menu-title">

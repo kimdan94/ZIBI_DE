@@ -148,6 +148,8 @@
                   	]]>
 					apply_address1,
 					book_state,
+					book_headcount,
+					book_maxcount,
 					book_match,
 					book_matchDate
 				FROM book_matching

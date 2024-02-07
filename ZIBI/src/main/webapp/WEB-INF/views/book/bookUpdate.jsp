@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!-- 내용 시작 -->
 <%-- daterangepicker --%>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -171,41 +170,6 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-window.onload = function(){
-	//참여 인원 기본값 0 초기화
-	let book_maxcount = document.getElementById('book_maxcount');
-	if(book_maxcount.value == 0){
-		book_maxcount.value = '';
-	}
-	
-	//썸네일 삭제
-	$('#file_del').click(function(){
-		let choice = confirm('썸네일을 삭제하시겠습니까?');
-		if(choice){
-			$.ajax({
-				url:'deleteFile',
-				data:{book_num:${bookVO.book_num}},
-				type:'post',
-				dataType:'json',
-				success:function(param){
-					if(param.result == 'logout'){
-						alert('로그인 후 이용하세요!');
-						location.replace('/member/login');
-					}else if(param.result == 'success'){
-						$('#book_detail').hide();
-					}else{
-						alert('파일 삭제 오류 발생');
-					}
-				},
-				error:function(){
-					alert('네트워크 오류 발생');
-				}
-			});
-		}
-	});
-};
-</script>
 <!-- 내용 끝 -->
 <!-- Daum 지도 API 시작 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -257,3 +221,38 @@ window.onload = function(){
     }
 </script>
 <!-- Daum 지도 API 끝 -->
+<script type="text/javascript">
+window.onload = function(){
+	//참여 인원 기본값 0 초기화
+	let book_maxcount = document.getElementById('book_maxcount');
+	if(book_maxcount.value == 0){
+		book_maxcount.value = '';
+	}
+	
+	//썸네일 삭제
+	$('#file_del').click(function(){
+		let choice = confirm('썸네일을 삭제하시겠습니까?');
+		if(choice){
+			$.ajax({
+				url:'deleteFile',
+				data:{book_num:${bookVO.book_num}},
+				type:'post',
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'logout'){
+						alert('로그인 후 이용하세요!');
+						location.replace('/member/login');
+					}else if(param.result == 'success'){
+						$('#book_detail').hide();
+					}else{
+						alert('파일 삭제 오류 발생');
+					}
+				},
+				error:function(){
+					alert('네트워크 오류 발생');
+				}
+			});
+		}
+	});
+};
+</script>

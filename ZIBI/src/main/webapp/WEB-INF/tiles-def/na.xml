@@ -85,7 +85,7 @@
     	<put-attribute name="body" value="/WEB-INF/views/member/passwordUpdateForm.jsp"/>
 	</definition>
 	<definition name="findPassword" extends="menuPageYena">
-		<put-attribute name="title" value="비밀번호 찾기"/>
+		<put-attribute name="title" value="비밀번호 분실"/>
     	<put-attribute name="body" value="/WEB-INF/views/member/findPassword.jsp"/>
 	</definition>
 	<definition name="checkPassword" extends="menuPageYena">

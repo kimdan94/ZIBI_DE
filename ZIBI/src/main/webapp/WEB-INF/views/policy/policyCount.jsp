@@ -8,12 +8,13 @@
 	</c:if>
 	<c:if test="${!empty list}">
 		<div class="policy-map text-center">
-			<h3>대한민국의 1인 가구 세대수와 비율을 알아보세요 📊</h3>
-			<p>지도의 지자체를 클릭하면 1인 가구 비율이 나타납니다</p>
+			<h5>${year}년도의 대한민국의 1인 가구 세대수와 비율을 알아보세요 📊</h5>
 		</div>
 		<div class="row">
 			<div class="col-6" id="map" style="height:700px;"></div>
-			<div class="col-6" id="piechart" style="height: 700px;"></div>
+			<div class="col-6" id="piechart">
+				<div style="margin-top:290px;">지도의 지자체를 클릭하면<br>1인 가구 비율이 나타납니다</div>
+			</div>
 		</div>
 	</c:if>
 </div>
@@ -27,7 +28,7 @@
 		'packages' : [ 'corechart' ]
 	});
 	
-	google.charts.setOnLoadCallback(drawChart); //
+	google.charts.setOnLoadCallback(drawChart);
 	
 	/*----행정구역코드를 받아 차트를 생성하는 함수----*/
 	function drawChart(tot_family, household_cnt, content) {
@@ -44,6 +45,7 @@
 			'width':800,
 			colors: ['#DB3954', '#696969'],
 			slices: { 1: {offset: 0.2} },
+			fontSize: 20,
 			is3D: true
 		};
 

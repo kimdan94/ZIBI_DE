@@ -31,7 +31,7 @@
 			<a id="questionPopup_btn">문의하기</a>
 		</div>
 		<div class="text-end" id="question_popup" style="display: none;">
-			229rkawk@google.com으로 이메일 문의해주세요!😉 (운영 시간 월~금, 9시~18시)
+			229rkawk@google.com으로 문의해 주세요!😉 (운영 시간 월~금, 9시~18시)
 			<input type="button" class="btn mem-btn" value="닫기" id="close_questionPopup_btn">
 		</div>
 		<nav class="navbar navbar-expand-lg">

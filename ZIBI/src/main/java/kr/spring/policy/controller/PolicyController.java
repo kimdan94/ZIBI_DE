@@ -47,6 +47,7 @@ public class PolicyController {
 		
 		List<PolicyVO> list = policyService.selectStatsList(); //1인 가구 비율 목록
 		
+		model.addAttribute("year",list.get(1).getYear());
 		model.addAttribute("list",list);
 		model.addAttribute("kakao_apikey", kakao_apikey);
 				

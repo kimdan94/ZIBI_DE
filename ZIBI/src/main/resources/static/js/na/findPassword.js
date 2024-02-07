@@ -1,16 +1,5 @@
 $(document).ready(function() {
-	//모달창 클릭 시 로그인 페이지로 이동
-	function loginDirect(){ 
-		//히스토리를 지우고 이동
-		location.replace('/member/login');
-	}
-	
-	function replaceEmailForm(){
-		location.replace('/member/findPassword');
-		$(window).scrollTop(0);
-		$('body').css('overflow-y','');
-	}
-	
+
 	//이메일 인증버튼 클릭
 	$('#find_email').submit(function(event){
 		
@@ -45,3 +34,14 @@ $(document).ready(function() {
 		event.preventDefault();
 	});//end of email check click
 });	
+
+function loginDirect(){//모달창 클릭 시 로그인 페이지로 이동
+	//히스토리를 지우고 이동
+	location.replace('/member/login');
+}
+
+function replaceEmailForm(){
+	location.replace('/member/findPassword');
+	$(window).scrollTop(0);
+	$('body').css('overflow-y','');
+}

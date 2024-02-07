@@ -29,7 +29,7 @@
 					</a>
 					<span id="naver_id_login"></span>
 				</div>
-				<input type="button" class="btn mem-btn w-100" value="비밀번호 찾기" onclick="location.href='${pageContext.request.contextPath}/member/findPassword'">
+				<input type="button" class="btn mem-btn w-100" value="비밀번호 분실" onclick="location.href='${pageContext.request.contextPath}/member/findPassword'">
 			</form:form>
 		</div>
 	</div>

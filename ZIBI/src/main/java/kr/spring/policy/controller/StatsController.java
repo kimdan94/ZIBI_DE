@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.policy.service.PolicyService;
 import kr.spring.policy.vo.PolicyVO;
@@ -35,7 +39,8 @@ public class StatsController {
 	
 	/*------------------url 문자열 생성, json 데이터 생성-------------------*/
 	@RequestMapping("/stats/getData")
-	public String getStats() throws Exception {
+	@ResponseBody
+	public Map<String,String> getStats(@RequestParam String selectYear,@RequestParam String inputYear) throws Exception {
 		
 		//서비스 ID, 보안 키로 액세스 토큰 받아오기
 		String apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json"; //액세스 토큰을 받아올 주소
@@ -55,8 +60,19 @@ public class StatsController {
 		
 		//총 가구수
 		apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/stats/population.json";
-		String year = "2022"; 
+		
+		String year = null; 
+		
+		if(selectYear!=null && !selectYear.equals("0")) {
+			year = selectYear;
+			log.debug("<<데이터 1>>" + selectYear);
+		} else {
+			year = inputYear;
+			log.debug("<<데이터 2>>" + inputYear);
+		}
 		String low_search = "1";
+		
+		Map<String, String> map = new HashMap<String, String>();
 
 		urlBuilder = new StringBuilder(apiUrl);
 		urlBuilder.append("?" + URLEncoder.encode("accessToken","UTF-8") + "="+accessToken);
@@ -67,28 +83,33 @@ public class StatsController {
 		
 		obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
 		jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
-		
 		JSONArray array1 = (JSONArray)jsonObj.get("result"); //json 데이터 내 총 가구수가 든 json 추출 (배열 형태로 존재하므로 array 사용)
-				
-		//1인 가구 수
-		apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/stats/household.json";
-		String household_type = "A0"; //조회 종료년월
+		
+		if(array1==null) {
+			map.put("result","failed");
+		} else {
+			//1인 가구 수
+			apiUrl = "https://sgisapi.kostat.go.kr/OpenAPI3/stats/household.json";
+			String household_type = "A0"; //조회 종료년월
 
-		urlBuilder = new StringBuilder(apiUrl);
-		urlBuilder.append("?" + URLEncoder.encode("accessToken","UTF-8") + "="+accessToken);
-		urlBuilder.append("&" + URLEncoder.encode("year","UTF-8") + "=" + URLEncoder.encode(year, "UTF-8"));
-		urlBuilder.append("&" + URLEncoder.encode("household_type","UTF-8") + "=" + URLEncoder.encode(household_type, "UTF-8"));
+			urlBuilder = new StringBuilder(apiUrl);
+			urlBuilder.append("?" + URLEncoder.encode("accessToken","UTF-8") + "="+accessToken);
+			urlBuilder.append("&" + URLEncoder.encode("year","UTF-8") + "=" + URLEncoder.encode(year, "UTF-8"));
+			urlBuilder.append("&" + URLEncoder.encode("household_type","UTF-8") + "=" + URLEncoder.encode(household_type, "UTF-8"));
+			
+			jsonData = statusUrl(urlBuilder);
+			
+			obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
+			jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
+			
+			JSONArray array2 = (JSONArray)jsonObj.get("result"); //json 데이터 내 1인 가구수가 든 json 추출 (배열 형태로 존재하므로 array 사용)
+					
+			updateDB(year, array1, array2); //DB 업데이트
+			
+			map.put("result","success");
+		}
 		
-		jsonData = statusUrl(urlBuilder);
-		
-		obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
-		jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
-		
-		JSONArray array2 = (JSONArray)jsonObj.get("result"); //json 데이터 내 1인 가구수가 든 json 추출 (배열 형태로 존재하므로 array 사용)
-				
-		updateDB(year, array1, array2); //DB 업데이트
-		
-		return "redirect:/admin/policy";
+		return map;
 	}
 	
 	/*------------------json 데이터 DB 업데이트-------------------*/

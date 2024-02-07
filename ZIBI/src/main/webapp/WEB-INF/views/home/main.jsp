@@ -10,7 +10,7 @@
 	<div class="carousel-inner">
 		<div class="carousel-item active " style="background: #f4faff;">
 			<div class="cmain-content text-end">
-				<h5>낯설기만 한 ‘방’이 포근한 ‘집’이 되는 기적을 만드는</h5>
+				<h5 style="font-weight: 600;">낯설기만 한 ‘방’이 포근한 ‘집’이 되는 기적을 만드는</h5>
 				<h1>ZIBI</h1>
 				<p>1인 가구에게 필요한 정보를 한 데 모은 플랫폼🔥</p>
 				<small id="img_site">Image by jcomp on Freepik</small>
@@ -20,16 +20,15 @@
 			</div>
 		</div>
 		<div class="carousel-item" style="background: #fafafa;">
-			<div class="cmain-photo">
-				<img src="${pageContext.request.contextPath}/upload/${perf.performance_poster}" height="700">
+			<div class="cmovie-photo">
+				<img src="${pageContext.request.contextPath}/upload/${perf.performance_poster}" style="height: 500px !important;">
 			</div>
-			<div class="cmain-content">
-				<small>ZIBI 회원들을 위해 관리자가 엄선한 영화를 놀라운 가격으로 만나세요</small>
+			<div class="cmovie-content">
+				<small>매일 만나는 최신 영화 혜택 📽️</small>
 				<h1>
 					<a href="${pageContext.request.contextPath}/performance/detail?performance_num=${perf.performance_num}">${perf.performance_title}</a>
 				</h1>
-				<h5>${perf.performance_content}</h5>
-				<small>⌛ ${perf.performance_start_date}</small>
+				<small>${perf.performance_start_date}~</small>
 			</div>
 		</div>
 	</div>
@@ -48,7 +47,7 @@
 	<div class="main-content">
 		<h5 style="margin-bottom: 20px;">ZIBI의 다양한 메뉴를 만나보세요</h5>
 		<div class="owl-carousel">
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/book/list'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -58,7 +57,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/performance/list'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -68,7 +67,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/checklist/list'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -78,7 +77,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/secondhand/list'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -88,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/helper/list'">
 				<div class="service-content d-flex  justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -98,7 +97,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/policy/main'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -108,7 +107,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item">
+			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/community/list'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
 						<h5 class="mb-3">
@@ -123,7 +122,7 @@
 	<!-- 메뉴 설명 끝 -->
 	<div class="main-content">
 		<div class="row main-hot">
-			<h5 style="margin-bottom: 20px;">ZIBI의 명당</h5>
+			<h5 style="margin-bottom: 20px;">ZIBI의 명단이 궁금하신가요?</h5>
 			<div class="col-4">
 				<div class="photo-area">
 					<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${member_content.mem_num}">

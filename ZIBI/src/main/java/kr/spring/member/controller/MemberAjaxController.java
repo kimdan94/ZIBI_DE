@@ -171,7 +171,7 @@ public class MemberAjaxController {
 			sendEmail(mem_email, title, content); //이메일 전송
 			
 			db_member.setMem_password(password); //임시 비밀번호 세팅
-			memberService.updateMemberDetail(db_member); //비밀번호를 임시 비밀번호로 변경
+			memberService.updatePassword(db_member); //비밀번호를 임시 비밀번호로 변경
 			
 			mapJson.put("result", "success");
 		} else {

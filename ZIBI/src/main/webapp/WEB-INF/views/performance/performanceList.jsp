@@ -22,10 +22,10 @@
 			
 			<div class="text-center wow" data-wow-delay="0.1s">
 				<small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Latest Events</small>
-				<h1 class="display-5 mb-5">Our Social Professional Events Gallery</h1>
+				<h1 class="display-5 mb-5">현재 상영작</h1>
 			</div>
-			<div class="tab-class text-center">
-			<!-- =================== 메뉴 시작 =================== -->
+			<!-- <div class="tab-class text-center">
+			=================== 메뉴 시작 ===================
 				<ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow" data-wow-delay="0.1s">
 					<li class="nav-item p-2">
 						<a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
@@ -53,8 +53,8 @@
 						</a>
 					</li>
 				</ul>
-			<!-- =================== 메뉴 끝 =================== -->
-			</div>
+			=================== 메뉴 끝 ===================
+			</div> -->
 		</div>
 	</div>
 	

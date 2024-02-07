@@ -51,11 +51,11 @@
 <!-- 영화 정보/ 인원 선택 End -->
 
 
-<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
+<%-- <c:forEach var="cinema" items="${pickCinema}" varStatus="status">
 	<div>행 : ${cinema.cinema_row}</div>
 	<div>열 : ${cinema.cinema_col}</div>
 </c:forEach>
-
+ --%>
 
 <!-- 좌석 선택 Start -->
 <div class="container-fluid contact py-6 wow" data-wow-delay="0.1s">
@@ -87,27 +87,29 @@
 	</div>
 </div>
 <!-- 총 금액 End -->
-
-
-<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
-<form action="submitSeat" method="get">
-	<!-- mem_num -->
-	<input type="hidden" id="cinema_num" name="cinema_num" value="${tmpCinema.cinema_num}"/>
-	<!-- ticketing_num -->
-	<input type="hidden" id="ticketing_num" name="ticketing_num" value="${tmpTicket.ticketing_num}"/>
-	<!-- 선택한 좌석 정보 -->
-	<input type="hidden" id="seat_info" name="seat_info" value=""/>
-	<!-- 일반 명 수 -->
-	<input type="hidden" id="adult_money" name="adult_money" value=""/>
-	<!-- 청소년 명 수 -->
-	<input type="hidden" id="teenage_money" name="teenage_money" value=""/>	
-	<!-- 우대 명 수 -->
-	<input type="hidden" id="treatement_money" name="treatement_money" value=""/>
-	
-	<input type="submit" value="결제하기">
-</form>
-<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
-
+<br>
+<div class="container-fluid contact py-6 wow" data-wow-delay="0.1s">
+	<div class="container">
+		<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
+		<form action="submitSeat" method="get">
+			<!-- mem_num -->
+			<input type="hidden" id="cinema_num" name="cinema_num" value="${tmpCinema.cinema_num}"/>
+			<!-- ticketing_num -->
+			<input type="hidden" id="ticketing_num" name="ticketing_num" value="${tmpTicket.ticketing_num}"/>
+			<!-- 선택한 좌석 정보 -->
+			<input type="hidden" id="seat_info" name="seat_info" value=""/>
+			<!-- 일반 명 수 -->
+			<input type="hidden" id="adult_money" name="adult_money" value=""/>
+			<!-- 청소년 명 수 -->
+			<input type="hidden" id="teenage_money" name="teenage_money" value=""/>	
+			<!-- 우대 명 수 -->
+			<input type="hidden" id="treatement_money" name="treatement_money" value=""/>
+			
+			<input type="submit" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill" value="결제하기">
+		</form>
+		<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
+	</div>
+</div>
 
 
 

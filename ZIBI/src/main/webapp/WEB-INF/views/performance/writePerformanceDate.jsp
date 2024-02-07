@@ -68,7 +68,7 @@ $(function(){
 			dataType:'json',
 			success:function(param){
 				if(param.result=='success'){
-					alert("성공");
+					//alert("성공");
 					//console.log(param.listLoc2);
 					$('#selectLoc2').empty();
 					let output = '<option value="">선택</option>';

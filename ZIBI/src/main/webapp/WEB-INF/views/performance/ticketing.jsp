@@ -13,9 +13,9 @@
 
         <!-- Blog Start -->
         <div class="container-fluid blog py-6" style="padding:0 200px">
-                <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
-                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Blog</small>
-                    <h1 class="display-5 mb-5">Be First Who Read News</h1>
+                <div class="text-center wow" data-wow-delay="0.1s">
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Select Movie</small>
+                    <h1 class="display-5 mb-5">영화 선택하기</h1>
                 </div>
                 <div class="row gx-4 justify-content-center">
                 	<!-- -------------- 첫번째 : 영화관 위치 찾기 -------------- -->
@@ -24,9 +24,12 @@
                             <div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">1</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
+                                </div>
+                                <div class="h5 lh-base my-auto h-100 p-3">
+	                                영화관 선택
                                 </div>
                             </div>
                             
@@ -43,7 +46,7 @@
                             	<tbody>
 	                            	<c:forEach var="cinema" items="${cinemaList}">
 	                            	<tr>
-										<td>${cinema.cinema_location1}</td>
+										<td style="border:1px solid black;">${cinema.cinema_location1}</td>
 									</tr>
 									</c:forEach>
 									
@@ -76,9 +79,12 @@
                             <div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">2</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
+                                </div>
+                                <div class="h5 lh-base my-auto h-100 p-3">
+	                                영화
                                 </div>
                             </div>
                             
@@ -88,7 +94,7 @@
                                 	<!-- ajax -->
 		                           	<c:forEach var="performance" items="${list}">
 		                           	<tr class="ticketing-ent-row" id="${performance.performance_num}">
-										<td class="ticketing-poster"><img id="ticketing-poster-img" src="${pageContext.request.contextPath}/upload/${performance.performance_poster}"></td>
+										<td class="ticketing-poster"><img id="ticketing-poster-img" src="${pageContext.request.contextPath}/upload/${performance.performance_poster}" style="height:230px; margin:10px;"></td>
 										<td class="ticketing-info">${performance.performance_title}<br>${performance.performance_age}</td>
 									</tr>
 									</c:forEach>
@@ -109,8 +115,8 @@
                              <div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">3</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
                             </div>
@@ -134,9 +140,12 @@
                             <div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">4</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
+                                </div>
+                                <div class="h5 lh-base my-auto h-100 p-3">
+	                                상영관 + 날짜 + 시간 선택
                                 </div>
                             </div>
                             <!-- 최종 선택할 수 있는 영화 나옴 -->
@@ -149,6 +158,22 @@
                     <!-- -------------- 네번째 : 최종 선택 -------------- -->
                     
                     
+                    
+                    <!-- ----------------- form 시작 --------------------- -->
+                    <form action="updateTicketing" id="update_ticketing" method="post">
+						<!-- 상영관 -->
+						<input type="hidden" id="cinema_hidden" value=""/>
+						<!-- 영화 -->
+						<input type="hidden" id="performance_hidden" value=""/>
+						<!-- 날짜 -->
+						<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
+						<!-- 최종 선택 -->
+						<input type="hidden" id="ent_hidden" value=""/>
+						<!-- <input type="submit" value="예매하기"> -->
+						<input type="button" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill" value="예매하기" onclick='submitEnt()'>
+					</form>
+                    <!-- ----------------- form 끝 --------------------- -->
+                    
                 </div>
         </div>
         <!-- Blog End -->
@@ -157,11 +182,11 @@
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <!-- ------------------------------------------------------------------------ -->
  <!-- 캐러셀 시작 -->
-<div class="container">
+<!-- <div class="container">
 	<div class="main-content">
 		<h5>ZIBI의 다양한 메뉴를 만나보세요!</h5>
 		
-		<!-- ----------------------- << 캐러셀 시작 >> ------------------------ -->
+		----------------------- << 캐러셀 시작 >> ------------------------
 		<div class="owl-carousel">
 			<div class="bg-light rounded service-item">
 				<div class="service-content d-flex justify-content-center p-4">
@@ -234,26 +259,15 @@
 				</div>
 			</div>
 		</div>
-		<!-- ----------------------- << 캐러셀 끝 >> ------------------------ -->
+		----------------------- << 캐러셀 끝 >> ------------------------
 		
 	</div>
-</div>
+</div> -->
 <!-- 캐러셀 끝 -->
 
 <!-- ------------------------------------------------------------------------ -->
 
-<form action="updateTicketing" id="update_ticketing" method="post">
-	<!-- 상영관 -->
-	<input type="hidden" id="cinema_hidden" value=""/>
-	<!-- 영화 -->
-	<input type="hidden" id="performance_hidden" value=""/>
-	<!-- 날짜 -->
-	<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
-	<!-- 최종 선택 -->
-	<input type="hidden" id="ent_hidden" value=""/>
-	<!-- <input type="submit" value="예매하기"> -->
-	<input type="button" value="예매하기" onclick='submitEnt()'>
-</form>
+
 
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 

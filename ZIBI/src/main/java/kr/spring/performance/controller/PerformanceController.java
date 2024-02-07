@@ -29,8 +29,10 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.service.PerformanceService;
 import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
+import kr.spring.performance.vo.PaymentVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
+import kr.spring.performance.vo.TotalVO;
 import kr.spring.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -547,7 +549,7 @@ public class PerformanceController {
 	}
 	
 	/*=================================`
-	 * 결제 완료 = 결제 정보 + 티켓
+	 * 결제 내역
 	 *=================================*/
 	@RequestMapping("/performance/history")
 	public ModelAndView history(HttpServletRequest request, HttpSession session) {
@@ -556,11 +558,29 @@ public class PerformanceController {
 		ModelAndView mav = new ModelAndView();
 		
 		Integer user = memberVO.getMem_num();
+		log.debug("<<회원번호 user>> : " + user);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		
+		map.put("mem_num", user);
+		List<CinemaVO> payCinema = performanceService.selectPayCinema(map);
+		List<PerformanceVO> payPerformance = performanceService.selectPayPerformance(map);
+		List<TicketingVO> payTicketing = performanceService.selectPayTicketing(map);
+		List<ChoiceVO> payChoice = performanceService.selectPayChoice(map);
+		List<PaymentVO> payPayment = performanceService.selectPayPayment(map);
+
+		List<TotalVO> total = performanceService.selectPayTotal(map);
+		log.debug("<><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
+		log.debug("" + total);
+		log.debug("<><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 		
 		mav.setViewName("performanceHistory"); // tiles 설정 name과 동일해야 함
+		mav.addObject("payCinema", payCinema);
+		mav.addObject("payPerformance", payPerformance);
+		mav.addObject("payTicketing", payTicketing);
+		mav.addObject("payChoice", payChoice);
+		mav.addObject("payPayment", payPayment);
+		mav.addObject("total", total);
 		
 		return mav; 
 		

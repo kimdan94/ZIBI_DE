@@ -8,9 +8,9 @@
         <!-- 결제창 Start -->
         <div class="container-fluid blog py-6">
             <div class="container">
-                <div class="text-center wow bounceInUp" data-wow-delay="0.1s">
-                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Our Blog</small>
-                    <h1 class="display-5 mb-5">Be First Who Read News</h1>
+                <div class="text-center wow" data-wow-delay="0.1s">
+                    <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Payment</small>
+                    <h1 class="display-5 mb-5">결제하기</h1>
                 </div>
                 <div class="row gx-4 justify-content-center">
                 
@@ -21,8 +21,8 @@
                             <div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">1</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
                                 <p class="h5 lh-base my-auto h-100 p-3">예매정보</p>
@@ -34,6 +34,12 @@
                             	<p>영화관 : ${payCinema.cinema_theater}</p>
                             	<p>일시 : ${payTicketing.ticketing_date} ${payTicketing.ticketing_start_time} </p>
                             	<p></p>
+                            	<div>
+									좌석 : 
+									<c:forEach var="seatList" items="${seatList}" varStatus="status">
+									${seatList} 
+									</c:forEach>
+								</div>
                             </div>
                         </div>
                     </div>
@@ -46,14 +52,15 @@
                             <div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">2</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
                                 <p class="h5 lh-base my-auto h-100 p-3">결제수단</p>
                             </div>
                             <div class="overflow-hidden rounded" style="background-color:pink; height:600px;">
-                            asdf
+                            	<input type="radio" name="options" value="kakaopay"> 카카오페이
+								<input type="radio" name="options" value="card"> 카드결제
                             </div>
                         </div>
                     </div>
@@ -65,14 +72,19 @@
                         	<div class="blog-content mx-4 d-flex rounded bg-light">
                                 <div class="text-dark bg-primary rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0">16</p>
-                                        <p class="fw-bold mb-0">Sep</p>
+                                        <p class="fw-bold mb-0" style="color:white;">3</p>
+                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
                                 <p class="h5 lh-base my-auto h-100 p-3">결제하기</p>
                             </div>
                             <div class="overflow-hidden rounded" style="background-color:pink; height:600px;">
-                            asdf
+                            	<div>일반 : ${payCinema.cinema_adult} X ${adult_money}</div>
+								<div>청소년 : ${payCinema.cinema_teenage} X ${teenage_money}</div>
+								<div>우대 : ${payCinema.cinema_treatment} X ${treatement_money}</div>
+								<div>합계 : <span id="total_price">${payCinema.cinema_adult*adult_money + payCinema.cinema_teenage*teenage_money + payCinema.cinema_treatment*treatement_money}</span></div>
+                            	
+								<button class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill" onclick="pay()">결제</button>
                             </div>
                         </div>
                     </div>
@@ -86,24 +98,13 @@
 <!-- <button onclick="kakaoPay()">카카오페이</button> -->
 <!-- <button onclick="card()">카카오페이</button> -->
 
-<input type="radio" name="options" value="kakaopay"> 카카오페이
-<input type="radio" name="options" value="card"> 카드결제
-<input type="radio" name="options" value="tosspay"> 토스페이
+
+<!-- <input type="radio" name="options" value="tosspay"> 토스페이 -->
 
 
-<button onclick="total()">가격보기</button>
 
-<button onclick="pay()">결제</button>
-<div>
-	좌석 : 
-	<c:forEach var="seatList" items="${seatList}" varStatus="status">
-	${seatList} 
-	</c:forEach>
-</div>
-<div>일반 : ${payCinema.cinema_adult} X ${adult_money}</div>
-<div>청소년 : ${payCinema.cinema_teenage} X ${teenage_money}</div>
-<div>우대 : ${payCinema.cinema_treatment} X ${treatement_money}</div>
-<div>합계 : <span id="total_price">${payCinema.cinema_adult*adult_money + payCinema.cinema_teenage*teenage_money + payCinema.cinema_treatment*treatement_money}</span></div>
+
+
 <!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
 <form id="choiceValue" action="choiceSeat" method="post">
 	<!-- ticketing_num -->
@@ -139,6 +140,8 @@ function pay(){
 	console.log(listVar);
 	if(listVar == 'kakaopay') {
 		kakaoPay();
+	} else if(listVar == 'card'){
+		card();
 	}
 	
 }
@@ -148,7 +151,72 @@ function kakaoPay() {
 	IMP.request_pay({
 	    pg : 'kakaopay', // html5_inicis : 일반 카드 // kakaopay.TC0ONETIME : 카카오페이 // pg사 코드 https://portone.gitbook.io/docs/tip/pg-2
 	    pay_method : 'card', // kakaopay에서 생략 가능
-	    merchant_uid: "order_no_0113", // 상점에서 관리하는 고유 주문 번호 - String
+	    merchant_uid: "order_no_" + new Date().getTime(), // 상점에서 관리하는 고유 주문 번호 - String
+	    name : '주문명:결제테스트', // 상품명
+	    amount : $('#total_price').text(), // 가격 - integer
+	    buyer_email : '',
+	    buyer_name : '구매자이름', // 구매자 이름
+	    buyer_tel : '', // 휴대폰 번호
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	var total_price = document.getElementById('total_price');
+	    	console.log('가격 : ' + total_price);
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	$.ajax({
+	    		url: "/performance/initPayment", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		type: 'POST',
+	    		data: {
+	    			// uid, type, price, choice_num
+		    		imp_uid : rsp.imp_uid,
+		    		merchant_uid : rsp.merchant_uid,
+		    		pay_method : 'card',
+		    		total_price : $('#total_price').text(),
+		    		ticketing_num : $('#ticketing_num').val(),
+		    		cinema_num : $('#cinema_num').val(),
+		    		choice_seat : $('#choice_seat').val(),
+		    		choice_adult : $('#choice_adult').val(),
+		    		choice_teenage : $('#choice_teenage').val(),
+		    		choice_treatment : $('#choice_treatment').val()
+		    		
+		    		//기타 필요한 데이터가 있으면 추가 전달
+	    		},
+	    		dataType: 'json',
+	    		success:function(param){
+					//alert(rsp.imp_uid + ' // ' + rsp.merchant_uid);
+					console.log(param.result);
+	    			if(param.result=='success'){
+						var msg = '결제가 완료되었습니다.';
+		    			msg += '\n 상점 거래ID : ' + rsp.merchant_uid;
+		    			//msg += '\n 결제 금액 : ' +rsp.merchant_uid;
+		    			//msg += ' 카드 승인번호 : ' + rsp.apply_num; // 카카오 페이지에서는 안 보임
+		    			
+		    			alert(msg);
+
+		    			//submit();
+		    			location.href='/performance/showTicket';
+					}
+	    			
+				},
+				error:function(){
+					alert('결제 네트워크 오류 발생');
+					ifError();
+				}
+	    	
+	    	})
+	    } else {
+	    	ifError();
+	        var msg = '결제에 실패하였습니다. ';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        alert(msg);
+	        location.href='/main/home'; // 이동함
+	    }
+	});
+}
+function card() {
+	IMP.request_pay({
+	    pg : 'html5_inicis', // html5_inicis : 일반 카드 // kakaopay.TC0ONETIME : 카카오페이 // pg사 코드 https://portone.gitbook.io/docs/tip/pg-2
+	    pay_method : 'card', // kakaopay에서 생략 가능
+	    merchant_uid: "order_no_" + new Date().getTime(), // 상점에서 관리하는 고유 주문 번호 - String
 	    name : '주문명:결제테스트', // 상품명
 	    amount : $('#total_price').text(), // 가격 - integer
 	    buyer_email : '',
@@ -183,14 +251,14 @@ function kakaoPay() {
 					console.log(param.result);
 	    			if(param.result=='success'){
 						var msg = '결제가 완료되었습니다.';
-		    			msg += '\n 상점 거래ID : ' + rsp.merchant_uid;
-		    			//msg += '\n 결제 금액 : ' +rsp.merchant_uid;
-		    			//msg += ' 카드 승인번호 : ' + rsp.apply_num; // 카카오 페이지에서는 안 보임
+		    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+		    			//msg += '\n결제 금액 : ' +rsp.merchant_uid;
+		    			//msg += '카드 승인번호 : ' + rsp.apply_num; // 카카오 페이지에서는 안 보임
 		    			
 		    			alert(msg);
 
 		    			//submit();
-		    			//location.href='/performance/performanceComplete';
+		    			location.href='/performance/showTicket';
 					}
 	    			
 				},
@@ -209,11 +277,6 @@ function kakaoPay() {
 	    }
 	});
 }
-function card() {
-	
-	
-}
-
 function ifError() {
 	alert('error 진입');
 	$.ajax({

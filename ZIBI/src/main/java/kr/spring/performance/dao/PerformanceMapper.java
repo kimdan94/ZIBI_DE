@@ -9,8 +9,10 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
+import kr.spring.performance.vo.PaymentVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
+import kr.spring.performance.vo.TotalVO;
 
 @Mapper
 public interface PerformanceMapper {
@@ -51,7 +53,12 @@ public interface PerformanceMapper {
 	public void insertPayment(Map<String, Object> map);
 	
 	// 결제 내역
-	
+	public List<CinemaVO> selectPayCinema(Map<String, Object> map);
+	public List<PerformanceVO> selectPayPerformance(Map<String, Object> map);
+	public List<TicketingVO> selectPayTicketing(Map<String, Object> map);
+	public List<ChoiceVO> selectPayChoice(Map<String, Object> map);
+	public List<PaymentVO> selectPayPayment(Map<String, Object> map);
+	public List<TotalVO> selectPayTotal(Map<String, Object> map);
 	
 	
 	//좌석 출력

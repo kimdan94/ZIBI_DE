@@ -3,12 +3,12 @@ package kr.spring.performance.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
-
 import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
+import kr.spring.performance.vo.PaymentVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
+import kr.spring.performance.vo.TotalVO;
 
 public interface PerformanceService {
 	// 사용자
@@ -41,6 +41,15 @@ public interface PerformanceService {
 	public void insertChoice(Map<String, Object> map);
 	public void updateChoice(int cinema_num, int num); // 여석 수 업데이트
 	public void insertPayment(Map<String, Object> map);
+	
+	// 결제 내역
+	public List<CinemaVO> selectPayCinema(Map<String, Object> map);
+	public List<PerformanceVO> selectPayPerformance(Map<String, Object> map);
+	public List<TicketingVO> selectPayTicketing(Map<String, Object> map);
+	public List<ChoiceVO> selectPayChoice(Map<String, Object> map);
+	public List<PaymentVO> selectPayPayment(Map<String, Object> map);
+	public List<TotalVO> selectPayTotal(Map<String, Object> map);
+	
 	
 	
 	public List<ChoiceVO> selectChoice(Map<String, Object> map);

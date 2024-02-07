@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.performance.dao.PerformanceMapper;
 import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
+import kr.spring.performance.vo.PaymentVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
+import kr.spring.performance.vo.TotalVO;
 
 @Service
 @Transactional
@@ -144,6 +146,37 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public void insertPayment(Map<String, Object> map) {
 		performanceMapper.insertPayment(map);
+	}
+
+	// 결제 내역
+	@Override
+	public List<CinemaVO> selectPayCinema(Map<String, Object> map) {
+		return performanceMapper.selectPayCinema(map);
+	}
+
+	@Override
+	public List<PerformanceVO> selectPayPerformance(Map<String, Object> map) {
+		return performanceMapper.selectPayPerformance(map);
+	}
+
+	@Override
+	public List<TicketingVO> selectPayTicketing(Map<String, Object> map) {
+		return performanceMapper.selectPayTicketing(map);
+	}
+
+	@Override
+	public List<ChoiceVO> selectPayChoice(Map<String, Object> map) {
+		return performanceMapper.selectPayChoice(map);
+	}
+
+	@Override
+	public List<PaymentVO> selectPayPayment(Map<String, Object> map) {
+		return performanceMapper.selectPayPayment(map);
+	}
+
+	@Override
+	public List<TotalVO> selectPayTotal(Map<String, Object> map) {
+		return performanceMapper.selectPayTotal(map);
 	}
 
 	

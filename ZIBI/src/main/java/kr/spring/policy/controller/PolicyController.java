@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.policy.service.PolicyService;
 import kr.spring.policy.vo.PolicyVO;
@@ -159,4 +160,12 @@ public class PolicyController {
 	
 		return "redirect:/admin/policy";
 	}
+	
+	@RequestMapping("/admin/performanceMain")
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("adminPerformanceMain"); //타일스
+		return mav; //타일스 설정명
+	}
+	
 }

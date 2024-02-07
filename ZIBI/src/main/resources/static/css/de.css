@@ -369,3 +369,8 @@ select:hover {
 	font-size: 13px;
 	color: #848484;
 }
+
+/*해결중&완료 토글*/
+#output_solution, #output_scrap{
+	cursor:pointer;
+}

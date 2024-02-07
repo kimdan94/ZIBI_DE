@@ -73,7 +73,7 @@
 	</div>
 	<div class="align-right">
 		<c:if test="${!empty user}">
-		<!-- 스크랩수 -->		
+		<!-- 스크랩 -->		
 		<img id="output_scrap" data-num="${helper.helper_num}" 
 			src="${pageContext.request.contextPath}/images/de/heart1.png" width="30">
 		스크랩 <span id="output_scount"></span><span>·</span>
@@ -92,7 +92,7 @@
 		<form id="re_form">
 			<input type="hidden" name="helper_num" value="${helper.helper_num}" id="helper_num">
 			<div class="float-left">
-			<textarea rows="3" cols="60" name="re_content" id="re_content" class="rep-content" 
+			<textarea rows="3" cols="60" name="re_content" id="re_content" class="rep-content" placeholder="댓글을 입력해주세요."
 			<c:if test="${empty user}">disabled="disabled"</c:if>
 			><c:if test="${empty user}">로그인 후 작성할 수 있습니다.</c:if></textarea>	
 			</div>

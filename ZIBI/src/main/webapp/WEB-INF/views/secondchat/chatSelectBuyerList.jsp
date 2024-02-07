@@ -23,6 +23,7 @@ $(function(){
 		});
 	});
 	
+	
 });
 </script>
 <!--  거래자 선택 목록 시작 -->
@@ -30,7 +31,7 @@ $(function(){
 	<div class="container"
 		style="max-width: 500px;">
 		<div class="text-center">
-			<h1 class="display-5 mb-5">구매자 목록</h1>
+			<h1 class="mb-5">거래자 선택</h1>
 		</div>
 		<div class="tab-class text-center">
 			<div class="tab-content">
@@ -59,7 +60,7 @@ $(function(){
 												${chat.chatVO.chat_reg_date}
 											</div>
 											${chat.read_count} 
-											<input type="button" value="거래자 선택" class="selbuyer-btn1" id="sc_selectBuyer" data-num="${chat.sc_num}" data-buyer_num="${chat.buyer_num}"
+											<input type="button" value="구매자 선택" class="selbuyer-btn1" id="sc_selectBuyer" data-num="${chat.sc_num}" data-buyer_num="${chat.buyer_num}"
 												onclick="location.href='${pageContext.request.contextPath}/secondhand/detail?sc_num=${chat.sc_num}'">
 										</div>
 									</div>
@@ -68,7 +69,9 @@ $(function(){
 							</tr>
 						</c:forEach>
 						</table>
-						<input type="button" class="selbuyer-btn2" value="거래자 선택하지 않을래요">
+						<!-- 거래자 선택하지 않는 버튼 클릭시 이미 이 페이지로 올때 second테이블에 update해줬으므로 바로 list로 가면 된다.  -->
+						<input type="button" class="selbuyer-btn2" value="거래자 선택하지 않을래요" 
+						onclick="location.href='${pageContext.request.contextPath}/secondhand/detail?sc_num=${sc_num}'">
 					</c:if>
 				</div>
 			</div>

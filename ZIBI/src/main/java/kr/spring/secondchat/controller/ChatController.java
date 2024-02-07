@@ -192,6 +192,7 @@ public class ChatController {
 		log.debug("<<구매자 목록 정보 list > : " + list);
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
+		model.addAttribute("sc_num" ,sc_num);
 		
 		return "chatSelectBuyerList";//해당 판매글에 대한 구매자들 목록 페이지 
 	}

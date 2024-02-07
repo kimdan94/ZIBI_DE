@@ -8,8 +8,8 @@
 				<div class="event-img position-relative">
 					<img class="my-photo img-fluid" src="${pageContext.request.contextPath}/member/photoView">
 					<div class="event-overlay">
-						<a data-lightbox="event-1" id="photo_btn">
-							<img src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="40px">
+						<a data-lightbox="event-1">
+							<img id="photo_btn" src="${pageContext.request.contextPath}/images/na/mypage-change.png" width="40px">
 						</a>
 					</div>
 				</div>
@@ -81,7 +81,7 @@
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/mypageProfileImage.js"></script>
 <script>
 	$('#main_btn').toggleClass("mem-btn");
 	$('#main_btn').toggleClass("mem-btn-green");

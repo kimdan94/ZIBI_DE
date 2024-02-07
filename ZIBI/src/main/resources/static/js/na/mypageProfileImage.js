@@ -1,5 +1,3 @@
-$(document).ready(function() {
-
 	//프로필 사진 변경 선택 시 버튼 노출
 	$('#photo_btn').click(function() {
 		$('#photo_choice').show();
@@ -77,4 +75,3 @@ $(document).ready(function() {
 		$('#photo_choice').hide();
 		$('#photo_check').hide();
 	});
-});

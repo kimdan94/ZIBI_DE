@@ -83,10 +83,10 @@
 		                        GROUP BY mem_num
 		                )
 		                GROUP BY mem_num
+                        ORDER BY count DESC
 		            )a)
 		JOIN member USING (mem_num)
 		WHERE rnum=1
-		ORDER BY count DESC
 	</select>
 	
 	<!-- 가장 많이 영화 예매한 회원 -->

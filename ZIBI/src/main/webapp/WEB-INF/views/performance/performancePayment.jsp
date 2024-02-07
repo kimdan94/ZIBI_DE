@@ -132,7 +132,7 @@ function total(){
 	console.log(total_price);
 }
 var IMP = window.IMP;
-IMP.init(""); // 가맹점 식별코드
+IMP.init("imp22154723"); // 가맹점 식별코드
 
 function pay(){
 	//ifError();

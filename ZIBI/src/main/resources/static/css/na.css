@@ -55,6 +55,10 @@
 	color: #32a77b !important;
 	transition: .3s !important;
 }
+.main-content:not(:last-of-type){
+	padding-bottom: 30px;
+	border-bottom: 1px solid #ededed;
+}
 .main-content h4{
 	font-weight: 600;
 	margin-top: 30px;
@@ -72,7 +76,7 @@
 
 /* 케러셀 */
 .carousel-item {
-	height: 500px;
+	height: 400px;
 	width: 100%;
 	overflow: hidden;
 	display: felx;
@@ -94,7 +98,7 @@
 }
 .cmain-content #img_site{
 	font-size: .6em;
-	color: lightgray;
+	color: #ededed;
 }
 
 /*캐러셀 : 메뉴 설명*/
@@ -168,7 +172,7 @@
 
 /* 최신글 */
 .main-content .team-item{
-	border: 1px solid lightgray;
+	border: 1px solid #ededed;
 }
 .main-content .team-item .team-img{
 	height: 180px;
@@ -179,12 +183,16 @@
 	height: 100%;
 	object-fit: cover;
 	object-position: 50% 50%;
-	border-bottom: 1px solid lightgray;
+	border-bottom: 1px solid #ededed;
 }
 .main-content h6{
+	display:block !important;
+	white-space:nowrap !important;
+	overflow:hidden;
+	text-overflow:ellipsis !important;
 	font-size: 1.1em;
 	font-weight: 600;
-	margin-top: 15px;
+	margin: 15px 5px 10px 5px;
 }
 .main-content h6.text-primary{
 	font-size: .9em;
@@ -193,11 +201,14 @@
 	font-size: .8em;
 }
 
-/* 지금 가장 핫한 */
+/* 지비의 명당 */
 .main-hot .photo-area{
-	height: 150px;
-	width: 150px;
+	height: 120px;
+	width: 120px;
 	float: left;
+}
+.main-hot .col-4{
+	margin-bottom: 15px;
 }
 .main-hot h6{
 	margin: 0;
@@ -210,8 +221,8 @@
 	object-position: 50% 50%;
 }
 .main-hot .col-4 div:nth-child(2){
-	margin-top: 85px;
-	padding-left: 160px;
+	margin-top: 60px;
+	padding-left: 130px;
 
 }
 .main-hot a{
@@ -359,10 +370,13 @@
 .mypage-list{
 	margin: 20px;
 	padding: 5px;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #f5f5f5;
+}
+.mypage-list .row:first-child{
+	background-color: #f5f5f5;
 }
 .mypage-list .row div{
-	border-top: 1px solid gray;
+	border-top: 1px solid #f5f5f5;
 	padding: 5px;
 }
 
@@ -437,6 +451,7 @@
 }
 .openProfile .card-img{
 	height: 250px;
+	border-bottom: 1px solid #ededed;
 }
 .openProfile .card-img .card-image{
 	border-radius: 5px;

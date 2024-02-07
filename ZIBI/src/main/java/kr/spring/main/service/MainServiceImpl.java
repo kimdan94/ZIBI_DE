@@ -74,4 +74,19 @@ public class MainServiceImpl implements MainService {
 	public LastestContentVO selectMostContentMember() {
 		return mainMapper.selectMostContentMember();
 	}
+
+	@Override
+	public LastestContentVO selectMostHelpMember() {
+		return mainMapper.selectMostHelpMember();
+	}
+
+	@Override
+	public LastestContentVO selectMostSecondMember() {
+		return mainMapper.selectMostSecondMember();
+	}
+
+	@Override
+	public LastestContentVO selectMostMovieMember() {
+		return mainMapper.selectMostMovieMember();
+	}
 }

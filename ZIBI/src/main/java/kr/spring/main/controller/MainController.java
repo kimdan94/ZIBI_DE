@@ -57,8 +57,11 @@ public class MainController {
 		
 		//가장 핫한 회원
 		LastestContentVO member_follower = mainService.selectMostFollowerMember(); //가장 팔로우가 많은
-		LastestContentVO member_follow = mainService.selectMostFollowMember(); //가장 팔로우를 많이 한
-		LastestContentVO member_content = mainService.selectMostContentMember(); //가장 글을 많이 쓴
+		LastestContentVO member_book = mainService.selectMostFollowMember(); //가장 모임 참여를 많이 한
+		LastestContentVO member_content = mainService.selectMostContentMember(); //가장 커뮤니티 글을 많이 쓴
+		LastestContentVO member_movie = mainService.selectMostMovieMember(); //가장 영화 예매를 많이 한
+		LastestContentVO member_second = mainService.selectMostSecondMember(); //가장 중고 거래를 많이 한
+		LastestContentVO member_helper = mainService.selectMostHelpMember(); //가장 헬프유 많이 한
 		
 		model.addAttribute("perf",perf);
 		
@@ -70,7 +73,10 @@ public class MainController {
 		
 		model.addAttribute("member_content",member_content);
 		model.addAttribute("member_follower",member_follower);
-		model.addAttribute("member_follow",member_follow);
+		model.addAttribute("member_book",member_book);
+		model.addAttribute("member_movie",member_movie);
+		model.addAttribute("member_second",member_second);
+		model.addAttribute("member_helper",member_helper);
 		
 		return "home"; //타일스 설정명
 	}

@@ -450,7 +450,7 @@ $(function() {
 										    <th scope="col">동네</th>
 										    <th scope="col">최근수정일</th>
 										    <th scope="col">채팅하기</th>
-										    <th scope="col">기능</th>
+										    <th scope="col">예약</th>
 										  </tr>
 										</thead>
 										<tbody>
@@ -493,29 +493,29 @@ $(function() {
                 </div>
                 <div id="tab-11" class="tab-pane fade show p-0">
                     <div class="row g-4">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="menu-item d-flex align-items-center">
                                 <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                        <h4>Sabudana Tikki</h4>
-                                        <h4 class="text-primary">$90</h4>
-                                    </div>
-                                    <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
+                                    <table class="table">
+										<thead>
+										  <tr>
+										    <th scope="col">사진</th>
+										    <th scope="col">판매상태</th>
+										    <th scope="col">글제목</th>
+										    <th scope="col">가격</th>
+										    <th scope="col">동네</th>
+										    <th scope="col">최근수정일</th>
+										    <th scope="col">채팅하기</th>
+										    <th scope="col">기능</th>
+										  </tr>
+										</thead>
+										<tbody>
+										  
+										</tbody>
+									</table>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="menu-item d-flex align-items-center">
-                                <div class="w-100 d-flex flex-column text-start ps-4">
-                                    <div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-                                        <h4>Crispy</h4>
-                                        <h4 class="text-primary">$90</h4>
-                                    </div>
-                                    <p class="mb-0">Consectetur adipiscing elit sed dwso eiusmod tempor incididunt ut labore.</p>
-                                </div>
-                            </div>
-                        </div>
-                        
                     </div>
                 </div>
             </div>

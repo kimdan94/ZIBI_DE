@@ -77,7 +77,7 @@ public class PageUtil_second {
 						page.append(i);
 						page.append("</span></b>");
 					} else {
-						page.append("&nbsp;<a href='"+pageUrl+"?pageNum=");
+						page.append("&nbsp;<a style='color:black;text-decoration:none;' href='"+pageUrl+"?pageNum=");
 						page.append(i);
 						page.append(sub_url+"'>");
 						page.append(i);
@@ -87,7 +87,7 @@ public class PageUtil_second {
 				}
 				// 다음 block 페이지
 				if (totalPage - startPage >= pageCount) {
-					page.append("<a href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
+					page.append("<a style='text-decoration:none;color:black;' href="+pageUrl+"?pageNum="+ (endPage + 1) + sub_url +">");
 					page.append("[다음]");
 					page.append("</a>");
 				}

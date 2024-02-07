@@ -287,10 +287,9 @@ $(function(){
 					<img class="flex-shrink-0 img-fluid rounded-circle"
 						src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${second.mem_num}" style="width:50px" alt="">
 					<div class="w-100 d-flex flex-column text-start ps-4">
-						<div
-							class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-							<h4>${second.mem_nickname}</h4>
-							<h4 class="text-primary">${chat.chatVO.chat_reg_date}</h4>
+						<div class="d-flex justify-content-between border-bottom pb-2 mb-2">
+							<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${second.mem_num}" style="color:black;">${second.mem_nickname}</a>
+							<%-- <h4>${second.sc_reg_date}</h4> --%>
 						</div>
 						<!--수정하기!!!  -->
 						<p class="mb-0">상품 개수</p>

@@ -118,10 +118,7 @@ $(function(){
 	});
 	
 });
-
 </script>
-
-<!-- About Satrt -->
 <div class="container-fluid py-6">
     <div class="container">
         <div class="row g-5 align-items-start">
@@ -145,7 +142,7 @@ $(function(){
 				
 			</div>
 			<div class="col-lg-7">
-                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">
+                <small class="d-inline-block fw-bold text-uppercase bg-light border rounded-pill px-4 py-1 mb-3">
                 	<a>홈</a>
                 	>
                 	<c:if test="${second.sc_category==1}"><span>의류/액세서리</span></c:if>
@@ -155,27 +152,27 @@ $(function(){
                 	<c:if test="${second.sc_category==5}"><span>식품</span></c:if>
                 	<c:if test="${second.sc_category==6}"><span>기타</span></c:if>
                 </small>
-                <h1 class="display-5 mb-4">${second.sc_title}</h1>
+                <h1>${second.sc_title}</h1>
                 <p class="mb-4">${second.sc_price}원</p>
                 
-                <div class="row g-4 text-dark mb-5" style="border-top:2px solid #eeeeee;">
+                <div class="dinfo-box1 row g-4 text-dark mb-5">
                			<!-- 칸 나누는 구역 -->
-                	<div class="container-fluid" style="background-color: gray;">
-				        <div class="row">
-				            <!-- row 1 (total : 12) -->
-				            <div class="col-4" style="background-color: #F8ECD1;">
+                	<div class="container-fluid">
+				        <div class="row" style="text-align:center;">
+				            <div class="box1-first col-4">
 				                <p>상품 상태</p>
 				                <p><c:if test="${second.sc_status == 1}">중고</c:if>
 				                	<c:if test="${second.sc_status == 2}">새 상품</c:if>
 				                </p>
 				            </div>
-				            <div class="col-4" style="background-color: #DEB6AB;">
+				            
+				            <div class="box1-second col-4">
 				                <p>거래 방법</p>
 				                <p><c:if test="${second.sc_way == 1}">직거래</c:if>
 				                   <c:if test="${second.sc_way == 2}">택배</c:if>
 				                </p>
 				            </div>
-				            <div class="col-4" style="background-color: #AC7D88;">
+				            <div class="col-4">
 				                <p>거래 지역</p>
 				                <p>${second.sc_address}</p>
 				            </div>
@@ -195,11 +192,10 @@ $(function(){
                 </c:if>
                 <!-- 로그인한 사람이 게시글 작성자일때 -->
                 <c:if test="${!empty user && user.mem_num == second.mem_num}">
-                <div class="row g-4 text-dark mb-5" style="border-top:2px solid #eeeeee;">
-                	<div class="container-fluid" style="background-color: gray;">
-				        <div class="row">
-				            <!-- row 1 (total : 12) -->
-				            <div class="col-4" style="background-color: #F8ECD1;">
+                <div class="row g-4 text-dark mb-5">
+                	<div class="container-fluid" >
+				        <div class="row" style="text-align:center;">
+				            <div class="col-4">
 				            	<a href="update?sc_num=${second.sc_num}">
 					                <img src="${pageContext.request.contextPath}/images/jiwon/sc_modifylogo.png" 
 					                	class="sc_modifylogo" width="30">
@@ -207,7 +203,7 @@ $(function(){
 					                <span>상품 수정</span>
 				                </a>
 				            </div>
-				            <div class="col-4" id="" style="background-color: #DEB6AB;">
+				            <div class="col-4" id="" >
 				            	<a href="#" id="sc_modify_status">	
 					            	<img src="${pageContext.request.contextPath}/images/jiwon/sc_status_modifylogo.png" 
 					            		class="sc_status_modifylogo" width="30">
@@ -215,7 +211,7 @@ $(function(){
 					                <span>상태 변경</span>
 				                </a>
 				            </div>
-				            <div class="col-4" style="background-color: #AC7D88;">
+				            <div class="col-4">
 				            	<a href="#" id="sc_delete">	
 					            	<img src="${pageContext.request.contextPath}/images/jiwon/sc_deletelogo.png" 
 					            		class="sc_deletelogo" width="30">
@@ -226,10 +222,10 @@ $(function(){
 				    	</div>
 				    </div>
                 </div>
-                <img id="output_fav" data-num="${second.sc_num}"
+                <img id="output_fav" data-num="${second.sc_num}" style="width:40px;height:40px;"
 	                	src="${pageContext.request.contextPath}/images/jiwon/sc_fav.png">
 	            <span id="output_fcount"></span>
-	            <a href="${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=${second.sc_num}" class="btn btn-primary py-3 px-5 rounded-pill">채팅</a>
+	            <input type="button" value="채팅하기" class="sc-order-btn-green w-25" onclick="location.href='${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=${second.sc_num}'">
                 </c:if> 
             </div>
         </div>
@@ -245,16 +241,20 @@ $(function(){
         <div class="row g-5 align-items-start">
         	
             <div class="col-lg-7">
-           		<small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">상품정보</small>
+           		<small class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-3">상품정보</small>
        			<p class="display-5 mb-4">${second.sc_content}</p>         	
        			<p class="fw-bold">거래 희망 장소</p>
+       			<p>${second.sc_place}</p>
             	<!-- 위도 경도가 0이 아닌 경우에 지도 표시  -->
             	<c:if test="${second.sc_latitude!=0 && second.sc_longitude!=0}">
             	<!-- 지도 시작 -->
-            	<div id="map" style="width:400px;height:400px;"></div>
+            	<div id="map" style="width:500px;height:300px;"></div>
             	
-                <p>${second.sc_latitude}</p>
-                <p>${second.sc_longitude}</p>
+            	<%-- 삭제하기!!
+                	<p>${second.sc_latitude}</p>
+                	<p>${second.sc_longitude}</p>
+                --%>
+                
                 <script>
 				    // 카카오 맵 초기화
 				    const container = document.getElementById('map');
@@ -278,8 +278,8 @@ $(function(){
             </div>
             <!-- 지도 끝 -->
             
-            <div class="col-lg-5">
-                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">상점정보</small>
+            <div class="sc-storeinfo col-lg-5">
+                <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-3">상점정보</small>
                 <h1 class="display-5 mb-4">상점정보</h1>
 
 				<div class="menu-item d-flex align-items-center">
@@ -297,11 +297,10 @@ $(function(){
 					</div>
 				</div>
 
-
-				<p class="mb-4">${second.sc_content}</p>
+				<!-- 상점 후기 란 -->
                 <div class="row g-4 text-dark mb-5">
                 	
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <i class="fas fa-share text-primary me-2"></i>Fresh and Fast food Delivery
                     </div>
                     <div class="col-sm-6">
@@ -312,9 +311,8 @@ $(function(){
                     </div>
                     <div class="col-sm-6">
                         <i class="fas fa-share text-primary me-2"></i>Delicious Deals for Delicious Meals
-                    </div>
+                    </div> -->
                 </div>
-                <a href="" class="btn btn-primary py-3 px-5 rounded-pill">About Us<i class="fas fa-arrow-right ps-2"></i></a>
             </div>
         </div>
     </div>

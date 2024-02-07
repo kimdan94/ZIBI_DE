@@ -12,7 +12,7 @@
 
 
         <!-- Blog Start -->
-        <div class="container-fluid blog py-6" style="padding:0 200px">
+        <div class="container-fluid blog py-6" style="padding:0 200px"> 
                 <div class="text-center wow" data-wow-delay="0.1s">
                     <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Select Movie</small>
                     <h1 class="display-5 mb-5">영화 선택하기</h1>

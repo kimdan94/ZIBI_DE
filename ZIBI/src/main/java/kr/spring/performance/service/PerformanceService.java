@@ -19,7 +19,7 @@ public interface PerformanceService {
 	public List<CinemaVO> selectCinemaLoc2(Map<String, Object> map);
 	public List<CinemaVO> selectCinemaNum(String cinema_location2);
 	public List<TicketingVO> selectPerformance(int cinema_num);
-	public List<TicketingVO> selectDate();
+	public List<TicketingVO> selectDate(); 
 	
 	
 	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map);

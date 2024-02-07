@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class TotalVO {
+public class TotalVO { 
 	private CinemaVO cinemaVO;
 	private PerformanceVO performanceVO;
 	private TicketingVO ticketingVO;

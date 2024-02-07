@@ -9,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class TicketingVO {
+public class TicketingVO { 
 	private int ticketing_num;
 	private int performance_num;
 	private int cinema_num;

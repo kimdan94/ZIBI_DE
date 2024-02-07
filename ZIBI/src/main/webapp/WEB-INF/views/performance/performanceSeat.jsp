@@ -7,7 +7,7 @@
 <c:forEach var="ticketing" items="${pickTicketing}" varStatus="status">
 	<div id="ticketing-num" style="display:none;">${ticketing.ticketing_num}</div>
 </c:forEach>
-<!--  -->
+<!-- ticketing_num -->
 
 
 <!-- 영화 정보 / 인원 선택 Start -->

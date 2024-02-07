@@ -34,7 +34,7 @@ public class PerformanceAjaxController {
 	private MemberService memberService;
 	
 	/*=================================
-	 * [관리자] 상영관 - 상영관 + 2관
+	 * [관리자] 상영관 - 상영관 + 2관 
 	 *=================================*/
 	@RequestMapping("/admin/adminSelectLocation")
 	@ResponseBody

@@ -24,7 +24,7 @@
 	<br>
 	<c:forEach var="payment" items="${payPayment}" varStatus="status">
 		<div>${payment}</div>
-	</c:forEach>
+	</c:forEach><!--  -->
 	
 	<c:forEach var="payment" items="${total}" varStatus="status">
 		<div>${payment.cinemaVO.cinema_num}</div>

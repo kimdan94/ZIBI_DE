@@ -11,7 +11,7 @@
 	<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 	<input type="submit" value="검색">
 	<input type="button" value="목록" onclick="location.href='performanceList'">
-</form> --%>
+</form> --%> 
 
 	<!-- -----------------------------부트스트랩------------------------------- -->
 	<div class="container-fluid event py-6">

@@ -12,7 +12,7 @@
 				<li>
 					<form:label path="cinema_location1">장소1</form:label>
 					<form:input path="cinema_location1"/>
-					<form:errors path="cinema_location1" cssClass="error-color"/>
+					<form:errors path="cinema_location1" cssClass="error-color"/> 
 				</li>
 				<li>
 					<form:label path="cinema_location2">장소2</form:label>

@@ -22,7 +22,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 	private PerformanceMapper performanceMapper;
 
 	@Override
-	public void insertPerformance(PerformanceVO performance) {
+	public void insertPerformance(PerformanceVO performance) { 
 		performanceMapper.insertPerformance(performance);
 	}
 

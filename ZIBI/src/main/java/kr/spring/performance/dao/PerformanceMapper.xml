@@ -39,7 +39,7 @@
 		   performance_age,
 		   performance_category)
 		VALUES (
-		   performance_seq.nextval,
+		   performance_seq.nextval, 
 		   #{performance_title},
 		   #{performance_poster,jdbcType=VARCHAR},
 		   #{performance_content},

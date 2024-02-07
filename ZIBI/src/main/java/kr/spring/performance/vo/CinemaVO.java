@@ -7,7 +7,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class CinemaVO {
+public class CinemaVO { 
 	private int cinema_num;
 	private String cinema_location1;
 	private String cinema_location2;

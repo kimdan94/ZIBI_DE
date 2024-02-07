@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
-        <!-- 결제창 Start -->
+        <!-- 결제창 start -->
         <div class="container-fluid blog py-6">
             <div class="container">
                 <div class="text-center wow" data-wow-delay="0.1s">

@@ -8,7 +8,7 @@
 				<input type="button" class="btn mem-btn-green w-100" value="예매 내역" onclick="" id="">
 			</div>
 		</div>
-		<br><br>
+		<br><br> 
 		<a href='history'>결제내역</a>
 	</div>
 	

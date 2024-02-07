@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class ChoiceVO {
+public class ChoiceVO { 
 	private int choice_num;
 	private int choice_row;
 	private int choice_col;

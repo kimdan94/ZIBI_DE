@@ -31,7 +31,7 @@ public interface PerformanceMapper {
 	
 	// 상영관 + 날짜 + 영화로 예매할 수 있는 정보
 	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map);
-	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map);
+	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map); // 
 	public List<TicketingVO> selectWithTicketing(Map<String, Object> map);
 	
 	

@@ -47,7 +47,7 @@ public class PerformanceController {
 	private MemberService memberService;
 	
 	/*=================================
-	 * 기본 레이아웃 (타일즈 설정을 위한 페이지)
+	 * 기본 레이아웃 (타일즈 설정을 위한 페이지) 
 	 *=================================*/
 	@RequestMapping("/performance/layout")
 	public ModelAndView main() {

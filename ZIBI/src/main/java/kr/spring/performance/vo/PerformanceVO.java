@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PerformanceVO {
+public class PerformanceVO { 
 	private int performance_num;
 	private String performance_title;
 	private String performance_poster; // 포스터명

@@ -64,7 +64,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/performance/list">🎬 영화 감상</a>
 						</h5>
-						<p class="mb-1">지비러를 위한 영화를<br>특별한 가격으로 감상하세요</p>
+						<p class="mb-1">지비러를 위한 영화를<br>특가로 감상하세요</p>
 					</div>
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/checklist/list">🏠 집 체크리스트</a>
 						</h5>
-						<p class="mb-1">집을 이사할 때 ZIBI의<br>체크리스트를 활용해보세요</p>
+						<p class="mb-1">집을 이사할 때 ZIBI의<br>리스트를 활용해보세요</p>
 					</div>
 				</div>
 			</div>

@@ -6,6 +6,7 @@ $(function(){
 	
 	selectLocation(loc1);
 	
+	var title;
 	// table row 선택 함수
 	function selectLocation(location){
 		// 기본 영화 선택 리스트 지우기
@@ -24,17 +25,32 @@ $(function(){
 				var str = '';
 				for (var j=0; j<tdsNum; j++) {
 					var row_value = this.cells[j].innerHTML;
-					this.cells[j].style.backgroundColor="red"
+					
+					//색 추가------------------
+					if(location == loc1){
+						$('.searchCinema1').css("background-color","");
+					} else if(location == loc2){
+						$('.searchCinema2').css("background-color","");
+					}
+					//$('.searchCinema').css("background-color","");
+					//this.cells[j].style.backgroundColor="red"
+					$(this.cells[j]).css("background-color","pink");
 					console.log(this.cells[j]);
 					
+					
+					//-------------------------
 					str += row_value + '';
 				};
 				
 				console.log(str); // 지역 출력
 				if(location == loc1){
+					title = row_value;
+					$('#selectCinemaTitle').text(title);
 					console.log('지역1');
 					location2(str); // 지역2의 테이블이 나오게
 				} else if(location == loc2){
+					var title2 = title + ' > ' + row_value;
+					$('#selectCinemaTitle').text(title2);
 					console.log('지역2');
 					console.log(str);
 					$('#cinema_hidden').attr('value',str); // form의 hidden 값 넣어주기
@@ -62,7 +78,7 @@ $(function(){
 					let output = '';
 					for(var i=0; i<param.listLoc2.length; i++){
 						console.log("값 : " + param.listLoc2[i].cinema_num);
-						output += '<tr id="'+param.listLoc2[i].cinema_num+'"><td>' + param.listLoc2[i].cinema_location2 + '</td></tr>';
+						output += '<tr class="searchCinema2"  id="'+param.listLoc2[i].cinema_num+'"><td class="searchCinema2">' + param.listLoc2[i].cinema_location2 + '</td></tr>';
 					}
 					$('#location2 tbody').append(output);
 					selectLocation(loc2);
@@ -124,6 +140,8 @@ $(function(){
 					$('newspan').empty();
 					
 					for(let i=0; i<param.resultCinema.length; i++){
+						
+						
 						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
 						// output
 						let outputResult = '<div class="ent" id="'+param.resultTicketing[i].ticketing_num+'" style="display:inline-block;margin:20px;border:1px solid black;width:120px;height:120px;text-align:center;vertical-align:middle;padding:0.5em;">'; // vertical-align이 안되어서 padding:0.5em; 했더니 됨
@@ -134,6 +152,7 @@ $(function(){
 						outputResult += '</div>';
 						// output 추가
 						$('#resultSelect').append(outputResult);
+						
 						console.log(param.resultCinema[i].cinema_theater);
 						console.log(param.resultTicketing[i].ticketing_start_time);
 						
@@ -176,7 +195,10 @@ $(function(){
 	$(document).on('click','.ent',function(){ // script로 만든 태그는 document로 접근해야 함!!!!!
 		var ent_id = $(this).attr("id");
 		$('#ent_hidden').attr('value',ent_id);
+		$('.ent').css("background-color","");
+		$(this).css("background-color","pink");
 	});
+	
 	
 	
 });

@@ -28,7 +28,7 @@
                                         <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
-                                <div class="h5 lh-base my-auto h-100 p-3">
+                                <div class="h5 lh-base my-auto h-100 p-3" id="selectCinemaTitle">
 	                                영화관 선택
                                 </div>
                             </div>
@@ -45,8 +45,8 @@
                             	</thead>
                             	<tbody>
 	                            	<c:forEach var="cinema" items="${cinemaList}">
-	                            	<tr>
-										<td style="border:1px solid black;">${cinema.cinema_location1}</td>
+	                            	<tr class="searchCinema1">
+										<td class="searchCinema1" style="border:1px solid black;">${cinema.cinema_location1}</td>
 									</tr>
 									</c:forEach>
 									
@@ -83,7 +83,7 @@
                                         <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
-                                <div class="h5 lh-base my-auto h-100 p-3">
+                                <div class="h5 lh-base my-auto h-100 p-3" id="selectPerformanceTitle">
 	                                영화
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                                         <p class="fw-bold mb-0" style="color:white;">Step</p>
                                     </div>
                                 </div>
-                                <div class="h5 lh-base my-auto h-100 p-3">
+                                <div class="h5 lh-base my-auto h-100 p-3" id="resultTitle">
 	                                상영관 + 날짜 + 시간 선택
                                 </div>
                             </div>

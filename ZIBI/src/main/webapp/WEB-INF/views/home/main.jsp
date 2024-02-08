@@ -63,7 +63,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/performance/list">🎬 영화 감상</a>
 						</h5>
-						<p class="mb-1">지비러를 위한 영화를<br>특가로 감상하세요</p>
+						<p class="mb-1">지비러를 위한 영화를<br>특가로 감상하세요!</p>
 					</div>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/checklist/list">🏠 집 체크리스트</a>
 						</h5>
-						<p class="mb-1">집을 이사할 때 ZIBI의<br>리스트를 활용해보세요</p>
+						<p class="mb-1">집을 이사할 때 ZIBI의<br>리스트를 활용해보세요!</p>
 					</div>
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/secondhand/list">🤝 중고거래</a>
 						</h5>
-						<p class="mb-1">더이상 사용하지 않는<br>물품을 거래하세요</p>
+						<p class="mb-1">더이상 사용하지 않는<br>물품을 거래하세요!</p>
 					</div>
 				</div>
 			</div>
@@ -93,7 +93,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/helper/list">🙋 재능 기부</a>
 						</h5>
-						<p class="mb-1">나의 사소한 재능을<br>기부하세요</p>
+						<p class="mb-1">나의 사소한 재능을<br>기부하세요!</p>
 					</div>
 				</div>
 			</div>
@@ -103,7 +103,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/policy/main">ℹ️ 1인 가구 정보</a>
 						</h5>
-						<p class="mb-1">1인 가구 정보를<br>열람하세요</p>
+						<p class="mb-1">1인 가구 정보를<br>열람하세요!</p>
 					</div>
 				</div>
 			</div>
@@ -113,7 +113,7 @@
 						<h5 class="mb-3">
 							<a href="${pageContext.request.contextPath}/community/list">✍️ 커뮤니티</a>
 						</h5>
-						<p class="mb-1">지비러들끼리 간편하게<br>소통하세요</p>
+						<p class="mb-1">지비러들끼리 간편하게<br>소통하세요!</p>
 					</div>
 				</div>
 			</div>
@@ -197,7 +197,7 @@
 			<h5>최신글을 구경하세요</h5>
 			<div class="col-6">
 				<h6>🤝 중고 거래</h6>
-				<div class="container-fluid team py-6">
+				<div class="container-fluid team py-6" >
 					<div class="row g-1">
 						<c:forEach var="content" items="${list_second}">
 							<div class="col-lg-4 col-md-2">
@@ -210,20 +210,12 @@
 											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
 										</c:if>
 									</div>
-									<div class="team-content text-center py-3 rounded-bottom text-center">
+									<div class="team-content text-center py-1 rounded-bottom text-center">
 										<h6 class="text-primary">
 											<a href="${pageContext.request.contextPath}/secondhand/detail?sc_num=${content.num}" class="my-auto">
 												${content.title}
 											</a>
 										</h6>
-										<p>
-											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
-												${content.mem_nickname}
-											</a>
-										</p>
-										<p class="mb-0">
-											${content.reg_date}
-										</p>
 									</div>
 								</div>
 							</div>
@@ -246,20 +238,12 @@
 											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
 										</c:if>
 									</div>
-									<div class="team-content text-center py-3 rounded-bottom text-center">
+									<div class="team-content text-center py-1 rounded-bottom text-center">
 										<h6 class="text-primary">
 											<a href="${pageContext.request.contextPath}/helper/detail?helper_num=${content.num}" class="my-auto text-center">
 												${content.title}
 											</a>
 										</h6>
-										<p>
-											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
-												${content.mem_nickname}
-											</a>
-										</p>
-										<p class="mb-0">
-											${content.reg_date}
-										</p>
 									</div>
 								</div>
 							</div>
@@ -284,18 +268,12 @@
 											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
 										</c:if>
 									</div>
-									<div class="team-content text-center py-3 rounded-bottom text-center">
+									<div class="team-content text-center py-1 rounded-bottom text-center">
 										<h6 class="text-primary">
 											<a href="${pageContext.request.contextPath}/performance/detail?performance_num=${content.num}" class="my-auto text-center">
 												${content.title}
 											</a>
 										</h6>
-										<p>
-											개봉일
-										</p>
-										<p class="mb-0">
-											${content.reg_date}
-										</p>
 									</div>
 								</div>
 							</div>
@@ -318,20 +296,12 @@
 											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
 										</c:if>
 									</div>
-									<div class="team-content text-center py-3 rounded-bottom text-center">
+									<div class="team-content text-center py-1 rounded-bottom text-center">
 										<h6 class="text-primary">
 											<a href="${pageContext.request.contextPath}/book/detail?book_num=${content.num}" class="my-auto text-center">
 												${content.title}
 											</a>
 										</h6>
-										<p>
-											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
-												${content.mem_nickname}
-											</a>
-										</p>
-										<p class="mb-0">
-											${content.reg_date}
-										</p>
 									</div>
 								</div>
 							</div>
@@ -356,20 +326,12 @@
 											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
 										</c:if>
 									</div>
-									<div class="team-content text-center py-3 rounded-bottom text-center">
+									<div class="team-content text-center py-1 rounded-bottom text-center">
 										<h6 class="text-primary">
 											<a href="${pageContext.request.contextPath}/community/detail?community_num=${content.num}" class="my-auto text-center">
 												${content.title}
 											</a>
 										</h6>
-										<p>
-											<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${content.mem_num}" class="my-auto">
-												${content.mem_nickname}
-											</a>
-										</p>
-										<p class="mb-0">
-											${content.reg_date}
-										</p>
 									</div>
 								</div>
 							</div>

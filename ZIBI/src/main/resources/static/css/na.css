@@ -108,7 +108,7 @@
 }
 .cmovie-photo{
 	position: absolute;
-	left: 35%;
+	left: 30%;
 	transform: translateX(-60%);
 	transform: rotate( -10deg );
 }

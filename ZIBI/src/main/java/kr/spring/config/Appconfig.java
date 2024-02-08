@@ -41,7 +41,11 @@ public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 		registry.addInterceptor(adminCheck)
 			.addPathPatterns("/stats/getData")
 			.addPathPatterns("/admin/policy")
-			.addPathPatterns("/admin/policyModify");
+			.addPathPatterns("/admin/policyModify")
+			.addPathPatterns("/admin/performanceMain")
+			.addPathPatterns("/admin/write")
+			.addPathPatterns("/admin/writeCinema")
+			.addPathPatterns("/admin/writePerformanceDate");
 		
 		//로그인 체크 인터셉터
 		registry.addInterceptor(loginCheck)
@@ -55,6 +59,10 @@ public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 			.addPathPatterns("/member/passwordUpdate")
 			.addPathPatterns("/admin/policy")
 			.addPathPatterns("/admin/policyModify")
+			.addPathPatterns("/admin/performanceMain")
+			.addPathPatterns("/admin/write")
+			.addPathPatterns("/admin/writeCinema")
+			.addPathPatterns("/admin/writePerformanceDate")
 			.addPathPatterns("/book/write")
 			.addPathPatterns("/secondhand/write")
 			.addPathPatterns("/secondhand/update")
@@ -64,6 +72,9 @@ public class Appconfig implements WebMvcConfigurer, WebSocketConfigurer {
 			.addPathPatterns("/secondchat/chatListForBuyer")
 			.addPathPatterns("/book/update")
 			.addPathPatterns("/performance/updateTicketing")
+			.addPathPatterns("/performance/submitSeat")
+			.addPathPatterns("/performance/choiceSeat")
+			.addPathPatterns("/performance/history")
 			.addPathPatterns("/book/cancel")
 			.addPathPatterns("/book/review")
 			.addPathPatterns("/helper/write")

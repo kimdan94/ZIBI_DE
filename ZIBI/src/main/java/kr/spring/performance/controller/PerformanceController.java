@@ -498,35 +498,41 @@ public class PerformanceController {
 	/*=================================`
 	 * 결제
 	 *=================================*/
-	@PostMapping("/performance/choiceSeat")
-	public ModelAndView choiceSeat(@RequestParam String choice_seat,
-			                         @RequestParam int choice_adult,
-			                         @RequestParam int choice_teenage,
-			                         @RequestParam int choice_treatment,
-			                         @RequestParam int ticketing_num,
-			                         @RequestParam int cinema_num,
+	@RequestMapping("/performance/choiceSeat")
+	public ModelAndView choiceSeat(@RequestParam String uid,
+//            						 @RequestParam String choice_seat,
+//			                         @RequestParam int choice_adult,
+//			                         @RequestParam int choice_teenage,
+//			                         @RequestParam int choice_treatment,
+//			                         @RequestParam int ticketing_num,
+//			                         @RequestParam int cinema_num,
 			                         HttpServletRequest request, HttpSession session) {
 		log.debug("<<결제끝>>");
 
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 		ModelAndView mav = new ModelAndView();
+		log.debug("<<uid>> "  + uid);
 
-		log.debug("<<ticketing_num>> "  + ticketing_num);
-		log.debug("<<cinema_num>> "  + cinema_num);
-		log.debug("<<choice_seat>> "  + choice_seat);
+		Integer user = memberVO.getMem_num();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
+		map.put("mem_num", user);
+		map.put("payment_uid", uid);
+		List<TotalVO> total = performanceService.selectPayTotal(map);
+		List<TotalVO> all = performanceService.selectPayAll(map);
 		
-		log.debug("<<choice_adult>> "  + choice_adult);
-		log.debug("<<choice_teenage>> "  + choice_teenage);
-		log.debug("<<choice_treatment>> "  + choice_treatment);
-		log.debug("<<ticketing_num>> "  + ticketing_num);
-		
-		
-		
-		
-		
-		mav.setViewName("performanceList"); // tiles 설정 name과 동일해야 함
 
+//		log.debug("<<ticketing_num>> "  + ticketing_num);
+//		log.debug("<<cinema_num>> "  + cinema_num);
+//		log.debug("<<choice_seat>> "  + choice_seat);
+//		log.debug("<<choice_adult>> "  + choice_adult);
+//		log.debug("<<choice_teenage>> "  + choice_teenage);
+//		log.debug("<<choice_treatment>> "  + choice_treatment);
+//		log.debug("<<ticketing_num>> "  + ticketing_num);
+		
+		mav.setViewName("performanceShowTicket"); // tiles 설정 name과 동일해야 함
+		mav.addObject("total", total);
+		mav.addObject("all", all);
 		return mav; 
 	}
 	
@@ -563,24 +569,26 @@ public class PerformanceController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("mem_num", user);
-		List<CinemaVO> payCinema = performanceService.selectPayCinema(map);
-		List<PerformanceVO> payPerformance = performanceService.selectPayPerformance(map);
-		List<TicketingVO> payTicketing = performanceService.selectPayTicketing(map);
-		List<ChoiceVO> payChoice = performanceService.selectPayChoice(map);
-		List<PaymentVO> payPayment = performanceService.selectPayPayment(map);
+//		List<CinemaVO> payCinema = performanceService.selectPayCinema(map);
+//		List<PerformanceVO> payPerformance = performanceService.selectPayPerformance(map);
+//		List<TicketingVO> payTicketing = performanceService.selectPayTicketing(map);
+//		List<ChoiceVO> payChoice = performanceService.selectPayChoice(map);
+//		List<PaymentVO> payPayment = performanceService.selectPayPayment(map);
 
 		List<TotalVO> total = performanceService.selectPayTotal(map);
+		List<TotalVO> all = performanceService.selectPayAll(map);
 		log.debug("<><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 		log.debug("" + total);
 		log.debug("<><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 		
 		mav.setViewName("performanceHistory"); // tiles 설정 name과 동일해야 함
-		mav.addObject("payCinema", payCinema);
-		mav.addObject("payPerformance", payPerformance);
-		mav.addObject("payTicketing", payTicketing);
-		mav.addObject("payChoice", payChoice);
-		mav.addObject("payPayment", payPayment);
+//		mav.addObject("payCinema", payCinema);
+//		mav.addObject("payPerformance", payPerformance);
+//		mav.addObject("payTicketing", payTicketing);
+//		mav.addObject("payChoice", payChoice);
+//		mav.addObject("payPayment", payPayment);
 		mav.addObject("total", total);
+		mav.addObject("all", all);
 		
 		return mav; 
 		

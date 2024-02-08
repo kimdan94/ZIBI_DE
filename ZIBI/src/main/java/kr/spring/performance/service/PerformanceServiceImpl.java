@@ -179,6 +179,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.selectPayTotal(map);
 	}
 
+	@Override
+	public List<TotalVO> selectPayAll(Map<String, Object> map) {
+		return performanceMapper.selectPayAll(map);
+	}
+
 	
 
 

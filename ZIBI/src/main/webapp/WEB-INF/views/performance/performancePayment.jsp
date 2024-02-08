@@ -104,9 +104,9 @@
 
 
 
-
 <!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
-<form id="choiceValue" action="choiceSeat" method="post">
+<form id="choiceValue" action="choiceSeat" method="get">
+<%-- 
 	<!-- ticketing_num -->
 	<input type="hidden" id="ticketing_num" name="ticketing_num" value="${payTicketing.ticketing_num}"/>
 	<!-- cinema_num -->
@@ -120,10 +120,16 @@
 	<input type="hidden" id="choice_teenage" name="choice_teenage" value="${teenage_money}"/>	
 	<!-- 우대 명 수 -->
 	<input type="hidden" id="choice_treatment" name="choice_treatment" value="${treatement_money}"/>
+ --%>
+
 	
+	<input type="hidden" id="uid" name="uid" value=""/>
+
 	<!-- <input type="submit" value="결제하기"> -->
 </form>
 <!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
+
+<div id="payment-data" data-ticketing-num="${payTicketing.ticketing_num}" data-cinema-num="${payCinema.cinema_num}" data-choice-seat="${seatList}" data-choice-adult="${adult_money}" data-choice-teenage="${teenage_money}" data-choice-treatment="${treatement_money}"></div>
 
 <!-- 결제하기 버튼 생성 -->
 <script type="text/javascript">
@@ -136,6 +142,10 @@ IMP.init("imp22154723"); // 가맹점 식별코드
 
 function pay(){
 	//ifError();
+	
+	console.log($("#payment-data").data("ticketing-num"));
+	console.log($("#payment-data").data("cinema-num"));
+	
 	var listVar = $('input[name=options]:checked').val();
 	console.log(listVar);
 	if(listVar == 'kakaopay') {
@@ -161,22 +171,33 @@ function kakaoPay() {
 	    if ( rsp.success ) {
 	    	var total_price = document.getElementById('total_price');
 	    	console.log('가격 : ' + total_price);
+	    	console.log('uid : ' + rsp.merchant_uid);
+	    	$('#uid').attr('value', rsp.merchant_uid);
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	    	$.ajax({
 	    		url: "/performance/initPayment", //cross-domain error가 발생하지 않도록 주의해주세요
 	    		type: 'POST',
 	    		data: {
 	    			// uid, type, price, choice_num
+	    			
+
 		    		imp_uid : rsp.imp_uid,
 		    		merchant_uid : rsp.merchant_uid,
 		    		pay_method : 'card',
 		    		total_price : $('#total_price').text(),
-		    		ticketing_num : $('#ticketing_num').val(),
+		    		/* ticketing_num : $('#ticketing_num').val(),
 		    		cinema_num : $('#cinema_num').val(),
 		    		choice_seat : $('#choice_seat').val(),
 		    		choice_adult : $('#choice_adult').val(),
 		    		choice_teenage : $('#choice_teenage').val(),
-		    		choice_treatment : $('#choice_treatment').val()
+		    		choice_treatment : $('#choice_treatment').val() */
+		    		
+		    		ticketing_num : $('#payment-data').data("ticketing-num"),
+		    		cinema_num : $('#payment-data').data("cinema-num"),
+		    		choice_seat : $('#payment-data').data("choice-seat"),
+		    		choice_adult : $('#payment-data').data("choice-adult"),
+		    		choice_teenage : $('#payment-data').data("choice-teenage"),
+		    		choice_treatment : $('#payment-data').data("choice-treatment")
 		    		
 		    		//기타 필요한 데이터가 있으면 추가 전달
 	    		},
@@ -192,8 +213,8 @@ function kakaoPay() {
 		    			
 		    			alert(msg);
 
-		    			//submit();
-		    			location.href='/performance/showTicket';
+		    			submit();
+		    			//location.href='/performance/showTicket';
 					}
 	    			
 				},

@@ -283,8 +283,32 @@
 	
 	<!-- [결제내역] TotalVO -->
 	<select id="selectPayTotal" parameterType="map" resultMap="totalMap">
+		SELECT DISTINCT
+			c.cinema_num,
+			c.cinema_location1,
+			c.cinema_location2,
+			c.cinema_theater,
+			p.performance_num,
+			p.performance_title,
+			p.performance_poster,
+			p.performance_age,
+			t.ticketing_num,
+			t.ticketing_date,
+			t.ticketing_start_time,
+			pc.mem_num,
+			pp.payment_uid,
+			pp.payment_type,
+			pp.payment_price,
+			pp.payment_state,
+			pp.payment_date
+		<include refid="payment_history"></include>
+		<include refid="withOrderUid"></include>
+	</select>
+	
+	<select id="selectPayAll" parameterType="map" resultMap="totalMap">
 		SELECT *
 		<include refid="payment_history"></include>
+		<include refid="withOrderUid"></include>
 	</select>
 	
 	<!-- [include] 결제 내역 -->
@@ -296,6 +320,14 @@
 		JOIN cinema c ON t.cinema_num = c.cinema_num
 		WHERE pc.mem_num=#{mem_num}
 	</sql>
+	
+	<!-- [재사용] 결제내역 주문번호로 검색 -->
+	<sql id="withOrderUid">
+		<if test="payment_uid != null and payment_uid != ''">
+			AND pp.payment_uid=#{payment_uid}
+		</if>
+	</sql>
+	
 	
 	
 	

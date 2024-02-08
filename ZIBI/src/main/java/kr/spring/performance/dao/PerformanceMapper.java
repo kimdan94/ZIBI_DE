@@ -59,6 +59,7 @@ public interface PerformanceMapper {
 	public List<ChoiceVO> selectPayChoice(Map<String, Object> map);
 	public List<PaymentVO> selectPayPayment(Map<String, Object> map);
 	public List<TotalVO> selectPayTotal(Map<String, Object> map);
+	public List<TotalVO> selectPayAll(Map<String, Object> map);
 	
 	
 	//좌석 출력

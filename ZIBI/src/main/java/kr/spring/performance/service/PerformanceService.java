@@ -49,6 +49,7 @@ public interface PerformanceService {
 	public List<ChoiceVO> selectPayChoice(Map<String, Object> map);
 	public List<PaymentVO> selectPayPayment(Map<String, Object> map);
 	public List<TotalVO> selectPayTotal(Map<String, Object> map);
+	public List<TotalVO> selectPayAll(Map<String, Object> map);
 	
 	
 	

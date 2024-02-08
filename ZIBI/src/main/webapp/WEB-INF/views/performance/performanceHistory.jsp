@@ -25,7 +25,8 @@
 					${total.cinemaVO.cinema_location1} ${total.cinemaVO.cinema_location2} ${total.cinemaVO.cinema_theater}
 				</div>
 				<div>
-					${total.performanceVO.performance_title} ${total.performanceVO.performance_age}
+				<a href="${pageContext.request.contextPath}/performance/choiceSeat?uid=${total.paymentVO.payment_uid}">${total.performanceVO.performance_title} ${total.performanceVO.performance_age}</a>
+					
 				</div>
 			</td>
 			<td>${total.ticketingVO.ticketing_date} ${total.ticketingVO.ticketing_start_time}</td>

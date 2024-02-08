@@ -3,6 +3,8 @@ package kr.spring.second.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondReviewVO;
@@ -38,6 +40,13 @@ public interface SecondService {
 	//구매자 선택시 sc_num 관련 행이 없다면 판매완료 행 insert  sc_order_status를 3으로 insert
 	public void insertOrderSellFin(SecondOrderVO secondOrderVO);
 	
+	
+	//숨김 게시글 sc_show=1 숨김처리
+	public void updateScHide(int sc_num);
+	//숨김 게시글 sc_show=2 공개처리
+	public void updateScShow(int sc_num);//숨김 -> 공개로 변경
+	
+	
 	//찜
 	public SecondFavVO selectFav(SecondFavVO fav);//한건의 데이터 읽어옴
 	public int selectFavCount(int sc_num);
@@ -62,6 +71,9 @@ public interface SecondService {
 		//판매내역 - 거래완료
 	public List<SecondVO> selectSellFinList(Map<String,Object> map);
 	public int selectSellFinCount(Map<String,Object> map);
+		//판매내역 - 숨김
+	public List<SecondVO> selectHideList(Map<String,Object> map);
+	public int selectHideCount(Map<String,Object> map);
 	
 	//판매내역 - 끌어올리기
 	public void updateSysdate(int sc_num);

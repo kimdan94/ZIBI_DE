@@ -38,7 +38,7 @@ $(function() {
                     output += '<input type="button" value="수정" onclick="location.href=\'update?sc_num=' + item.sc_num + '\'" ><br>';
                     //output += '<input type="button" value="삭제"><br>';
                     output += '<input type="button" value="삭제" onclick="location.href=\'delete?sc_num=' + item.sc_num + '\'" ><br>';
-                    output += '<input type="button" value="숨기기">';
+                    output += '<input type="button" value="숨기기" class="sc_hidein" data-num="' + item.sc_num + '">';
                     output += '</td>';
                     output += '</tr>';
 		
@@ -52,7 +52,7 @@ $(function() {
         });//end of ajax
     }//end of function
     
-    //끌어올리기 - 등록일 sysdate로 update   (전체, 판매중 부분만)
+    //끌어올리기 - 등록일 sysdate로 update   (판매중인 게시글만 끌어올리기 가능)
     $(document).on('click', '.sc_up', function(){
     	let sc_num = $(this).attr('data-num');
     	 $.ajax({
@@ -62,6 +62,23 @@ $(function() {
  	        dataType: 'json',
  	        success: function(param) {
  	        	alert('최상단 UP하기 사용!')
+ 	        },
+ 	        error: function() {
+ 	            alert('네트워크 오류 발생');
+ 	        }
+ 	    });
+    });
+    
+  	//숨기기 -  (전체, 판매중 부분만)
+    $(document).on('click', '.sc_hidein', function(){
+    	let sc_num = $(this).attr('data-num');
+    	 $.ajax({
+ 	        url: 'updateScHide',
+ 	        type: 'post',
+ 	        data: {sc_num: sc_num},
+ 	        dataType: 'json',
+ 	        success: function(param) {
+ 	        	alert('게시글 숨김 처리되었습니다.')
  	        },
  	        error: function() {
  	            alert('네트워크 오류 발생');
@@ -270,23 +287,63 @@ $(function() {
     });
     
   	//숨김
-  	/*
     $('#sc_sellFin').click(function(){
     	$.ajax({
-            url: 'sc_sellFin',
+            url: 'sc_hide',
             type: 'post',
             data: { mem_num: ${memberVO.mem_num} },
             dataType: 'json',
             success: function(param) {
             	// 해당 탭의 tbody에 동적으로 생성한 내용 추가
-                $('#tab-10 tbody').empty();
+                $('#tab-11 tbody').empty();
+            	
+                $(param.sellFinList).each(function(index, item) {
+                    let output = '<tr>';
+                    output += '<td><a href="detail?sc_num='+item.sc_num +'"><img width="60" src="${pageContext.request.contextPath}/upload/' + item.sc_filename + '"></a></td>';
+                    output += '<td>';
+                    output += '<select class="sc_sell_status" name="sc_sell_status">';
+                    output += '<option value="0" ' + (item.sc_sellstatus == 0 ? 'selected' : '') + '>판매중</option>';
+                    output += '<option value="1" ' + (item.sc_sellstatus == 1 ? 'selected' : '') + '>예약대기</option>';
+                    output += '<option value="2" ' + (item.sc_sellstatus == 2 ? 'selected' : '') + '>예약중</option>';
+                    output += '<option value="3" ' + (item.sc_sellstatus == 3 ? 'selected' : '') + '>판매완료</option>';
+                    output += '</select>';
+                    output += '</td>';
+                    output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
+                    output += '<td>' + item.sc_price + '</td>';
+                    output += '<td>' + item.sc_address + '</td>';
+                    output += '<td>' + item.sc_modify_date + '</td>';
+                    output += '<td>';
+                    output += '<input type="button" value="숨기기 해제" class="sc_hideout" data-num="'+item.sc_num+'">';
+                    output += '</td>';
+                    output += '</tr>';
+		
+                    // 해당 탭의 tbody에 동적으로 생성한 내용 추가
+                    $('#tab-11 tbody').append(output);
+                });
             },
             error: function() {
                 alert('네트워크 오류 발생');
             }
     	});
     });
-    */
+    
+  	//숨기기 해제 클릭 시 - sc_num에 해당하는 게시글 sc_show=2로 update
+    $(document).on('click', '.sc_hideout', function(){
+    	let sc_num = $(this).attr('data-num');
+    	 $.ajax({
+ 	        url: 'updateScShow',
+ 	        type: 'post',
+ 	        data: {sc_num: sc_num},
+ 	        dataType: 'json',
+ 	        success: function(param) {
+ 	        	alert('게시글이 공개되었습니다.')
+ 	        },
+ 	        error: function() {
+ 	            alert('네트워크 오류 발생');
+ 	        }
+ 	    });
+    });
+  	
   	
     //페이지 들어올 때 자동으로 ajax 실행된다("전체"가 먼저 실행되서 목록에 보여진다)
     SecondsellAll();
@@ -505,7 +562,6 @@ $(function() {
 										    <th scope="col">가격</th>
 										    <th scope="col">동네</th>
 										    <th scope="col">최근수정일</th>
-										    <th scope="col">채팅하기</th>
 										    <th scope="col">기능</th>
 										  </tr>
 										</thead>

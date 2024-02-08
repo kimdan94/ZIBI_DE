@@ -110,6 +110,9 @@ $(function(){
             success: function(param) {
             	//모달창 닫기
         		$('#secondOrderModal').hide();
+        		$('#status_png').empty();
+            	output = '<img src="${pageContext.request.contextPath}/images/jiwon/sc_waitReserve.png" class="position-absolute top-50 start-50 translate-middle" style="width:300px;height:300px; z-index: 1;">';  
+            	$('#status_png').append(output);
             },
             error: function() {
                 alert('네트워크 오류 발생');

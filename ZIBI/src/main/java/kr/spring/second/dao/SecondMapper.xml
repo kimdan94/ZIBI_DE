@@ -73,6 +73,7 @@
 		FROM second
 		JOIN member USING(mem_num) 
 		<include refid="secondSearch"></include>
+		WHERE sc_show = 2
 		ORDER BY sc_reg_date DESC)a) 
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
@@ -227,6 +228,19 @@
 			 FROM second 
 			 JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=2 AND sc_sellstatus=3)a)
 	</select>
+	
+	<!-- sc_show가 1(숨김) 게시물 -->
+	<!-- 중고거래 마이페이지 - 판매내역 - 판매완료 글 개수-->  
+	<select id="selectHideCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*) FROM second JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=1
+	</select>
+	
+	<select id="selectHideList" parameterType="map" resultType="secondVO">
+		SELECT * FROM second JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=1
+	</select>
+	
+	
+	
 	
 	<!-- 마이페이지 - 구매내역 -->
 	<select id="selectBuyList" parameterType="map" resultMap="secondMap">

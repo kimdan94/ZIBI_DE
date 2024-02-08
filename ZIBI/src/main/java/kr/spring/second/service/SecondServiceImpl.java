@@ -101,7 +101,6 @@ public class SecondServiceImpl implements SecondService{
 	//구매자 선택시 sc_num 존재 여부 (select)
 	@Override
 	public SecondOrderVO selectOrderCheck(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return secondMapper.selectOrderCheck(map);
 	}
 	@Override
@@ -109,6 +108,17 @@ public class SecondServiceImpl implements SecondService{
 		secondMapper.insertOrderSellFin(secondOrderVO);
 		
 	}
+	//숨김 게시글 sc_show=1 숨김처리
+	@Override
+	public void updateScHide(int sc_num) {
+		secondMapper.updateScHide(sc_num);
+	}
+	//숨김 게시글 sc_show=2 공개처리
+	@Override
+	public void updateScShow(int sc_num) {
+		secondMapper.updateScShow(sc_num);
+	}
+	
 	
 	//=========   찜   ==================
 	
@@ -181,6 +191,15 @@ public class SecondServiceImpl implements SecondService{
 	public int selectSellFinCount(Map<String, Object> map) {
 		return secondMapper.selectSellFinCount(map);
 	}
+	//판매내역 - 숨김
+	@Override
+	public List<SecondVO> selectHideList(Map<String, Object> map) {
+		return secondMapper.selectHideList(map);
+	}
+	@Override
+	public int selectHideCount(Map<String, Object> map) {
+		return secondMapper.selectHideCount(map);
+	}
 	//판매내역 - 끌어올리기
 	@Override
 	public void updateSysdate(int sc_num) {
@@ -219,4 +238,7 @@ public class SecondServiceImpl implements SecondService{
 	public int selectReviewCount(int mem_num) {
 		return secondMapper.selectReviewCount(mem_num);
 	}
+	
+	
+	
 }

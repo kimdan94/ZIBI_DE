@@ -305,6 +305,44 @@ public class SecondAjaxController {
 		}
 		return mapJson;
 	}
+	
+	/*============================
+	 * 중고거래 판매내역 - 숨김처리 글 목록
+	 *============================*/
+	@RequestMapping("/secondhand/sc_hide")
+	@ResponseBody
+	public Map<String,Object> sc_hide(@RequestParam int mem_num, HttpSession session){
+		log.debug("<<중고거래 판매내역 - 숨김처리 mem_num>> : " + mem_num);
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else {
+			map.put("mem_num", mem_num); 
+			//숨김처리 sc_show=1(숨김)  전체 레코드 수 - 로그인 한 사람의 게시물만
+			int count = secondService.selectHideCount(map);
+			log.debug("<<판매내역 - 숨김 레코드 수 count>> : " + count);
+			List<SecondVO> sellFinList = null;
+			if(count > 0) {
+				sellFinList = secondService.selectHideList(map);
+				mapJson.put("result", "success");
+			}else {
+				sellFinList = Collections.emptyList();
+			}
+			mapJson.put("count", count);
+			mapJson.put("sellFinList", sellFinList);
+		}
+		return mapJson;
+	}
+	
+	
+	
+	
+	
 	/*================================
 	 * 중고거래 상태변경(detail) 모달창- 판매중
 	 *================================*/
@@ -418,6 +456,46 @@ public class SecondAjaxController {
 		}
 		return map;
 	}
+	
+	/*============================
+	 * 중고거래 판매내역 - 숨김 처리
+	 *============================*/
+	@RequestMapping("/secondhand/updateScHide")
+	@ResponseBody
+	public Map<String,Object> updateScHide(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<숨김 처리 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//sc_show 1로 숨김 처리
+			secondService.updateScHide(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
+	/*============================
+	 * 중고거래 판매내역 - 숨김 해제
+	 *============================*/
+	@RequestMapping("/secondhand/updateScShow")
+	@ResponseBody
+	public Map<String,Object> updateScShow(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<숨김 해제 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else{
+			//sc_show 2로 update -> 글 공개처리
+			secondService.updateScShow(sc_num);
+			map.put("result", "success");
+		}
+		return map;
+	}
+	
+	
+	
 }
 
 

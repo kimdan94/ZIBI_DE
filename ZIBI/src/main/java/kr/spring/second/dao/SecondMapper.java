@@ -42,6 +42,7 @@ public interface SecondMapper {
 	@Update("UPDATE second SET sc_sellstatus=3 WHERE sc_num=#{sc_num}")
 	public void updateSellFin(int sc_num);//거래완료로 변경
 	
+	
 	//거래
 	public void insertSecondOrder(SecondOrderVO secondOrderVO);
 	
@@ -59,6 +60,18 @@ public interface SecondMapper {
 	public SecondOrderVO selectOrderCheck(Map<String,Object> map);
 	//구매자 선택시 sc_num 관련 행이 없다면 판매완료 행 insert  sc_order_status를 3으로 insert
 	public void insertOrderSellFin(SecondOrderVO secondOrderVO);
+	
+	
+	
+	//숨김 게시글 sc_show=1 숨김처리
+	@Update("UPDATE second SET sc_show=1 WHERE sc_num=#{sc_num}")
+	public void updateScHide(int sc_num);
+	
+	//숨김 게시글 sc_show=2 공개처리
+	@Update("UPDATE second SET sc_show=2 WHERE sc_num=#{sc_num}")
+	public void updateScShow(int sc_num);//숨김 -> 공개로 변경
+	
+	
 	
 	
 	//찜
@@ -91,6 +104,10 @@ public interface SecondMapper {
 		//판매내역 - 거래완료
 	public List<SecondVO> selectSellFinList(Map<String,Object> map);
 	public int selectSellFinCount(Map<String,Object> map);
+		//판매내역 - 숨김
+	public List<SecondVO> selectHideList(Map<String,Object> map);
+	public int selectHideCount(Map<String,Object> map);
+	
 	
 	//판매내역 - 끌어올리기 (등록일을 최신으로)
 	@Update("UPDATE second SET sc_reg_date=SYSDATE WHERE sc_num=#{sc_num}")

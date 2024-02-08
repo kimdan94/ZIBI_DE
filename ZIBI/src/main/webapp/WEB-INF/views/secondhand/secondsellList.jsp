@@ -35,10 +35,10 @@ $(function() {
                     output += 'onclick="location.href=\'${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=' + item.sc_num + '\'"></td>';
                     output += '<td><input type="button" value="끌어올리기" class="sc_up" data-num="' + item.sc_num + '" ' + (item.sc_sellstatus !== 0 ? 'disabled' : '') + '></td>';
                     output += '<td>';
-                    output += '<input type="button" value="수정" onclick="location.href=\'update?sc_num=' + item.sc_num + '\'" ><br>';
+                    output += '<input type="button" value="수정" class="store-md" onclick="location.href=\'update?sc_num=' + item.sc_num + '\'"><br>';
                     //output += '<input type="button" value="삭제"><br>';
-                    output += '<input type="button" value="삭제" onclick="location.href=\'delete?sc_num=' + item.sc_num + '\'" ><br>';
-                    output += '<input type="button" value="숨기기" class="sc_hidein" data-num="' + item.sc_num + '">';
+                    output += '<input type="button" value="삭제" class="store-md" onclick="location.href=\'delete?sc_num=' + item.sc_num + '\'"><br>';
+                    output += '<input type="button" value="숨기기" class="sc_hidein" data-num="' + item.sc_num + '" >';
                     output += '</td>';
                     output += '</tr>';
 		
@@ -119,7 +119,7 @@ $(function() {
                     output += '<input type="button" value="수정"><br>';
                     output += '<input type="button" value="삭제"><br>';
                     //output += '<input type="button" value="삭제" onclick="location.href=\'delete?sc_num=' + item.sc_num + '\'" ><br>';
-                    output += '<input type="button" value="숨기기">';
+                    output += '<input type="button" value="숨기기" >';
                     output += '</td>';
                     output += '</tr>';
 		
@@ -161,10 +161,10 @@ $(function() {
                     output += '<td>' + item.sc_address + '</td>';
                     output += '<td>' + item.sc_order_reg_date + '</td>';
                     output += '<td>' + item.sc_buyer_nickname + '</td>';
-                    output += '<td><input type="button" value="채팅하기"></td>';
+                    output += '<td><input type="button" value="채팅하기" ></td>';
                     output += '<td>';
-                    output += '<input type="button" id="updateOrderReserve" value="예약확정" data-num="'+item.sc_num+'"><br>';
-                    output += '<input type="button" value="예약거절"><br>';
+                    output += '<input type="button" id="updateOrderReserve" value="예약 확정" data-num="'+item.sc_num+'"><br>';
+                    output += '<input type="button" value="예약 거절"><br>';
                     output += '</td>';
                     output += '</tr>';
 		
@@ -209,12 +209,10 @@ $(function() {
                     let output = '<tr>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'"><img width="60" src="${pageContext.request.contextPath}/upload/' + item.sc_filename + '"></a></td>';
                     output += '<td>';
-                    output += '<select name="sc_sell_status">';
-                    output += '<option value="0" ' + (item.sc_sellstatus == 0 ? 'selected' : '') + '>판매중</option>';
-                    output += '<option value="1" ' + (item.sc_sellstatus == 1 ? 'selected' : '') + '>예약대기</option>';
-                    output += '<option value="2" ' + (item.sc_sellstatus == 2 ? 'selected' : '') + '>예약중</option>';
-                    output += '<option value="3" ' + (item.sc_sellstatus == 3 ? 'selected' : '') + '>판매완료</option>';
-                    output += '</select>';
+                    output += '<c:if test="' + (item.sc_sellstatus == 0) + '">판매중</c:if>';
+                    output += '<c:if test="' + (item.sc_sellstatus == 1) + '">예약대기</c:if>';
+                    output += '<c:if test="' + (item.sc_sellstatus == 2) + '">예약중</c:if>';
+                    output += '<c:if test="' + (item.sc_sellstatus == 3) + '">판매완료</c:if>';
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
@@ -287,7 +285,7 @@ $(function() {
     });
     
   	//숨김
-    $('#sc_sellFin').click(function(){
+    $('#sc_hide').click(function(){
     	$.ajax({
             url: 'sc_hide',
             type: 'post',
@@ -313,7 +311,7 @@ $(function() {
                     output += '<td>' + item.sc_address + '</td>';
                     output += '<td>' + item.sc_modify_date + '</td>';
                     output += '<td>';
-                    output += '<input type="button" value="숨기기 해제" class="sc_hideout" data-num="'+item.sc_num+'">';
+                    output += '<input type="button" value="숨기기 해제" class="sc_hideout" data-num="'+item.sc_num+'" id="sc_hidein1">';
                     output += '</td>';
                     output += '</tr>';
 		

@@ -639,6 +639,8 @@ ul.search li:last-child {
 .menu .menu-item .border-bottom {
     border-bottom-style: dashed !important;
 }
+
+
 /*** 판매내역 끝 ***/
 
 /* secondReviewWrite.jsp 거래후기 작성 폼*/
@@ -655,6 +657,64 @@ ul.search li:last-child {
 	font-size:17px;
 	color:gray;
 }
+
+
+
+
+
+.scstore-btn,
+.scstore-btn:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+}
+
+.scstore-btn:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+}
+#sc_hidein1,
+#sc_hidein1:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+}
+#sc_hidein1:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+}
+/* 마이페이지 수정, 삭제 버튼 */
+.store-md,
+.store-md:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:50px;
+}
+.store-md:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:50px;
+}
+
+
+
+
+
 /* 별점 */
 .rate { 
 	display: inline-block;

@@ -27,7 +27,7 @@ import kr.spring.helper.vo.HelperReplyVO;
 import kr.spring.helper.vo.HelperVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.FileUtil;
-import kr.spring.util.PageUtil;
+import kr.spring.util.PageUtil_hp;
 import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -96,7 +96,7 @@ public class HelperController {
 		int count = helperService.selectRowCount(map);
 		log.debug("<count> : " + count);
 
-		PageUtil page = new PageUtil(keyfield, keyword, currentPage, count, 3, 10, "list", 
+		PageUtil_hp page = new PageUtil_hp(keyfield, keyword, currentPage, count, 3, 10, "list", 
 									"&order=" + order + "&helper_category=" + helper_category + "&helper_select=" + helper_select);
 
 		List<HelperVO> list = null;

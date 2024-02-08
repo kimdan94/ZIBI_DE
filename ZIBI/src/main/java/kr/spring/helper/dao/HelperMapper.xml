@@ -99,7 +99,8 @@
 			  			helper_select,
 			  			helper_filename,
 			  			helper_scrap,
-			  			helper_reply
+			  			helper_reply,
+			  			helper_solution
 			  		FROM helper
 			  		LEFT OUTER JOIN (SELECT COUNT(*) helper_scrap, helper_num FROM helper_scrap GROUP BY helper_num) USING(helper_num)
 			  		LEFT OUTER JOIN (SELECT COUNT(*) helper_reply, helper_num FROM helper_reply GROUP BY helper_num) USING(helper_num)

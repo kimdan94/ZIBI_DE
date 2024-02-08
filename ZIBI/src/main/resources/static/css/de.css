@@ -97,7 +97,6 @@
 	border-color: #D8D8D8;
 	border-radius: 20px;
 	padding:15px;
-	
 }
 .border-color2{
 	border-color: #D8D8D8;
@@ -256,8 +255,9 @@ form#mre_form{
 .margin-left{
 	margin-left:10px;
 }
+/*목록 검색*/
 .margin-keyword{
-	margin-left:150px;
+	margin-left:230px;
 }
 
 /*상세글 박스*/
@@ -374,3 +374,40 @@ select:hover {
 #output_solution, #output_scrap{
 	cursor:pointer;
 }
+
+/*목록 테이블*/
+table{
+	width:100%;
+	margin:7px 0;
+ 	border-collapse: separate;
+ 	border-top: 1px solid #D8D8D8;
+}
+th, td {
+    border-bottom: 1px solid #D8D8D8;
+    padding: 10px;
+}
+th:first-child, td:first-child {
+    border-left: none;
+}
+
+/*목록 폰트*/
+.font-color1{
+	color:#04B486;
+	font-size: 18px;
+	font-weight: bold;
+}
+.font-color2{
+	color:#848484;
+	font-size: 18px;
+}
+.font-bold{
+	font-weight: bold;
+}
+
+/*지도*/
+#map{
+	width: 500px;
+	height: 300px;
+}
+
+

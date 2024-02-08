@@ -68,7 +68,7 @@ $(function(){
 			alert('해결여부 표시 오류');
 		}
 		//문서 객체에 추가
-		$('#output_solution').attr('src',output);
+		$('.solution').attr('src',output);
 		$('#output_text').text(outputText);
 	}
 	

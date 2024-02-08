@@ -8,47 +8,46 @@
 	<ul class="nav nav-pills d-inline-flex justify-content-center mb-2">
 		<li class="nav-item p-2">
 		<a class="btn mem-btn-green radius border-width" 
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=1'"> <span class="text-dark" style="width: 150px;">헬프미</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=1'"> <span class="text-white" style="width: 150px;">헬프미</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a class="btn mem-btn-green radius border-width"
-			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=2'"> <span class="text-dark" style="width: 150px;">헬프유</span></a>
+			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=2'"> <span class="text-white" style="width: 150px;">헬프유</span></a>
 		</li>
 	</ul>
 </div>
 <div>
 <div class="container-fluid contact py-6">
 	<div class="d-flex justify-content-center">
-		<div class="rounded col-md-4 col-lg-6">
+		<div class="rounded col-md-4 col-lg-8">
 	<div class="text-center">
 	<ul class="nav nav-pills justify-content-center mb-3">
 		<li class="nav-item p-2">
 		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
-			href="#" onclick="location.href='list?helper_select=${param.helper_select}'"> <span class="text-dark" style="width: 70px;">전체</span></a>
+			href="#" onclick="location.href='list?helper_select=${param.helper_select}'"> <span style="width: 70px;">전체</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
-			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=1'"> <span class="text-dark" style="width: 70px;">벌레</span></a>
+			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=1'"> <span style="width: 70px;">벌레</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
-			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=2'"> <span class="text-dark" style="width: 70px;">조립</span></a>
+			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=2'"> <span style="width: 70px;">조립</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
-			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=3'"> <span class="text-dark" style="width: 70px;">수리</span></a>
+			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=3'"> <span style="width: 70px;">수리</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
-			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=4'"> <span class="text-dark" style="width: 70px;">소분</span></a>
+			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=4'"> <span style="width: 70px;">소분</span></a>
 		</li>
 		<li class="nav-item p-2">
 		<a id="hp_bord" class="d-flex py-2 mx-2 rounded-pill"
-			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=5'"> <span class="text-dark" style="width: 70px;">기타</span></a>
+			href="#" onclick="location.href='list?helper_select=${param.helper_select}&helper_category=5'"> <span style="width: 70px;">기타</span></a>
 		</li>
 	</ul>
-</div>
-	<form action="list" id="search_form" method="get">
+	<form action="list" id="search_form" method="get" class="align-center">
 			<div class="margin-keyword">
 				<select name="keyfield" id="keyfield" class="float-left border-color2">
 					<option value="1" <c:if test="${param.keyfield==1}">selected</c:if>>제목</option>
@@ -80,24 +79,37 @@
 			<option value="3" <c:if test="${param.order==3}">selected</c:if>>스크랩</option>
 		</select>
 	</div>
+</div>
 	<br><br>
 	<c:if test="${count == 0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
-	<hr size="8" width="100%" class="hr-line">
 	<c:if test="${count > 0}">
-	<c:forEach var="helper" items="${list}">
-			<div class="float-left margin-top2" style="font-size:20px;"> 
+	<table>
+		<tr class="align-center">
+			<th>게시판</th>
+			<th>카테고리</th>
+			<th>사진</th>
+			<th>내용</th>
+			<th>해결여부</th>
+			<th>조회수</th>
+			<th>스크랩</th>
+			<th>등록일</th>
+		</tr>
+	<c:forEach var="helper" items="${list}">	
+	<tr class="align-center">	
+			<td class="font-bold">
 			<c:if test="${helper.helper_select == 1}"><div>헬프미</div></c:if>
 			<c:if test="${helper.helper_select == 2}"><div>헬프유</div></c:if>
-			<hr size="3" noshade="noshade" width="100%">
-			<c:if test="${helper.helper_category ==  1}"><div>벌레</div></c:if>
-			<c:if test="${helper.helper_category ==  2}"><div>조립</div></c:if>
-			<c:if test="${helper.helper_category ==  3}"><div>수리</div></c:if>
-			<c:if test="${helper.helper_category ==  4}"><div>소분</div></c:if>
-			<c:if test="${helper.helper_category ==  5}"><div>기타</div></c:if>
-			</div>        
-			<div class="float-left1">
+			</td>
+			<td>
+			<c:if test="${helper.helper_category ==  1}"><div>🐛 벌레 🐛</div></c:if>
+			<c:if test="${helper.helper_category ==  2}"><div>⚙️ 조립 ⚙️</div></c:if>
+			<c:if test="${helper.helper_category ==  3}"><div>🛠️ 수리 🛠️</div></c:if>
+			<c:if test="${helper.helper_category ==  4}"><div>🛒 소분 🛒</div></c:if>
+			<c:if test="${helper.helper_category ==  5}"><div>🏃‍♀️ 기타 🏃‍♀️</div></c:if>
+			</td>
+			<td>
 			<c:if test="${empty helper.helper_filename}">
 			<img src="${pageContext.request.contextPath}/images/de/noimg.png"
 			style="width:200px; height:200px; padding:10px;">
@@ -106,20 +118,22 @@
 			<img src="${pageContext.request.contextPath}/upload/${helper.helper_filename}"
 			style="width:200px; height:200px; padding:10px;" class="radius">
 			</c:if>
-			</div>
-			<div class="float-left2 align-center">
-			<div class="align-center">
-			<c:if test="${helper.helper_solution == 0}">[ 해결중 ]</c:if>
-			<c:if test="${helper.helper_solution == 1}">[ 해결완료 ]</c:if>
-			</div>
-            <div class="align-center font-size1 margin-top2"><a href="detail?helper_num=${helper.helper_num}">${helper.helper_title}</a></div><br>
-			<div class="align-center">${helper.helper_address1}</div><br>
-			<div class="align-center">${helper.mem_nickname}</div><div class="align-center">
-			${helper.helper_reg_date}</div>
-			</div>
-			<br>
-			<hr size="3" noshade="noshade" width="100%"> 
-</c:forEach>
+			</td>
+			<td>
+			<a href="detail?helper_num=${helper.helper_num}"><span class="font-size1">${helper.helper_title}</span></a>
+			<br><br>
+			${helper.helper_address1}<br>
+			</td>
+			<td>
+			<div class="font-color1"><c:if test="${helper.helper_solution == 0}">해결중</c:if></div>
+			<div class="font-color2"><c:if test="${helper.helper_solution == 1}">해결완료</c:if></div>
+			</td>
+			<td>${helper.helper_hit}</td>
+			<td>${helper.helper_scrap}</td>
+			<td>${helper.helper_reg_date}</td>
+	</tr>	
+	</c:forEach>
+	</table>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
@@ -150,3 +164,4 @@ $(function(){
 });//end of function
 </script>
 <!-- 내용 끝 -->
+			

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link href="${pageContext.request.contextPath}/css/de.css" rel="stylesheet">
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.scrap.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.solution.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/helper.reply.js"></script>
@@ -19,7 +20,7 @@
 		<div id="output_solution" data-num="${helper.helper_num}"></div>
 		<span id="output_text" data-num="${helper.helper_num}" style="font-size:20px; font-weight:bold; margin-left:10px;"></span>
 		<c:if test="${user.mem_num == helper.mem_num}">
-		<img id="output_solution" class="toggle"
+		<img id="output_solution" class="toggle solution"
 			src="${pageContext.request.contextPath}/images/de/toggle1.png" width="60">
 		</c:if>
 		<br>
@@ -41,8 +42,9 @@
 		</div>
 		<br>
 		<div>
+			<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${helper.mem_num}">
 			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${helper.mem_num}"
-						width="50" height="50" class="my-photo radius margin-photo">
+						width="50" height="50" class="my-photo radius margin-photo"></a>
 			${helper.mem_nickname}
 			<div class="align-right margin-date">
 			<c:if test="${!empty helper.helper_modify_date}">
@@ -68,7 +70,7 @@
 	<h3>도움장소</h3>
 	<div><img src="${pageContext.request.contextPath}/images/de/map.png" width="30">
 	${helper.helper_address1} ${helper.helper_address2}
-	<div id="map" style="width:300px;height:300px;margin-top:10px;"></div>
+	<div id="map"></div><br>
 	</div>
 	</div>
 	<div class="align-right">
@@ -122,7 +124,9 @@
 	<div class="align-center">
 	<br><br><br>
 	<c:if test="${!empty user}">
+	<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${user.mem_num}">
 	<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${user.mem_num}" width="120" height="120" class="my-photo radius2">
+	</a>
 	</c:if>	
 	<c:if test="${empty user}">
 	<img src="${pageContext.request.contextPath}/images/de/basic.png" width="120" height="120" class="my-photo radius2">
@@ -144,7 +148,8 @@
 						};
 						</script>
 			</c:if>
-	<input type="button" value="채팅" onclick="location.href='talkList?helper_num=${helper.helper_num}'" 
+			<!-- 채팅 따로 구현하기 - 시연 때문에 홈으로라고 명칭만 변경해둠 -->
+	<input type="button" value="홈으로" onclick="location.href='talkList?helper_num=${helper.helper_num}'" 
 			class="btn mem-btn-green w-100"><br><br>	
 	<input type="button" value="목록으로" onclick="location.href='list?helper_num=${helper.helper_num}'" 
 			class="btn mem-btn-green w-100">	

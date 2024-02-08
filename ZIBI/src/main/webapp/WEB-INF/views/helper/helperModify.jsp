@@ -70,7 +70,6 @@
         	<form:label path="upload">썸네일</form:label>
 			<input type="file" name="upload" id="upload"
 					accept="image/gif,image/png,image/jpeg,image/jpg">
-			<form:errors path="upload"/>
 			<c:if test="${!empty helperVO.helper_filename}">
 			<div id="file_detail">(${helperVO.helper_filename})사진이 등록되어 있습니다.
 				<input type="button" value="파일삭제" id="file_del" class="delete-btn2">
@@ -118,7 +117,8 @@
 			<form:label path="helper_address2">상세주소</form:label>
 			<form:input path="helper_address2" class="w-100 form-control p-3 margin-top"
 				placeholder="상세주소는 선택사항입니다."/>
-			<form:errors path="helper_address2" cssClass="error-color"/>
+				<span class="thum">※ 개인정보 보호를 위해 지나치게 상세한 주소 입력은 권하지 않습니다.</span><br>
+				<span class="thum">예시) 지비아파트 101동 801호(X) / 지비아파트 1단지(O)</span><br>
 		</div>
         <div>
         	<div id="map" style="width:300px;height:300px;margin-top:10px;display:none"></div>

@@ -155,7 +155,7 @@ $(function(){
 			modifyUI += '<textarea rows="3" cols="60" name="re_content" id="mre_content" class="rep-content2">'+content+'</textarea><br>';
 			modifyUI += '<div id="mre_first" class="margin-span"><span class="letter-count">300/300</span></div>';//글자수 체크
 			modifyUI += '<div id="mre_second" class="align-right">';
-			modifyUI += ' <input type="submit" value="수정" id="modify_btn"class="d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1">';
+			modifyUI += ' <input type="submit" value="수정" id="modify_btn" class="d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1">';
 			modifyUI += ' <input type="button" value="취소" class="re-reset d-inline-block text-dark text-uppercase bg-light border rounded-pill px-2 py-1 mb-1">';	
 			modifyUI += '</div>';
 			modifyUI += '<hr size="1" noshade width="96%">';
@@ -201,7 +201,11 @@ $(function(){
 			$('#mre_content').val('').focus();
 			return false;
 		}
-		
+		//댓글 수정 alert
+		if(!confirm('수정하시겠습니까?')){
+        	return false; // 취소를 선택한 경우 폼 제출을 막음
+    	}
+			
 		//폼에 입력한 데이터 반환
 		let form_data = $(this).serialize();
 		
@@ -267,7 +271,7 @@ $(function(){
 		//댓글 번호
 		let re_num = $(this).attr('data-num');
 		
-		if(!confirm('삭제하시겠습니까?')){
+		if(!confirm('댓글을 삭제하시겠습니까?')){
 			return;
 		}
 		

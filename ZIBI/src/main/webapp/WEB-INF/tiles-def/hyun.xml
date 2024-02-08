@@ -26,6 +26,12 @@
     	<put-attribute name="body" value="/WEB-INF/views/performance/performanceList.jsp"/>
 	</definition>
 	
+	<!-- 공연 상세  -->
+	<definition name="performanceDetail" extends="performancePage">
+		<put-attribute name="title" value="영화 상세"/>
+    	<put-attribute name="body" value="/WEB-INF/views/performance/performanceDetail.jsp"/>
+	</definition>
+	
 	<!-- 공연 정보 넣는 폼 작성 -->
 	<definition name="writePerformance" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
     	<put-attribute name="body" value="/WEB-INF/views/performance/writePerformance.jsp"/>

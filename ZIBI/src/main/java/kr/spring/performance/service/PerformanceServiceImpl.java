@@ -184,6 +184,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.selectPayAll(map);
 	}
 
+	@Override
+	public PerformanceVO selectWithPerformance(int performance_num) {
+		return performanceMapper.selectWithPerformance(performance_num);
+	}
+
 	
 
 

@@ -40,7 +40,7 @@
 
 
 
-		<a href='history'>결제내역</a>
+		<a href='${pageContext.request.contextPath}/performance/history'>결제내역</a>
 	</div>
 	
 	

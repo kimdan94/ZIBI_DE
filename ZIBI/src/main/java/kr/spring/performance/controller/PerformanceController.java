@@ -85,6 +85,23 @@ public class PerformanceController {
 		return mav; 
 	}
 	
+	/*=================================
+	 * 영화 Detail
+	 *=================================*/
+	@RequestMapping("/performance/detail") // detail?performance_num=${performance.performance_num}
+	public ModelAndView performanceDetail(@RequestParam int performance_num) {
+		log.debug("<< 디테일 >>");
+		Map<String, Object> map = new HashMap<String, Object>();
+		log.debug("<<영화 번호>> : " + performance_num);
+		
+		PerformanceVO performance = performanceService.selectWithPerformance(performance_num);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("performanceDetail"); // tiles 설정 name과 동일해야 함
+		mav.addObject("performance", performance);
+		return mav; 
+	}
+	
 	
 	/*=================================
 	 * 게시판 글 등록

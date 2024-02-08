@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글쓰기/</h2>
 	<!-- form태그를 사용하려면 먼저 Controller에서 modelAttribute부터 -->
@@ -13,9 +15,26 @@
 					<form:errors path="performance_title" cssClass="error-color"/>
 				</li>
 				<li>
-					<form:label path="performance_content">내용</form:label>
 					<form:textarea path="performance_content"/>
 					<form:errors path="performance_content" cssClass="error-color"/>
+					<script>
+					function MyCustomUploadAdapterPlugin(editor){
+						editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+							return new UploadAdapter(loader);
+						}
+					}
+					
+					ClassicEditor
+					    .create(document.querySelector('#performance_content'),{
+					    	extraPlugins:[MyCustomUploadAdapterPlugin]
+					    })
+					    .then(editor => {
+					    	window.editor = editor;
+					    })
+					    .catch(error => {
+					    	console.error(error);
+					    });					
+				</script>
 				</li>
 				<li><!-- upload를 하려면 vo에 MultipartFile 변수를 만들어줘야 한다 (sql X) -->
 					<form:label path="upload">포스터</form:label>

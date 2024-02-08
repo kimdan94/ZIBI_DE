@@ -29,6 +29,10 @@ public interface PerformanceMapper {
 	@Select("SELECT DISTINCT ticketing_date FROM ticketing WHERE ticketing_date >= TRUNC(SYSDATE) ORDER BY ticketing_date ASC")
 	public List<TicketingVO> selectDate();
 	
+	// 영화 디테일
+	@Select("SELECT * FROM performance WHERE performance_num=#{performance_num}")
+	public PerformanceVO selectWithPerformance(int performance_num);
+	
 	// 상영관 + 날짜 + 영화로 예매할 수 있는 정보
 	public List<CinemaVO> selectCinemaWithTicketing(Map<String, Object> map);
 	public List<PerformanceVO> selectPerformanceWithTicketing(Map<String, Object> map); // 

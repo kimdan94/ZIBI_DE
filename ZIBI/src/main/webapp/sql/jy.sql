@@ -44,7 +44,7 @@ create table book_review(
  mem_num number not null,
  book_rev varchar2(300) not null,
  book_grade varchar2(9) not null,
- book_revIp varchar2(400) not null,
+ book_revIp varchar2(40) not null,
  apply_gatheringDate varchar2(100) not null,
  constraint book_review_pk primary key (rev_num),
  constraint book_review_fk1 foreign key (book_num) references book (book_num),

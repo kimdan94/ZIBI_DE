@@ -46,7 +46,13 @@
                         	<div class="service-content d-flex align-items-center justify-content-center p-1">
                             	<div class="second-box text-left">
                             		<a href="detail?sc_num=${second.sc_num}">
-                                		<img src="${pageContext.request.contextPath}/upload/${second.sc_filename}" id="thumb_img">
+                            			<c:if test="${empty second.sc_filename}">
+                            			<img src="${pageContext.request.contextPath}/images/jiwon/sc_noimg.png" id="thumb_noimg">
+                            			</c:if>
+                            			<c:if test="${!empty second.sc_filename}">
+                            			<img src="${pageContext.request.contextPath}/upload/${second.sc_filename}" id="thumb_img">
+                            			</c:if>
+                                		
                                 		<span id="main_title">${second.sc_title}</span>
                                 		<br>
                                			<span id="main_price" class="mb-4"><b><fmt:formatNumber value="${second.sc_price}"/>원</b></span>

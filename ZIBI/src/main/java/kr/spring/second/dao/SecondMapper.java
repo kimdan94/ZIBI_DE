@@ -31,7 +31,6 @@ public interface SecondMapper {
 	public void deleteFile(int sc_num);
 	
 	
-	
 	//판매 상태 변경
 	@Update("UPDATE second SET sc_sellstatus=0 WHERE sc_num=#{sc_num}")
 	public void updateForSale(int sc_num);//판매중으로 변경
@@ -85,6 +84,12 @@ public interface SecondMapper {
 	public void deleteFav(SecondFavVO secondFav);
 	@Delete("DELETE FROM second_fav WHERE sc_num=#{sc_num}")
 	public void deleteFavByScNum(int sc_num);//상세글 지울떄 찜 지우기 위해
+	
+	//상세글 지울 때 같이 삭제 
+	@Delete("DELETE FROM second_order WHERE sc_num=#{sc_num}")
+	public void deleteOrderByScNum(int sc_num);
+	@Delete("DELETE FROM second_review WHERE sc_num=#{sc_num}")
+	public void deleteReviewByScNum(int sc_num);
 	
 	//=========  중고거래 마이페이지   ==================
 		//판매내역 - 전체 

@@ -265,6 +265,10 @@ label[for="sc_way2"]{
 	width:100%; 
 	height:220px;
 }
+#thumb_noimg{
+	width:100%; 
+	height:220px;
+}
 #main_title{
 	font-size:20px;
 	margin-left:10px;
@@ -684,6 +688,7 @@ ul.search li:last-child {
     border: 1px solid #ededed;
 	box-shadow: none;
 	margin-bottom:5px;
+	width:90px;
 }
 #sc_hidein1:hover,active,visited{
 	background: #32a77b !important;
@@ -691,6 +696,113 @@ ul.search li:last-child {
     box-shadow: none;
     border:none;
     margin-bottom:5px;
+    width:90px;
+}
+#sc_hidein2,
+#sc_hidein2:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:55px;
+}
+#sc_hidein2:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:55px;
+}
+#sc_hidein3,
+#sc_hidein3:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:55px;
+}
+#sc_hidein3:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:55px;
+}
+#sc_hidein4,
+#sc_hidein4:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:55px;
+}
+#sc_hidein4:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:55px;
+}
+
+
+/* 끌어올리기 버튼 */
+#sc_up3,
+#sc_up3:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:85px;
+}
+#sc_up3:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:85px;
+}
+#sc_up4,
+#sc_up4:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:85px;
+}
+#sc_up4:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:85px;
+}
+/* 마이페이지 - 채팅하기 버튼 */
+.scstore-btn2,
+.scstore-btn2:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	width:68px;
+}
+
+.scstore-btn2:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:68px;
 }
 /* 마이페이지 수정, 삭제 버튼 */
 .store-md,
@@ -710,8 +822,24 @@ ul.search li:last-child {
     margin-bottom:5px;
     width:50px;
 }
-
-
+/* 예약 확정, 예약 거절 버튼 */
+.reserve-okno,
+.reserve-okno:focus{
+	background: white !important;
+    color: #32a77b;
+    border: 1px solid #ededed;
+	box-shadow: none;
+	margin-bottom:5px;
+	width:90px;
+}
+.reserve-okno:hover,active,visited{
+	background: #32a77b !important;
+    color: white;
+    box-shadow: none;
+    border:none;
+    margin-bottom:5px;
+    width:90px;
+}
 
 
 

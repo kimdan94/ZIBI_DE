@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b2c8d108f8ba3676d57626832ac387e&libraries=services"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/second.fav.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jiwon/second.fav.js"></script>
 <script type="text/javascript">
 $(function(){
 	//바로 예약 버튼 클릭
@@ -135,10 +135,18 @@ $(function(){
         <div class="row g-5 align-items-start">
         	<!-- 썸네일 -->
 			<div class="col-lg-5 position-relative">
+				<c:if test="${empty second.sc_filename}">
+				<img src="${pageContext.request.contextPath}/images/jiwon/sc_noimg.png"
+					style="width: 500px; height: 450px;" class="img-fluid rounded"
+					alt="">
+				</c:if>
+				<c:if test="${!empty second.sc_filename}">
 				<img
 					src="${pageContext.request.contextPath}/upload/${second.sc_filename}"
 					style="width: 500px; height: 450px;" class="img-fluid rounded"
 					alt="">
+				</c:if>
+				
 				<div id="status_png">
 				<c:if test="${second.sc_sellstatus==1}">
 					<img src="${pageContext.request.contextPath}/images/jiwon/sc_waitReserve.png" class="position-absolute top-50 start-50 translate-middle" style="width:300px;height:300px; z-index: 1;">

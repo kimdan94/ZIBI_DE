@@ -49,12 +49,19 @@ public class SecondServiceImpl implements SecondService{
 	public void updateSecond(SecondVO second) {
 		secondMapper.updateSecond(second);
 	}
-
+	//글 삭제
 	@Override
 	public void deleteSecond(int sc_num) {
+		//부모글 찜 삭제
+		secondMapper.deleteFavByScNum(sc_num);
+		//second_order 거래가 존재하면 먼저 삭제
+		secondMapper.deleteOrderByScNum(sc_num);
+		//second_review 후기가 존재하면 먼저 삭제 
+		secondMapper.deleteReviewByScNum(sc_num);
+		//부모글 삭제
 		secondMapper.deleteSecond(sc_num);
 	}
-
+	//파일 삭제 처리
 	@Override
 	public void deleteFile(int sc_num) {
 		secondMapper.deleteFile(sc_num);

@@ -42,7 +42,7 @@
                             	<div class="second-box text-left">
                             		<c:if test="${second.sc_sellstatus == 0}"><p style="background:#32a77b;" class="second-span4">판매중</p></c:if>
                             		<c:if test="${second.sc_sellstatus == 1}"><p style="background:#93C571;" class="second-span4">예약대기</p></c:if>
-		                			<c:if test="${second.sc_sellstatus == 2}"><p style="background:#A9B68E;" class="second-span4">예약중</p></c:if>
+		                			<c:if test="${second.sc_sellstatus == 2}"><p style="background:#75B44A;" class="second-span4">예약중</p></c:if>
 		                			<c:if test="${second.sc_sellstatus == 3}"><p style="background:#638E35;" class="second-span4">판매 완료</p></c:if>
                             		<a href="detail?sc_num=${second.sc_num}">
                             			<c:if test="${empty second.sc_filename}">

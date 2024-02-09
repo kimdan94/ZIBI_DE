@@ -276,11 +276,6 @@ $(function(){
             	<!-- 지도 시작 -->
             	<div id="map" style="width:500px;height:300px;"></div>
             	
-            	<%-- 삭제하기!!
-                	<p>${second.sc_latitude}</p>
-                	<p>${second.sc_longitude}</p>
-                --%>
-                
                 <script>
 				    // 카카오 맵 초기화
 				    const container = document.getElementById('map');

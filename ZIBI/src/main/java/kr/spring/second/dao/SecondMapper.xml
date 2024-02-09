@@ -69,7 +69,7 @@
 			<![CDATA[
 			REPLACE(REPLACE(sc_title,'<','&lt;'),'>','&gt;') sc_title,
 			]]> 
-			sc_price,sc_filename,sc_address,
+			sc_price,sc_filename,sc_address,sc_sellstatus,
 			sc_reg_date, mem_num
 		FROM second
 		JOIN member USING(mem_num)
@@ -107,7 +107,22 @@
 		WHERE sc_num=#{sc_num} 
 	</update>
 	
-	
+	<!-- 글 상세 판매자 후기 행 개수 -->
+	<select id="selectSellRevCount" parameterType="integer">
+		SELECT COUNT(*)
+		FROM second_review sr
+		JOIN second s ON sr.sc_num = s.sc_num
+		JOIN member m ON sr.reviewer_num = m.mem_num
+		WHERE s.mem_num = (SELECT mem_num FROM second WHERE sc_num = #{sc_num})
+	</select>
+	<!-- 글 상세 판매자 후기 목록 -->
+	<select id="selectSellRevList" parameterType="map" resultType="secondVO">
+		SELECT sr.reviewer_num, sr.sc_rev_content,sr.sc_rev_star, reviewer_num, m.mem_nickname
+		FROM second_review sr
+		JOIN second s ON sr.sc_num = s.sc_num
+		JOIN member m ON sr.reviewer_num = m.mem_num
+		WHERE s.mem_num = (SELECT mem_num FROM second WHERE sc_num = #{sc_num})
+	</select>
 	
 	
 	<!-- ================= 거래 ================= -->
@@ -302,5 +317,44 @@
 		JOIN member m ON sr.reviewer_num = m.mem_num WHERE s.mem_num = #{mem_num}
 	</select>
 
+	<!-- 채팅 내역 행 개수   -->
+	<select id="selectBuyChatCount" parameterType="map" resultType="integer">
+		 SELECT COUNT(*)
+		FROM chatroom 
+		JOIN (SELECT chatroom_num FROM chat GROUP BY chatroom_num) USING(chatroom_num) 
+		JOIN second USING(sc_num) 
+		JOIN member USING(mem_num) 
+		LEFT OUTER JOIN (
+		    SELECT chat_num, chat_message, chat_reg_date, chatroom_num 
+		    FROM chat 
+		    WHERE chat_num IN (
+		        SELECT MAX(chat_num) AS chat_num 
+		        FROM chat 
+		        GROUP BY chatroom_num
+		    )
+		) USING(chatroom_num) 
+		WHERE buyer_num = #{mem_num}
 	
+	</select>
+	<!-- 채팅 내역 목록 가져오기   -->
+	<select id="selectBuyChatList" parameterType="map" resultType="chatRoomVO">
+	 SELECT chatroom_num, mem_nickname, sc_title, sc_filename, chat_reg_date,sc_num 
+FROM chatroom 
+JOIN (SELECT chatroom_num FROM chat GROUP BY chatroom_num) USING(chatroom_num) 
+JOIN second USING(sc_num) 
+JOIN member USING(mem_num) 
+LEFT OUTER JOIN (
+    SELECT chat_num, chat_message, chat_reg_date, chatroom_num 
+    FROM chat 
+    WHERE chat_num IN (
+        SELECT MAX(chat_num) AS chat_num 
+        FROM chat 
+        GROUP BY chatroom_num
+    )
+) USING(chatroom_num) 
+WHERE buyer_num = #{mem_num}
+	
+	</select>
+	
+
 </mapper>

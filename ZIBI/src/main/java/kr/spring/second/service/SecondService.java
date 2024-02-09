@@ -7,6 +7,7 @@ import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
+import kr.spring.secondchat.vo.ChatRoomVO;
 
 public interface SecondService {
 	//부모글
@@ -24,6 +25,10 @@ public interface SecondService {
 	public void updateWaitReserve(int sc_num);//예약대기로 변경
 	public void updateReserve(int sc_num);//예약중으로 변경
 	public void updateSellFin(int sc_num);//거래완료로 변경
+	
+	//글 상세 후기 목록
+	public List<SecondVO> selectSellRevList(Map<String,Object> map);
+	public int selectSellRevCount(int sc_num);
 	
 	//거래
 	public void insertSecondOrder(SecondOrderVO secondOrderVO);
@@ -92,4 +97,10 @@ public interface SecondService {
 	public int selectReviewCount(int mem_num);
 	
 	public void deleteOrderByScNum(int sc_num);
+	
+	//=============== 내 상점- 채팅 내역 ================
+	//채팅 내역 목록 구하기
+	public List<ChatRoomVO> selectBuyChatList(Map<String,Object> map);
+	//채팅 내역 행 개수 구하기
+	public int selectBuyChatCount(Map<String,Object> map);
 }

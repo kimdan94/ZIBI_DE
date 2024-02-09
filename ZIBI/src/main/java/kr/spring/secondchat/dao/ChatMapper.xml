@@ -71,7 +71,6 @@
 	
 	<!-- 구매자 목록 구하기 -->
 	<select id="selectChatBuyerList" parameterType="map" resultMap="chatMap">
-		
 		SELECT * FROM chatroom c 
 		JOIN (SELECT chatroom_num FROM chat group by chatroom_num) USING(chatroom_num) 
 		LEFT OUTER JOIN 

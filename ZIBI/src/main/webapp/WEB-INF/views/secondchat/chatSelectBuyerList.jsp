@@ -51,15 +51,13 @@ $(function(){
 												src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${chat.buyer_num}"
 												style="width: 90px;" alt="">
 											<div class="w-100 d-flex flex-column text-start ps-4">
-												<div
-													class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-													<h4>${chat.buyer}</h4>
-													<h4>${chat.chatVO.chat_reg_date}</h4>
+												<div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
+													<h4>${chat.mem_nickname}</h4>
 												</div>
 												<p class="mb-0">${chat.chatVO.chat_message}</p>
 												${chat.chatVO.chat_reg_date}
 											</div>
-											${chat.read_count} 
+											<span class="seller-read">${chat.read_count}</span>
 											<input type="button" value="구매자 선택" class="selbuyer-btn1" id="sc_selectBuyer" data-num="${chat.sc_num}" data-buyer_num="${chat.buyer_num}"
 												onclick="location.href='${pageContext.request.contextPath}/secondhand/detail?sc_num=${chat.sc_num}'">
 										</div>

@@ -28,6 +28,7 @@ import kr.spring.second.service.SecondService;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
+import kr.spring.secondchat.vo.ChatRoomVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PageUtil_second;
 import kr.spring.util.StringUtil;
@@ -136,7 +137,7 @@ public class SecondController {
 	@RequestMapping("/secondhand/detail")
 	public ModelAndView process(@RequestParam int sc_num) {
 		log.debug("<<중고거래 글 상세 sc_num>> : " + sc_num);
-		
+		Map<String,Object> map = new HashMap<String,Object>();
 		//해당 글의 조회수 증가
 		secondService.updateHit(sc_num);
 		
@@ -149,9 +150,22 @@ public class SecondController {
 			String extractedAddress = extractAddress(second.getSc_address());
 	        second.setSc_address(extractedAddress);
 		}
+		map.put("sc_num", sc_num);
 		
+		List<SecondVO> list1 = null;
+		int count1 = secondService.selectSellRevCount(sc_num);
+		log.debug("<<글 상세 판매자 후기 count1>> :" + count1);
+		if(count1 > 0) {
+			list1 = secondService.selectSellRevList(map);
+			log.debug("<<글 상세 판매자 후기 list1>> : " + list1);
+		}
 		
-		return new ModelAndView("secondDetail","second",second);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("secondDetail"); //타일스
+		mav.addObject("second",second);
+		mav.addObject("list1",list1);
+		
+		return mav;
 	}//second에 mem_num, sc_num, sc_title, sc_content, sc_category,sc_price,sc_status,sc_way,sc_place,위도,경도,조회수,등록일 등 정보 있음
 	
 	
@@ -369,7 +383,27 @@ public class SecondController {
 		
 		return "common/resultAlert";
 	}
-	
-	
+	/*================================
+	 * 내 상점 - 채팅 내역 페이지 
+	 *================================*/
+	@RequestMapping("/secondhand/secondBuyChatList")
+	public String secondBuyChatList(HttpSession session,Model model) {
+		//회원번호 셋팅
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("mem_num", user.getMem_num());
+		int count = secondService.selectBuyChatCount(map);
+		log.debug("<<채팅 내역 count >> : " + count);
+		
+		List<ChatRoomVO> list = null;
+		if(count > 0) {
+			list = secondService.selectBuyChatList(map);
+			log.debug("<<채팅 내역 페이지 list>> : " + list);
+		}
+		model.addAttribute("list",list);
+		model.addAttribute("count",count);
+		return "secondBuyChatList"; //타일즈
+	}
 }
 

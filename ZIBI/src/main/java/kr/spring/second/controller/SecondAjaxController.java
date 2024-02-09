@@ -378,10 +378,6 @@ public class SecondAjaxController {
 		return mapJson;
 	}
 	
-	
-	
-	
-	
 	/*================================
 	 * 중고거래 상태변경(detail) 모달창- 판매중
 	 *================================*/

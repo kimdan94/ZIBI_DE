@@ -43,6 +43,9 @@ public class SecondVO {
 	private String sc_buyer_nickname;
 	private int sc_buyer_num;
 	private Date sc_order_reg_date;
+	private String sc_rev_content;
+	private int reviewer_num;
+	private double sc_rev_star;
 	
 	//DB에 없음
 	private int sc_favcnt;      //판매글 관심수(찜)

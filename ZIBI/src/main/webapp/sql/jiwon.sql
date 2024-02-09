@@ -38,13 +38,6 @@ create table second_order(
  
 create sequence second_order_seq;
 
---내 동네
-create table second_area(
- sc_area varchar2(70),
- mem_num number not null,
- constraint second_area_fk foreign key (mem_num) references member (mem_num)
-);
-
 --중고거래 거래 후기
 create table second_review(
  sc_rev_num number not null,      

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b2c8d108f8ba3676d57626832ac387e&libraries=services"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jiwon/second.fav.js"></script>
@@ -152,8 +153,8 @@ $(function(){
                 	<c:if test="${second.sc_category==5}"><span>식품</span></c:if>
                 	<c:if test="${second.sc_category==6}"><span>기타</span></c:if>
                 </small>
-                <h1>${second.sc_title}</h1>
-                <p class="mb-4">${second.sc_price}원</p>
+                <p style="font-size:35px;">${second.sc_title}</p>
+                <p class="mb-4" style="font-size:40px;"><fmt:formatNumber value="${second.sc_price}"/>원</p>
                 
                 <div class="dinfo-box1 row g-4 text-dark mb-5">
                			<!-- 칸 나누는 구역 -->
@@ -305,8 +306,6 @@ $(function(){
             
             <div class="sc-storeinfo col-lg-5">
                 <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border rounded-pill px-4 py-1 mb-3">상점정보</small>
-                <h1 class="display-5 mb-4">상점정보</h1>
-
 				<div class="menu-item d-flex align-items-center">
 				
 					<img class="flex-shrink-0 img-fluid rounded-circle"
@@ -320,23 +319,83 @@ $(function(){
 						<p class="mb-0">상품 개수</p>
 					</div>
 				</div>
-
-				<!-- 상점 후기 란 -->
-                <div class="row g-4 text-dark mb-5">
-                	
-                    <!-- <div class="col-sm-6">
-                        <i class="fas fa-share text-primary me-2"></i>Fresh and Fast food Delivery
-                    </div>
-                    <div class="col-sm-6">
-                        <i class="fas fa-share text-primary me-2"></i>24/7 Customer Support
-                    </div>
-                    <div class="col-sm-6">
-                        <i class="fas fa-share text-primary me-2"></i>Easy Customization Options
-                    </div>
-                    <div class="col-sm-6">
-                        <i class="fas fa-share text-primary me-2"></i>Delicious Deals for Delicious Meals
-                    </div> -->
-                </div>
+				<br>
+				<div><h2>상점 후기</h2></div>
+				<table>
+				<c:forEach var="screv" items="${list1}">
+					<tr>
+						<td>
+							<div class="menu-item d-flex align-items-center">
+							<img class="flex-shrink-0 img-fluid rounded-circle"  style="width:50px"
+							src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${screv.reviewer_num}" alt="">
+						<div class="w-100 d-flex flex-column text-start ps-4">
+						<div class="d-flex justify-content-between border-bottom mb-1">
+							<a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${screv.reviewer_num}" style="color:black;">${screv.mem_nickname}</a>
+						</div>
+						
+						<!-- 별점 -->
+						<div class="testimonial-content">
+							<c:if test="${screv.sc_rev_star==5}">
+								<div class="rate2 d-flex">
+									<span style="width: 100%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==4.5}">
+								<div class="rate2 d-flex">
+									<span style="width: 92%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==4}">
+								<div class="rate2 d-flex">
+									<span style="width: 81%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==3.5}">
+								<div class="rate2 d-flex">
+									<span style="width: 71%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==3}">
+								<div class="rate2 d-flex">
+									<span style="width: 60%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==2.5}">
+								<div class="rate2 d-flex">
+									<span style="width: 50%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==2}">
+								<div class="rate2 d-flex">
+									<span style="width: 39%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==1.5}">
+								<div class="rate2 d-flex">
+									<span style="width: 30%;"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==1}">
+								<div class="rate2 d-flex">
+									<span style="width: 20%"></span>
+								</div>
+							</c:if>
+							<c:if test="${screv.sc_rev_star==0.5}">
+								<div class="rate2 d-flex">
+									<span style="width: 9%"></span>
+								</div>
+							</c:if>
+						<p class="mt-1">${screv.sc_rev_content}</p>
+						</div>
+						</div>
+					</div>
+						
+						
+						</td>
+					</tr>
+				</c:forEach>
+				</table>
+				
             </div>
         </div>
     </div>

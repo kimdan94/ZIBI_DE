@@ -61,7 +61,10 @@
 						<span class="separator">찜 상품</span>
 					</a>
 					<a href="secondreviewList">
-						<span>거래 후기</span>
+						<span class="separator">거래 후기</span>
+					</a>
+					<a href="secondBuyChatList">
+						<span>채팅 내역</span>
 					</a>
 				</div>
 			</nav>

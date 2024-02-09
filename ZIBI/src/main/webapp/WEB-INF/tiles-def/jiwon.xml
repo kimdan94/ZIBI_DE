@@ -5,7 +5,7 @@
 <tiles-definitions>
     <definition name="secondMain" template="/WEB-INF/views/secondhand/sc_layout_main.jsp">
     	<put-attribute name="tabtitle" value="중고거래 목록 | ZIBI"/>
-    	<put-attribute name="title" value="중고거래 목록"/>
+    	<put-attribute name="title" value="중고거래"/>
     	<put-attribute name="header" value="/WEB-INF/views/home/header.jsp"/>
     	<put-attribute name="menu" value="/WEB-INF/views/home/menu.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondList.jsp"/>
@@ -15,7 +15,7 @@
 	<!-- 판매 등록 폼 -->
 	<definition name="secondWrite" extends="secondMain">
 		<put-attribute name="tabtitle" value="중고거래 상품 목록 | ZIBI"/>
-		<put-attribute name="title" value="중고거래 상품 목록"/>
+		<put-attribute name="title" value="중고거래 상품 등록"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondWrite.jsp"/> 
 		<put-attribute name="css" value="/WEB-INF/views/secondhand/secondCSS.jsp"/>
 	</definition>	
@@ -23,7 +23,7 @@
 	<!-- 상세 글 -->
 	<definition name="secondDetail" extends="secondMain">
 		<put-attribute name="tabtitle" value="중고거래 상품 상세"/>
-		<put-attribute name="title" value="중고거래 상품 상세"/>
+		<put-attribute name="title" value="중고거래 상품"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondDetail.jsp"/>
 	</definition>	
 	
@@ -62,6 +62,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondreviewList.jsp"/>
 	</definition>
 	
+	<!-- 내 상점 - 채팅 내역 -->
+	<definition name="secondBuyChatList" extends="secondsellList">
+		<put-attribute name="tabtitle" value="내 상점 - 채팅 내역"/>
+		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondBuyChatList.jsp"/>
+	</definition>
+	
 	
 	<!-- 거래 후기 작성 폼 -->
 	<definition name="secondReviewWrite" extends="secondMain">
@@ -69,6 +75,8 @@
 		<put-attribute name="title" value="중고거래 후기 작성"/>
 		<put-attribute name="body" value="/WEB-INF/views/secondhand/secondReviewWrite.jsp"/> 
 	</definition>	
+	
+	
 	
 	<!-- ==================== 중고거래 채팅  ======================== -->
 	

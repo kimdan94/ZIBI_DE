@@ -12,6 +12,7 @@ import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
+import kr.spring.secondchat.vo.ChatRoomVO;
 
 @Service
 @Transactional
@@ -249,7 +250,22 @@ public class SecondServiceImpl implements SecondService{
 	public void deleteOrderByScNum(int sc_num) {
 		secondMapper.deleteOrderByScNum(sc_num);
 	}
-	
-	
-	
+	//=============== 내 상점- 채팅 내역 ================
+	@Override
+	public List<ChatRoomVO> selectBuyChatList(Map<String, Object> map) {
+		return secondMapper.selectBuyChatList(map);
+	}
+	@Override
+	public int selectBuyChatCount(Map<String, Object> map) {
+		return secondMapper.selectBuyChatCount(map);
+	}
+	//글 상세 후기 목록
+	@Override
+	public int selectSellRevCount(int sc_num) {
+		return secondMapper.selectSellRevCount(sc_num);
+	}
+	@Override
+	public List<SecondVO> selectSellRevList(Map<String, Object> map) {
+		return secondMapper.selectSellRevList(map);
+	}
 }

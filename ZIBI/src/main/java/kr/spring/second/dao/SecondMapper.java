@@ -13,6 +13,7 @@ import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondReviewVO;
 import kr.spring.second.vo.SecondVO;
+import kr.spring.secondchat.vo.ChatRoomVO;
 
 @Mapper
 public interface SecondMapper {
@@ -42,6 +43,10 @@ public interface SecondMapper {
 	public void updateSellFin(int sc_num);//거래완료로 변경
 	
 	
+	//글 상세 후기 목록
+	public List<SecondVO> selectSellRevList(Map<String,Object> map);
+	public int selectSellRevCount(int sc_num);
+
 	//거래
 	public void insertSecondOrder(SecondOrderVO secondOrderVO);
 	
@@ -138,4 +143,9 @@ public interface SecondMapper {
 	//후기 목록 행 개수 가져오기
 	public int selectReviewCount(int mem_num);
 	
+	//=============== 내 상점- 채팅 내역 ================
+	//채팅 내역 목록 구하기
+	public List<ChatRoomVO> selectBuyChatList(Map<String,Object> map);
+	//채팅 내역 행 개수 구하기
+	public int selectBuyChatCount(Map<String,Object> map);
 }

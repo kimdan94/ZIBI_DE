@@ -40,6 +40,10 @@
                     	<div class=" rounded">
                         	<div class="service-content d-flex align-items-center justify-content-center p-1">
                             	<div class="second-box text-left">
+                            		<c:if test="${second.sc_sellstatus == 0}"><p style="background:#32a77b;" class="second-span4">판매중</p></c:if>
+                            		<c:if test="${second.sc_sellstatus == 1}"><p style="background:#93C571;" class="second-span4">예약대기</p></c:if>
+		                			<c:if test="${second.sc_sellstatus == 2}"><p style="background:#A9B68E;" class="second-span4">예약중</p></c:if>
+		                			<c:if test="${second.sc_sellstatus == 3}"><p style="background:#638E35;" class="second-span4">판매 완료</p></c:if>
                             		<a href="detail?sc_num=${second.sc_num}">
                             			<c:if test="${empty second.sc_filename}">
                             			<img src="${pageContext.request.contextPath}/images/jiwon/sc_noimg.png" id="thumb_noimg">
@@ -47,24 +51,23 @@
                             			<c:if test="${!empty second.sc_filename}">
                             			<img src="${pageContext.request.contextPath}/upload/${second.sc_filename}" id="thumb_img">
                             			</c:if>
-                                		<!-- 판매 상태 넣기 -->
-                                		<span></span>
-                                		
                                 		<span id="main_title">${second.sc_title}</span>
                                 		<br>
                                			<span id="main_price" class="mb-4"><b><fmt:formatNumber value="${second.sc_price}"/>원</b></span>
                                			<span id="main_regdate" class="mb-3 pb-3">${second.sc_reg_date}</span><br>
                                 		
                                 		<span id="main_address">
-                                		<img src="${pageContext.request.contextPath}/images/logo_tab.png" width="30px;">
-                                		${second.sc_address}</span>
+                                			<img src="${pageContext.request.contextPath}/images/logo_tab.png" width="30px;">
+                                			${second.sc_address}
+                                		</span>
                             		</a>
                             	</div>
+                            	
                         	</div>
                     	</div>
                 	</div>
                 	</c:forEach>
-                	<div class="second-page">${page}</div>
+                	<div class="second-page" style="margin-top:10px;">${page}</div>
             	</div>
         	</div>
     	</c:if>

@@ -185,7 +185,6 @@ public class ChatController {
 		//구매자 목록 읽어오기
 		if(count==0) {	//거래자가 없으면 거래완료처리만 해주고 글 상세로 redirect
 			return "redirect:/secondhand/detail?sc_num="+sc_num;
-			
 		}
 		//count가 0 이상일때  거래자 list 구하고 넘김
 		list = chatService.selectChatBuyerList(map);
@@ -230,13 +229,4 @@ public class ChatController {
 		}
 		return mapAjax;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

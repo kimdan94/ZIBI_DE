@@ -27,8 +27,7 @@
 											style="width: 90px;" alt="">
 										<div class="w-100 d-flex flex-column text-start ps-4">
 											<div class="d-flex justify-content-between border-bottom border-primary pb-2 mb-2">
-												<h4>${chat.buyer}</h4>
-												<h4>${chat.chatVO.chat_reg_date}</h4>
+												<h4>${chat.mem_nickname}</h4>
 											</div>
 											<p class="mb-0">${chat.chatVO.chat_message}</p>
 											${chat.chatVO.chat_reg_date}

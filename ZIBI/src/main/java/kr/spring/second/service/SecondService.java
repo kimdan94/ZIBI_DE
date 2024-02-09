@@ -3,8 +3,6 @@ package kr.spring.second.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Update;
-
 import kr.spring.second.vo.SecondFavVO;
 import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.second.vo.SecondReviewVO;
@@ -92,4 +90,6 @@ public interface SecondService {
 	public List<SecondReviewVO> selectReviewList(Map<String,Object> map);
 	//후기 목록 행 개수 가져오기
 	public int selectReviewCount(int mem_num);
+	
+	public void deleteOrderByScNum(int sc_num);
 }

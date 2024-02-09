@@ -4,10 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="container"> 
 	<div class="scmain-btn">
-	<button type="button" class="chat-btn">
-		<img src="${pageContext.request.contextPath}/images/jiwon/chat_icon.png" width="22px">
-			<span class="chat-txt separator1">채팅하기</span>
-	</button>
 	<button type="button" class="sell-btn" onclick="location.href='write'">
 		<img src="${pageContext.request.contextPath}/images/jiwon/sc_writelogo.png" width="22px">
 			<span class="sell-txt separator1">판매하기</span>
@@ -20,7 +16,7 @@
 	<div>
 		<form action="list" id="search_form" method="get">
 			<ul class="search">
-				<li><input type="search" name="keyword" id="keyword"
+				<li><input type="search" name="keyword" id="keyword" placeholder="상품명, 지역명, 내용 입력"
 					value="${param.keyword}" class="p-2" autocomplete="off"></li>
 				<li>
  					<input type="image" src="../images/jiwon/sc_searchicon.png" class="sc-btn-search">	
@@ -34,15 +30,14 @@
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 		</c:if>
 		<c:if test="${count > 0}">
-		<div class="container-fluid service py-6">
     	    <div class="container">
             	<div class="text-left">
                 	<h4 class="mainlist-title">중고거래 인기상품</h4>
             	</div>
-            	<div class="row g-4">
+            	<div class="row">
             		<c:forEach var="second" items="${list}">
                 	<div class="col-lg-3 col-md-6 col-sm-12">
-                    	<div class=" rounded service-items">
+                    	<div class=" rounded">
                         	<div class="service-content d-flex align-items-center justify-content-center p-1">
                             	<div class="second-box text-left">
                             		<a href="detail?sc_num=${second.sc_num}">
@@ -52,11 +47,14 @@
                             			<c:if test="${!empty second.sc_filename}">
                             			<img src="${pageContext.request.contextPath}/upload/${second.sc_filename}" id="thumb_img">
                             			</c:if>
+                                		<!-- 판매 상태 넣기 -->
+                                		<span></span>
                                 		
                                 		<span id="main_title">${second.sc_title}</span>
                                 		<br>
                                			<span id="main_price" class="mb-4"><b><fmt:formatNumber value="${second.sc_price}"/>원</b></span>
                                			<span id="main_regdate" class="mb-3 pb-3">${second.sc_reg_date}</span><br>
+                                		
                                 		<span id="main_address">
                                 		<img src="${pageContext.request.contextPath}/images/logo_tab.png" width="30px;">
                                 		${second.sc_address}</span>
@@ -69,8 +67,6 @@
                 	<div class="second-page">${page}</div>
             	</div>
         	</div>
-    	</div>
-    	<!-- Service End -->
     	</c:if>
 	</div>
 </div>

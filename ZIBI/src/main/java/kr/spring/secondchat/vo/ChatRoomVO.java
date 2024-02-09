@@ -21,6 +21,7 @@ public class ChatRoomVO {
 	private String sc_filename;		//판매글 썸네일 사진
 	private int sc_sellstatus;  //판매 상태 (0:판매중, 1: 예약대기,2:예약중,3:거래완료)
 	private int sc_price; 		//판매 가격
+	private String mem_nickname;
 	
 	//매핑
 	private ChatVO chatVO; 

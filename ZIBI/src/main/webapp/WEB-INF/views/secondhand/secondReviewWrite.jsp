@@ -28,10 +28,18 @@
 				<div class="review-txt1">거래 경험을 알려주세요!</div>
 				<div class="review-txt2">남겨주신 거래 후기는 상대방의 프로필에 공개돼요.</div>
 					<textarea rows="5" name="sc_rev_content" id="sc_rev_content" placeholder="여기에 적어주세요.(선택사항)"></textarea>
-					<div>후기는 <span>수정 및 삭제가 불가능</span>하므로 신중히 작성해주세요.</div>
-					<div>허위 및 성의없는 내용을 작성할 경우, 서비스 이용이 제한될 수 있습니다.</div>
-					<input type="submit" value="후기 보내기">
-					<input type="button" value="목록으로" onclick="location.href='list'">
+					<div class="rev-notice1">
+						<span class="rev-notice-icon">※</span>
+						후기는 <span class="rev-redspan">수정 및 삭제가 불가능</span>하므로 신중히 작성해주세요.
+					</div>
+					<div class="rev-notice1">
+						<span class="rev-notice-icon">※</span>
+						허위 및 성의없는 내용을 작성할 경우, 서비스 이용이 제한될 수 있습니다.</div>
+						<br>
+					<div class="review-buttons">
+						<input type="submit" value="후기 보내기" class="revwrite-btn btn btn-light w-25">
+						<input type="button" value="목록으로" onclick="location.href='list'" class="revwrite-btn btn btn-light w-25">
+					</div>
 			</form>
 		</div>
 	</div>

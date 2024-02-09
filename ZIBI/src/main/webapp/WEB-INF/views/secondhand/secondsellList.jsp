@@ -36,11 +36,26 @@ $(function() {
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
-                    output += '<td>' + item.sc_address + '</td>';
-                    output += '<td>' + item.sc_modify_date + '</td>';
+                    output += '<td>';
+                    output += item.sc_address != null ? item.sc_address : '지역 설정 안함';
+                    output += '</td>';
+                    output += '<td>';
+                    if(item.sc_modify_date == null){
+                    	output += item.sc_reg_date;
+                    }else{
+                    	output += item.sc_modify_date;
+                    }
+                    output += '</td>';
                     output += '<td><input type="button" value="채팅하기" class="scstore-btn2"';
                     output += 'onclick="location.href=\'${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=' + item.sc_num + '\'"></td>';
-                    output += '<td><input type="button" value="끌어올리기" class="sc_up" id="sc_up3" data-num="' + item.sc_num + '" ' + (item.sc_sellstatus !== 0 ? 'disabled' : '') + '></td>';
+                    output += '<td>';
+                    if (item.sc_sellstatus != 0) {
+                        output += '<input type="button" value="끌어올리기" class="sc_up" id="sc-up-disabled" disabled data-num="' + item.sc_num + '">';
+                    } else {
+                        buttonClass = "sc_up";
+                        output += '<input type="button" value="끌어올리기" class="sc_up" id="sc_up3" data-num="' + item.sc_num + '">';
+                    }
+                    output += '</td>';
                     output += '<td>';
                     output += '<input type="button" value="수정" class="store-md" onclick="location.href=\'update?sc_num=' + item.sc_num + '\'"><br>';
                     output += '<input type="button" value="삭제" class="store-md" onclick="location.href=\'delete?sc_num=' + item.sc_num + '\'"><br>';
@@ -126,8 +141,16 @@ $(function() {
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
-                    output += '<td>' + item.sc_address + '</td>';
-                    output += '<td>' + item.sc_modify_date + '</td>';
+                    output += '<td>';
+                    output += item.sc_address != null ? item.sc_address : '지역 설정 안함';
+                    output += '</td>';
+                    output += '<td>';
+                    if(item.sc_modify_date == null){
+                    	output += item.sc_reg_date;
+                    }else{
+                    	output += item.sc_modify_date;
+                    }
+                    output += '</td>';
                     output += '<td><input type="button" value="채팅하기" class="scstore-btn2"';
                     output += 'onclick="location.href=\'${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=' + item.sc_num + '\'"></td>';
                     output += '<td><input type="button" value="끌어올리기" class="sc_up" data-num="'+item.sc_num+'" id="sc_up4"></td>';
@@ -182,14 +205,25 @@ $(function() {
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
-                    output += '<td>' + item.sc_address + '</td>';
-                    output += '<td>' + item.sc_order_reg_date + '</td>';
-                    output += '<td>' + item.sc_buyer_nickname + '</td>';
+                    output += '<td>';
+                    output += item.sc_address != null ? item.sc_address : '지역 설정 안함';
+                    output += '</td>';
+                    output += '<td>';
+                    output += item.sc_order_reg_date != null ? item.sc_order_reg_date : 'X';
+                    output += '</td>';
+                    output += '<td>';
+                    output += item.sc_buyer_nickname != null ? item.sc_buyer_nickname : 'X';
+                    output += '</td>';
                     output += '<td><input type="button" value="채팅하기" class="scstore-btn2"';
                     output += 'onclick="location.href=\'${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=' + item.sc_num + '\'"></td>';
                     output += '<td>';
-                    output += '<input type="button" id="updateOrderReserve" value="예약 확정" data-num="'+item.sc_num+'" class="reserve-okno"><br>';
-                    output += '<input type="button" value="예약 거절" class="reserve-okno"><br>';
+                    if(item.sc_buyer_nickname!=null){ // 구매자가 있다면 버튼 클릭 가능 
+                    	output += '<input type="button" id="updateOrderReserve" value="예약 확정" data-num="'+item.sc_num+'" class="reserve-okno"><br>';
+                        output += '<input type="button" value="예약 거절" data-num="'+item.sc_num+'" id="updateOrderReject" class="reserve-okno"><br>';	
+                    }else{ // 구매자가 없다면 버튼 클릭 불가능
+                    	output += '<input type="button" id="updateOrderReserve" value="예약 확정" data-num="'+item.sc_num+'" class="screserve-disabled" disabled><br>';
+                        output += '<input type="button" value="예약 거절" data-num="'+item.sc_num+'" id="updateOrderReject" class="screserve-disabled" disabled><br>';
+                    }
                     output += '</td>';
                     output += '</tr>';
 		
@@ -218,6 +252,24 @@ $(function() {
 	        }
 	    });
 	});
+    
+    //예약 대기 페이지에서 예약 거절 클릭시 ajax - 동적
+    $(document).on('click', '#updateOrderReject', function(){
+	    let sc_num = $(this).attr('data-num');
+	    $.ajax({
+	        url: 'updateOrderReject',
+	        type: 'post',
+	        data: {sc_num: sc_num},
+	        dataType: 'json',
+	        success: function(param) {
+	            alert('예약이 거절되었습니다.');
+	        },
+	        error: function() {
+	            alert('네트워크 오류 발생');
+	        }
+	    });
+	});
+    
     
     //예약 중
     $('#sc_reserve').click(function(){
@@ -252,12 +304,24 @@ $(function() {
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
-                    output += '<td>' + item.sc_address + '</td>';
-                    output += '<td>' + item.sc_modify_date + '</td>';
+                    output += '<td>';
+                    output += item.sc_address != null ? item.sc_address : '지역 설정 안함';
+                    output += '</td>';
+                    output += '<td>';
+                    if(item.sc_modify_date == null){
+                    	output += item.sc_reg_date;
+                    }else{
+                    	output += item.sc_modify_date;
+                    }
+                    output += '</td>';
+                    output += '<td>';
+                    output += item.sc_buyer_nickname != null ? item.sc_buyer_nickname : 'X';
+                    output += '</td>';
                     output += '<td><input type="button" value="채팅하기" class="scstore-btn2"';
                     output += 'onclick="location.href=\'${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=' + item.sc_num + '\'"></td>';
                     output += '<td>';
-                    output += '<input type="button" value="수정" onclick="location.href=\'update?sc_num=' + item.sc_num + '\'" class="store-md"><br>';
+                    output += '<input type="button" value="판매완료하기" id="updateOrderFini" class="sellfini-btn" data-num="'+item.sc_num+'"><br>';
+                    output += '<input type="button" value="수정" onclick="location.href=\'update?sc_num=' + item.sc_num + '\'" class="store-md">';
                     output += '</td>';
                     output += '</tr>';
 		
@@ -272,6 +336,22 @@ $(function() {
     	});
     });
     
+  	//예약중 페이지에서 판매완료하기 클릭 시 ajax   - 동적
+    $(document).on('click', '#updateOrderFini', function(){
+	    let sc_num = $(this).attr('data-num');
+	    $.ajax({
+	        url: 'updateOrderFini',
+	        type: 'post',
+	        data: {sc_num: sc_num},
+	        dataType: 'json',
+	        success: function(param) {
+	            alert('판매 완료 처리되었습니다.');
+	        },
+	        error: function() {
+	            alert('네트워크 오류 발생');
+	        }
+	    });
+	});
     
     //판매완료
     $('#sc_sellFin').click(function(){
@@ -306,8 +386,19 @@ $(function() {
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
-                    output += '<td>' + item.sc_address + '</td>';
-                    output += '<td>' + item.sc_modify_date + '</td>';
+                    output += '<td>';
+                    output += item.sc_address != null ? item.sc_address : '지역 설정 안함';
+                    output += '</td>';
+                    output += '<td>';
+                    if(item.sc_modify_date == null){
+                    	output += item.sc_reg_date;
+                    }else{
+                    	output += item.sc_modify_date;
+                    }
+                    output += '</td>';
+                    output += '<td>';
+                    output += item.sc_buyer_nickname != null ? item.sc_buyer_nickname : 'X';
+                    output += '</td>';
                     output += '<td><input type="button" value="채팅하기" class="scstore-btn2"';
                     output += 'onclick="location.href=\'${pageContext.request.contextPath}/secondchat/chatListForSeller?sc_num=' + item.sc_num + '\'"></td>';
                     output += '<td>';
@@ -360,8 +451,16 @@ $(function() {
                     output += '</td>';
                     output += '<td><a href="detail?sc_num='+item.sc_num +'" class="sc-title-fav">' + item.sc_title + '</a></td>';
                     output += '<td>' + item.sc_price + '</td>';
-                    output += '<td>' + item.sc_address + '</td>';
-                    output += '<td>' + item.sc_modify_date + '</td>';
+                    output += '<td>';
+                    output += item.sc_address != null ? item.sc_address : '지역 설정 안함';
+                    output += '</td>';
+                    output += '<td>';
+                    if(item.sc_modify_date == null){
+                    	output += item.sc_reg_date;
+                    }else{
+                    	output += item.sc_modify_date;
+                    }
+                    output += '</td>';
                     output += '<td>';
                     output += '<input type="button" value="숨기기 해제" class="sc_hideout" data-num="'+item.sc_num+'" id="sc_hidein1">';
                     output += '</td>';
@@ -465,7 +564,7 @@ $(function() {
 										    <th scope="col">글제목</th>
 										    <th scope="col">가격</th>
 										    <th scope="col">동네</th>
-										    <th scope="col">최근수정일</th>
+										    <th scope="col">최근작성일</th>
 										    <th scope="col">채팅하기</th>
 										    <th scope="col">끌어올리기</th>
 										    <th scope="col">기능</th>
@@ -495,7 +594,7 @@ $(function() {
 										    <th scope="col">글제목</th>
 										    <th scope="col">가격</th>
 										    <th scope="col">동네</th>
-										    <th scope="col">최근수정일</th>
+										    <th scope="col">최근작성일</th>
 										    <th scope="col">채팅하기</th>
 										    <th scope="col">끌어올리기</th>
 										    <th scope="col">기능</th>
@@ -555,9 +654,10 @@ $(function() {
 										    <th scope="col">글제목</th>
 										    <th scope="col">가격</th>
 										    <th scope="col">동네</th>
-										    <th scope="col">최근수정일</th>
+										    <th scope="col">최근작성일</th>
+											<th scope="col">구매자</th>
 										    <th scope="col">채팅하기</th>
-										    <th scope="col">기능</th>
+										    <th scope="col">예약</th>
 										  </tr>
 										</thead>
 										<tbody>
@@ -584,7 +684,8 @@ $(function() {
 										    <th scope="col">글제목</th>
 										    <th scope="col">가격</th>
 										    <th scope="col">동네</th>
-										    <th scope="col">최근수정일</th>
+										    <th scope="col">최근작성일</th>
+										    <th scope="col">구매자</th>
 										    <th scope="col">채팅하기</th>
 										    <th scope="col">기능</th>
 										  </tr>
@@ -611,7 +712,7 @@ $(function() {
 										    <th scope="col">글제목</th>
 										    <th scope="col">가격</th>
 										    <th scope="col">동네</th>
-										    <th scope="col">최근수정일</th>
+										    <th scope="col">최근작성일</th>
 										    <th scope="col">기능</th>
 										  </tr>
 										</thead>

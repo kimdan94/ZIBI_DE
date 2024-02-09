@@ -16,7 +16,7 @@
 
 <div class="container">
 	<div class="d-flex justify-content-center">
-		<div class="rounded sc-writeform col-md-4 col-lg-6">
+		<div class="rounded col-md-4 col-lg-6">
 			<form:form action="update" id="sc_updateform" modelAttribute="secondVO" enctype="multipart/form-data">
 				<form:hidden path="sc_num"/>
 				<div>
@@ -208,22 +208,10 @@
 				            document.getElementById("sc_latitude").value = coords.lat;
 				            document.getElementById("sc_longitude").value = coords.lng;
 				            
-				            
-				            //위도(sc_latitude) , 경도(sc_longitude) 변수에 저장
-				            //var sc_latitude = coords.lat;
-				            //var sc_longitude = coords.lng;
-				            
 				          	//좌표 출력   나중에 주석처리
 				            var message = '현재 좌표의 위도는 ' + coords.lat + ' 이고, 경도는 ' + coords.lng + ' 입니다';
 				            var resultDiv = document.getElementById('clickLatlng');
 				            resultDiv.innerHTML = message;
-				            
-				            
-				            /* 삭제하기!!!!!
-				            var message1 = 'db 좌표의 위도는 ' + sc_latitude + ' 이고, 경도는 ' + sc_longitude + ' 입니다';
-				            var resultDiv1 = document.getElementById('clickLatlng1');
-				            resultDiv1.innerHTML = message1;
-				            */
 				        });
 				    }
 				</script>

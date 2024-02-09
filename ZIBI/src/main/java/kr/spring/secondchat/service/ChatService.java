@@ -3,7 +3,6 @@ package kr.spring.secondchat.service;
 import java.util.List;
 import java.util.Map;
 
-import kr.spring.second.vo.SecondOrderVO;
 import kr.spring.secondchat.vo.ChatRoomVO;
 import kr.spring.secondchat.vo.ChatVO;
 

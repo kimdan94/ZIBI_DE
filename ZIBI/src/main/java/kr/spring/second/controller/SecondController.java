@@ -343,7 +343,6 @@ public class SecondController {
 	//거래 후기 작성 폼 호출
 	@GetMapping("/secondhand/secondReviewWrite")
 	public ModelAndView reviewForm(@RequestParam int sc_num,HttpSession session) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
 		SecondVO second = secondService.selectSecond(sc_num);//secondVO에 sc_num, mem_nickname(판매자 닉네임) 들어있음
 		log.debug("<<거래 후기 위한 판매자 닉네임 second>> : " + second);
 		

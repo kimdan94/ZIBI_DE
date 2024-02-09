@@ -26,7 +26,14 @@
 								<tbody>
 									<c:forEach var="second" items="${list}">
 									<tr>
-										<td><a href="detail?sc_num=${second.sc_num}"><img width="60" src="${pageContext.request.contextPath}/upload/${second.secondVO.sc_filename}"></a></td>
+										<td>
+											<c:if test="${second.secondVO.sc_filename ==null}">
+												<a href="detail?sc_num=${second.sc_num}"><img width="60" src="${pageContext.request.contextPath}/images/jiwon/sc_mynoimg.png"></a>
+											</c:if>
+											<c:if test="${second.secondVO.sc_filename !=null}">
+												<a href="detail?sc_num=${second.sc_num}"><img width="60" src="${pageContext.request.contextPath}/upload/${second.secondVO.sc_filename}"></a>	
+											</c:if>
+										</td>
 										<td>
 											<c:if test="${second.secondVO.sc_sellstatus ==0}">판매중</c:if>
 											<c:if test="${second.secondVO.sc_sellstatus ==1}">예약대기</c:if>
@@ -38,8 +45,8 @@
 										<td>${second.secondVO.sc_address}</td>
 										<td>${second.mem_nickname}</td>
 										<td>${second.sc_order_reg_date}</td>
-										<td><input type="button" value="채팅하기"></td>
-										<td><input type="button" value="후기" onclick="location.href='${pageContext.request.contextPath}/secondhand/secondReviewWrite?sc_num=${second.sc_num}'"></td>
+										<td><input type="button" value="채팅하기" class="scstore-btn2"></td>
+										<td><input type="button" value="후기" onclick="location.href='${pageContext.request.contextPath}/secondhand/secondReviewWrite?sc_num=${second.sc_num}'" class="store-md"></td>
 									</tr>								
 									</c:forEach>
 								</tbody>

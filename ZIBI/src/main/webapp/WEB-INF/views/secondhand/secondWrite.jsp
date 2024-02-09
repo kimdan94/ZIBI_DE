@@ -12,8 +12,7 @@
     });
 </script>
 
-
-<div>
+<div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded sc-writeform col-md-4 col-lg-6">
 			<form:form action="write" id="sc_write" modelAttribute="secondVO" enctype="multipart/form-data">

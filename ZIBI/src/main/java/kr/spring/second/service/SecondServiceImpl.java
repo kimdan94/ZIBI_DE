@@ -245,6 +245,10 @@ public class SecondServiceImpl implements SecondService{
 	public int selectReviewCount(int mem_num) {
 		return secondMapper.selectReviewCount(mem_num);
 	}
+	@Override
+	public void deleteOrderByScNum(int sc_num) {
+		secondMapper.deleteOrderByScNum(sc_num);
+	}
 	
 	
 	

@@ -219,7 +219,7 @@ public class SecondAjaxController {
 		return mapJson;
 	}
 	/*============================
-	 * 중고거래 판매내역 - 예약대기 페이지 - 예약 확정 버튼 클릭 시 
+	 * 중고거래 판매내역 - 예약대기 페이지 - 예약 확정 버튼 클릭 시 - 예약중으로 상태 변경됨
 	 *============================*/
 	@RequestMapping("/secondhand/updateOrderReserve")
 	@ResponseBody
@@ -237,7 +237,26 @@ public class SecondAjaxController {
 			map.put("result", "success");
 		}
 		return map;
-		
+	}
+	/*============================
+	 * 중고거래 판매내역 - 예약대기 페이지 - 예약 거절 버튼 클릭 시 - 판매중으로 상태 변경됨
+	 *============================*/
+	@RequestMapping("/secondhand/updateOrderReject")
+	@ResponseBody
+	public Map<String,Object> updateOrderReject(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<예약대기 페이지 - 예약 거절 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else {
+			//second테이블 sc_sellstatus=0로 update
+			secondService.updateForSale(sc_num);
+			//second_order테이블에서 삭제
+			secondService.deleteOrderByScNum(sc_num);
+			map.put("result", "success");
+		}
+		return map;
 	}
 	
 	/*============================
@@ -274,7 +293,7 @@ public class SecondAjaxController {
 		return mapJson;
 	}
 	/*============================
-	 * 중고거래 판매내역 - 거래완료
+	 * 중고거래 판매내역 - 판매완료
 	 *============================*/
 	@RequestMapping("/secondhand/sc_sellFin")
 	@ResponseBody
@@ -304,6 +323,26 @@ public class SecondAjaxController {
 			mapJson.put("sellFinList", sellFinList);
 		}
 		return mapJson;
+	}
+	/*============================
+	 * 중고거래 판매내역 - 예약중 페이지 - 판매완료하기 버튼 클릭 시 - 판매완료로 상태 변경됨
+	 *============================*/
+	@RequestMapping("/secondhand/updateOrderFini")
+	@ResponseBody
+	public Map<String,Object> updateOrderFini(@RequestParam int sc_num, HttpSession session){
+		log.debug("<<예약중 페이지 - 판매완료처리 sc_num>> : " + sc_num);
+		Map<String,Object> map = new HashMap<String,Object>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			map.put("result", "logout");
+		}else {
+			//second테이블 sc_sellstatus=3로 update
+			secondService.updateSellFin(sc_num);
+			//second_order테이블 sc_order_status=3로 update
+			secondService.updateOrderSellFin(sc_num);
+			map.put("result", "success");
+		}
+		return map;
 	}
 	
 	/*============================

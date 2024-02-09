@@ -80,25 +80,6 @@ $(function(){
             }
 		});
 	});
-	/* //모달창에서 거래완료 클릭시 
-	$('#scSellFin_btn').click(function(){
-		$.ajax({
-			url: 'updateSellFin',
-            type: 'post',
-            data:{sc_num:${second.sc_num}},
-            dataType: 'json',
-            success: function(param) {
-            	$('#secondModifyStatusModal').hide();
-            	$('#status_png').empty();
-            	output = '<img src="${pageContext.request.contextPath}/images/jiwon/sc_sellFin.png" class="position-absolute top-50 start-50 translate-middle" style="width:300px;height:300px; z-index: 1;">';
-            	$('#status_png').append(output);
-            },
-            error: function() {
-                alert('네트워크 오류 발생');
-            }
-		});
-	}); */
-	
 	
 	//바로예약 모달창에서 채팅없이 거래 클릭 시 - 예약대기로 변경되고, second_order 테이블에 insert
 	$('#sc_orderinsert').click(function(){
@@ -199,16 +180,41 @@ $(function(){
 				    </div>
                 </div>
                 	<!-- 사용자가 없거나, 게시글 작성자가 아닐때   -->
-               	<c:if test="${user.mem_num != second.mem_num}">
+                <c:choose>
+                <c:when test="${user.mem_num != second.mem_num}">
+                <!-- 판매중인 경우 채팅 ,예약 버튼 있음 -->
+                <c:if test="${second.sc_sellstatus==0}">
 	                <!-- 찜 -->
 	                <img id="output_fav" data-num="${second.sc_num}"
 	                	src="${pageContext.request.contextPath}/images/jiwon/sc_fav.png" style="width:40px;height:40px;">
 	                <span id="output_fcount"></span>
 	                <input type="button" value="채팅하기" class="sc-order-btn-green w-25"
 	                	onclick="location.href='${pageContext.request.contextPath}/secondchat/chatListForBuyer?sc_num=${second.sc_num}'">
-	                <%-- <a href="${pageContext.request.contextPath}/secondchat/chatListForBuyer?sc_num=${second.sc_num}" class="btn btn-primary py-3 px-5 rounded-pill">채팅</a> --%>
 	                <input type="button" value="바로 예약" id="sc_order" class="sc-order-btn w-25">
                 </c:if>
+                <!-- 예약 대기&예약중인 경우 채팅만 가능, 바로 예약 disabled 처리 -->
+                <c:if test="${second.sc_sellstatus==1 || second.sc_sellstatus==2}">
+	                <!-- 찜 -->
+	                <img id="output_fav" data-num="${second.sc_num}"
+	                	src="${pageContext.request.contextPath}/images/jiwon/sc_fav.png" style="width:40px;height:40px;">
+	                <span id="output_fcount"></span>
+	                <input type="button" value="채팅하기" class="sc-order-btn-green w-25"
+	                	onclick="location.href='${pageContext.request.contextPath}/secondchat/chatListForBuyer?sc_num=${second.sc_num}'">
+	                <input type="button" value="바로 예약" id="sc_order" class="sc-disabled-btn w-25" disabled>
+                </c:if>
+                
+                <!-- 판패 완료 시 채팅, 바로예약 버튼 diabled처리 -->
+               	<c:if test="${second.sc_sellstatus==3}">
+	                <!-- 찜 -->
+	                <img id="output_fav" data-num="${second.sc_num}"
+	                	src="${pageContext.request.contextPath}/images/jiwon/sc_fav.png" style="width:40px;height:40px;">
+	                <span id="output_fcount"></span>
+	                <input type="button" value="채팅하기" class="sc-disabled-btn w-25" disabled
+	                	onclick="location.href='${pageContext.request.contextPath}/secondchat/chatListForBuyer?sc_num=${second.sc_num}'">
+	                <input type="button" value="바로 예약" id="sc_order" class="sc-disabled-btn w-25" disabled>
+                </c:if>
+                </c:when>
+                </c:choose>
                 <!-- 로그인한 사람이 게시글 작성자일때 -->
                 <c:if test="${!empty user && user.mem_num == second.mem_num}">
                 <div class="row g-4 text-dark mb-5">
@@ -361,22 +367,23 @@ $(function(){
 <%-- 상태 변경 모달 --%>
 <div id="secondModifyStatusModal" style="display: none">
 	<div class="ms-modal-box">
-		<div>
-			<span class="close" id="ms_closeModalBtn">&times;</span>
+		<div id="ms_closeModalBtn">
+			<span class="close">&times;</span>
+		</div>
+		<div class="mModal-status">
+			<h3 class="mModal-h3">상태 변경</h3>
 			<ul>
-				<li><input type="button" value="판매중" id="scForsale_btn" class="sc-sdefault-btn btn-light w-25"></li>
-				<li><input type="button" value="예약대기" id="scWaitReserve_btn" class="sc-sdefault-btn btn-light w-25"></li>
-				<li><input type="button" value="예약중" id="scReserve_btn" class="sc-sdefault-btn btn-light w-25"></li>
-				<li><input type="button" value="거래완료" id="scSellFin_btn" class="sc-sdefault-btn btn-light w-25" 
+				<li><input type="button" value="판매중" id="scForsale_btn" class="sc-sdefault-btn btn-light"></li>
+				<li><input type="button" value="예약대기" id="scWaitReserve_btn" class="sc-sdefault-btn btn-light"></li>
+				<li><input type="button" value="예약중" id="scReserve_btn" class="sc-sdefault-btn btn-light"></li>
+				<li><input type="button" value="거래완료" id="scSellFin_btn" class="sc-sdefault-btn btn-light" 
 					onclick="location.href='${pageContext.request.contextPath}/secondchat/chatSelectBuyerList?sc_num=${second.sc_num}'">
 				</li>
 			</ul>
 		</div>
-		
 	</div>
 	<div class="modal-bg"></div>
 </div>
-
 
 <%-- 글 삭제 모달 --%>
 <div id="secondDeleteModal" style="display: none">

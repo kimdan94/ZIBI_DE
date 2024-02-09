@@ -50,7 +50,8 @@
 			sc_show=2
 		<if test="keyword != null and keyword != ''">
 				AND (sc_title LIKE '%' || #{keyword} || '%' OR
-				sc_content LIKE '%' || #{keyword} || '%')
+				sc_content LIKE '%' || #{keyword} || '%' OR
+				sc_address LIKE '%' || #{keyword} || '%') 
 		</if>
 	</sql>
 	
@@ -206,11 +207,13 @@
 	<!-- 중고거래 마이페이지 - 판매내역 - 예약중 글 목록 -->
 	<select id="selectReserveList" parameterType="map" resultType="secondVO">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM 
-			(SELECT sc_num, sc_filename, sc_title,
-					sc_price, sc_address,sc_reg_date,sc_sellstatus,
-					sc_modify_date,mem_num
-			 FROM second 
-			 JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=2 AND sc_sellstatus=2)a)
+			(SELECT s.sc_num, s.sc_filename, s.sc_title,
+					s.sc_price, s.sc_address,s.sc_reg_date,s.sc_sellstatus,
+					s.sc_modify_date, s.mem_num, m.mem_nickname sc_buyer_nickname
+			 FROM second s
+			 LEFT OUTER JOIN second_order so ON s.sc_num = so.sc_num
+			 LEFT OUTER JOIN member m ON so.sc_buyer_num = m.mem_num
+			 WHERE s.mem_num=#{mem_num} AND s.sc_show=2 AND s.sc_sellstatus=2)a)
 	</select>
 	
 	<!-- sc_sellstatus가 3일때(판매완료)  -->
@@ -221,11 +224,13 @@
 	<!-- 중고거래 마이페이지 - 판매내역 - 판매완료 글 목록 -->
 	<select id="selectSellFinList" parameterType="map" resultType="secondVO">
 		SELECT * FROM (SELECT a.*, rownum rnum FROM 
-			(SELECT sc_num, sc_filename, sc_title,
-					sc_price, sc_address,sc_reg_date,sc_sellstatus,
-					sc_modify_date,mem_num
-			 FROM second 
-			 JOIN member USING(mem_num) WHERE mem_num=#{mem_num} AND sc_show=2 AND sc_sellstatus=3)a)
+			(SELECT s.sc_num, s.sc_filename, s.sc_title,
+					s.sc_price, s.sc_address,s.sc_reg_date,s.sc_sellstatus,
+					s.sc_modify_date, s.mem_num, m.mem_nickname sc_buyer_nickname
+			 FROM second s
+			 LEFT OUTER JOIN second_order so ON s.sc_num = so.sc_num
+			 LEFT OUTER JOIN member m ON so.sc_buyer_num = m.mem_num
+			 WHERE s.mem_num=#{mem_num} AND s.sc_show=2 AND s.sc_sellstatus=3)a)
 	</select>
 	
 	<!-- sc_show가 1(숨김) 게시물 -->

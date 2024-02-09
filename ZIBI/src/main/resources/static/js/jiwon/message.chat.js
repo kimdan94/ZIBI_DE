@@ -70,8 +70,17 @@ $(function(){
 							output += '</div><div class="space-message">';
 							output += item.mem_nickname;
 						}
+						
+						
 						output += '<div class="item">';
-						output += item.chat_read_check + '<span>' + item.chat_message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
+						if(item.mem_num==param.user_num){
+							if(item.chat_read_check==0){
+								output+='';
+							}else{
+								output+= '<span class="chat-read-check">' + item.chat_read_check + '</span>';
+							}
+						}
+						output += '<span>' + item.chat_message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
 						
 						//시간 추출
 						output += '<div class="align-right">'+item.chat_reg_date.split(' ')[1]+'</div>';

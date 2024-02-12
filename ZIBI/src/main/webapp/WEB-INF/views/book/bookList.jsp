@@ -59,7 +59,7 @@
 			<c:if test="${mbook.book_onoff == 2}">
 				<input type="button" value="모임 취소" disabled="disabled" class="btn-guide4">
 			</c:if>
-			<c:if test="${(mbook.book_onoff == 3 && mbook.book_state != 2 && mbook.compareNow == 2)|| (mbook.book_headcount == mbook.book_maxcount && mbook.compareNow == 2)}">
+			<c:if test="${(mbook.book_onoff == 3 && mbook.book_state != 2 && mbook.compareNow == 2)|| (mbook.book_headcount == mbook.book_maxcount && mbook.compareNow == 2 && mbook.book_state != 2)}">
 				<input type="button" value="모집 완료" disabled="disabled" class="btn-guide">
 			</c:if>
 		</td>

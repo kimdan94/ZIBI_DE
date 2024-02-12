@@ -27,7 +27,9 @@
 					</ul>
 				</div>
 				<div class="col-lg-2 col-md-10 footer-logo">
-					<img src="${pageContext.request.contextPath}/images/logo_rec.png" width="120px">
+					<a href="${pageContext.request.contextPath}/main/home" class="navbar-brand">
+						<img src="${pageContext.request.contextPath}/images/logo_rec.png" width="120px">
+					</a>
 				</div>
 			</div>
 			<div class="info">

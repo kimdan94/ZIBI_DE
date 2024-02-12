@@ -1,7 +1,6 @@
-$(document).ready(function() {
+
 	if($('#mem_name').val()==''){ //추가 정보 첫 입력의 경우 버튼 활성화
 		$('#phone_check').show();
-		$('#nickname_check').show();
 	}
 	
 	let phone_checked = 1; //닉네임 변경 변수 체크
@@ -143,4 +142,3 @@ $(document).ready(function() {
 		$('#nickname_area').text(message);
 		nickname_checked = 0;
 	}
-});

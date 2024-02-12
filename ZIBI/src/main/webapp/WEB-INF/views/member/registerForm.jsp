@@ -51,5 +51,5 @@
 		</form:form>
 	</div>
 </div>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/na/mypageZipcode.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/na/register.js"></script>

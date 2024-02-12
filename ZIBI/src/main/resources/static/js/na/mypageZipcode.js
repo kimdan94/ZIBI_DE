@@ -1,4 +1,4 @@
-$(document).ready(function() {
+
 	var element_layer = document.getElementById('layer'); // 우편번호 찾기 화면을 넣을 element
 	
 	function closeDaumPostcode() { // iframe을 넣은 element를 안보이게 한다.
@@ -73,4 +73,3 @@ $(document).ready(function() {
 		element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width) / 2 - borderWidth) + 'px';
 		element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height) / 2 - borderWidth) + 'px';
 	}
-});

@@ -3,7 +3,7 @@
 <div class="openProfile">
 	<div class="row justify-content-center">
 		<div class="col-5 user">
-			<img class="book-profile" src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${mem_num}">
+			<img src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${mem_num}">
 		</div>
 		<div class="col-2 align-self-center">
 			<h5>${nickname}</h5>

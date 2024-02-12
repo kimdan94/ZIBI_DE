@@ -64,7 +64,9 @@
 
 	//카테고리 선택 이벤트
 	$('#category').change(function(){
-		if($(this).val()==6){
+		if($(this).val()==5){
+			location.href = '/performance/history';
+		} else if($(this).val()==6){
 			location.href = '/secondhand/secondsellList';
 		} else{
 			location.href = 'mypageDeal?category='+$('#category').val();

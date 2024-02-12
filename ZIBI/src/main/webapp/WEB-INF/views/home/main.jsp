@@ -67,16 +67,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/checklist/list'">
-				<div class="service-content d-flex justify-content-center p-4">
-					<div class="service-content-icon text-center">
-						<h5 class="mb-3">
-							<a href="${pageContext.request.contextPath}/checklist/list">🏠 집 체크리스트</a>
-						</h5>
-						<p class="mb-1">집을 이사할 때 ZIBI의<br>리스트를 활용해보세요!</p>
-					</div>
-				</div>
-			</div>
 			<div class="bg-light rounded service-item" onclick="location.href='${pageContext.request.contextPath}/secondhand/list'">
 				<div class="service-content d-flex justify-content-center p-4">
 					<div class="service-content-icon text-center">
@@ -254,10 +244,10 @@
 		</div>
 		<div class="row">
 			<div class="col-6">
-				<h6>🎬 최신 영화</h6>
+				<h6>✍️ 커뮤니티</h6>
 				<div class="container-fluid team py-6">
 					<div class="row g-1">
-						<c:forEach var="content" items="${list_movie}">
+						<c:forEach var="content" items="${list_community}">
 							<div class="col-lg-4 col-md-2">
 								<div class="team-item rounded">
 									<div class="team-img">
@@ -270,7 +260,7 @@
 									</div>
 									<div class="team-content text-center py-1 rounded-bottom text-center">
 										<h6 class="text-primary">
-											<a href="${pageContext.request.contextPath}/performance/detail?performance_num=${content.num}" class="my-auto text-center">
+											<a href="${pageContext.request.contextPath}/community/detail?community_num=${content.num}" class="my-auto text-center">
 												${content.title}
 											</a>
 										</h6>
@@ -311,38 +301,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-6">
-				<h6>✍️ 커뮤니티</h6>
-				<div class="container-fluid team py-6">
-					<div class="row g-1">
-						<c:forEach var="content" items="${list_community}">
-							<div class="col-lg-4 col-md-2">
-								<div class="team-item rounded">
-									<div class="team-img">
-										<c:if test="${!empty content.photo}">
-											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/upload/${content.photo}" >
-										</c:if>
-										<c:if test="${empty content.photo}">
-											<img class="img-fluid rounded" src="${pageContext.request.contextPath}/images/na/no-image.png">
-										</c:if>
-									</div>
-									<div class="team-content text-center py-1 rounded-bottom text-center">
-										<h6 class="text-primary">
-											<a href="${pageContext.request.contextPath}/community/detail?community_num=${content.num}" class="my-auto text-center">
-												${content.title}
-											</a>
-										</h6>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
-			</div>
-			<div class="col-6">
-				<h6>🏠 집 체크리스트</h6>
-				추가 필요
-			</div>
+
 		</div>
 	</div>
 	<!-- 최신글 끝 -->

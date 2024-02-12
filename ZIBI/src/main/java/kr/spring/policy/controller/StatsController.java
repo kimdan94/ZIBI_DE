@@ -49,7 +49,7 @@ public class StatsController {
 		urlBuilder.append("?" + URLEncoder.encode("consumer_key","UTF-8") + "="+consumer_key); //공공데이터에서 요청한 파라미터값 저장
 		urlBuilder.append("&" + URLEncoder.encode("consumer_secret","UTF-8") + "=" + URLEncoder.encode(consumer_secret, "UTF-8"));
 		
-		String jsonData = statusUrl(urlBuilder);
+		String jsonData = statsUrl(urlBuilder);
 		
 		JSONParser jsonParser = new JSONParser(); //문자열을 Json 형식에 맞게 Object로 파싱할 수 있는 Parser
 		Object obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
@@ -79,7 +79,7 @@ public class StatsController {
 		urlBuilder.append("&" + URLEncoder.encode("year","UTF-8") + "=" + URLEncoder.encode(year, "UTF-8"));
 		urlBuilder.append("&" + URLEncoder.encode("low_search","UTF-8") + "=" + URLEncoder.encode(low_search, "UTF-8"));
 		
-		jsonData = statusUrl(urlBuilder);
+		jsonData = statsUrl(urlBuilder);
 		
 		obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
 		jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
@@ -97,7 +97,7 @@ public class StatsController {
 			urlBuilder.append("&" + URLEncoder.encode("year","UTF-8") + "=" + URLEncoder.encode(year, "UTF-8"));
 			urlBuilder.append("&" + URLEncoder.encode("household_type","UTF-8") + "=" + URLEncoder.encode(household_type, "UTF-8"));
 			
-			jsonData = statusUrl(urlBuilder);
+			jsonData = statsUrl(urlBuilder);
 			
 			obj = jsonParser.parse(jsonData); //JsonParser로 Json 문자열을 Obejct 형식으로 파싱
 			jsonObj = (JSONObject)obj; //Object 형식의 데이터를 JSONObject형식으로 형변환
@@ -145,7 +145,7 @@ public class StatsController {
 	}
 	
 	/*------------------url 생성, json 응답 받아옴-------------------*/
-	private String statusUrl(StringBuilder urlBuilder) throws Exception {
+	private String statsUrl(StringBuilder urlBuilder) throws Exception {
 		
 		URL url = new URL(urlBuilder.toString()); //url 생성
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();

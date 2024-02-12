@@ -109,9 +109,7 @@
 					SELECT book_num num, REPLACE(REPLACE(apply_title,'<','&lt;'),'>','&gt;') title, book_matchdate reg_date, 3 category FROM book_matching WHERE apply_num=#{mem_num}
 					UNION
 					SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, helper_reg_date reg_date, 4 category FROM helper WHERE mem_num=#{mem_num}
-					UNION
-					SELECT performance_num num, REPLACE(REPLACE(performance_title,'<','&lt;'),'>','&gt;') title, payment_date reg_date, 5 category FROM perform_payment a JOIN perform_choice USING (choice_num) JOIN ticketing USING (ticketing_num) JOIN performance USING (performance_num) WHERE a.mem_num=#{mem_num}
-					)
+				)
 				]]>
 		<include refid="dealCategory"/>
 	</select>
@@ -126,8 +124,6 @@
 								SELECT book_num num, REPLACE(REPLACE(apply_title,'<','&lt;'),'>','&gt;') title, book_matchdate reg_date, 3 category FROM book_matching WHERE apply_num=#{mem_num}
 								UNION
 								SELECT helper_num num, REPLACE(REPLACE(helper_title,'<','&lt;'),'>','&gt;') title, helper_reg_date reg_date, 4 category FROM helper WHERE mem_num=#{mem_num})
-								UNION ALL
-								SELECT performance_num num, REPLACE(REPLACE(performance_title,'<','&lt;'),'>','&gt;') title, payment_date reg_date, 5 category FROM perform_payment a JOIN perform_choice USING (choice_num) JOIN ticketing USING (ticketing_num) JOIN performance USING (performance_num) WHERE a.mem_num=#{mem_num}
 								)
 								]]>
 						<include refid="dealCategory"/>)a)

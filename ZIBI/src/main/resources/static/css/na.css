@@ -15,9 +15,14 @@
 	margin: 0 auto;
 	overflow: hidden;
 }
-
 .admin-page a{
 	color: black !important;
+}
+.admin-page .col-5 a{
+	display:block !important;
+	white-space:nowrap !important;
+	overflow:hidden;
+	text-overflow:ellipsis !important;
 }
 .admin-page a:hover{
 	color: #32a77b !important;
@@ -223,6 +228,7 @@
 	font-size: 1.1em;
 	font-weight: 600;
 	margin: 15px 5px 10px 5px;
+	color:black !important;
 }
 .main-content h6.text-primary{
 	font-size: .9em;
@@ -456,13 +462,13 @@
 .openProfile a{
 	color: black !important;
 }
-.openProfile a:hover{
+.openProfile a:hovuserer{
 	color: #32a77b !important;
 	transition: .3s !important;
 }
 .openProfile .col-5{
-	height: 300px;
-	width: 300px;
+	height:  150px !important;
+	width: 174px !important;
 }
 
 .openProfile .col-5 img{
@@ -523,18 +529,20 @@
 }
 
 /* 입력폼 */
-.member-form label{
+label{
 	font-weight: bold;
 	color: black;
 	margin-top: 20px;
 }
-.member-form input{
+input{
 	margin: 5px 0 5px 0;
 }
-.member-form input[type="text"]:focus,
-.member-form input[type="text"]:hover,
-.member-form input[type="password"]:focus,
-.member-form input[type="password"]:hover{
+input[type="text"]:focus,
+input[type="text"]:hover,
+input[type="search"]:hover,
+input[type="search"]:focus,
+input[type="password"]:focus,
+input[type="password"]:hover{
 	border: 1px solid #737373 !important;
 	box-shadow: none;
 }

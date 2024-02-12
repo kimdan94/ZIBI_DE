@@ -47,7 +47,6 @@ public class MemberVO {
 	private Date mem_modidate;
 	private byte[] mem_photo;
 	private String mem_photoname;
-	private String mem_auid;
 	
 	private int follow_count; //팔로우 수
 	

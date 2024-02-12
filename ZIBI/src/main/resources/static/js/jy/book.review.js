@@ -16,7 +16,7 @@ $(function(){
 		}
 		
 		//후기 내용
-		if($('#rev_content').val().trim()==''){
+		if($('#book_rev').val().trim()==''){
 			$('#revValid').text('후기 내용을 입력해 주세요.');
 			return false;
 		}else{

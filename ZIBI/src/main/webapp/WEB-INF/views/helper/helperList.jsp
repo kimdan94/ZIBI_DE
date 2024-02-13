@@ -6,7 +6,7 @@
 <!-- 내용 시작 -->
 <div class="text-center">
 	<ul class="nav nav-pills d-inline-flex justify-content-center mb-2">
-		<li class="nav-item p-2">
+		<li class="nav-item p-2"> 
 		<a class="btn mem-btn-green radius border-width" 
 			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=1'"> <span class="text-white" style="width: 150px;">헬프미</span></a>
 		</li> 

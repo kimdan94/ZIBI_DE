@@ -399,3 +399,178 @@ input[type=file]::file-selector-button{
 .rev-over-style{
 	border:3px solid blue;
 }
+
+/* 연령 */
+.ratingAge {
+	width: 30px;
+}
+/* 메인 컬러 */
+.green-background {
+	background-color: #32a77b;
+}
+.white-color{
+	color: white;
+}
+/* div */
+.div_inline{
+	display:inline-block;
+}
+/*버튼 위치*/
+.btn-position{
+	float:right;
+}
+/* 메인 리스트
+--------------------------------------*/
+.mainMouseoverBtn {
+    border: none;
+    border-radius: 10px;
+    background-color: #32a77b;
+    padding: 10px 0;
+    color: white;
+    margin: auto 0;
+}
+/* 상세 페이지
+--------------------------------------*/
+.detailLabel{
+	color: gray;
+	font-size:14pt;
+}
+.detailContent{
+	font-size:20pt;
+}
+
+
+/* 상영관, 영화, 날짜 시간 선택 페이지
+--------------------------------------*/
+.searchCinemaTable{
+	margin-top: 20px;
+	width: 150px;
+	border-top: solid #d3d3d3 1px;
+	border-bottom: solid #d3d3d3 1px;
+	padding: 5px 0;
+	text-align: center;
+	font-size: 14pt;
+	cursor: pointer;
+}
+.ent{
+	display:inline-block;
+	margin:20px;
+	border:1px solid #d3d3d3;
+	border-radius: 5px;
+	width:120px;height:120px;
+	text-align:center;
+	vertical-align:middle;
+	padding:0.5em;
+	cursor: pointer;
+}
+.ticketing-ent-row{
+	cursor: pointer;
+	margin: 0 auto;
+}
+#movieList{
+	margin: 10px;
+}
+#ticketing-poster-img{
+	height:230px; 
+	margin:10px; 
+	padding-left: 40px;
+}
+.ticketing-info{
+	font-size: 13pt;
+}
+
+
+/* 좌석 선택 페이지
+--------------------------------------*/
+.poster{
+	width: 170px;
+}
+.point{
+	cursor: pointer;
+}
+.people{
+	font-size: 14pt;
+}
+.select-people{
+	width: 140px;
+	margin: 30px 0 10px 40px;
+}
+.select-people-inner{
+	display: flex;
+	justify-content: space-evenly;
+	margin-bottom: 5px;
+}
+.seat-movieInfo-sort{
+	display:flex;
+	margin: 40px;
+}
+.movieInfo-sort{
+	margin: 3px 0 0 30px;
+	font-size: 13pt;
+}
+
+/* 좌석 선택 페이지
+--------------------------------------*/
+.payment-body{
+	height: 580px;
+	padding: 40px;
+	font-size: 13pt;
+}
+.submitBtn{
+	border: none;
+	width: 100px;
+	text-align: center;
+	float: right;
+}
+
+
+
+/* 좌석 선택 페이지
+--------------------------------------*/
+.ticketPage{
+	margin: 40px;
+}
+.ticketLabel{
+	color: gray;
+	font-size:11pt;
+}
+.ticketContent{
+	font-size:13pt;
+}
+/* 티켓
+--------------------------------------*/
+.showTicket{
+	display: inline-block;
+	margin: 10px 30px 0 0;
+}
+.showTicketImg{
+	width:300px;
+}
+.ticketBody{
+	font-size: 18pt;
+	margin: 20px 0;
+}
+
+
+/* 결제 history
+--------------------------------------*/
+.historyTable{
+	width: 100%;
+}
+.historyTable th, td{
+	border-bottom: 2px solid #d3d3d3;
+	padding: 15px;
+}
+.historyTable tr{
+	margin: 10px;
+	color: gray;
+}
+.ticketInfo{
+	margin: 8px;
+}
+/* 결제 history
+--------------------------------------*/
+.form-style{ 
+	list-style-type:none;
+	width:40%;
+}

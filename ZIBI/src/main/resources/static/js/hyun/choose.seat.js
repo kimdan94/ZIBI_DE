@@ -40,9 +40,9 @@ $(function(){ // performanceSeat.jsp
 		let treatement = Number($('.treatement-num').text())+treatement_num;
 		
 		if(adult<0 || teenage<0 || treatement<0){
-			alert('0 이하는 안됨');
+			alert('0 미만은 선택할 수 없습니다');
 		} else if(adult + teenage + treatement > 8) {
-			alert('8 이하만 가능');
+			alert('8 이하의 인원만 선택할 수 있습니다');
 		} else {
 			// 값 업데이트
 			$('.adult-num').text(adult);
@@ -112,7 +112,7 @@ $(function(){ // performanceSeat.jsp
 	// 클릭 가능한 seat 출력
 	function seat(param){
 		count = 0;
-		// alert('좌석을 다시 선택해주세요');
+
 		let standard = param.pickCinema[0].cinema_col * 0.2;
 		
 		$('#seat').empty();
@@ -163,6 +163,11 @@ $(function(){ // performanceSeat.jsp
 	
 	 
 	$(document).on('click','.seat-style',function(){ // 토글 형태
+		var totalPeopleNum = calculatePeopleNum();
+		if(totalPeopleNum == 0){
+			alert('인원을 선택해주세요');
+		}
+	
 		// 좌석 취소
 		if($(this).hasClass('seat-click')) { // 좌석 취소
 			$(this).removeClass('seat-click'); // 선택한 좌석 class 제거

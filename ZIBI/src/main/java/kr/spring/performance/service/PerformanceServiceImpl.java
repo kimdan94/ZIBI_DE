@@ -189,6 +189,16 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return performanceMapper.selectWithPerformance(performance_num);
 	}
 
+	@Override
+	public int selectPayCount(Map<String, Object> map) {
+		return performanceMapper.selectPayCount(map);
+	}
+
+	@Override
+	public void deleteChoice(Map<String, Object> map) {
+		performanceMapper.deleteChoice(map);
+	}
+
 	
 
 

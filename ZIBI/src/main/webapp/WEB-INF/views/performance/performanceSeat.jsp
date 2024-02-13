@@ -3,6 +3,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/hyun/choose.seat.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- ticketing_num 저장 -->
 <c:forEach var="ticketing" items="${pickTicketing}" varStatus="status">
 	<div id="ticketing-num" style="display:none;">${ticketing.ticketing_num}</div>
@@ -13,41 +14,73 @@
 <!-- 영화 정보 / 인원 선택 Start -->
 <div class="container-fluid contact py-6">
 	<div class="container">
-		<h2>영화 정보</h2>
-		<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
-			<div>${cinema.cinema_location1} ${cinema.cinema_location2} ${cinema.cinema_theater}</div>
-		</c:forEach>
-		<c:forEach var="performance" items="${pickPerformance}" varStatus="status">
-			<div>${performance.performance_title}</div>
-			<div>${performance.performance_age}</div>
-		</c:forEach>
-		<c:forEach var="ticketing" items="${pickTicketing}" varStatus="status">
-			<div>예매 정보: ${ticketing.ticketing_date} ${ticketing.ticketing_start_time}</div>
-		</c:forEach>
+		<h3>영화 정보</h3>
+		<h5 style="color:#32a77b;"> ※지비 회원은 할인가로 만나볼 수 있습니다</h5>
+		<div class="seat-movieInfo-sort">
+			<c:forEach var="performance" items="${pickPerformance}" varStatus="status">
+			<div class="div_inline">
+					<img class="poster" src="${pageContext.request.contextPath}/upload/${performance.performance_poster}" alt="">
+				</div>
+			</c:forEach>
+		
+			<div class="div_inline">
+				<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
+					<div class="movieInfo-sort" style="margin-top:30px;">${cinema.cinema_location1} ${cinema.cinema_location2} ${cinema.cinema_theater}</div>
+				</c:forEach>
+				<c:forEach var="ticketing" items="${pickTicketing}" varStatus="status">
+					<div class="movieInfo-sort">예매 정보: ${ticketing.ticketing_date} ${ticketing.ticketing_start_time}</div>
+				</c:forEach>
+				<c:forEach var="performance" items="${pickPerformance}" varStatus="status">
+					<div class="movieInfo-sort">${performance.performance_title}</div>
+					<div class="movieInfo-sort">
+					<c:if test="${performance.performance_age == 0}">
+					전체 관람가
+					<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating1.png">
+					</c:if>
+					<c:if test="${performance.performance_age == 12}">
+					12세 이상 관람
+					<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating2.png">
+					</c:if>
+					<c:if test="${performance.performance_age == 15}">
+					15세 이상 관람
+					<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating3.png">
+					</c:if>
+					<c:if test="${performance.performance_age == 19}">
+					청소년 관람 불가
+					<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating4.png">
+					</c:if>
+					</div>
+				</c:forEach>
+			</div>
+			
+			
+		</div>
 		
 		<br>
-		<h2>인원 선택</h2>
-		<div>
-			<span class="people">일반</span>
-			<span class="people adult-minus">-</span>
-			<span class="people adult-num">0</span>
-			<span class="people adult-plus">+</span>
-		</div>
-		<div>
-			<span class="people">청소년</span>
-			<span class="people teenage-minus">-</span>
-			<span class="people teenage-num">0</span>
-			<span class="people teenage-plus">+</span>
-		</div>
-		<div>
-			<span class="people">우대</span>
-			<span class="people treatement-minus">-</span>
-			<span class="people treatement-num">0</span>
-			<span class="people treatement-plus">+</span>
+		<h3>인원 선택</h3>
+		<div class="select-people">
+			<div class="select-people-inner">
+				<span class="people people-category">일반&nbsp;&nbsp;&nbsp;</span>
+				<span class="people adult-minus point">-</span>
+				<span class="people adult-num">0</span>
+				<span class="people adult-plus point">+</span>
+			</div>
+			<div class="select-people-inner">
+				<span class="people people-category">청소년</span>
+				<span class="people teenage-minus point">-</span>
+				<span class="people teenage-num">0</span>
+				<span class="people teenage-plus point">+</span>
+			</div>
+			<div class="select-people-inner">
+				<span class="people people-category">우대&nbsp;&nbsp;&nbsp;</span>
+				<span class="people treatement-minus point">-</span>
+				<span class="people treatement-num">0</span>
+				<span class="people treatement-plus point">+</span>
+			</div>
 		</div>
 	</div>
 </div>
-<br><br><br>
+<br>
 <!-- 영화 정보/ 인원 선택 End -->
 
 
@@ -78,12 +111,18 @@
 <!-- 총 금액 Start -->
 <div class="container-fluid contact py-6 wow" data-wow-delay="0.1s">
 	<div class="container">
-	<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
-		<div>일반 : ${cinema.cinema_adult} <span class="adult_money"></span></div>
-		<div>청소년 : ${cinema.cinema_teenage} <span class="teenage_money"></span></div>
-		<div>우대 : ${cinema.cinema_treatment} <span class="treatement_money"></span></div>
-	</c:forEach>
-	<div><span class="total-money"></span></div>
+	
+		<h3>결제 정보</h3>
+
+		<div style="margin: 40px;">
+		<c:forEach var="cinema" items="${pickCinema}" varStatus="status">
+			<div class="people">일반 : <fmt:formatNumber value="${cinema.cinema_adult}" pattern="#,###" /> <span class="adult_money"></span></div>
+			<div class="people">청소년 : <fmt:formatNumber value="${cinema.cinema_teenage}" pattern="#,###" /> <span class="teenage_money"></span></div>
+			<div class="people">우대 : <fmt:formatNumber value="${cinema.cinema_treatment}" pattern="#,###" /> <span class="treatement_money"></span></div>
+		</c:forEach>
+		<div><span class="total-money"></span></div>
+		</div>
+
 	</div>
 </div>
 <!-- 총 금액 End -->
@@ -105,7 +144,7 @@
 			<!-- 우대 명 수 -->
 			<input type="hidden" id="treatement_money" name="treatement_money" value=""/>
 			
-			<input type="submit" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill" value="결제하기">
+			<input type="submit" class="mem-btn-green mem-btn py-2 px-4 d-none d-xl-inline-block rounded-pill" value="결제하기">
 		</form>
 		<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
 	</div>

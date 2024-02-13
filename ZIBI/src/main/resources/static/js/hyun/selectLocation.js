@@ -32,11 +32,9 @@ $(function(){
 					} else if(location == loc2){
 						$('.searchCinema2').css("background-color","");
 					}
-					//$('.searchCinema').css("background-color","");
-					//this.cells[j].style.backgroundColor="red"
-					$(this.cells[j]).css("background-color","pink");
+
+					$(this.cells[j]).css("background-color","#A3C9AA");
 					console.log(this.cells[j]);
-					
 					
 					//-------------------------
 					str += row_value + '';
@@ -78,7 +76,7 @@ $(function(){
 					let output = '';
 					for(var i=0; i<param.listLoc2.length; i++){
 						console.log("값 : " + param.listLoc2[i].cinema_num);
-						output += '<tr class="searchCinema2"  id="'+param.listLoc2[i].cinema_num+'"><td class="searchCinema2">' + param.listLoc2[i].cinema_location2 + '</td></tr>';
+						output += '<tr class="searchCinema2"  id="'+param.listLoc2[i].cinema_num+'"><td class="searchCinema2 searchCinemaTable">' + param.listLoc2[i].cinema_location2 + '</td></tr>';
 					}
 					$('#location2 tbody').append(output);
 					selectLocation(loc2);
@@ -144,7 +142,7 @@ $(function(){
 						
 						// 최종[날짜+시간] 목록 --> 영화 제목 / 상영관 / 여석 / 시간
 						// output
-						let outputResult = '<div class="ent" id="'+param.resultTicketing[i].ticketing_num+'" style="display:inline-block;margin:20px;border:1px solid black;width:120px;height:120px;text-align:center;vertical-align:middle;padding:0.5em;">'; // vertical-align이 안되어서 padding:0.5em; 했더니 됨
+						let outputResult = '<div class="ent" id="'+param.resultTicketing[i].ticketing_num+'" style="">'; // vertical-align이 안되어서 padding:0.5em; 했더니 됨
 						outputResult += '<div>'+param.resultPerformance[i].performance_title+'</div>';
 						outputResult += '<div>'+param.resultCinema[i].cinema_theater+'</div>';
 						outputResult += '<div>'+param.resultTicketing[i].ticketing_start_time+'</div>';
@@ -159,7 +157,7 @@ $(function(){
 						// 영화 목록 --> 영화 제목 / 영화 포스터 / 연령제한
 						// output
 						let outputPerformance = '<tr class="ticketing-ent-row" id='+param.resultTicketing[i].performance_num+'>';
-						outputPerformance += '<td class="ticketing-poster"><img style="height:230px; margin:10px;" id="ticketing-poster-img"  src="../upload/'+param.resultPerformance[i].performance_poster+'"></td>'; // js에서 파일 읽어오는 것! .. 이용
+						outputPerformance += '<td class="ticketing-poster"><img style="" id="ticketing-poster-img"  src="../upload/'+param.resultPerformance[i].performance_poster+'"></td>'; // js에서 파일 읽어오는 것! .. 이용
 						outputPerformance += '<td class="ticketing-info">'+param.resultPerformance[i].performance_title+'<br>'+param.resultPerformance[i].performance_age+'</td>';
 						outputPerformance += '</tr>';
 						// output 추가
@@ -196,7 +194,7 @@ $(function(){
 		var ent_id = $(this).attr("id");
 		$('#ent_hidden').attr('value',ent_id);
 		$('.ent').css("background-color","");
-		$(this).css("background-color","pink");
+		$(this).css("background-color","#A3C9AA");
 	});
 	
 	

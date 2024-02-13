@@ -21,7 +21,8 @@
 			<!-- 빠른 예매 버튼 끝 -->
 			
 			<div class="text-center wow" data-wow-delay="0.1s">
-				<small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Latest Events</small>
+				<!-- <small class="d-inline-block fw-bold text-dark text-uppercase bg-light border border-primary rounded-pill px-4 py-1 mb-3">Latest Events</small> -->
+				<h5 class="mb-5" style="color:#32a77b;"> ※지비 회원은 할인가로 만나볼 수 있습니다 <span style="font-size:12pt;color:#32a77b;"> (1인 2000원 할인)</span></h5>
 				<h1 class="display-5 mb-5">현재 상영작</h1>
 			</div>
 			<!-- <div class="tab-class text-center">

@@ -144,11 +144,12 @@
 			<!-- 우대 명 수 -->
 			<input type="hidden" id="treatement_money" name="treatement_money" value=""/>
 			
-			<input type="submit" class="mem-btn-green mem-btn py-2 px-4 d-none d-xl-inline-block rounded-pill" value="결제하기">
+			<input type="submit" style="float:right;" class="mem-btn-green mem-btn py-2 px-4 d-none d-xl-inline-block rounded-pill" value="결제하기">
 		</form>
 		<!-- ----------------------------<<ChoiceVO>>------------------------------------ -->
 	</div>
 </div>
+<br><br><br>
 
 
 

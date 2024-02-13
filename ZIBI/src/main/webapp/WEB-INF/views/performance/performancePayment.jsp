@@ -259,7 +259,6 @@ function kakaoPay() {
 					alert('결제 네트워크 오류 발생');
 					console.log('error1 : ' + ticketing_num);
 					ifError();
-					location.href='/main/home';
 				}
 	    	})
 	    } else {
@@ -269,7 +268,6 @@ function kakaoPay() {
 	        msg += '에러내용 : ' + rsp.error_msg;
 	        alert(msg);
 	    	ifError();
-	        location.href='/main/home'; // 이동함
 	    }
 	});
 }
@@ -326,7 +324,6 @@ function card() {
 					alert('결제 네트워크 오류 발생');
 					console.log('error1 : ' + ticketing_num);
 					ifError();
-					location.href='/main/home';
 				}
 	    	})
 	    } else {
@@ -336,13 +333,12 @@ function card() {
 	        msg += '에러내용 : ' + rsp.error_msg;
 	        alert(msg);
 	    	ifError();
-	        location.href='/main/home'; // 이동함
 	    }
 	});
 }
 
 function ifError() {
-	alert('error 진입');
+	//alert('error 진입');
 	$.ajax({
 		url:'errorPayment',
 		type:'post',
@@ -356,7 +352,8 @@ function ifError() {
 		},
 		dataType:'json',
 		success:function(param){
-				alert('에러 성공ㄹ');
+				//alert('에러 성공ㄹ');
+			location.href='/main/home';
 		},
 		error:function(){
 			alert('네트워크 오류 발생');

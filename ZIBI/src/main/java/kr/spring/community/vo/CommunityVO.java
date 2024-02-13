@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -17,6 +18,7 @@ public class CommunityVO {
 	private int community_num;
 	@NotBlank
 	private String community_title;
+	@Range(min=1,max=5)
 	private int community_category;
 	@NotBlank
 	private String community_content;

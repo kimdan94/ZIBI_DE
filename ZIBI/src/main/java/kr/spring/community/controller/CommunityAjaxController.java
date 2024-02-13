@@ -33,9 +33,9 @@ public class CommunityAjaxController {
 	/*=======================
 	 * 부모글 업로드 파일 삭제
 	 *=======================*/
-	@RequestMapping("/Community/deleteFile")
+	@RequestMapping("/community/deleteFile")
 	@ResponseBody
-	public Map<String,String> processFile(int Community_num,
+	public Map<String,String> processFile(int community_num,
 			                     HttpSession session,
 			                     HttpServletRequest request){
 		Map<String,String> mapJson = new HashMap<String,String>();
@@ -44,9 +44,9 @@ public class CommunityAjaxController {
 		if(user==null) {
 			mapJson.put("result", "logout");
 		}else {
-			CommunityVO vo = communityService.selectCommunity(Community_num);
+			CommunityVO vo = communityService.selectCommunity(community_num);
 			
-			communityService.deleteFile(Community_num);
+			communityService.deleteFile(community_num);
 			FileUtil.removeFile(request, vo.getCommunity_filename());
 			
 			mapJson.put("result", "success");

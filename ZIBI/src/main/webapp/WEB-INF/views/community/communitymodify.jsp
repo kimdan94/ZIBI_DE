@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 내용 시작 -->
 <%--<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--%>
 <script type="text/javascript"
@@ -10,14 +11,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>	
-<script type="text/javascript">
-	window.onload = function() {
-		let community_maxcount = document.getElementById('community_maxcount');
-		if (community_maxcount.value == 0) {
-			community_maxcount.value = '';
-		}
-	};  
-</script>
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6" style="width:800px;">
@@ -73,15 +66,12 @@
 					<br>
 					<input type="file" id="community_filename" name="upload"
 						accept="image/gif,image/png,image/jpeg">
-					<form:errors path="community_filename" cssClass="error-phrase"/>	
-					
+					<form:errors path="community_filename" cssClass="error-phrase"/>
 					<c:if test="${!empty communityVO.community_filename}">
-				<div id="file_detail">
-					<input type="button" value="파일 삭제" id="file_del" class="default-btn3">
-					<img src="${pageContext.request.contextPath}/upload/${communityVO.community_filename}" width="50px;" id="community_file">
-					<br><br>
-					<span class="guide-phrase">*현재 파일은 ${communityVO.community_filename}입니다.</span>
-				</div>
+					<div id="file_detail">
+						<input type="button" value="파일 삭제" id="file_del" class="default-btn3">
+						<img src="${pageContext.request.contextPath}/upload/${communityVO.community_filename}" width="50px;" id="community_file">
+					</div>
 				</c:if>
 					<br><br>
 				</div>
@@ -96,12 +86,6 @@
 </div>
 <script type="text/javascript">
 window.onload = function(){
-	//참여 인원 기본값 0 초기화
-	let community_maxcount = document.getElementById('community_maxcount');
-	if(community_maxcount.value == 0){
-		community_maxcount.value = '';
-	}
-	
 	//파일 삭제
 	$('#file_del').click(function(){
 		let choice = confirm('파일을 삭제하시겠습니까?');
@@ -116,7 +100,7 @@ window.onload = function(){
 						alert('로그인 후 이용하세요!');
 						location.replace('/member/login');
 					}else if(param.result == 'success'){
-						$('#community_detail').hide();
+						$('#file_detail').hide();
 					}else{
 						alert('파일 삭제 오류 발생');
 					}

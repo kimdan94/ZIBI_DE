@@ -9,7 +9,7 @@
 		<li class="nav-item p-2">
 		<a class="btn mem-btn-green radius border-width" 
 			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=1'"> <span class="text-white" style="width: 150px;">헬프미</span></a>
-		</li>
+		</li> 
 		<li class="nav-item p-2">
 		<a class="btn mem-btn-green radius border-width"
 			data-bs-toggle="pill" href="#" onclick="location.href='list?helper_select=2'"> <span class="text-white" style="width: 150px;">헬프유</span></a>

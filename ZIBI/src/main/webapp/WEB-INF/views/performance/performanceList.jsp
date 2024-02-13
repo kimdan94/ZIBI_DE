@@ -27,7 +27,7 @@
 			<!-- <div class="tab-class text-center">
 			=================== 메뉴 시작 ===================
 				<ul class="nav nav-pills d-inline-flex justify-content-center mb-5 wow" data-wow-delay="0.1s">
-					<li class="nav-item p-2">
+					<li class	="nav-item p-2">
 						<a class="d-flex mx-2 py-2 border border-primary bg-light rounded-pill active" data-bs-toggle="pill" href="#tab-1">
 							<span class="text-dark" style="width: 150px;">All Events</span>
 						</a>
@@ -84,7 +84,7 @@
                                                 </div>
                                             </div>
                                             <div>${performance.performance_title}</div>
-                                            <div>${performance.performance_start_date}</div>
+                                            <div>개봉일 ${performance.performance_start_date}</div>
                                             <div>
                                             <!-- 연령 등급 -->
                                             <c:if test="${performance.performance_age == 0}">

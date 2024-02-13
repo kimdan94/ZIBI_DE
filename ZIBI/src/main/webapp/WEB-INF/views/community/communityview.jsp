@@ -31,7 +31,8 @@
 		<li><img
 			src="${pageContext.request.contextPath}/member/viewProfile?mem_num=${community.mem_num}"
 			width="40" height="40" class="my-photo radius"></li>
-		<li><span class="re">&nbsp;${community.mem_nickname}</span><br> <c:if
+		<li><a href="${pageContext.request.contextPath}/member/mypageOpen?mem_num=${community.mem_num}"><span class="re">&nbsp;${community.mem_nickname}</span><br></a>
+		<c:if
 				test="${!empty community.community_modify_date}">
 			&nbsp;최근 수정일 : ${community.community_modify_date}
 			</c:if> <c:if test="${empty community.community_modify_date}">
@@ -56,7 +57,7 @@
 				  fn:endsWith(community.community_filename,'.GIF') ||
 				  fn:endsWith(community.community_filename,'.png') ||
 				  fn:endsWith(community.community_filename,'.PNG')}">
-		<div class="align-center">
+		<div class="align-left">
 			<img
 				src="${pageContext.request.contextPath}/upload/${community.community_filename}"
 				class="detail-img">

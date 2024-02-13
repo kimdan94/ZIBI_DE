@@ -21,7 +21,7 @@
 <div class="container">
 	<div class="d-flex justify-content-center">
 		<div class="rounded col-md-4 col-lg-6" style="width:800px;">
-			<form:form action="update" id="community_write"
+			<form:form action="update" id="community_update"
 				modelAttribute="communityVO" enctype="multipart/form-data">
 				<form:hidden path="community_num"/>
 				<div>
@@ -75,6 +75,14 @@
 						accept="image/gif,image/png,image/jpeg">
 					<form:errors path="community_filename" cssClass="error-phrase"/>	
 					
+					<c:if test="${!empty communityVO.community_filename}">
+				<div id="file_detail">
+					<input type="button" value="파일 삭제" id="file_del" class="default-btn3">
+					<img src="${pageContext.request.contextPath}/upload/${communityVO.community_filename}" width="50px;" id="community_file">
+					<br><br>
+					<span class="guide-phrase">*현재 파일은 ${communityVO.community_filename}입니다.</span>
+				</div>
+				</c:if>
 					<br><br>
 				</div>
 				<div class="align-center" style="margin-top:20px;">
@@ -86,4 +94,39 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+window.onload = function(){
+	//참여 인원 기본값 0 초기화
+	let community_maxcount = document.getElementById('community_maxcount');
+	if(community_maxcount.value == 0){
+		community_maxcount.value = '';
+	}
+	
+	//파일 삭제
+	$('#file_del').click(function(){
+		let choice = confirm('파일을 삭제하시겠습니까?');
+		if(choice){
+			$.ajax({
+				url:'deleteFile',
+				data:{community_num:${communityVO.community_num}},
+				type:'post',
+				dataType:'json',
+				success:function(param){
+					if(param.result == 'logout'){
+						alert('로그인 후 이용하세요!');
+						location.replace('/member/login');
+					}else if(param.result == 'success'){
+						$('#community_detail').hide();
+					}else{
+						alert('파일 삭제 오류 발생');
+					}
+				},
+				error:function(){
+					alert('네트워크 오류 발생');
+				}
+			});
+		}
+	});
+};
+</script>
 <!-- 내용 끝 -->

@@ -3,6 +3,7 @@ package kr.spring.performance.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -64,11 +65,17 @@ public interface PerformanceMapper {
 	public List<PaymentVO> selectPayPayment(Map<String, Object> map);
 	public List<TotalVO> selectPayTotal(Map<String, Object> map);
 	public List<TotalVO> selectPayAll(Map<String, Object> map);
+	public int selectPayCount(Map<String, Object> map);
 	
 	
 	//좌석 출력
 	@Select("SELECT * FROM perform_choice WHERE ticketing_num=#{ticketing_num}")
 	public List<ChoiceVO> selectChoice(Map<String, Object> map);
+	
+	
+	//좌석 rollback
+	@Delete("DELETE FROM perform_choice WHERE choice_row=#{choice_row} AND choice_col=#{choice_col} AND choice_adult=#{choice_adult} AND choice_teenage=#{choice_teenage} AND choice_treatment=#{choice_treatment} AND mem_num=#{mem_num} AND ticketing_num=#{ticketing_num}")
+	public void deleteChoice(Map<String, Object> map);
 	
 	
 	// 관리자

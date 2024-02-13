@@ -288,20 +288,51 @@ public class PerformanceAjaxController {
 	 *=================================*/
 	@RequestMapping("/performance/errorPayment")
 	@ResponseBody // 지역2 str으로 해당 상영관의 번호 알아내기
-	public Map<String, Object> errorPayment(HttpSession session, HttpServletRequest request){
+	public Map<String, Object> errorPayment(
+            @RequestParam(value="ticketing_num") int ticketing_num, 
+            @RequestParam(value="choice_seat") String choice_seat, 
+            @RequestParam(value="choice_adult") int choice_adult, 
+            @RequestParam(value="choice_teenage") int choice_teenage, 
+            @RequestParam(value="choice_treatment") int choice_treatment, 
+            HttpSession session, HttpServletRequest request){
+
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		Map<String, Object> map = new HashMap<String, Object>();
+		log.debug("<<Mem_num>> : " + user.getMem_num());
+		
+		log.debug("<< ticketing_num >> : " + ticketing_num); // choice_num
+		log.debug("<< choice_seat >> : " + choice_seat); // choice_num
+		log.debug("<< choice_adult >> : " + choice_adult); // 명 // choice_num
+		log.debug("<< choice_teenage >> : " + choice_teenage); // 명 // choice_num
+		log.debug("<< choice_treatment >> : " + choice_treatment); // 명 // choice_num
+		
 		
 		Map<String, Object> mapJson = new HashMap<String, Object>();
 		log.debug("====== << ERROR >> =======");
 		// 롤백
-		
-		
-		
-		
+		String[] str = choice_seat.split(" ");
+		String match = "[^0-9_]";
+		for(int i=0; i<str.length; i++) {
+			String seat = str[i].replaceAll(match, "");
+			String[] seats = seat.split("_");
+			// seats[0] : 행 seats[1] : 열
+			log.debug("<<Seat>> : " + seats[0] + " " + seats[1]);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("mem_num", user.getMem_num());
+			map.put("choice_row", Integer.parseInt(seats[0])); // 행
+			map.put("choice_col", Integer.parseInt(seats[1])); // 열
+			map.put("choice_adult", choice_adult);
+			map.put("choice_teenage", choice_teenage);
+			map.put("choice_treatment", choice_treatment);
+			map.put("ticketing_num", ticketing_num);
+			
+			performanceService.deleteChoice(map);
+			
+		}
 		
 		log.debug("====== << ERROR >> =======");
-		
 		
 		return mapJson;
 	}

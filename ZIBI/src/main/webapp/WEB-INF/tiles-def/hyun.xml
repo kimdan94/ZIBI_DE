@@ -23,6 +23,7 @@
 	
 	<!-- 공연 list (main 페이지) -->
 	<definition name="performanceList" extends="performancePage">
+		<put-attribute name="title" value="영화"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/performanceList.jsp"/>
 	</definition>
 	
@@ -34,39 +35,43 @@
 	
 	<!-- 공연 정보 넣는 폼 작성 -->
 	<definition name="writePerformance" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
+		<put-attribute name="title" value="영화 정보 form"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/writePerformance.jsp"/>
 	</definition>
 	
 	<!-- 상영관, 날짜 선택 -->
 	<definition name="ticketing" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
+		<put-attribute name="title" value="상영 선택"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/ticketing.jsp"/>
 	</definition>
 	
 	<!-- 상영관 정보 넣는 폼 작성 -->
 	<definition name="writeCinema" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
+		<put-attribute name="title" value="상영관 정보 form"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/writeCinema.jsp"/>
 	</definition>
 	
 	<!-- 영화,상영관,상영날짜,상영시간 정보 넣는 폼 작성 -->
 	<definition name="writePerformanceDate" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
+		<put-attribute name="title" value="영화, 상영관, 날짜, 시간 정보 form"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/writePerformanceDate.jsp"/>
 	</definition>
 	
 	<!-- 좌석 선택창 -->
 	<definition name="performanceSeat" extends="performancePage"><!-- jsp 명과 name을 동일하게 써야함 -->
-		<put-attribute name="title" value="좌석 선택"/>
+		<put-attribute name="title" value="인원/좌석 선택"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/performanceSeat.jsp"/>
 	</definition>
 	
 	<!-- 결제창 -->
 	<definition name="performancePayment" extends="performancePage">
-		<put-attribute name="title" value="결제하기"/>
+		<put-attribute name="title" value="결제"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/performancePayment.jsp"/>
 	</definition>
 	
 	<!-- [결제] 티켓 번호 -->
 	<definition name="performanceShowTicket" extends="performancePage">
-		<put-attribute name="title" value="티켓"/>
+		<put-attribute name="title" value="결제 완료"/>
     	<put-attribute name="body" value="/WEB-INF/views/performance/performanceShowTicket.jsp"/>
 	</definition>
 	

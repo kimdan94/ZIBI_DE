@@ -311,6 +311,12 @@
 		<include refid="withOrderUid"></include>
 	</select>
 	
+	<select id="selectPayCount" parameterType="map" resultType="integer">
+		SELECT COUNT(*)
+		<include refid="payment_history"></include>
+		<include refid="withOrderUid"></include>
+	</select>
+	
 	<!-- [include] 결제 내역 -->
 	<sql id="payment_history">
 		FROM performance p

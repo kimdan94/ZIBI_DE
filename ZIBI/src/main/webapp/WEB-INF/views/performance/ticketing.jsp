@@ -22,10 +22,10 @@
                     <div class="col-md-6 col-lg-3 wow bounceInUp" data-wow-delay="0.1s">
                         <div class="blog-item">
                             <div class="blog-content mx-4 d-flex rounded bg-light">
-                                <div class="text-dark bg-primary rounded-start">
+                                <div class="text-dark green-background rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0" style="color:white;">1</p>
-                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
+                                        <p class="fw-bold mb-0 white-color">1</p>
+                                        <p class="fw-bold mb-0 white-color">Step</p>
                                     </div>
                                 </div>
                                 <div class="h5 lh-base my-auto h-100 p-3" id="selectCinemaTitle">
@@ -33,20 +33,20 @@
                                 </div>
                             </div>
                             
-                            <div class="overflow-hidden rounded justify-content-center">
+                            <div class="overflow-hidden rounded justify-content-center" style="margin-top:5px;padding:20px;">
                             <!-- table > tbody > tr > td / > thead > tr > th -->
 
 								<!-- 지역1 -->
                             	<table id="location1" style="float:left;">
                             	<thead>
                             		<tr>
-                            			<th>지역1</th>
+                            			<th></th>
                             		</tr>
                             	</thead>
                             	<tbody>
 	                            	<c:forEach var="cinema" items="${cinemaList}">
 	                            	<tr class="searchCinema1">
-										<td class="searchCinema1" style="border:1px solid black;">${cinema.cinema_location1}</td>
+										<td class="searchCinema1 searchCinemaTable">${cinema.cinema_location1}</td>
 									</tr>
 									</c:forEach>
 									
@@ -58,7 +58,7 @@
                             	<table id="location2" style="float:left;">
 	                            	<thead>
 	                            		<tr>
-	                            			<th>지역2</th>
+	                            			<th></th>
 	                            		</tr>
 	                            	</thead>
 	                            	<tbody>
@@ -77,10 +77,10 @@
                         <div class="blog-item">
                             
                             <div class="blog-content mx-4 d-flex rounded bg-light">
-                                <div class="text-dark bg-primary rounded-start">
+                                <div class="text-dark green-background rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0" style="color:white;">2</p>
-                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
+                                        <p class="fw-bold mb-0 white-color">2</p>
+                                        <p class="fw-bold mb-0 white-color">Step</p>
                                     </div>
                                 </div>
                                 <div class="h5 lh-base my-auto h-100 p-3" id="selectPerformanceTitle">
@@ -89,13 +89,32 @@
                             </div>
                             
                             <div class="overflow-hidden rounded">
-                                <table style="float:left;">
+                                <table id="movieList" style="float:left;">
                                 <tbody id="ticketing_Ent">
                                 	<!-- ajax -->
 		                           	<c:forEach var="performance" items="${list}">
 		                           	<tr class="ticketing-ent-row" id="${performance.performance_num}">
 										<td class="ticketing-poster"><img id="ticketing-poster-img" src="${pageContext.request.contextPath}/upload/${performance.performance_poster}" style="height:230px; margin:10px;"></td>
-										<td class="ticketing-info">${performance.performance_title}<br>${performance.performance_age}</td>
+										<td class="ticketing-info">
+											${performance.performance_title}
+											<br>
+											<c:if test="${performance.performance_age == 0}">
+											전체 관람가
+											<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating1.png">
+											</c:if>
+											<c:if test="${performance.performance_age == 12}">
+											12세 이상 관람
+											<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating2.png">
+											</c:if>
+											<c:if test="${performance.performance_age == 15}">
+											15세 이상 관람
+											<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating3.png">
+											</c:if>
+											<c:if test="${performance.performance_age == 19}">
+											청소년 관람 불가
+											<img class="ratingAge" src="${pageContext.request.contextPath}/images/hyun/rating4.png">
+											</c:if>
+										</td>
 									</tr>
 									</c:forEach>
 								</tbody>
@@ -113,17 +132,17 @@
                         <div class="blog-item">
                             
                              <div class="blog-content mx-4 d-flex rounded bg-light">
-                                <div class="text-dark bg-primary rounded-start">
+                                <div class="text-dark green-background rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0" style="color:white;">3</p>
-                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
+                                        <p class="fw-bold mb-0 white-color">3</p>
+                                        <p class="fw-bold mb-0 white-color">Step</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="overflow-hidden rounded">
 								<div id="date_list" style="height:300px;overflow:scroll;width:110px;">
 									<c:forEach var="day" items="${dayList}">
-										<input type="button" value="${day.ticketing_date}">
+										<input type="button" value="${day.ticketing_date}" style="border:1px solid #d3d3d3; padding:2px;">
 									</c:forEach>
 								</div>
 								
@@ -138,10 +157,10 @@
                         <div class="blog-item">
                             
                             <div class="blog-content mx-4 d-flex rounded bg-light">
-                                <div class="text-dark bg-primary rounded-start">
+                                <div class="text-dark green-background rounded-start">
                                     <div class="h-100 p-3 d-flex flex-column justify-content-center text-center">
-                                        <p class="fw-bold mb-0" style="color:white;">4</p>
-                                        <p class="fw-bold mb-0" style="color:white;">Step</p>
+                                        <p class="fw-bold mb-0 white-color">4</p>
+                                        <p class="fw-bold mb-0 white-color">Step</p>
                                     </div>
                                 </div>
                                 <div class="h5 lh-base my-auto h-100 p-3" id="resultTitle">
@@ -158,22 +177,22 @@
                     <!-- -------------- 네번째 : 최종 선택 -------------- -->
                     
                     
-                    
-                    <!-- ----------------- form 시작 --------------------- -->
-                    <form action="updateTicketing" id="update_ticketing" method="post">
-						<!-- 상영관 -->
-						<input type="hidden" id="cinema_hidden" value=""/>
-						<!-- 영화 -->
-						<input type="hidden" id="performance_hidden" value=""/>
-						<!-- 날짜 -->
-						<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
-						<!-- 최종 선택 -->
-						<input type="hidden" id="ent_hidden" value=""/>
-						<!-- <input type="submit" value="예매하기"> -->
-						<input type="button" class="btn btn-primary py-2 px-4 d-none d-xl-inline-block rounded-pill" value="예매하기" onclick='submitEnt()'>
-					</form>
-                    <!-- ----------------- form 끝 --------------------- -->
-                    
+                    <div>
+	                    <!-- ----------------- form 시작 --------------------- -->
+	                    <form action="updateTicketing" id="update_ticketing" method="post">
+							<!-- 상영관 -->
+							<input type="hidden" id="cinema_hidden" value=""/>
+							<!-- 영화 -->
+							<input type="hidden" id="performance_hidden" value=""/>
+							<!-- 날짜 -->
+							<input type="hidden" id="day_hidden" value="${today}"/><!-- 기본값 항상 있어야 함 -->
+							<!-- 최종 선택 -->
+							<input type="hidden" id="ent_hidden" value=""/>
+							<!-- <input type="submit" value="예매하기"> -->
+							<input type="button" class="mem-btn-green mem-btn py-2 px-4 d-none btn-position d-xl-inline-block rounded-pill" value="예매하기" onclick='submitEnt()'>
+						</form>
+	                    <!-- ----------------- form 끝 --------------------- -->
+                    </div>
                 </div>
         </div>
         <!-- Blog End -->

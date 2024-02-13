@@ -52,10 +52,14 @@ public interface PerformanceService {
 	public List<PaymentVO> selectPayPayment(Map<String, Object> map);
 	public List<TotalVO> selectPayTotal(Map<String, Object> map);
 	public List<TotalVO> selectPayAll(Map<String, Object> map);
+	public int selectPayCount(Map<String, Object> map);
 	
 	
 	
 	public List<ChoiceVO> selectChoice(Map<String, Object> map);
+	
+	public void deleteChoice(Map<String, Object> map);
+	
 	
 	
 	// 관리자

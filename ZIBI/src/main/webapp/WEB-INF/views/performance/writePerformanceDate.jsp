@@ -3,54 +3,55 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="page-main">
-	<h2>선택</h2>
-	<!-- form태그를 사용하려면 먼저 Controller에서 modelAttribute부터 -->
-	<form:form action="registerDate" modelAttribute="ticketingVO" enctype="multipart/form-data">
-		<form:errors element="div" cssClass="error-color"/>
-			<ul>
-				<li>
-					<form:label path="performance_num">영화 선택</form:label>
-					<form:select path="performance_num">
-						<option value="">선택	</option>
-						<c:forEach var="performance" items="${listPerformance}">
-						<form:option value="${performance.performance_num}" label ="${performance.performance_title} ${performance.performance_start_date}" />
-						</c:forEach>
-					</form:select>
-				</li>
-				<li>
-					<form:label path="">지역 선택</form:label>
-					<form:select path="" id="selectLoc1">
-						<form:option value="" label ="선택" />
-						<c:forEach var="cinema" items="${listCinemaLoc1}">
-						<form:option value="${cinema.cinema_location1}" label ="${cinema.cinema_location1} ${performance.performance_start_date}" />
-						</c:forEach>
-					</form:select>
-				</li>
-				<li>
-					<form:label path="cinema_num">상영관 지역 선택</form:label>
-					<form:select path="cinema_num"  id="selectLoc2">
-						<option value="">선택	</option>
-					</form:select>
-				</li>
-				<li>
-					<form:label path="ticketing_date">날짜</form:label>
-					<form:input path="ticketing_date"/>
-					<form:errors path="ticketing_date" cssClass="error-color"/>
-				</li>
-				<li>
-					<form:label path="ticketing_start_time">시간</form:label>
-					<form:input path="ticketing_start_time"/>
-					<form:errors path="ticketing_start_time" cssClass="error-color"/>
-				</li>
-			</ul>
-			<div class="align-center">
-				<form:button>전송</form:button>
-				<input type="button" value="목록" onclick="location.href='list'">
-			</div>	
-	</form:form>
+<div class="container-fluid event py-6">
+	<div class="container">
+		<!-- form태그를 사용하려면 먼저 Controller에서 modelAttribute부터 -->
+		<form:form action="registerDate" modelAttribute="ticketingVO" enctype="multipart/form-data">
+			<form:errors element="div" cssClass="error-color"/>
+				<ul>
+					<li class="form-style ticketInfo">
+						<form:label path="performance_num">영화 선택</form:label>
+						<form:select path="performance_num">
+							<option value="">선택	</option>
+							<c:forEach var="performance" items="${listPerformance}">
+							<form:option value="${performance.performance_num}" label ="${performance.performance_title} ${performance.performance_start_date}" />
+							</c:forEach>
+						</form:select>
+					</li>
+					<li class="form-style ticketInfo">
+						<form:label path="">지역 선택</form:label>
+						<form:select path="" id="selectLoc1">
+							<form:option value="" label ="선택" />
+							<c:forEach var="cinema" items="${listCinemaLoc1}">
+							<form:option value="${cinema.cinema_location1}" label ="${cinema.cinema_location1} ${performance.performance_start_date}" />
+							</c:forEach>
+						</form:select>
+					</li>
+					<li class="form-style ticketInfo">
+						<form:label path="cinema_num">상영관 지역 선택</form:label>
+						<form:select path="cinema_num"  id="selectLoc2">
+							<option value="">선택	</option>
+						</form:select>
+					</li>
+					<li class="form-style ticketInfo">
+						<form:label path="ticketing_date">날짜</form:label>
+						<form:input class="form-control" path="ticketing_date"/>
+						<form:errors path="ticketing_date" cssClass="error-color"/>
+					</li>
+					<li class="form-style ticketInfo">
+						<form:label path="ticketing_start_time">시간</form:label>
+						<form:input class="form-control" path="ticketing_start_time"/>
+						<form:errors path="ticketing_start_time" cssClass="error-color"/>
+					</li>
+				</ul>
+				<div class="align-center">
+					<form:button class="mem-btn-green py-2 px-4 d-none d-xl-inline-block rounded-pill submitBtn">전송</form:button>
+					<input class="mem-btn-green py-2 px-4 d-none d-xl-inline-block rounded-pill submitBtn" type="button" value="목록" onclick="location.href='list'">
+				</div>	
+		</form:form>
+		<br><br>
+	</div>
 </div>
-
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 // 장소 선택 -> 서울 -> 월드타워

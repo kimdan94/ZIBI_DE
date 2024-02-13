@@ -27,13 +27,12 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.performance.service.PerformanceService;
-import kr.spring.performance.vo.ChoiceVO;
 import kr.spring.performance.vo.CinemaVO;
-import kr.spring.performance.vo.PaymentVO;
 import kr.spring.performance.vo.PerformanceVO;
 import kr.spring.performance.vo.TicketingVO;
 import kr.spring.performance.vo.TotalVO;
 import kr.spring.util.FileUtil;
+import kr.spring.util.PageUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -575,7 +574,8 @@ public class PerformanceController {
 	 * 결제 내역
 	 *=================================*/
 	@RequestMapping("/performance/history")
-	public ModelAndView history(HttpServletRequest request, HttpSession session) {
+	public ModelAndView history(@RequestParam(value="pageNum",defaultValue="1") int currentPage,
+								HttpServletRequest request, HttpSession session) {
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("user");
 		ModelAndView mav = new ModelAndView();
@@ -586,26 +586,20 @@ public class PerformanceController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("mem_num", user);
-//		List<CinemaVO> payCinema = performanceService.selectPayCinema(map);
-//		List<PerformanceVO> payPerformance = performanceService.selectPayPerformance(map);
-//		List<TicketingVO> payTicketing = performanceService.selectPayTicketing(map);
-//		List<ChoiceVO> payChoice = performanceService.selectPayChoice(map);
-//		List<PaymentVO> payPayment = performanceService.selectPayPayment(map);
 
 		List<TotalVO> total = performanceService.selectPayTotal(map);
 		List<TotalVO> all = performanceService.selectPayAll(map);
-		log.debug("<><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
 		log.debug("" + total);
-		log.debug("<><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
+		log.debug("<<pageNum>> : " + currentPage);
+		int count = performanceService.selectPayCount(map);
+		log.debug("<<count>> : " + count);
+		PageUtil page = new PageUtil(currentPage, count, 20, 10 ,"total");
+		
 		
 		mav.setViewName("performanceHistory"); // tiles 설정 name과 동일해야 함
-//		mav.addObject("payCinema", payCinema);
-//		mav.addObject("payPerformance", payPerformance);
-//		mav.addObject("payTicketing", payTicketing);
-//		mav.addObject("payChoice", payChoice);
-//		mav.addObject("payPayment", payPayment);
 		mav.addObject("total", total);
 		mav.addObject("all", all);
+		mav.addObject("page", page.getPage());
 		
 		return mav; 
 		

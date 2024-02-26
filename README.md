@@ -29,8 +29,71 @@
   - StarUml을 활용하여 구현하려는 기능들을 기반으로 데이터를 구조화하였습니다.
 ![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/b205891e-918a-4839-86ae-7fbe69ecea02)
 
+<h3 align="left">2. 프로젝트 소개</h3>
+
+<h4 align="left">1) 개발 환경</h4>
+
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/c55af302-80cb-4b50-aa00-918461b5bbcd)
+
+<h4 align="left">2) 사용한 API</h4>
+
+- **Daum 주소 서비스**
+- **CKEditor**
+
+<h4 align="left">3) 실행화면</h4>
+
+* 재능기부 메인 페이지
+
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/b1bb9905-fefa-4356-add6-fab1b16efd2d)<br>
+1. 상위 게시판 분류
+→ 헬프미, 헬프유 버튼 클릭 시 해당 
+게시판 글로 분류되어 목록에 보여짐
+
+2. 하위 카테고리 분류
+→  벌레~기타 버튼 클릭 시 해당 
+카테고리 글로 분류되어 목록에 보여짐
+
+3. 제목, 내용, 제목+내용, 주소로 LIKE 검색
+→  검색 결과에 따라 결과 다르게 처리됨
+
+4. 최신순, 조회수, 스크랩수에 따라 글 정렬 
+
+5. 페이지 처리
+→  한 화면에 3개씩 노출
+
+* 글쓰기 페이지
+
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/b2824580-cf4d-4af5-abd8-392f8de9681b)<br>
+1. INSERT 시 상세주소,썸네일 제외한 모든 
+   항목에 입력 유효성 체크        → radio 버튼 게시판 선택, 
+            select 카테고리 선택도 필수 항목 
+
+2. CK Editor로 이미지 첨부, 내용 작성 가능
+
+3. 썸네일 파일 미첨부 시 기본 이미지 표시
+
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/b6f4249b-bbdb-469f-a86e-15804917770f)<br>
+Daum API 사용하여 주소 검색창 띄움
+→  검색한 주소에 대한 지도 미리보기(마커 표시)
+
+* 글수정 페이지
+
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/e1bbe963-c313-4e4f-a91e-70ace77af0c4)<br>
+
+1. 작성했던 내용 미리보기 가능
+
+2. 기존에 첨부한 썸네일 사진(파일) 삭제 가능
+   파일 삭제 후 수정된 글엔 미리보기 이미지로
+   표시됨
+
+3. 글쓰기와 동일한 입력 유효성체크
+
+4. 글 삭제 버튼 클릭 시 confirm창 표시
+→  글 삭제 시 해당 게시글의 댓글, 
+     스크랩까지 모두 삭제됨
 
 
 
 
+* 
 ###

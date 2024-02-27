@@ -3,10 +3,10 @@
 ###
 - 프로젝트 기간 : 2024년 1월 10일 ~ 2024년 2월 14일
 
-<hr>
+
 
 <h3 align="left">1. 기획 스케치</h3>
-
+<hr>
 ###
 
 <h4 align="left">1) 기획 의도</h4>
@@ -28,6 +28,8 @@
 - **UML&ERD 작성**
   - StarUml을 활용하여 구현하려는 기능들을 기반으로 데이터를 구조화하였습니다.
 ![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/b205891e-918a-4839-86ae-7fbe69ecea02)
+
+<hr>
 
 <h3 align="left">2. 프로젝트 소개</h3>
 

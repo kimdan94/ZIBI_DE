@@ -1,7 +1,9 @@
-<h1 align="left">ZIBI Project</h1>
+<h1 align="left">All Campus Project</h1>
+
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/54bdf3db-393c-4055-b5b4-6e08a9fe8f28)
 
 ###
-- 프로젝트 기간 : 2024년 1월 10일 ~ 2024년 2월 14일
+- 프로젝트 기간 : 2023년 11월 27일 ~ 2023년 12월 27일
 
 
 
@@ -13,9 +15,9 @@
 
 ###
 
-<p align="left">2023년 기준 우리나라 1인 가구 수는 750만 명으로 무려 35%를 차지하고 있다고 합니다.<br>1인 가구 자취인들에게 세분화된 자취 기능들을 한 데 모은 플랫폼이 필요하다고 생각했고. <br>총 6개의 서비스를 제공하는 플랫폼을 만들게 되었습니다.<br>
-그 중 재능기부 게시판은 1인 가구 자취인들끼리 서로의 재능을 무료로 나눈다는 취지하에 만들게 되었습니다.
-</p>
+<p align="left">
+하나의 사이트만으로 대학 생활을 마스터 할 수 있도록 다양한 정보를 제공함은 물론,<br>
+  '우리가 만들어가는, 모두를 위한 대학생활'이라는 브랜드 슬로건에 따라 학생들이 주도하는 대학 커뮤니티로서 학생들이 안전하게 대화를 나눌 수 있는 장을 마련하고자 올캠퍼스를 만들었습니다.
 
 ###
 
@@ -25,19 +27,16 @@
   - Word를 활용하여 구현하려는 기능들을 기반으로 웹사이트에 필요한 기능을 구체적으로 나열했습니다
  <br>
     
-  ![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/27fee5d0-dd62-42d7-b86b-1f4a0a8a03e7)
-  
-- **테이블 설계서**
-  - Excel를 활용하여 구현하려는 기능들을 기반으로 필요한 테이블을 만들었습니다.
-  <br>
-  
-![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/3e496869-d468-423a-9c03-73d715279bce)
+  ![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/4eabaae6-5d68-463b-b428-f9033846ba6b)
 
-- **UML&ERD 작성**
-  - StarUml을 활용하여 구현하려는 기능들을 기반으로 데이터를 구조화하였습니다.
+
+- **ERD 작성**
+  - [ERDCloud](https://www.erdcloud.com/)을 활용하여 구현하려는 기능들을 기반으로 데이터를 구조화하였습니다.
   <br>
   
-![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/b205891e-918a-4839-86ae-7fbe69ecea02)
+![image](https://github.com/kimdan94/ZIBI_DE/assets/123554665/0a3d9615-301e-4cae-b3a4-4908a8a8a406)
+
+
 
 <h4 align="left">3) 협업 과정</h4>
 세미 프로젝트를 진행하면서 깃충돌 이슈와 같은 문제가 종종 있었기에, 프로젝트를 진행함에 있어 팀원들간의 의사소통이 가장 중요하다고 생각했습니다.

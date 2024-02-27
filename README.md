@@ -7,7 +7,7 @@
 
 <h3 align="left">1. 기획 스케치</h3>
 <hr>
-###
+
 
 <h4 align="left">1) 기획 의도</h4>
 
